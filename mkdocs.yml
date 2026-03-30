@@ -1,0 +1,93 @@
+site_name: PRISM
+site_description: Proactive Reliability & Security Maturity Model - Enterprise Metrics Management
+site_url: https://grokify.github.io/prism/
+repo_url: https://github.com/grokify/prism
+repo_name: grokify/prism
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.tabs.link
+
+plugins:
+  - search
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
+  - tables
+  - attr_list
+  - md_in_html
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Installation: getting-started/installation.md
+      - Quick Start: getting-started/quickstart.md
+      - Your First Document: getting-started/first-document.md
+  - CLI Reference:
+      - Overview: cli/index.md
+      - prism init: cli/init.md
+      - prism validate: cli/validate.md
+      - prism score: cli/score.md
+      - prism catalog: cli/catalog.md
+  - Schema:
+      - Overview: schema/index.md
+      - Domains: schema/domains.md
+      - Lifecycle Stages: schema/stages.md
+      - Categories: schema/categories.md
+      - Metric Types: schema/metrics.md
+      - SLIs & SLOs: schema/slos.md
+      - Thresholds: schema/thresholds.md
+  - Concepts:
+      - Overview: concepts/index.md
+      - Maturity Model: concepts/maturity.md
+      - Customer Awareness: concepts/awareness.md
+      - PRISM Score: concepts/scoring.md
+      - Framework Mappings: concepts/frameworks.md
+  - Examples:
+      - Overview: examples/index.md
+      - Security Metrics: examples/security.md
+      - Operations Metrics: examples/operations.md
+  - Integrations:
+      - Overview: integrations/index.md
+      - Dashforge: integrations/dashforge.md
+      - Marp Presentations: integrations/marp.md
+      - Excel Export: integrations/excel.md
+  - API Reference:
+      - Go Library: api/library.md
+      - Types: api/types.md
+  - Releases:
+      - Changelog: releases/changelog.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/grokify/prism
