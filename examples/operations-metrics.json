@@ -1,0 +1,359 @@
+{
+  "$schema": "https://github.com/grokify/prism/schema/prism.schema.json",
+  "metadata": {
+    "name": "Operations Metrics Example",
+    "description": "Example PRISM document focused on operations and SRE metrics",
+    "version": "1.0.0",
+    "author": "PRISM Team"
+  },
+  "domains": [
+    {
+      "name": "operations",
+      "description": "Operational reliability and efficiency metrics",
+      "weight": 1.0
+    }
+  ],
+  "metrics": [
+    {
+      "id": "ops-availability",
+      "name": "Service Availability",
+      "description": "Percentage of time the service is available and responding to requests",
+      "domain": "operations",
+      "stage": "runtime",
+      "category": "reliability",
+      "metricType": "rate",
+      "trendDirection": "higher_better",
+      "unit": "%",
+      "baseline": 99.0,
+      "current": 99.95,
+      "target": 99.99,
+      "thresholds": {
+        "green": 99.95,
+        "yellow": 99.9,
+        "red": 99.0
+      },
+      "status": "Green",
+      "sli": {
+        "name": "Availability",
+        "description": "Ratio of successful requests to total requests",
+        "formula": "successful_requests / total_requests * 100"
+      },
+      "slo": {
+        "target": ">=99.99%",
+        "window": "30d"
+      },
+      "maturityMapping": {
+        "level1": "<99%",
+        "level2": "99-99.5%",
+        "level3": "99.5-99.9%",
+        "level4": "99.9-99.95%",
+        "level5": ">=99.95%"
+      },
+      "frameworkMappings": [
+        {
+          "framework": "SRE",
+          "reference": "availability-slo"
+        },
+        {
+          "framework": "DORA",
+          "reference": "availability"
+        }
+      ],
+      "owner": "SRE Team",
+      "dataSource": "prometheus"
+    },
+    {
+      "id": "ops-latency-p99",
+      "name": "P99 Response Latency",
+      "description": "99th percentile response latency for API requests",
+      "domain": "operations",
+      "stage": "runtime",
+      "category": "efficiency",
+      "metricType": "latency",
+      "trendDirection": "lower_better",
+      "unit": "ms",
+      "baseline": 500,
+      "current": 120,
+      "target": 100,
+      "thresholds": {
+        "green": 100,
+        "yellow": 250,
+        "red": 500
+      },
+      "status": "Yellow",
+      "sli": {
+        "name": "Latency",
+        "description": "99th percentile of request duration",
+        "formula": "histogram_quantile(0.99, request_duration_seconds)"
+      },
+      "slo": {
+        "target": "<=100ms",
+        "window": "7d"
+      },
+      "frameworkMappings": [
+        {
+          "framework": "SRE",
+          "reference": "latency-slo"
+        }
+      ],
+      "owner": "Platform Team",
+      "dataSource": "prometheus"
+    },
+    {
+      "id": "ops-error-rate",
+      "name": "Error Rate",
+      "description": "Percentage of requests resulting in errors (5xx responses)",
+      "domain": "operations",
+      "stage": "runtime",
+      "category": "reliability",
+      "metricType": "rate",
+      "trendDirection": "lower_better",
+      "unit": "%",
+      "baseline": 2.0,
+      "current": 0.3,
+      "target": 0.1,
+      "thresholds": {
+        "green": 0.1,
+        "yellow": 0.5,
+        "red": 1.0
+      },
+      "status": "Yellow",
+      "sli": {
+        "name": "Error Rate",
+        "description": "Ratio of error responses to total responses",
+        "formula": "error_responses / total_responses * 100"
+      },
+      "slo": {
+        "target": "<=0.1%",
+        "window": "30d"
+      },
+      "frameworkMappings": [
+        {
+          "framework": "SRE",
+          "reference": "error-budget"
+        }
+      ],
+      "owner": "SRE Team",
+      "dataSource": "prometheus"
+    },
+    {
+      "id": "ops-deployment-frequency",
+      "name": "Deployment Frequency",
+      "description": "Number of deployments to production per day",
+      "domain": "operations",
+      "stage": "build",
+      "category": "efficiency",
+      "metricType": "rate",
+      "trendDirection": "higher_better",
+      "unit": "deploys/day",
+      "baseline": 0.5,
+      "current": 3.2,
+      "target": 5.0,
+      "thresholds": {
+        "green": 5.0,
+        "yellow": 1.0,
+        "red": 0.1
+      },
+      "status": "Yellow",
+      "maturityMapping": {
+        "level1": "<1/month",
+        "level2": "1/week",
+        "level3": "1/day",
+        "level4": "multiple/day",
+        "level5": "on-demand"
+      },
+      "frameworkMappings": [
+        {
+          "framework": "DORA",
+          "reference": "deployment-frequency"
+        }
+      ],
+      "owner": "Platform Team",
+      "dataSource": "ci-cd-pipeline"
+    },
+    {
+      "id": "ops-lead-time",
+      "name": "Lead Time for Changes",
+      "description": "Time from code commit to production deployment",
+      "domain": "operations",
+      "stage": "build",
+      "category": "efficiency",
+      "metricType": "latency",
+      "trendDirection": "lower_better",
+      "unit": "hours",
+      "baseline": 168,
+      "current": 4,
+      "target": 1,
+      "thresholds": {
+        "green": 1,
+        "yellow": 24,
+        "red": 168
+      },
+      "status": "Yellow",
+      "maturityMapping": {
+        "level1": ">6 months",
+        "level2": "1-6 months",
+        "level3": "1 week - 1 month",
+        "level4": "1 day - 1 week",
+        "level5": "<1 day"
+      },
+      "frameworkMappings": [
+        {
+          "framework": "DORA",
+          "reference": "lead-time-for-changes"
+        }
+      ],
+      "owner": "Platform Team",
+      "dataSource": "ci-cd-pipeline"
+    },
+    {
+      "id": "ops-mttr",
+      "name": "Mean Time to Recovery",
+      "description": "Average time to restore service after an incident",
+      "domain": "operations",
+      "stage": "response",
+      "category": "response",
+      "metricType": "latency",
+      "trendDirection": "lower_better",
+      "unit": "minutes",
+      "baseline": 240,
+      "current": 45,
+      "target": 15,
+      "thresholds": {
+        "green": 15,
+        "yellow": 60,
+        "red": 240
+      },
+      "status": "Yellow",
+      "maturityMapping": {
+        "level1": ">1 week",
+        "level2": "1 day - 1 week",
+        "level3": "1 hour - 1 day",
+        "level4": "15 min - 1 hour",
+        "level5": "<15 min"
+      },
+      "frameworkMappings": [
+        {
+          "framework": "DORA",
+          "reference": "time-to-restore-service"
+        },
+        {
+          "framework": "SRE",
+          "reference": "mttr"
+        }
+      ],
+      "owner": "SRE Team",
+      "dataSource": "incident-management"
+    },
+    {
+      "id": "ops-change-failure-rate",
+      "name": "Change Failure Rate",
+      "description": "Percentage of deployments causing production incidents",
+      "domain": "operations",
+      "stage": "test",
+      "category": "quality",
+      "metricType": "rate",
+      "trendDirection": "lower_better",
+      "unit": "%",
+      "baseline": 25,
+      "current": 8,
+      "target": 5,
+      "thresholds": {
+        "green": 5,
+        "yellow": 15,
+        "red": 30
+      },
+      "status": "Yellow",
+      "maturityMapping": {
+        "level1": ">45%",
+        "level2": "31-45%",
+        "level3": "16-30%",
+        "level4": "6-15%",
+        "level5": "0-5%"
+      },
+      "frameworkMappings": [
+        {
+          "framework": "DORA",
+          "reference": "change-failure-rate"
+        }
+      ],
+      "owner": "Platform Team",
+      "dataSource": "incident-management"
+    },
+    {
+      "id": "ops-infra-coverage",
+      "name": "Infrastructure as Code Coverage",
+      "description": "Percentage of infrastructure managed via IaC",
+      "domain": "operations",
+      "stage": "design",
+      "category": "prevention",
+      "metricType": "coverage",
+      "trendDirection": "higher_better",
+      "unit": "%",
+      "baseline": 40,
+      "current": 85,
+      "target": 100,
+      "thresholds": {
+        "green": 95,
+        "yellow": 75,
+        "red": 50
+      },
+      "status": "Yellow",
+      "owner": "Platform Team",
+      "dataSource": "terraform-cloud"
+    }
+  ],
+  "maturity": {
+    "levels": [
+      {"level": 1, "name": "Reactive", "description": "Ad-hoc operations, firefighting mode"},
+      {"level": 2, "name": "Basic", "description": "Basic monitoring and alerting"},
+      {"level": 3, "name": "Defined", "description": "Standardized runbooks and processes"},
+      {"level": 4, "name": "Managed", "description": "SLO-driven, data-informed decisions"},
+      {"level": 5, "name": "Optimizing", "description": "Automated remediation, continuous improvement"}
+    ],
+    "cells": [
+      {"domain": "operations", "stage": "design", "currentLevel": 3, "targetLevel": 4, "primaryKPI": "ops-infra-coverage"},
+      {"domain": "operations", "stage": "build", "currentLevel": 4, "targetLevel": 5, "primaryKPI": "ops-deployment-frequency"},
+      {"domain": "operations", "stage": "test", "currentLevel": 3, "targetLevel": 4, "primaryKPI": "ops-change-failure-rate"},
+      {"domain": "operations", "stage": "runtime", "currentLevel": 4, "targetLevel": 5, "primaryKPI": "ops-availability"},
+      {"domain": "operations", "stage": "response", "currentLevel": 3, "targetLevel": 4, "primaryKPI": "ops-mttr"}
+    ]
+  },
+  "okrs": [
+    {
+      "objectiveName": "Achieve elite reliability",
+      "keyResultName": "Maintain 99.99% availability",
+      "metricIds": ["ops-availability", "ops-error-rate"]
+    },
+    {
+      "objectiveName": "Accelerate delivery velocity",
+      "keyResultName": "Deploy 5+ times per day with <1hr lead time",
+      "metricIds": ["ops-deployment-frequency", "ops-lead-time"]
+    },
+    {
+      "objectiveName": "Minimize incident impact",
+      "keyResultName": "Reduce MTTR to under 15 minutes",
+      "metricIds": ["ops-mttr", "ops-change-failure-rate"]
+    }
+  ],
+  "initiatives": [
+    {
+      "id": "init-slo-platform",
+      "name": "SLO Platform Implementation",
+      "description": "Deploy centralized SLO tracking and error budget management",
+      "status": "in_progress",
+      "priority": 1,
+      "metricIds": ["ops-availability", "ops-error-rate", "ops-latency-p99"],
+      "owner": "SRE Team"
+    },
+    {
+      "id": "init-auto-remediation",
+      "name": "Automated Remediation",
+      "description": "Implement automated incident response for common failure modes",
+      "status": "planned",
+      "priority": 2,
+      "metricIds": ["ops-mttr"],
+      "owner": "SRE Team"
+    }
+  ]
+}
