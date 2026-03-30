@@ -1,0 +1,68 @@
+{
+  "irVersion": "1.0",
+  "project": "prism",
+  "repository": "https://github.com/grokify/prism",
+  "versioning": "semver",
+  "commitConvention": "conventional",
+  "maintainers": ["grokify"],
+  "releases": [
+    {
+      "version": "v0.1.0",
+      "date": "2026-03-30",
+      "highlights": [
+        { "description": "PRISM (Proactive Reliability & Security Maturity Model) - a unified framework for B2B SaaS health metrics combining SLOs, DMAIC, OKRs, and maturity modeling" },
+        { "description": "CLI tool for creating, validating, and scoring PRISM documents" },
+        { "description": "Auto-generated JSON Schema from Go types for editor validation" }
+      ],
+      "added": [
+        { "description": "Core types: PRISMDocument, Metric, SLI, SLO, Thresholds, DataPoint", "commit": "7de3f42" },
+        { "description": "Domain constants: security, operations", "commit": "7de3f42" },
+        { "description": "Lifecycle stage constants: design, build, test, runtime, response", "commit": "7de3f42" },
+        { "description": "Category constants: prevention, detection, response, reliability, efficiency, quality", "commit": "7de3f42" },
+        { "description": "Metric types: coverage, rate, latency, ratio, count, distribution, score", "commit": "7de3f42" },
+        { "description": "Framework mapping support: NIST_CSF, MITRE_ATTACK, DORA, SRE", "commit": "7de3f42" },
+        { "description": "Validation functions for all constants and document structure", "commit": "34d96a5" },
+        { "description": "ValidationError and ValidationErrors types for detailed error reporting", "commit": "34d96a5" },
+        { "description": "5-level maturity model: Reactive, Basic, Defined, Managed, Optimizing", "commit": "ba48494" },
+        { "description": "MaturityModel, MaturityLevelDef, MaturityCell types", "commit": "ba48494" },
+        { "description": "NewMaturityModelForDomains() for domain-filtered initialization", "commit": "ba48494" },
+        { "description": "Customer awareness model with four states: unaware, aware_not_remediating, aware_remediating, aware_remediated", "commit": "fd558e9" },
+        { "description": "AwarenessScore() using mutually exclusive state weights (0.0 → 0.25 → 0.5 → 1.0)", "commit": "fd558e9" },
+        { "description": "PRISM score calculation combining maturity and performance", "commit": "01b86c6" },
+        { "description": "Configurable weights: maturity 40%, performance 60%, stage weights, domain weights", "commit": "01b86c6" },
+        { "description": "Score interpretation: Elite (≥0.9), Strong (≥0.75), Medium (≥0.5), Weak (≥0.25), Critical", "commit": "01b86c6" },
+        { "description": "SLO.Operator and SLO.Value fields for machine-evaluable targets", "commit": "7de3f42" },
+        { "description": "Metric.MeetsSLO() method for programmatic SLO checking", "commit": "7de3f42" },
+        { "description": "Metric.CalculateStatus() for threshold-based status calculation", "commit": "7de3f42" },
+        { "description": "Metric.ProgressToTarget() for progress tracking", "commit": "7de3f42" },
+        { "description": "`prism init` command with domain filtering (-d) and output path (-o)", "commit": "b3d3352" },
+        { "description": "`prism validate` command for document validation", "commit": "b3d3352" },
+        { "description": "`prism score` command with --detailed and --json flags", "commit": "b3d3352" },
+        { "description": "`prism catalog` command to list available constants", "commit": "b3d3352" },
+        { "description": "JSON Schema auto-generation from Go types using invopop/jsonschema", "commit": "693290b" },
+        { "description": "Embedded schema access via schema.PRISMSchemaJSON()", "commit": "693290b" }
+      ],
+      "documentation": [
+        { "description": "README with installation, CLI usage, schema overview, and examples", "commit": "8cda40b" },
+        { "description": "Security metrics example (5 metrics: vuln coverage, MTTR, SAST, threat modeling, pentest)", "commit": "28224c2" },
+        { "description": "Operations metrics example (8 DORA-aligned metrics: availability, latency, error rate, deployment frequency, lead time, MTTR, change failure rate, IaC coverage)", "commit": "28224c2" },
+        { "description": "Score weight normalization behavior documented in ScoreConfig", "commit": "01b86c6" }
+      ],
+      "tests": [
+        { "description": "Unit tests for validation, maturity, awareness, and scoring", "commit": "4590a5b" },
+        { "description": "Integration tests for example JSON files", "commit": "4590a5b" },
+        { "description": "DataPoint timestamp JSON round-trip tests", "commit": "4590a5b" },
+        { "description": "MeetsSLO() tests for all operators (gte, lte, gt, lt, eq)", "commit": "4590a5b" }
+      ],
+      "dependencies": [
+        { "description": "github.com/spf13/cobra v1.10.2 for CLI", "commit": "e5a4109" },
+        { "description": "github.com/invopop/jsonschema v0.13.0 for schema generation", "commit": "e5a4109" }
+      ],
+      "infrastructure": [
+        { "description": "GitHub Actions workflows for CI, linting, and CodeQL", "commit": "e5a4109" },
+        { "description": "Dependabot configuration for automated dependency updates", "commit": "e5a4109" },
+        { "description": "golangci-lint configuration", "commit": "e5a4109" }
+      ]
+    }
+  ]
+}
