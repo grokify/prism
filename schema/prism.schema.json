@@ -1,0 +1,474 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/grokify/prism/schema/prism.schema.json",
+  "$ref": "#/$defs/PRISMDocument",
+  "$defs": {
+    "CustomerAwarenessConfig": {
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "states": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "enabled"
+      ]
+    },
+    "DMAICMapping": {
+      "properties": {
+        "define": {
+          "type": "string"
+        },
+        "measure": {
+          "type": "string"
+        },
+        "analyze": {
+          "type": "string"
+        },
+        "improve": {
+          "type": "string"
+        },
+        "control": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "DataPoint": {
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "value": {
+          "type": "number"
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "timestamp",
+        "value"
+      ]
+    },
+    "DomainDef": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "weight": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "name"
+      ]
+    },
+    "FrameworkMapping": {
+      "properties": {
+        "framework": {
+          "type": "string"
+        },
+        "reference": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "framework",
+        "reference"
+      ]
+    },
+    "Initiative": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "priority": {
+          "type": "integer"
+        },
+        "metricIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "name"
+      ]
+    },
+    "MaturityCell": {
+      "properties": {
+        "domain": {
+          "type": "string"
+        },
+        "stage": {
+          "type": "string"
+        },
+        "currentLevel": {
+          "type": "integer"
+        },
+        "targetLevel": {
+          "type": "integer"
+        },
+        "primaryKPI": {
+          "type": "string"
+        },
+        "kpiTarget": {
+          "type": "string"
+        },
+        "maturityScore": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "domain",
+        "stage",
+        "currentLevel"
+      ]
+    },
+    "MaturityLevelDef": {
+      "properties": {
+        "level": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "level",
+        "name"
+      ]
+    },
+    "MaturityMapping": {
+      "properties": {
+        "level1": {
+          "type": "string"
+        },
+        "level2": {
+          "type": "string"
+        },
+        "level3": {
+          "type": "string"
+        },
+        "level4": {
+          "type": "string"
+        },
+        "level5": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "MaturityModel": {
+      "properties": {
+        "levels": {
+          "items": {
+            "$ref": "#/$defs/MaturityLevelDef"
+          },
+          "type": "array"
+        },
+        "cells": {
+          "items": {
+            "$ref": "#/$defs/MaturityCell"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "Metadata": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "author": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "Metric": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "stage": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "metricType": {
+          "type": "string"
+        },
+        "trendDirection": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "baseline": {
+          "type": "number"
+        },
+        "current": {
+          "type": "number"
+        },
+        "target": {
+          "type": "number"
+        },
+        "sli": {
+          "$ref": "#/$defs/SLI"
+        },
+        "slo": {
+          "$ref": "#/$defs/SLO"
+        },
+        "thresholds": {
+          "$ref": "#/$defs/Thresholds"
+        },
+        "status": {
+          "type": "string"
+        },
+        "maturityMapping": {
+          "$ref": "#/$defs/MaturityMapping"
+        },
+        "dmaic": {
+          "$ref": "#/$defs/DMAICMapping"
+        },
+        "customerAwareness": {
+          "$ref": "#/$defs/CustomerAwarenessConfig"
+        },
+        "frameworkMappings": {
+          "items": {
+            "$ref": "#/$defs/FrameworkMapping"
+          },
+          "type": "array"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "dataSource": {
+          "type": "string"
+        },
+        "dataPoints": {
+          "items": {
+            "$ref": "#/$defs/DataPoint"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "name",
+        "domain",
+        "stage",
+        "category",
+        "metricType",
+        "baseline",
+        "current",
+        "target"
+      ]
+    },
+    "OKRMapping": {
+      "properties": {
+        "objectiveId": {
+          "type": "string"
+        },
+        "objectiveName": {
+          "type": "string"
+        },
+        "keyResultId": {
+          "type": "string"
+        },
+        "keyResultName": {
+          "type": "string"
+        },
+        "metricIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "objectiveName"
+      ]
+    },
+    "PRISMDocument": {
+      "properties": {
+        "$schema": {
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/$defs/Metadata"
+        },
+        "domains": {
+          "items": {
+            "$ref": "#/$defs/DomainDef"
+          },
+          "type": "array"
+        },
+        "metrics": {
+          "items": {
+            "$ref": "#/$defs/Metric"
+          },
+          "type": "array"
+        },
+        "maturity": {
+          "$ref": "#/$defs/MaturityModel"
+        },
+        "okrs": {
+          "items": {
+            "$ref": "#/$defs/OKRMapping"
+          },
+          "type": "array"
+        },
+        "initiatives": {
+          "items": {
+            "$ref": "#/$defs/Initiative"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "metrics"
+      ]
+    },
+    "SLI": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "formula": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "SLO": {
+      "properties": {
+        "target": {
+          "type": "string"
+        },
+        "operator": {
+          "type": "string"
+        },
+        "value": {
+          "type": "number"
+        },
+        "window": {
+          "type": "string"
+        },
+        "thresholds": {
+          "$ref": "#/$defs/Thresholds"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "target"
+      ]
+    },
+    "Thresholds": {
+      "properties": {
+        "green": {
+          "type": "number"
+        },
+        "yellow": {
+          "type": "number"
+        },
+        "red": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "green",
+        "yellow",
+        "red"
+      ]
+    }
+  },
+  "title": "PRISM Document",
+  "description": "PRISM (Proactive Reliability \u0026 Security Maturity Model) document schema"
+}
