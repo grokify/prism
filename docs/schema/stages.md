@@ -6,51 +6,39 @@ PRISM maps metrics to software delivery lifecycle stages, enabling measurement a
 
 | Stage | Constant | Weight | Description |
 |-------|----------|--------|-------------|
-| Design | `design` | 15% | Architecture, threat modeling, requirements |
-| Build | `build` | 20% | CI/CD, SAST, dependency scanning |
-| Test | `test` | 15% | Testing coverage, penetration testing |
-| Runtime | `runtime` | 30% | Production monitoring, availability, detection |
-| Response | `response` | 20% | Incident response, remediation, recovery |
+| Design | `design` | 15% | Architecture, requirements, planning |
+| Build | `build` | 20% | CI/CD, code quality, automation |
+| Test | `test` | 15% | Testing coverage, quality assurance |
+| Runtime | `runtime` | 30% | Production monitoring, availability |
+| Response | `response` | 20% | Incident response, recovery |
 
 ## Design Stage
 
-The design stage covers early-phase security and architecture decisions.
-
-### Security Metrics
-
-- Threat modeling coverage
-- Security requirements documentation
-- Architecture review completion
+The design stage covers early-phase architecture and planning decisions.
 
 ### Operations Metrics
 
 - Capacity planning accuracy
 - Architecture documentation
 - Design review velocity
+- Requirements coverage
 
 ### Example
 
 ```json
 {
-  "id": "sec-threat-modeling",
-  "name": "Threat Modeling Coverage",
-  "domain": "security",
+  "id": "ops-design-review",
+  "name": "Design Review Coverage",
+  "domain": "operations",
   "stage": "design",
-  "category": "prevention",
-  "description": "Percentage of new features with completed threat models"
+  "category": "quality",
+  "description": "Percentage of features with completed design reviews"
 }
 ```
 
 ## Build Stage
 
 The build stage covers CI/CD pipeline and pre-deployment activities.
-
-### Security Metrics
-
-- SAST coverage and findings
-- Dependency scanning coverage
-- Secrets scanning
-- Container image scanning
 
 ### Operations Metrics
 
@@ -68,6 +56,8 @@ The build stage covers CI/CD pipeline and pre-deployment activities.
   "domain": "operations",
   "stage": "build",
   "category": "efficiency",
+  "metricType": "count",
+  "unit": "/day",
   "frameworkMappings": [
     {"framework": "DORA", "reference": "deployment-frequency"}
   ]
@@ -78,27 +68,23 @@ The build stage covers CI/CD pipeline and pre-deployment activities.
 
 The test stage covers testing and validation activities.
 
-### Security Metrics
-
-- Penetration testing coverage
-- Security test pass rate
-- DAST coverage
-
 ### Operations Metrics
 
 - Test coverage percentage
 - Integration test pass rate
 - Performance test completion
+- End-to-end test coverage
 
 ### Example
 
 ```json
 {
-  "id": "sec-pentest-coverage",
-  "name": "Penetration Testing Coverage",
-  "domain": "security",
+  "id": "ops-test-coverage",
+  "name": "Test Coverage",
+  "domain": "operations",
   "stage": "test",
-  "category": "detection",
+  "category": "quality",
+  "metricType": "coverage",
   "unit": "%"
 }
 ```
@@ -106,12 +92,6 @@ The test stage covers testing and validation activities.
 ## Runtime Stage
 
 The runtime stage covers production monitoring and detection. This stage typically has the highest weight (30%) as it represents live system health.
-
-### Security Metrics
-
-- Runtime security monitoring
-- Anomaly detection rate
-- Intrusion detection coverage
 
 ### Operations Metrics
 
@@ -129,6 +109,8 @@ The runtime stage covers production monitoring and detection. This stage typical
   "domain": "operations",
   "stage": "runtime",
   "category": "reliability",
+  "metricType": "rate",
+  "unit": "%",
   "slo": {
     "target": ">=99.99%",
     "operator": "gte",
@@ -140,19 +122,14 @@ The runtime stage covers production monitoring and detection. This stage typical
 
 ## Response Stage
 
-The response stage covers incident handling and remediation.
-
-### Security Metrics
-
-- Vulnerability MTTR
-- Incident response time
-- Remediation completion rate
+The response stage covers incident handling and recovery.
 
 ### Operations Metrics
 
 - Mean time to recovery (DORA)
 - Incident resolution time
 - Post-mortem completion rate
+- Rollback success rate
 
 ### Example
 
@@ -162,7 +139,7 @@ The response stage covers incident handling and remediation.
   "name": "Mean Time to Recovery",
   "domain": "operations",
   "stage": "response",
-  "category": "reliability",
+  "category": "response",
   "metricType": "latency",
   "trendDirection": "lower_better",
   "unit": "hours"
@@ -194,3 +171,7 @@ config := &prism.ScoreConfig{
     },
 }
 ```
+
+## Security Stage Examples
+
+For security-specific stage examples (SAST, threat modeling, penetration testing, etc.), see [prism-security](https://github.com/grokify/prism-security).

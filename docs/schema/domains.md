@@ -1,60 +1,17 @@
 # Domains
 
-PRISM organizes metrics into two primary domains representing the main areas of B2B SaaS operational health.
+PRISM is an extensible framework that organizes metrics into domains. The core framework provides base domain support, with domain-specific content available through extension modules.
 
-## Available Domains
+## Core Domains
 
 | Domain | Constant | Description |
 |--------|----------|-------------|
-| Security | `security` | Application and infrastructure security metrics |
 | Operations | `operations` | Reliability, performance, and efficiency metrics |
-
-## Security Domain
-
-The security domain covers metrics related to protecting the application and infrastructure:
-
-### Common Metric Categories
-
-| Category | Example Metrics |
-|----------|-----------------|
-| Prevention | SAST coverage, dependency scanning, threat modeling |
-| Detection | Runtime security monitoring, anomaly detection |
-| Response | Vulnerability MTTR, incident response time |
-
-### Lifecycle Coverage
-
-| Stage | Focus Areas |
-|-------|-------------|
-| Design | Threat modeling, security requirements |
-| Build | SAST, SCA, secrets scanning |
-| Test | Penetration testing, security test coverage |
-| Runtime | Runtime protection, monitoring |
-| Response | Vulnerability remediation, incident response |
-
-### Example Metrics
-
-```json
-[
-  {
-    "id": "sec-sast-coverage",
-    "name": "SAST Coverage",
-    "domain": "security",
-    "stage": "build",
-    "category": "prevention"
-  },
-  {
-    "id": "sec-vuln-mttr",
-    "name": "Critical Vulnerability MTTR",
-    "domain": "security",
-    "stage": "response",
-    "category": "response"
-  }
-]
-```
+| Security | `security` | Security metrics (see [prism-security](https://github.com/grokify/prism-security)) |
 
 ## Operations Domain
 
-The operations domain covers metrics related to reliability, performance, and efficiency:
+The operations domain covers metrics related to reliability, performance, and efficiency. This is the primary domain included in prism core.
 
 ### Common Metric Categories
 
@@ -63,6 +20,7 @@ The operations domain covers metrics related to reliability, performance, and ef
 | Reliability | Availability, durability, error rate |
 | Efficiency | Deployment frequency, lead time, resource utilization |
 | Quality | Change failure rate, code coverage |
+| Response | Mean time to recovery, incident response |
 
 ### DORA Alignment
 
@@ -72,8 +30,8 @@ Operations metrics often align with DORA (DevOps Research and Assessment) metric
 |-------------|-------------|----------|
 | Deployment Frequency | Build | Efficiency |
 | Lead Time for Changes | Build | Efficiency |
-| Mean Time to Recovery | Response | Reliability |
-| Change Failure Rate | Build | Quality |
+| Mean Time to Recovery | Response | Response |
+| Change Failure Rate | Runtime | Quality |
 
 ### Example Metrics
 
@@ -84,16 +42,60 @@ Operations metrics often align with DORA (DevOps Research and Assessment) metric
     "name": "Service Availability",
     "domain": "operations",
     "stage": "runtime",
-    "category": "reliability"
+    "category": "reliability",
+    "metricType": "rate",
+    "unit": "%",
+    "current": 99.95,
+    "target": 99.99
   },
   {
     "id": "ops-deploy-frequency",
     "name": "Deployment Frequency",
     "domain": "operations",
     "stage": "build",
-    "category": "efficiency"
+    "category": "efficiency",
+    "metricType": "count",
+    "unit": "/day",
+    "current": 5,
+    "target": 10
+  },
+  {
+    "id": "ops-mttr",
+    "name": "Mean Time to Recovery",
+    "domain": "operations",
+    "stage": "response",
+    "category": "response",
+    "metricType": "latency",
+    "unit": "hours",
+    "current": 2,
+    "target": 1
   }
 ]
+```
+
+## Security Domain
+
+The security domain is supported by the PRISM framework but security-specific examples, metrics, and goals are provided by the **[prism-security](https://github.com/grokify/prism-security)** extension module.
+
+For security metric examples and detailed documentation, see [prism-security](https://github.com/grokify/prism-security).
+
+## Domain Extensibility
+
+PRISM is designed to be extensible. Domain modules can provide:
+
+- **Metrics** - Domain-specific metric definitions
+- **Goals** - Strategic objectives with maturity models
+- **Dashboards** - Visualization configurations
+- **Framework Mappings** - Industry framework alignment
+
+### Using Domain Modules
+
+```bash
+# Core prism with operations examples
+prism init -o ops.json
+
+# Add security domain content from prism-security
+# Copy metrics, goals, and phases from prism-security examples
 ```
 
 ## Domain Weights
@@ -102,23 +104,24 @@ In PRISM score calculation, domains have configurable weights:
 
 | Domain | Default Weight |
 |--------|----------------|
-| Security | 50% |
 | Operations | 50% |
+| Security | 50% |
 
 Weights can be customized in the `ScoreConfig`:
 
 ```go
 config := &prism.ScoreConfig{
     DomainWeights: map[string]float64{
-        "security":   0.6, // 60% weight
-        "operations": 0.4, // 40% weight
+        "operations": 0.6, // 60% weight
+        "security":   0.4, // 40% weight
     },
 }
 ```
 
 ## Best Practices
 
-1. **Balance Coverage** - Include metrics from both domains
-2. **Cover All Stages** - Each domain should have metrics across the lifecycle
-3. **Align with Frameworks** - Map metrics to industry frameworks (NIST, DORA)
-4. **Set Appropriate Weights** - Adjust domain weights based on organizational priorities
+1. **Start with Operations** - Use ops metrics as a foundation
+2. **Add Domain Modules** - Extend with security or other domain modules as needed
+3. **Cover All Stages** - Each domain should have metrics across the lifecycle
+4. **Align with Frameworks** - Map metrics to industry frameworks (DORA, SRE, NIST)
+5. **Set Appropriate Weights** - Adjust domain weights based on organizational priorities

@@ -6,10 +6,10 @@ PRISM metrics can be mapped to industry frameworks to provide context and enable
 
 | Framework | Constant | Description |
 |-----------|----------|-------------|
-| NIST CSF | `NIST_CSF` | NIST Cybersecurity Framework |
-| MITRE ATT&CK | `MITRE_ATTACK` | MITRE ATT&CK Framework |
 | DORA | `DORA` | DevOps Research and Assessment |
 | SRE | `SRE` | Site Reliability Engineering |
+| NIST CSF | `NIST_CSF` | NIST Cybersecurity Framework (see prism-security) |
+| MITRE ATT&CK | `MITRE_ATTACK` | MITRE ATT&CK Framework (see prism-security) |
 
 ## Framework Mapping Structure
 
@@ -21,79 +21,6 @@ PRISM metrics can be mapped to industry frameworks to provide context and enable
   ]
 }
 ```
-
-## NIST Cybersecurity Framework
-
-The NIST CSF provides a framework for managing cybersecurity risk.
-
-### Functions
-
-| Function | Description | PRISM Categories |
-|----------|-------------|------------------|
-| Identify (ID) | Asset management, risk assessment | - |
-| Protect (PR) | Access control, training, maintenance | Prevention |
-| Detect (DE) | Anomalies, monitoring, detection | Detection |
-| Respond (RS) | Response planning, communications | Response |
-| Recover (RC) | Recovery planning, improvements | Response |
-
-### Example Mappings
-
-```json
-[
-  {
-    "id": "sec-sast-coverage",
-    "name": "SAST Coverage",
-    "frameworkMappings": [
-      {"framework": "NIST_CSF", "reference": "PR.DS-6"}
-    ]
-  },
-  {
-    "id": "sec-monitoring",
-    "name": "Security Monitoring Coverage",
-    "frameworkMappings": [
-      {"framework": "NIST_CSF", "reference": "DE.CM-1"},
-      {"framework": "NIST_CSF", "reference": "DE.CM-7"}
-    ]
-  }
-]
-```
-
-### Common NIST CSF References
-
-| Reference | Category | Description |
-|-----------|----------|-------------|
-| PR.DS-6 | Protect | Integrity checking mechanisms |
-| PR.IP-1 | Protect | Configuration management |
-| DE.CM-1 | Detect | Network monitoring |
-| DE.CM-7 | Detect | Monitoring for unauthorized activity |
-| RS.AN-1 | Respond | Notifications from detection systems |
-
-## MITRE ATT&CK
-
-MITRE ATT&CK is a knowledge base of adversary tactics and techniques.
-
-### Mapping Approach
-
-Map detection and prevention metrics to ATT&CK techniques:
-
-```json
-{
-  "id": "sec-endpoint-detection",
-  "name": "Endpoint Detection Coverage",
-  "frameworkMappings": [
-    {"framework": "MITRE_ATTACK", "reference": "T1059"},
-    {"framework": "MITRE_ATTACK", "reference": "T1047"}
-  ]
-}
-```
-
-### Example Mappings
-
-| Metric | ATT&CK Technique | Description |
-|--------|------------------|-------------|
-| Endpoint Detection | T1059 | Command and Scripting Interpreter |
-| Network Monitoring | T1071 | Application Layer Protocol |
-| File Integrity | T1565 | Data Manipulation |
 
 ## DORA Metrics
 
@@ -242,3 +169,7 @@ Framework mappings enable automated compliance reporting:
 2. Calculate coverage per framework category
 3. Identify gaps in framework coverage
 4. Generate framework-specific reports
+
+## Security Frameworks
+
+For security-specific framework mappings (NIST CSF, MITRE ATT&CK), see [prism-security](https://github.com/grokify/prism-security).

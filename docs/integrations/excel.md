@@ -15,8 +15,8 @@ Export PRISM documents to XLSX format for stakeholder reporting and offline anal
 |-----------|-------------|
 | Summary | Overall scores and health status |
 | Metrics | All metrics with current values |
-| Security | Security domain metrics |
 | Operations | Operations domain metrics |
+| Domain | Domain-specific metrics (extensible) |
 | Maturity | Maturity model assessment |
 | Trends | Historical data (if available) |
 | Raw Data | Full JSON data for reference |
@@ -29,7 +29,7 @@ Export PRISM documents to XLSX format for stakeholder reporting and offline anal
 | Report Date | 2024-01-15 |
 | Overall Score | 78.2% |
 | Interpretation | Strong |
-| Security Score | 72.5% |
+| Reliability Score | 82.5% |
 | Operations Score | 84.0% |
 | Maturity Average | 3.6 |
 | Performance Average | 82.3% |
@@ -39,7 +39,7 @@ Export PRISM documents to XLSX format for stakeholder reporting and offline anal
 | ID | Name | Domain | Stage | Current | Target | Status | SLO Met |
 |----|------|--------|-------|---------|--------|--------|---------|
 | ops-availability | Service Availability | operations | runtime | 99.95% | 99.99% | Yellow | No |
-| sec-sast | SAST Coverage | security | build | 95% | 100% | Green | Yes |
+| ops-deploy-freq | Deployment Frequency | operations | build | 5/day | 10/day | Green | Yes |
 
 ### Conditional Formatting
 
@@ -87,7 +87,7 @@ prism export prism.json --worksheets summary,metrics -o report.xlsx
 prism export prism.json --include-charts -o report.xlsx
 
 # Export filtered by domain
-prism export prism.json --domain security -o security-report.xlsx
+prism export prism.json --domain operations -o ops-report.xlsx
 ```
 
 ## Chart Types
@@ -113,13 +113,13 @@ prism export prism.json \
   -o stakeholder-report.xlsx
 ```
 
-### Compliance Audit
+### DORA Metrics Report
 
 ```bash
 prism export prism.json \
   --worksheets metrics \
-  --filter-framework NIST_CSF \
-  -o nist-compliance.xlsx
+  --filter-framework DORA \
+  -o dora-metrics.xlsx
 ```
 
 ### Data Analysis

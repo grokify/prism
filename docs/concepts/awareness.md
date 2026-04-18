@@ -80,8 +80,8 @@ Enable awareness tracking for a metric:
 
 ```json
 {
-  "id": "sec-critical-vuln",
-  "name": "Critical Vulnerabilities",
+  "id": "ops-service-outage",
+  "name": "Service Outage Notification",
   "customerAwareness": {
     "enabled": true,
     "states": ["unaware", "aware_not_remediating", "aware_remediating", "aware_remediated"]

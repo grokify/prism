@@ -24,104 +24,16 @@ Start with basic metadata:
   "metadata": {
     "name": "Acme Corp PRISM",
     "version": "1.0.0",
-    "description": "Security and operations health metrics",
+    "description": "Operations health metrics",
     "owner": "Platform Team",
     "lastUpdated": "2024-01-15"
   }
 }
 ```
 
-## Step 2: Define Security Metrics
+## Step 2: Define Operations Metrics
 
-Add security metrics covering the software delivery lifecycle:
-
-### Design Stage - Threat Modeling
-
-```json
-{
-  "id": "sec-threat-modeling",
-  "name": "Threat Modeling Coverage",
-  "description": "Percentage of new features with completed threat models",
-  "domain": "security",
-  "stage": "design",
-  "category": "prevention",
-  "metricType": "coverage",
-  "trendDirection": "higher_better",
-  "unit": "%",
-  "baseline": 25,
-  "current": 75,
-  "target": 100,
-  "thresholds": {
-    "green": 90,
-    "yellow": 70,
-    "red": 50
-  },
-  "slo": {
-    "target": ">=90%",
-    "operator": "gte",
-    "value": 90,
-    "window": "quarterly"
-  }
-}
-```
-
-### Build Stage - SAST Coverage
-
-```json
-{
-  "id": "sec-sast-coverage",
-  "name": "SAST Coverage",
-  "description": "Percentage of repositories with SAST scanning enabled",
-  "domain": "security",
-  "stage": "build",
-  "category": "prevention",
-  "metricType": "coverage",
-  "trendDirection": "higher_better",
-  "unit": "%",
-  "baseline": 60,
-  "current": 95,
-  "target": 100,
-  "slo": {
-    "target": ">=95%",
-    "operator": "gte",
-    "value": 95
-  }
-}
-```
-
-### Response Stage - Vulnerability MTTR
-
-```json
-{
-  "id": "sec-vuln-mttr",
-  "name": "Vulnerability MTTR",
-  "description": "Mean time to remediate critical vulnerabilities",
-  "domain": "security",
-  "stage": "response",
-  "category": "response",
-  "metricType": "latency",
-  "trendDirection": "lower_better",
-  "unit": "days",
-  "baseline": 30,
-  "current": 7,
-  "target": 3,
-  "thresholds": {
-    "green": 7,
-    "yellow": 14,
-    "red": 30
-  },
-  "slo": {
-    "target": "<=7 days",
-    "operator": "lte",
-    "value": 7,
-    "window": "30d"
-  }
-}
-```
-
-## Step 3: Define Operations Metrics
-
-Add operations metrics aligned with DORA:
+Add operations metrics aligned with DORA and SRE practices:
 
 ### Runtime Stage - Availability
 
@@ -162,19 +74,82 @@ Add operations metrics aligned with DORA:
   "domain": "operations",
   "stage": "build",
   "category": "efficiency",
-  "metricType": "rate",
+  "metricType": "count",
   "trendDirection": "higher_better",
-  "unit": "deploys/day",
+  "unit": "/day",
   "baseline": 1,
   "current": 5,
   "target": 10,
+  "slo": {
+    "target": ">=5/day",
+    "operator": "gte",
+    "value": 5,
+    "window": "7d"
+  },
   "frameworkMappings": [
     {"framework": "DORA", "reference": "deployment-frequency"}
   ]
 }
 ```
 
-## Step 4: Define Maturity Levels
+### Build Stage - Lead Time for Changes
+
+```json
+{
+  "id": "ops-lead-time",
+  "name": "Lead Time for Changes",
+  "description": "Time from commit to production deployment",
+  "domain": "operations",
+  "stage": "build",
+  "category": "efficiency",
+  "metricType": "latency",
+  "trendDirection": "lower_better",
+  "unit": "hours",
+  "baseline": 168,
+  "current": 24,
+  "target": 1,
+  "slo": {
+    "target": "<=24h",
+    "operator": "lte",
+    "value": 24,
+    "window": "7d"
+  },
+  "frameworkMappings": [
+    {"framework": "DORA", "reference": "lead-time-for-changes"}
+  ]
+}
+```
+
+### Response Stage - Mean Time to Recovery
+
+```json
+{
+  "id": "ops-mttr",
+  "name": "Mean Time to Recovery",
+  "description": "Average time to recover from production incidents",
+  "domain": "operations",
+  "stage": "response",
+  "category": "response",
+  "metricType": "latency",
+  "trendDirection": "lower_better",
+  "unit": "hours",
+  "baseline": 24,
+  "current": 2,
+  "target": 1,
+  "slo": {
+    "target": "<=1h",
+    "operator": "lte",
+    "value": 1,
+    "window": "30d"
+  },
+  "frameworkMappings": [
+    {"framework": "DORA", "reference": "time-to-restore-service"},
+    {"framework": "SRE", "reference": "mttr"}
+  ]
+}
+```
+
+## Step 3: Define Maturity Levels
 
 Set your current and target maturity for each domain/stage:
 
@@ -190,25 +165,32 @@ Set your current and target maturity for each domain/stage:
     ],
     "cells": [
       {
-        "domain": "security",
-        "stage": "design",
+        "domain": "operations",
+        "stage": "runtime",
         "currentLevel": 3,
         "targetLevel": 4,
-        "primaryKPI": "sec-threat-modeling"
+        "primaryKPI": "ops-availability"
       },
       {
-        "domain": "security",
+        "domain": "operations",
         "stage": "build",
+        "currentLevel": 3,
+        "targetLevel": 5,
+        "primaryKPI": "ops-deploy-frequency"
+      },
+      {
+        "domain": "operations",
+        "stage": "response",
         "currentLevel": 4,
         "targetLevel": 5,
-        "primaryKPI": "sec-sast-coverage"
+        "primaryKPI": "ops-mttr"
       }
     ]
   }
 }
 ```
 
-## Step 5: Validate and Score
+## Step 4: Validate and Score
 
 Save your document and run:
 
@@ -227,4 +209,4 @@ See the [examples directory](https://github.com/grokify/prism/tree/main/examples
 - `operations-metrics.json` - DORA-aligned operations metrics
 - `goal-roadmap.json` - Goal-driven maturity roadmap with phases
 
-For application security examples, see [prism-appsec](https://github.com/grokify/prism-appsec).
+For security metrics examples, see [prism-security](https://github.com/grokify/prism-security).

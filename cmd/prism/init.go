@@ -20,14 +20,15 @@ var initCmd = &cobra.Command{
 	Long: `Create a new PRISM document scaffold with default structure.
 
 Examples:
-  prism init                          # Create default prism.json
-  prism init -d security              # Create with security domain focus
-  prism init -d operations -o ops.json # Create ops-focused document`,
+  prism init                          # Create default prism.json with operations metrics
+  prism init -d operations -o ops.json # Create ops-focused document
+
+For security metrics examples, see: https://github.com/grokify/prism-security`,
 	RunE: runInit,
 }
 
 func init() {
-	initCmd.Flags().StringVarP(&initDomain, "domain", "d", "", "Focus domain (security or operations)")
+	initCmd.Flags().StringVarP(&initDomain, "domain", "d", "", "Focus domain (operations). For security examples, see prism-security.")
 	initCmd.Flags().StringVarP(&initOutput, "output", "o", "prism.json", "Output file path")
 }
 
@@ -73,12 +74,12 @@ func runInit(cmd *cobra.Command, args []string) error {
 		Metrics:  make([]prism.Metric, 0),
 	}
 
-	// Add example metrics based on domain
-	if initDomain == "" || initDomain == prism.DomainSecurity {
-		doc.Metrics = append(doc.Metrics, createSecurityMetrics()...)
-	}
+	// Add example metrics (operations only - for security examples see prism-security)
 	if initDomain == "" || initDomain == prism.DomainOperations {
 		doc.Metrics = append(doc.Metrics, createOperationsMetrics()...)
+	}
+	if initDomain == prism.DomainSecurity {
+		fmt.Println("Note: For security metric examples, see https://github.com/grokify/prism-security")
 	}
 
 	// Marshal to JSON
@@ -94,46 +95,6 @@ func runInit(cmd *cobra.Command, args []string) error {
 
 	fmt.Printf("Created %s\n", initOutput)
 	return nil
-}
-
-func createSecurityMetrics() []prism.Metric {
-	return []prism.Metric{
-		{
-			ID:             "sec-coverage-01",
-			Name:           "Vulnerability Detection Coverage",
-			Description:    "Percentage of assets covered by vulnerability scanning",
-			Domain:         prism.DomainSecurity,
-			Stage:          prism.StageRuntime,
-			Category:       prism.CategoryDetection,
-			MetricType:     prism.MetricTypeCoverage,
-			TrendDirection: prism.TrendHigherBetter,
-			Unit:           "%",
-			Baseline:       70,
-			Current:        85,
-			Target:         95,
-			Thresholds:     &prism.Thresholds{Green: 90, Yellow: 75, Red: 60},
-			SLO:            &prism.SLO{Target: ">=95%", Window: prism.Window30Days},
-			FrameworkMappings: []prism.FrameworkMapping{
-				{Framework: prism.FrameworkNISTCSF, Reference: "DE.CM-8"},
-			},
-		},
-		{
-			ID:             "sec-response-01",
-			Name:           "Mean Time to Remediate (MTTR)",
-			Description:    "Average time to remediate critical vulnerabilities",
-			Domain:         prism.DomainSecurity,
-			Stage:          prism.StageResponse,
-			Category:       prism.CategoryResponse,
-			MetricType:     prism.MetricTypeLatency,
-			TrendDirection: prism.TrendLowerBetter,
-			Unit:           "hours",
-			Baseline:       72,
-			Current:        24,
-			Target:         8,
-			Thresholds:     &prism.Thresholds{Green: 12, Yellow: 36, Red: 72},
-			SLO:            &prism.SLO{Target: "<=8h", Window: prism.Window30Days},
-		},
-	}
 }
 
 func createOperationsMetrics() []prism.Metric {

@@ -46,8 +46,8 @@ theme: corporate
 
 ## 78.2% - Strong
 
-- Security: 72.5%
-- Operations: 84.0%
+- Reliability: 82.5%
+- Efficiency: 84.0%
 
 ![bg right:40%](score-gauge.svg)
 
@@ -57,23 +57,23 @@ theme: corporate
 
 |            | Design | Build | Test | Runtime | Response |
 |------------|--------|-------|------|---------|----------|
-| Security   | 🟡 65  | 🟢 92 | 🟡 70| 🟢 88   | 🟡 72    |
-| Operations | 🟡 68  | 🟢 85 | 🟡 75| 🟢 95   | 🟢 82    |
+| Reliability| 🟡 68  | 🟢 85 | 🟡 75| 🟢 95   | 🟢 82    |
+| Efficiency | 🟡 65  | 🟢 92 | 🟡 70| 🟢 88   | 🟡 72    |
 
 ---
 
 # Top Performing Metrics
 
 1. **Service Availability** - 99.95% (Target: 99.99%)
-2. **SAST Coverage** - 95% (Target: 100%)
-3. **Deployment Frequency** - 5/day (Target: 10/day)
+2. **Deployment Frequency** - 5/day (Target: 10/day)
+3. **P99 Latency** - 150ms (Target: 200ms)
 
 ---
 
 # Areas Needing Attention
 
-1. **Threat Modeling** - 75% (Target: 100%)
-2. **Lead Time** - 24 hours (Target: 1 hour)
+1. **Lead Time** - 24 hours (Target: 1 hour)
+2. **Change Failure Rate** - 10% (Target: 5%)
 3. **Error Rate** - 0.15% (Target: 0.1%)
 ```
 

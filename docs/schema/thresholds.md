@@ -163,16 +163,16 @@ fmt.Println(status) // "Yellow"
 
 ```json
 {
-  "id": "sec-vuln-mttr",
-  "name": "Vulnerability MTTR",
+  "id": "ops-mttr",
+  "name": "Mean Time to Recovery",
   "metricType": "latency",
   "trendDirection": "lower_better",
-  "unit": "days",
-  "current": 7,
+  "unit": "hours",
+  "current": 2,
   "thresholds": {
-    "green": 3,
-    "yellow": 7,
-    "red": 14
+    "green": 1,
+    "yellow": 4,
+    "red": 24
   }
 }
 ```

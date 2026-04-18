@@ -4,9 +4,25 @@ PRISM combines several established methodologies into a unified metrics framewor
 
 ## Core Concepts
 
+### [Goals](goals.md)
+
+Strategic objectives with their own maturity models. Each goal defines:
+
+- 5-level maturity progression specific to that goal
+- SLO requirements for each maturity level
+- Initiative linkage for tracking progress
+
+### [Phases](phases.md)
+
+Time-bounded planning periods (quarters) that organize:
+
+- Goal maturity targets (enter/exit levels)
+- Swimlanes for initiative grouping
+- Phase metrics (completion %, SLO compliance)
+
 ### [Maturity Model](maturity.md)
 
-A 5-level capability maturity model adapted for security and operations:
+A 5-level capability maturity model adapted for operations and extensible domains:
 
 | Level | Name | Description |
 |-------|------|-------------|
@@ -39,10 +55,10 @@ A composite health score (0.0-1.0) combining:
 
 Map metrics to industry standards:
 
-- NIST Cybersecurity Framework
-- MITRE ATT&CK
 - DORA metrics
 - SRE practices
+- NIST Cybersecurity Framework (see [prism-security](https://github.com/grokify/prism-security))
+- MITRE ATT&CK (see [prism-security](https://github.com/grokify/prism-security))
 
 ## Methodology Foundations
 
@@ -92,20 +108,18 @@ PRISM's maturity model is adapted from:
 ```
 PRISM Score (Overall)
 ├── Base Score
-│   ├── Security Score
+│   ├── Domain Score (e.g., Operations)
 │   │   ├── Design Cell Score
 │   │   ├── Build Cell Score
 │   │   ├── Test Cell Score
 │   │   ├── Runtime Cell Score
 │   │   └── Response Cell Score
-│   └── Operations Score
-│       ├── Design Cell Score
-│       ├── Build Cell Score
-│       ├── Test Cell Score
-│       ├── Runtime Cell Score
-│       └── Response Cell Score
+│   └── Additional Domains (extensible)
+│       └── ...
 └── Awareness Multiplier
 ```
+
+For security domain scoring, see [prism-security](https://github.com/grokify/prism-security).
 
 ## Getting Started
 

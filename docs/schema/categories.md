@@ -21,22 +21,22 @@ Prevention metrics measure proactive controls that stop issues before they occur
 
 | Metric | Domain | Stage |
 |--------|--------|-------|
-| SAST Coverage | Security | Build |
-| Threat Modeling Coverage | Security | Design |
-| Dependency Scanning | Security | Build |
-| Input Validation Coverage | Security | Build |
+| Input Validation Coverage | Operations | Build |
+| Configuration Validation | Operations | Build |
+| Pre-deploy Checks | Operations | Build |
+| Schema Validation | Operations | Design |
 
 ### JSON Example
 
 ```json
 {
-  "id": "sec-sast-coverage",
-  "name": "SAST Coverage",
-  "domain": "security",
+  "id": "ops-predeploy-checks",
+  "name": "Pre-deploy Check Coverage",
+  "domain": "operations",
   "stage": "build",
   "category": "prevention",
   "metricType": "coverage",
-  "description": "Percentage of code analyzed by static analysis"
+  "description": "Percentage of deployments with automated pre-deploy validation"
 }
 ```
 
@@ -48,22 +48,22 @@ Detection metrics measure the ability to identify issues when they occur.
 
 | Metric | Domain | Stage |
 |--------|--------|-------|
-| Security Monitoring Coverage | Security | Runtime |
-| Anomaly Detection Rate | Security | Runtime |
-| Log Coverage | Operations | Runtime |
 | Alert Coverage | Operations | Runtime |
+| Log Coverage | Operations | Runtime |
+| Anomaly Detection | Operations | Runtime |
+| Error Rate Monitoring | Operations | Runtime |
 
 ### JSON Example
 
 ```json
 {
-  "id": "sec-monitoring-coverage",
-  "name": "Security Monitoring Coverage",
-  "domain": "security",
+  "id": "ops-alert-coverage",
+  "name": "Alert Coverage",
+  "domain": "operations",
   "stage": "runtime",
   "category": "detection",
   "metricType": "coverage",
-  "description": "Percentage of systems with security monitoring"
+  "description": "Percentage of services with alerting configured"
 }
 ```
 
@@ -75,23 +75,23 @@ Response metrics measure the ability to handle and remediate incidents.
 
 | Metric | Domain | Stage |
 |--------|--------|-------|
-| Vulnerability MTTR | Security | Response |
-| Incident Response Time | Security | Response |
 | Mean Time to Recovery | Operations | Response |
+| Incident Response Time | Operations | Response |
 | Post-Mortem Completion | Operations | Response |
+| Rollback Success Rate | Operations | Response |
 
 ### JSON Example
 
 ```json
 {
-  "id": "sec-vuln-mttr",
-  "name": "Vulnerability MTTR",
-  "domain": "security",
+  "id": "ops-mttr",
+  "name": "Mean Time to Recovery",
+  "domain": "operations",
   "stage": "response",
   "category": "response",
   "metricType": "latency",
   "trendDirection": "lower_better",
-  "unit": "days"
+  "unit": "hours"
 }
 ```
 
@@ -137,8 +137,8 @@ Efficiency metrics measure performance and resource utilization.
 |--------|--------|-------|
 | Deployment Frequency | Operations | Build |
 | Lead Time for Changes | Operations | Build |
+| P99 Latency | Operations | Runtime |
 | Resource Utilization | Operations | Runtime |
-| Cost per Transaction | Operations | Runtime |
 
 ### JSON Example
 
@@ -149,8 +149,8 @@ Efficiency metrics measure performance and resource utilization.
   "domain": "operations",
   "stage": "build",
   "category": "efficiency",
-  "metricType": "rate",
-  "unit": "deploys/day",
+  "metricType": "count",
+  "unit": "/day",
   "trendDirection": "higher_better"
 }
 ```
@@ -163,7 +163,7 @@ Quality metrics measure code and process quality.
 
 | Metric | Domain | Stage |
 |--------|--------|-------|
-| Change Failure Rate | Operations | Build |
+| Change Failure Rate | Operations | Runtime |
 | Code Review Coverage | Operations | Build |
 | Test Coverage | Operations | Test |
 | Documentation Coverage | Operations | Design |
@@ -175,7 +175,7 @@ Quality metrics measure code and process quality.
   "id": "ops-change-failure-rate",
   "name": "Change Failure Rate",
   "domain": "operations",
-  "stage": "build",
+  "stage": "runtime",
   "category": "quality",
   "metricType": "rate",
   "unit": "%",
@@ -185,15 +185,7 @@ Quality metrics measure code and process quality.
 
 ## Category by Domain
 
-### Security Domain
-
-| Category | Common Use |
-|----------|------------|
-| Prevention | SAST, SCA, threat modeling |
-| Detection | Monitoring, alerting, DAST |
-| Response | Remediation, incident handling |
-
-### Operations Domain
+### Operations Domain (Core)
 
 | Category | Common Use |
 |----------|------------|
@@ -201,3 +193,9 @@ Quality metrics measure code and process quality.
 | Efficiency | DORA metrics, performance |
 | Quality | Testing, change management |
 | Response | MTTR, recovery |
+| Prevention | Pre-deploy validation |
+| Detection | Monitoring, alerting |
+
+### Security Domain (Extension)
+
+For security-specific category examples, see [prism-security](https://github.com/grokify/prism-security).

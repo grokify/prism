@@ -6,13 +6,13 @@ PRISM supports various metric types to represent different kinds of measurements
 
 | Type | Constant | Description | Example |
 |------|----------|-------------|---------|
-| Coverage | `coverage` | Percentage of coverage | SAST coverage |
+| Coverage | `coverage` | Percentage of coverage | Test coverage |
 | Rate | `rate` | Frequency or percentage | Error rate, availability |
 | Latency | `latency` | Time duration | P99 latency, MTTR |
 | Ratio | `ratio` | Proportion | Success ratio |
-| Count | `count` | Absolute count | Incident count |
+| Count | `count` | Absolute count | Deployment count |
 | Distribution | `distribution` | Statistical distribution | Latency percentiles |
-| Score | `score` | Composite score | Security score |
+| Score | `score` | Composite score | Health score |
 
 ## Coverage
 
@@ -28,13 +28,13 @@ Coverage metrics measure the extent of coverage for a control or practice.
 
 ```json
 {
-  "id": "sec-sast-coverage",
-  "name": "SAST Coverage",
+  "id": "ops-test-coverage",
+  "name": "Test Coverage",
   "metricType": "coverage",
   "trendDirection": "higher_better",
   "unit": "%",
-  "current": 95,
-  "target": 100
+  "current": 85,
+  "target": 95
 }
 ```
 
@@ -76,7 +76,7 @@ Rate metrics measure frequency or percentage over time.
 
 ## Latency
 
-Latency metrics measure time duration, typically for response times or remediation.
+Latency metrics measure time duration, typically for response times or recovery.
 
 ### Characteristics
 
@@ -99,13 +99,13 @@ Latency metrics measure time duration, typically for response times or remediati
 
 ```json
 {
-  "id": "sec-vuln-mttr",
-  "name": "Vulnerability MTTR",
+  "id": "ops-mttr",
+  "name": "Mean Time to Recovery",
   "metricType": "latency",
   "trendDirection": "lower_better",
-  "unit": "days",
-  "current": 7,
-  "target": 3
+  "unit": "hours",
+  "current": 2,
+  "target": 1
 }
 ```
 
@@ -146,23 +146,24 @@ Count metrics measure absolute numbers.
 
 ```json
 {
-  "id": "sec-open-vulns",
-  "name": "Open Critical Vulnerabilities",
+  "id": "ops-deploy-count",
+  "name": "Daily Deployments",
   "metricType": "count",
-  "trendDirection": "lower_better",
-  "current": 3,
-  "target": 0
+  "trendDirection": "higher_better",
+  "unit": "/day",
+  "current": 5,
+  "target": 10
 }
 ```
 
 ```json
 {
-  "id": "ops-deploy-count",
-  "name": "Monthly Deployments",
+  "id": "ops-incident-count",
+  "name": "Open Incidents",
   "metricType": "count",
-  "trendDirection": "higher_better",
-  "current": 45,
-  "target": 60
+  "trendDirection": "lower_better",
+  "current": 3,
+  "target": 0
 }
 ```
 
@@ -207,12 +208,12 @@ Score metrics represent composite or aggregated scores.
 
 ```json
 {
-  "id": "sec-overall-score",
-  "name": "Security Score",
+  "id": "ops-health-score",
+  "name": "Service Health Score",
   "metricType": "score",
   "trendDirection": "higher_better",
-  "current": 78,
-  "target": 90
+  "current": 85,
+  "target": 95
 }
 ```
 
@@ -234,4 +235,8 @@ Score metrics represent composite or aggregated scores.
 | Latency | `lower_better` |
 | MTTR | `lower_better` |
 | Deployment Frequency | `higher_better` |
-| Security Score | `higher_better` |
+| Health Score | `higher_better` |
+
+## Domain Extensions
+
+For security-specific metric examples, see [prism-security](https://github.com/grokify/prism-security).

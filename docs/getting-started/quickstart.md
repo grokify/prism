@@ -10,21 +10,9 @@ Create a new PRISM document with default settings:
 prism init -o prism.json
 ```
 
-This creates a document with both security and operations domains.
+This creates a document with operations metrics.
 
-### Domain-Specific Documents
-
-Create a security-focused document:
-
-```bash
-prism init -d security -o security-metrics.json
-```
-
-Create an operations-focused document:
-
-```bash
-prism init -d operations -o ops-metrics.json
-```
+For security metrics examples, see [prism-security](https://github.com/grokify/prism-security).
 
 ## 2. Edit Your Metrics
 

@@ -22,8 +22,8 @@ PRISM uses a 5-level maturity model to assess organizational capability across d
 - Firefighting mode is common
 - Results are unpredictable
 
-**Security Example**: Vulnerabilities addressed only when exploited
-**Operations Example**: Incidents handled without runbooks
+**Reliability Example**: Incidents handled without runbooks
+**Efficiency Example**: No deployment automation, manual releases
 
 ### Level 2: Basic
 
@@ -33,8 +33,8 @@ PRISM uses a 5-level maturity model to assess organizational capability across d
 - Manual processes predominate
 - Limited metrics collection
 
-**Security Example**: Vulnerability scanning exists but coverage is partial
-**Operations Example**: Basic monitoring with manual alerting
+**Reliability Example**: Basic monitoring with manual alerting
+**Efficiency Example**: Basic CI/CD exists but inconsistent
 
 ### Level 3: Defined
 
@@ -44,8 +44,8 @@ PRISM uses a 5-level maturity model to assess organizational capability across d
 - Roles and responsibilities are clear
 - Metrics are collected systematically
 
-**Security Example**: SAST/DAST integrated into all pipelines
-**Operations Example**: Standardized incident response procedures
+**Reliability Example**: Standardized incident response procedures
+**Efficiency Example**: Consistent CI/CD pipelines across all services
 
 ### Level 4: Managed
 
@@ -55,8 +55,8 @@ PRISM uses a 5-level maturity model to assess organizational capability across d
 - Variation is understood and addressed
 - Predictable outcomes
 
-**Security Example**: Vulnerability SLOs with automated tracking
-**Operations Example**: SLOs with error budgets and automated alerting
+**Reliability Example**: SLOs with error budgets and automated alerting
+**Efficiency Example**: DORA metrics tracked with quantitative targets
 
 ### Level 5: Optimizing
 
@@ -66,8 +66,8 @@ PRISM uses a 5-level maturity model to assess organizational capability across d
 - Proactive risk management
 - Industry-leading practices
 
-**Security Example**: Automated vulnerability remediation, zero-day response playbooks
-**Operations Example**: Self-healing systems, automated capacity management
+**Reliability Example**: Self-healing systems, automated capacity management
+**Efficiency Example**: On-demand deployments, sub-hour lead time
 
 ## Maturity Matrix
 
@@ -75,8 +75,8 @@ PRISM assesses maturity for each domain/stage combination:
 
 |  | Design | Build | Test | Runtime | Response |
 |--|--------|-------|------|---------|----------|
-| **Security** | L3 | L4 | L3 | L4 | L3 |
-| **Operations** | L3 | L4 | L3 | L4 | L4 |
+| **Reliability** | L3 | L4 | L3 | L4 | L4 |
+| **Efficiency** | L3 | L4 | L3 | L4 | L3 |
 
 ## Maturity Model Structure
 
@@ -103,12 +103,12 @@ Each cell represents a domain/stage intersection:
 
 ```json
 {
-  "domain": "security",
+  "domain": "operations",
   "stage": "build",
   "currentLevel": 4,
   "targetLevel": 5,
-  "primaryKPI": "sec-sast-coverage",
-  "kpiTarget": ">=95%"
+  "primaryKPI": "ops-deploy-frequency",
+  "kpiTarget": ">=10/day"
 }
 ```
 
@@ -135,7 +135,7 @@ MaturityScore = CurrentLevel / 5
 model := prism.NewMaturityModel()
 
 // Get a specific cell
-cell := model.GetCell("security", "build")
+cell := model.GetCell("operations", "build")
 cell.CurrentLevel = 4
 
 // Calculate maturity score
@@ -143,7 +143,7 @@ score := cell.CalculateMaturityScore()
 fmt.Printf("Maturity: %.1f%%\n", score*100) // 80%
 
 // Create domain-filtered model
-securityOnly := prism.NewMaturityModelForDomains([]string{"security"})
+opsOnly := prism.NewMaturityModelForDomains([]string{"operations"})
 ```
 
 ## Assessment Guidelines

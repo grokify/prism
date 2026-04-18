@@ -42,9 +42,9 @@ Domains:
   operations   - Reliability, performance, and efficiency
 
 Stages:
-  design       - Architecture, threat modeling, requirements
-  build        - CI/CD, SAST, dependency scanning
-  test         - Testing coverage, penetration testing
+  design       - Architecture, requirements, planning
+  build        - CI/CD, code analysis, dependency management
+  test         - Testing coverage, integration testing
   runtime      - Production monitoring, availability
   response     - Incident response, remediation
 
@@ -57,13 +57,13 @@ Categories:
   quality      - Code and process quality
 
 Metric Types:
-  coverage     - Percentage coverage (e.g., SAST coverage)
+  coverage     - Percentage coverage (e.g., test coverage)
   rate         - Frequency or percentage (e.g., error rate)
   latency      - Time duration (e.g., P99 latency)
   ratio        - Proportion (e.g., success ratio)
   count        - Absolute count (e.g., incidents)
   distribution - Statistical distribution (e.g., percentiles)
-  score        - Composite score (e.g., security score)
+  score        - Composite score (e.g., health score)
 
 Trend Directions:
   higher_better - Higher values are better
@@ -91,10 +91,10 @@ Awareness States:
   aware_remediated     - Customer has remediated
 
 Frameworks:
-  NIST_CSF     - NIST Cybersecurity Framework
-  MITRE_ATTACK - MITRE ATT&CK Framework
   DORA         - DevOps Research and Assessment
   SRE          - Site Reliability Engineering
+  NIST_CSF     - NIST Cybersecurity Framework (see prism-security)
+  MITRE_ATTACK - MITRE ATT&CK Framework (see prism-security)
 ```
 
 ## Use Cases

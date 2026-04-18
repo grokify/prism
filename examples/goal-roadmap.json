@@ -1,0 +1,444 @@
+{
+  "$schema": "../schema/prism.schema.json",
+  "metadata": {
+    "name": "Operations Goal Roadmap Example",
+    "description": "Demonstrates goals, phases, and initiative tracking with SLO-backed maturity levels",
+    "version": "1.0.0",
+    "author": "PRISM Team"
+  },
+  "roadmap": {
+    "name": "Operations Excellence Roadmap",
+    "description": "Multi-phase roadmap to achieve operational excellence",
+    "fiscalYearStart": 1
+  },
+  "metrics": [
+    {
+      "id": "ops-availability",
+      "name": "Service Availability",
+      "description": "Overall service uptime",
+      "domain": "operations",
+      "stage": "runtime",
+      "category": "reliability",
+      "metricType": "rate",
+      "trendDirection": "higher_better",
+      "unit": "%",
+      "baseline": 99.5,
+      "current": 99.95,
+      "target": 99.99,
+      "slo": {
+        "target": ">=99.9%",
+        "operator": "gte",
+        "value": 99.9,
+        "window": "30d"
+      },
+      "thresholds": {
+        "green": 99.9,
+        "yellow": 99.5,
+        "red": 99.0
+      },
+      "frameworkMappings": [
+        {"framework": "SRE", "reference": "availability-slo"},
+        {"framework": "DORA", "reference": "availability"}
+      ]
+    },
+    {
+      "id": "ops-deployment-freq",
+      "name": "Deployment Frequency",
+      "description": "Number of deployments per day",
+      "domain": "operations",
+      "stage": "build",
+      "category": "efficiency",
+      "metricType": "count",
+      "trendDirection": "higher_better",
+      "unit": "/day",
+      "baseline": 1,
+      "current": 5,
+      "target": 10,
+      "slo": {
+        "target": ">=5/day",
+        "operator": "gte",
+        "value": 5,
+        "window": "7d"
+      },
+      "thresholds": {
+        "green": 5,
+        "yellow": 2,
+        "red": 1
+      },
+      "frameworkMappings": [
+        {"framework": "DORA", "reference": "deployment-frequency"}
+      ]
+    },
+    {
+      "id": "ops-lead-time",
+      "name": "Lead Time for Changes",
+      "description": "Time from commit to production deployment",
+      "domain": "operations",
+      "stage": "build",
+      "category": "efficiency",
+      "metricType": "latency",
+      "trendDirection": "lower_better",
+      "unit": "hours",
+      "baseline": 168,
+      "current": 24,
+      "target": 1,
+      "slo": {
+        "target": "<=24h",
+        "operator": "lte",
+        "value": 24,
+        "window": "7d"
+      },
+      "thresholds": {
+        "green": 24,
+        "yellow": 72,
+        "red": 168
+      },
+      "frameworkMappings": [
+        {"framework": "DORA", "reference": "lead-time-for-changes"}
+      ]
+    },
+    {
+      "id": "ops-mttr",
+      "name": "Mean Time to Recovery",
+      "description": "Average time to recover from production incidents",
+      "domain": "operations",
+      "stage": "response",
+      "category": "response",
+      "metricType": "latency",
+      "trendDirection": "lower_better",
+      "unit": "hours",
+      "baseline": 24,
+      "current": 2,
+      "target": 1,
+      "slo": {
+        "target": "<=1h",
+        "operator": "lte",
+        "value": 1,
+        "window": "30d"
+      },
+      "thresholds": {
+        "green": 1,
+        "yellow": 4,
+        "red": 24
+      },
+      "frameworkMappings": [
+        {"framework": "DORA", "reference": "time-to-restore-service"},
+        {"framework": "SRE", "reference": "mttr"}
+      ]
+    },
+    {
+      "id": "ops-change-failure-rate",
+      "name": "Change Failure Rate",
+      "description": "Percentage of deployments causing production incidents",
+      "domain": "operations",
+      "stage": "runtime",
+      "category": "quality",
+      "metricType": "rate",
+      "trendDirection": "lower_better",
+      "unit": "%",
+      "baseline": 20,
+      "current": 5,
+      "target": 1,
+      "slo": {
+        "target": "<=5%",
+        "operator": "lte",
+        "value": 5,
+        "window": "30d"
+      },
+      "thresholds": {
+        "green": 5,
+        "yellow": 10,
+        "red": 20
+      },
+      "frameworkMappings": [
+        {"framework": "DORA", "reference": "change-failure-rate"}
+      ]
+    },
+    {
+      "id": "ops-p99-latency",
+      "name": "P99 Latency",
+      "description": "99th percentile response latency",
+      "domain": "operations",
+      "stage": "runtime",
+      "category": "efficiency",
+      "metricType": "latency",
+      "trendDirection": "lower_better",
+      "unit": "ms",
+      "baseline": 500,
+      "current": 150,
+      "target": 100,
+      "slo": {
+        "target": "<=200ms",
+        "operator": "lte",
+        "value": 200,
+        "window": "7d"
+      },
+      "thresholds": {
+        "green": 200,
+        "yellow": 350,
+        "red": 500
+      },
+      "frameworkMappings": [
+        {"framework": "SRE", "reference": "latency-slo"}
+      ]
+    }
+  ],
+  "goals": [
+    {
+      "id": "goal-reliability",
+      "name": "Achieve High Reliability",
+      "description": "Build world-class reliability with elite SLO compliance",
+      "owner": "VP Engineering",
+      "priority": 1,
+      "status": "active",
+      "targetDate": "2026-12-31",
+      "currentLevel": 3,
+      "targetLevel": 5,
+      "maturityModel": {
+        "levels": [
+          {
+            "level": 1,
+            "name": "Reactive",
+            "description": "Frequent outages, no SLOs, manual recovery",
+            "requiredSLOs": []
+          },
+          {
+            "level": 2,
+            "name": "Basic",
+            "description": "Basic monitoring, some SLOs defined",
+            "requiredSLOs": [
+              {"metricId": "ops-availability", "description": "Basic availability tracking"}
+            ],
+            "metricCriteria": [
+              {"metricId": "ops-availability", "operator": "gte", "value": 99.0}
+            ]
+          },
+          {
+            "level": 3,
+            "name": "Defined",
+            "description": "SLOs tracked, incident response documented",
+            "requiredSLOs": [
+              {"metricId": "ops-availability", "description": "Production SLO"},
+              {"metricId": "ops-mttr", "description": "Recovery time tracked"}
+            ],
+            "metricCriteria": [
+              {"metricId": "ops-availability", "operator": "gte", "value": 99.5},
+              {"metricId": "ops-mttr", "operator": "lte", "value": 4}
+            ]
+          },
+          {
+            "level": 4,
+            "name": "Managed",
+            "description": "Proactive monitoring, automated alerting, error budgets",
+            "requiredSLOs": [
+              {"metricId": "ops-availability", "description": "High availability"},
+              {"metricId": "ops-mttr", "description": "Fast recovery"},
+              {"metricId": "ops-p99-latency", "description": "Latency SLO"}
+            ],
+            "metricCriteria": [
+              {"metricId": "ops-availability", "operator": "gte", "value": 99.9},
+              {"metricId": "ops-mttr", "operator": "lte", "value": 1},
+              {"metricId": "ops-p99-latency", "operator": "lte", "value": 200}
+            ]
+          },
+          {
+            "level": 5,
+            "name": "Optimizing",
+            "description": "Self-healing systems, chaos engineering, elite reliability",
+            "requiredSLOs": [
+              {"metricId": "ops-availability", "description": "Elite availability"},
+              {"metricId": "ops-mttr", "description": "Automated recovery"},
+              {"metricId": "ops-p99-latency", "description": "Optimized latency"}
+            ],
+            "metricCriteria": [
+              {"metricId": "ops-availability", "operator": "gte", "value": 99.99},
+              {"metricId": "ops-mttr", "operator": "lte", "value": 0.25},
+              {"metricId": "ops-p99-latency", "operator": "lte", "value": 100}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "goal-delivery-velocity",
+      "name": "Accelerate Delivery Velocity",
+      "description": "Achieve elite DORA metrics for deployment speed and quality",
+      "owner": "Platform Team Lead",
+      "priority": 2,
+      "status": "active",
+      "targetDate": "2026-12-31",
+      "currentLevel": 3,
+      "targetLevel": 4,
+      "maturityModel": {
+        "levels": [
+          {
+            "level": 1,
+            "name": "Reactive",
+            "description": "Manual deployments, weekly or monthly releases",
+            "requiredSLOs": []
+          },
+          {
+            "level": 2,
+            "name": "Basic",
+            "description": "Some automation, bi-weekly releases",
+            "requiredSLOs": [
+              {"metricId": "ops-deployment-freq", "description": "Regular deployments"}
+            ],
+            "metricCriteria": [
+              {"metricId": "ops-deployment-freq", "operator": "gte", "value": 1}
+            ]
+          },
+          {
+            "level": 3,
+            "name": "Defined",
+            "description": "CI/CD pipeline, daily deployments possible",
+            "requiredSLOs": [
+              {"metricId": "ops-deployment-freq", "description": "Daily deployments"},
+              {"metricId": "ops-lead-time", "description": "Lead time tracked"}
+            ],
+            "metricCriteria": [
+              {"metricId": "ops-deployment-freq", "operator": "gte", "value": 2},
+              {"metricId": "ops-lead-time", "operator": "lte", "value": 72}
+            ]
+          },
+          {
+            "level": 4,
+            "name": "Managed",
+            "description": "Multiple daily deployments, low change failure rate",
+            "requiredSLOs": [
+              {"metricId": "ops-deployment-freq", "description": "High frequency"},
+              {"metricId": "ops-lead-time", "description": "Fast lead time"},
+              {"metricId": "ops-change-failure-rate", "description": "Quality gates"}
+            ],
+            "metricCriteria": [
+              {"metricId": "ops-deployment-freq", "operator": "gte", "value": 5},
+              {"metricId": "ops-lead-time", "operator": "lte", "value": 24},
+              {"metricId": "ops-change-failure-rate", "operator": "lte", "value": 5}
+            ]
+          },
+          {
+            "level": 5,
+            "name": "Optimizing",
+            "description": "On-demand deployments, continuous delivery, elite DORA",
+            "requiredSLOs": [
+              {"metricId": "ops-deployment-freq", "description": "On-demand deploys"},
+              {"metricId": "ops-lead-time", "description": "Hour-level lead time"},
+              {"metricId": "ops-change-failure-rate", "description": "Near-zero failures"}
+            ],
+            "metricCriteria": [
+              {"metricId": "ops-deployment-freq", "operator": "gte", "value": 10},
+              {"metricId": "ops-lead-time", "operator": "lte", "value": 1},
+              {"metricId": "ops-change-failure-rate", "operator": "lte", "value": 1}
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "phases": [
+    {
+      "id": "phase-q1-2026",
+      "name": "Q1 2026",
+      "quarter": "Q1",
+      "year": 2026,
+      "startDate": "2026-01-01",
+      "endDate": "2026-03-31",
+      "status": "in_progress",
+      "goalTargets": [
+        {"goalId": "goal-reliability", "enterLevel": 2, "exitLevel": 3},
+        {"goalId": "goal-delivery-velocity", "enterLevel": 2, "exitLevel": 3}
+      ],
+      "swimlanes": [
+        {
+          "id": "sw-platform",
+          "name": "Platform Initiatives",
+          "domain": "operations",
+          "initiativeIds": ["init-ci-cd", "init-monitoring"]
+        }
+      ]
+    },
+    {
+      "id": "phase-q2-2026",
+      "name": "Q2 2026",
+      "quarter": "Q2",
+      "year": 2026,
+      "startDate": "2026-04-01",
+      "endDate": "2026-06-30",
+      "status": "planning",
+      "goalTargets": [
+        {"goalId": "goal-reliability", "enterLevel": 3, "exitLevel": 4},
+        {"goalId": "goal-delivery-velocity", "enterLevel": 3, "exitLevel": 4}
+      ],
+      "swimlanes": [
+        {
+          "id": "sw-platform-q2",
+          "name": "Platform Initiatives",
+          "domain": "operations",
+          "initiativeIds": ["init-slo-dashboard", "init-deploy-automation"]
+        }
+      ]
+    }
+  ],
+  "initiatives": [
+    {
+      "id": "init-ci-cd",
+      "name": "CI/CD Pipeline Enhancement",
+      "description": "Standardize CI/CD across all services",
+      "status": "completed",
+      "priority": 1,
+      "owner": "Platform Team",
+      "goalIds": ["goal-delivery-velocity"],
+      "phaseId": "phase-q1-2026",
+      "metricIds": ["ops-deployment-freq", "ops-lead-time"],
+      "devCompletionPercent": 100,
+      "deploymentStatus": {
+        "status": "completed",
+        "totalCustomers": 50,
+        "deployedCustomers": 50,
+        "adoptionPercent": 100
+      }
+    },
+    {
+      "id": "init-monitoring",
+      "name": "Observability Platform",
+      "description": "Deploy comprehensive monitoring, logging, and alerting",
+      "status": "in_progress",
+      "priority": 2,
+      "owner": "SRE Team",
+      "goalIds": ["goal-reliability"],
+      "phaseId": "phase-q1-2026",
+      "metricIds": ["ops-availability", "ops-mttr", "ops-p99-latency"],
+      "devCompletionPercent": 90,
+      "deploymentStatus": {
+        "status": "in_progress",
+        "totalCustomers": 50,
+        "deployedCustomers": 45,
+        "adoptionPercent": 90
+      }
+    },
+    {
+      "id": "init-slo-dashboard",
+      "name": "SLO Dashboard",
+      "description": "Build executive SLO visibility dashboard with error budgets",
+      "status": "planned",
+      "priority": 1,
+      "owner": "Platform Team",
+      "goalIds": ["goal-reliability"],
+      "phaseId": "phase-q2-2026",
+      "metricIds": ["ops-availability", "ops-p99-latency"],
+      "devCompletionPercent": 0
+    },
+    {
+      "id": "init-deploy-automation",
+      "name": "Deployment Automation",
+      "description": "Fully automated deployment pipeline with canary releases",
+      "status": "planned",
+      "priority": 2,
+      "owner": "Platform Team",
+      "goalIds": ["goal-delivery-velocity"],
+      "phaseId": "phase-q2-2026",
+      "metricIds": ["ops-deployment-freq", "ops-change-failure-rate"],
+      "devCompletionPercent": 0
+    }
+  ]
+}

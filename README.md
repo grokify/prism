@@ -21,15 +21,14 @@ go get github.com/grokify/prism
 ### Initialize a new PRISM document
 
 ```bash
-# Create default document with both domains
+# Create default document with operations metrics
 prism init
-
-# Create security-focused document
-prism init -d security -o security.json
 
 # Create operations-focused document
 prism init -d operations -o ops.json
 ```
+
+For security metrics examples, see [prism-security](https://github.com/grokify/prism-security).
 
 ### Validate a document
 
@@ -73,10 +72,10 @@ Metrics are mapped to software delivery lifecycle stages:
 
 | Stage | Description |
 |-------|-------------|
-| `design` | Architecture, threat modeling, requirements |
-| `build` | CI/CD, SAST, dependency scanning |
-| `test` | Testing coverage, penetration testing |
-| `runtime` | Production monitoring, availability, detection |
+| `design` | Architecture, requirements, planning |
+| `build` | CI/CD, code quality, dependency management |
+| `test` | Testing coverage, quality assurance |
+| `runtime` | Production monitoring, availability, performance |
 | `response` | Incident response, remediation, recovery |
 
 ### Categories
@@ -94,13 +93,13 @@ Metrics are mapped to software delivery lifecycle stages:
 
 | Type | Description | Example |
 |------|-------------|---------|
-| `coverage` | Percentage of coverage | SAST coverage |
+| `coverage` | Percentage of coverage | Test coverage |
 | `rate` | Frequency or percentage | Error rate |
 | `latency` | Time duration | P99 latency, MTTR |
 | `ratio` | Proportion | Success ratio |
-| `count` | Absolute count | Incident count |
+| `count` | Absolute count | Deployment count |
 | `distribution` | Statistical distribution | Latency percentiles |
-| `score` | Composite score | Security score |
+| `score` | Composite score | Health score |
 
 ## Example Metric
 
@@ -196,10 +195,10 @@ PRISM metrics can be mapped to external frameworks:
 
 | Framework | Description |
 |-----------|-------------|
-| `NIST_CSF` | NIST Cybersecurity Framework |
-| `MITRE_ATTACK` | MITRE ATT&CK Framework |
 | `DORA` | DevOps Research and Assessment |
 | `SRE` | Site Reliability Engineering |
+| `NIST_CSF` | NIST Cybersecurity Framework (see [prism-security](https://github.com/grokify/prism-security)) |
+| `MITRE_ATTACK` | MITRE ATT&CK Framework (see [prism-security](https://github.com/grokify/prism-security)) |
 
 ## JSON Schema
 
@@ -230,9 +229,9 @@ Goals represent strategic objectives with their own 5-level maturity models:
 
 ```json
 {
-  "id": "goal-security-posture",
-  "name": "Strengthen Security Posture",
-  "owner": "CISO",
+  "id": "goal-reliability",
+  "name": "Achieve High Reliability",
+  "owner": "VP Engineering",
   "currentLevel": 3,
   "targetLevel": 4,
   "maturityModel": {
@@ -241,11 +240,11 @@ Goals represent strategic objectives with their own 5-level maturity models:
         "level": 3,
         "name": "Defined",
         "requiredSLOs": [
-          { "metricId": "sec-sast-coverage" },
-          { "metricId": "sec-vuln-mttr" }
+          { "metricId": "ops-availability" },
+          { "metricId": "ops-mttr" }
         ],
         "metricCriteria": [
-          { "metricId": "sec-sast-coverage", "operator": "gte", "value": 95 }
+          { "metricId": "ops-availability", "operator": "gte", "value": 99.5 }
         ]
       }
     ]
@@ -268,13 +267,13 @@ Phases organize work into time-bounded periods (quarters) with goal targets:
   "startDate": "2026-01-01",
   "endDate": "2026-03-31",
   "goalTargets": [
-    { "goalId": "goal-security-posture", "enterLevel": 2, "exitLevel": 3 }
+    { "goalId": "goal-reliability", "enterLevel": 2, "exitLevel": 3 }
   ],
   "swimlanes": [
     {
-      "name": "Security Initiatives",
-      "domain": "security",
-      "initiativeIds": ["init-sast-rollout", "init-vuln-sla"]
+      "name": "Platform Initiatives",
+      "domain": "operations",
+      "initiativeIds": ["init-monitoring", "init-ci-cd"]
     }
   ]
 }
@@ -286,9 +285,9 @@ Initiatives link to goals and phases with deployment tracking:
 
 ```json
 {
-  "id": "init-sast-rollout",
-  "name": "SAST Tool Rollout",
-  "goalIds": ["goal-security-posture"],
+  "id": "init-monitoring",
+  "name": "Observability Platform",
+  "goalIds": ["goal-reliability"],
   "phaseId": "phase-q1-2026",
   "status": "completed",
   "deploymentStatus": {
@@ -307,7 +306,7 @@ See the `examples/` directory:
 - `operations-metrics.json` - Operations-focused metrics (DORA metrics, SLOs, reliability)
 - `goal-roadmap.json` - Goal-driven maturity roadmap with phases and initiatives
 
-For application security examples, see [prism-appsec](https://github.com/grokify/prism-appsec).
+For security metrics examples, see [prism-security](https://github.com/grokify/prism-security).
 
 ## Library Usage
 
