@@ -1,0 +1,323 @@
+{
+  "$schema": "https://github.com/plexusone/dashforge/schema/dashboard.schema.json",
+  "id": "exec-okr-quarterly",
+  "title": "Executive OKR Dashboard",
+  "description": "Quarterly OKR progress with PRISM health metrics",
+  "version": "1.0.0",
+  "layout": {
+    "type": "grid",
+    "columns": 12,
+    "rowHeight": 70,
+    "gap": 16,
+    "padding": 24
+  },
+  "variables": [
+    {
+      "id": "domain",
+      "name": "Domain",
+      "type": "select",
+      "default": "",
+      "options": [
+        { "label": "Security", "value": "Security" },
+        { "label": "Operations", "value": "Operations" }
+      ]
+    },
+    {
+      "id": "status",
+      "name": "Status",
+      "type": "select",
+      "default": "",
+      "options": [
+        { "label": "On Track", "value": "on_track" },
+        { "label": "At Risk", "value": "at_risk" },
+        { "label": "Off Track", "value": "off_track" }
+      ]
+    }
+  ],
+  "dataSources": [
+    {
+      "id": "okr-data",
+      "type": "url",
+      "url": "../data/q1-2026-okr.json",
+      "format": "json"
+    }
+  ],
+  "widgets": [
+    {
+      "id": "prism-overall",
+      "type": "metric",
+      "title": "PRISM Score",
+      "position": { "x": 0, "y": 0, "w": 3, "h": 2 },
+      "dataSourceId": "okr-data",
+      "transform": [
+        { "type": "extract", "config": { "path": "prism" } }
+      ],
+      "config": {
+        "valueField": "overall",
+        "format": "percent",
+        "formatOptions": { "decimals": 1 },
+        "thresholds": [
+          { "value": 0, "color": "#ef4444" },
+          { "value": 50, "color": "#f59e0b" },
+          { "value": 75, "color": "#22c55e" }
+        ]
+      }
+    },
+    {
+      "id": "prism-interpretation",
+      "type": "metric",
+      "title": "Health Level",
+      "position": { "x": 3, "y": 0, "w": 2, "h": 2 },
+      "dataSourceId": "okr-data",
+      "transform": [
+        { "type": "extract", "config": { "path": "prism" } }
+      ],
+      "config": {
+        "valueField": "interpretation",
+        "format": "text"
+      }
+    },
+    {
+      "id": "security-score",
+      "type": "metric",
+      "title": "Security",
+      "position": { "x": 5, "y": 0, "w": 2, "h": 2 },
+      "dataSourceId": "okr-data",
+      "transform": [
+        { "type": "extract", "config": { "path": "prism" } }
+      ],
+      "config": {
+        "valueField": "security",
+        "format": "percent",
+        "formatOptions": { "decimals": 1 },
+        "thresholds": [
+          { "value": 0, "color": "#ef4444" },
+          { "value": 50, "color": "#f59e0b" },
+          { "value": 75, "color": "#22c55e" }
+        ]
+      }
+    },
+    {
+      "id": "operations-score",
+      "type": "metric",
+      "title": "Operations",
+      "position": { "x": 7, "y": 0, "w": 2, "h": 2 },
+      "dataSourceId": "okr-data",
+      "transform": [
+        { "type": "extract", "config": { "path": "prism" } }
+      ],
+      "config": {
+        "valueField": "operations",
+        "format": "percent",
+        "formatOptions": { "decimals": 1 },
+        "thresholds": [
+          { "value": 0, "color": "#ef4444" },
+          { "value": 50, "color": "#f59e0b" },
+          { "value": 75, "color": "#22c55e" }
+        ]
+      }
+    },
+    {
+      "id": "okr-on-track",
+      "type": "metric",
+      "title": "On Track",
+      "position": { "x": 9, "y": 0, "w": 1, "h": 2 },
+      "dataSourceId": "okr-data",
+      "transform": [
+        { "type": "extract", "config": { "path": "statusSummary" } }
+      ],
+      "config": {
+        "valueField": "onTrack",
+        "format": "number",
+        "thresholds": [
+          { "value": 0, "color": "#22c55e" }
+        ]
+      }
+    },
+    {
+      "id": "okr-at-risk",
+      "type": "metric",
+      "title": "At Risk",
+      "position": { "x": 10, "y": 0, "w": 1, "h": 2 },
+      "dataSourceId": "okr-data",
+      "transform": [
+        { "type": "extract", "config": { "path": "statusSummary" } }
+      ],
+      "config": {
+        "valueField": "atRisk",
+        "format": "number",
+        "thresholds": [
+          { "value": 0, "color": "#22c55e" },
+          { "value": 1, "color": "#f59e0b" }
+        ]
+      }
+    },
+    {
+      "id": "okr-off-track",
+      "type": "metric",
+      "title": "Off Track",
+      "position": { "x": 11, "y": 0, "w": 1, "h": 2 },
+      "dataSourceId": "okr-data",
+      "transform": [
+        { "type": "extract", "config": { "path": "statusSummary" } }
+      ],
+      "config": {
+        "valueField": "offTrack",
+        "format": "number",
+        "thresholds": [
+          { "value": 0, "color": "#22c55e" },
+          { "value": 1, "color": "#ef4444" }
+        ]
+      }
+    },
+    {
+      "id": "quarterly-trend-chart",
+      "type": "chart",
+      "title": "PRISM Score Trend",
+      "position": { "x": 0, "y": 2, "w": 6, "h": 4 },
+      "dataSourceId": "okr-data",
+      "transform": [
+        { "type": "extract", "config": { "path": "quarterlyTrend" } }
+      ],
+      "config": {
+        "marks": [
+          {
+            "id": "overall-line",
+            "name": "Overall",
+            "geometry": "line",
+            "encode": {
+              "x": "quarter",
+              "y": "overall"
+            },
+            "smooth": true
+          },
+          {
+            "id": "security-line",
+            "name": "Security",
+            "geometry": "line",
+            "encode": {
+              "x": "quarter",
+              "y": "security"
+            },
+            "smooth": true
+          },
+          {
+            "id": "operations-line",
+            "name": "Operations",
+            "geometry": "line",
+            "encode": {
+              "x": "quarter",
+              "y": "operations"
+            },
+            "smooth": true
+          }
+        ],
+        "axes": [
+          { "id": "x", "type": "category", "position": "bottom" },
+          { "id": "y", "type": "value", "position": "left", "name": "Score %" }
+        ],
+        "legend": { "show": true, "position": "top" },
+        "tooltip": { "show": true, "trigger": "axis" },
+        "grid": { "left": "3%", "right": "4%", "bottom": "3%", "containLabel": true }
+      }
+    },
+    {
+      "id": "domain-stage-chart",
+      "type": "chart",
+      "title": "Domain × Stage Scores",
+      "position": { "x": 6, "y": 2, "w": 6, "h": 4 },
+      "dataSourceId": "okr-data",
+      "transform": [
+        { "type": "extract", "config": { "path": "domainStageMatrix" } }
+      ],
+      "config": {
+        "marks": [
+          {
+            "id": "score-bars",
+            "geometry": "bar",
+            "encode": {
+              "x": "stage",
+              "y": "score",
+              "color": "domain"
+            }
+          }
+        ],
+        "axes": [
+          { "id": "x", "type": "category", "position": "bottom" },
+          { "id": "y", "type": "value", "position": "left", "name": "Score %" }
+        ],
+        "legend": { "show": true, "position": "top" },
+        "tooltip": { "show": true, "trigger": "axis" },
+        "grid": { "left": "3%", "right": "4%", "bottom": "3%", "containLabel": true }
+      }
+    },
+    {
+      "id": "objectives-chart",
+      "type": "chart",
+      "title": "Objective Progress",
+      "position": { "x": 0, "y": 6, "w": 12, "h": 3 },
+      "dataSourceId": "okr-data",
+      "transform": [
+        { "type": "extract", "config": { "path": "objectives" } }
+      ],
+      "config": {
+        "marks": [
+          {
+            "id": "obj-bars",
+            "geometry": "bar",
+            "encode": {
+              "x": "name",
+              "y": "progress"
+            }
+          }
+        ],
+        "axes": [
+          { "id": "x", "type": "category", "position": "bottom" },
+          { "id": "y", "type": "value", "position": "left", "name": "Progress %" }
+        ],
+        "tooltip": { "show": true, "trigger": "axis" },
+        "grid": { "left": "3%", "right": "4%", "bottom": "3%", "containLabel": true }
+      }
+    },
+    {
+      "id": "key-results-table",
+      "type": "table",
+      "title": "Key Results Details",
+      "position": { "x": 0, "y": 9, "w": 12, "h": 5 },
+      "dataSourceId": "okr-data",
+      "transform": [
+        { "type": "extract", "config": { "path": "keyResultsFlat" } },
+        {
+          "type": "filter",
+          "config": { "field": "domain", "operator": "eq", "value": "${var:domain}", "variable": "domain" }
+        },
+        {
+          "type": "filter",
+          "config": { "field": "status", "operator": "eq", "value": "${var:status}", "variable": "status" }
+        },
+        {
+          "type": "sort",
+          "config": { "field": "progress", "direction": "asc" }
+        }
+      ],
+      "config": {
+        "columns": [
+          { "field": "objective", "header": "Objective", "width": "25%" },
+          { "field": "keyResult", "header": "Key Result", "width": "20%" },
+          { "field": "current", "header": "Current", "width": "10%", "align": "right" },
+          { "field": "target", "header": "Target", "width": "10%", "align": "right" },
+          { "field": "unit", "header": "Unit", "width": "8%" },
+          { "field": "progress", "header": "Progress %", "width": "12%", "align": "right" },
+          { "field": "status", "header": "Status", "width": "15%" }
+        ],
+        "sortable": true,
+        "striped": true
+      }
+    }
+  ],
+  "theme": {
+    "mode": "light",
+    "primaryColor": "#3b82f6",
+    "backgroundColor": "#f8fafc"
+  }
+}
