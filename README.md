@@ -220,12 +220,94 @@ Use in your editor for validation:
 }
 ```
 
+## Goal-Driven Maturity Roadmap
+
+PRISM supports goal-driven maturity tracking with multi-phase roadmaps.
+
+### Goals
+
+Goals represent strategic objectives with their own 5-level maturity models:
+
+```json
+{
+  "id": "goal-security-posture",
+  "name": "Strengthen Security Posture",
+  "owner": "CISO",
+  "currentLevel": 3,
+  "targetLevel": 4,
+  "maturityModel": {
+    "levels": [
+      {
+        "level": 3,
+        "name": "Defined",
+        "requiredSLOs": [
+          { "metricId": "sec-sast-coverage" },
+          { "metricId": "sec-vuln-mttr" }
+        ],
+        "metricCriteria": [
+          { "metricId": "sec-sast-coverage", "operator": "gte", "value": 95 }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Each maturity level specifies which SLOs must be met to achieve that level.
+
+### Phases
+
+Phases organize work into time-bounded periods (quarters) with goal targets:
+
+```json
+{
+  "id": "phase-q1-2026",
+  "name": "Q1 2026",
+  "quarter": "Q1",
+  "year": 2026,
+  "startDate": "2026-01-01",
+  "endDate": "2026-03-31",
+  "goalTargets": [
+    { "goalId": "goal-security-posture", "enterLevel": 2, "exitLevel": 3 }
+  ],
+  "swimlanes": [
+    {
+      "name": "Security Initiatives",
+      "domain": "security",
+      "initiativeIds": ["init-sast-rollout", "init-vuln-sla"]
+    }
+  ]
+}
+```
+
+### Initiatives
+
+Initiatives link to goals and phases with deployment tracking:
+
+```json
+{
+  "id": "init-sast-rollout",
+  "name": "SAST Tool Rollout",
+  "goalIds": ["goal-security-posture"],
+  "phaseId": "phase-q1-2026",
+  "status": "completed",
+  "deploymentStatus": {
+    "status": "completed",
+    "totalCustomers": 50,
+    "deployedCustomers": 50,
+    "adoptionPercent": 100
+  }
+}
+```
+
 ## Examples
 
 See the `examples/` directory:
 
-- `security-metrics.json` - Security-focused metrics (vulnerability management, SAST, threat modeling)
 - `operations-metrics.json` - Operations-focused metrics (DORA metrics, SLOs, reliability)
+- `goal-roadmap.json` - Goal-driven maturity roadmap with phases and initiatives
+
+For application security examples, see [prism-appsec](https://github.com/grokify/prism-appsec).
 
 ## Library Usage
 

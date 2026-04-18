@@ -6,8 +6,8 @@ PRISM includes example documents to help you get started quickly.
 
 | Example | Description | Metrics |
 |---------|-------------|---------|
-| [Security Metrics](security.md) | Application security metrics | 5 |
 | [Operations Metrics](operations.md) | DORA-aligned operations metrics | 8 |
+| [Goal Roadmap](goal-roadmap.md) | Goal-driven maturity roadmap with phases | 6 |
 
 ## Example Files
 
@@ -15,8 +15,8 @@ Example files are located in the `examples/` directory:
 
 ```
 examples/
-├── security-metrics.json    # Security-focused metrics
-└── operations-metrics.json  # Operations-focused metrics
+├── operations-metrics.json  # Operations-focused metrics
+└── goal-roadmap.json        # Goal-driven maturity roadmap
 ```
 
 ## Using Examples
@@ -24,13 +24,13 @@ examples/
 ### View an Example
 
 ```bash
-cat examples/security-metrics.json
+cat examples/operations-metrics.json
 ```
 
 ### Validate an Example
 
 ```bash
-prism validate examples/security-metrics.json
+prism validate examples/operations-metrics.json
 ```
 
 ### Score an Example
@@ -42,20 +42,9 @@ prism score examples/operations-metrics.json --detailed
 ### Copy as Starting Point
 
 ```bash
-cp examples/security-metrics.json my-security.json
-# Edit my-security.json with your values
-prism validate my-security.json
-```
-
-## Combining Examples
-
-Create a comprehensive document by combining security and operations:
-
-```bash
-# Initialize with both domains
-prism init -o combined.json
-
-# Or manually merge metrics from both examples
+cp examples/operations-metrics.json my-ops.json
+# Edit my-ops.json with your values
+prism validate my-ops.json
 ```
 
 ## Example Patterns

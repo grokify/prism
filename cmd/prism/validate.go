@@ -16,7 +16,7 @@ var validateCmd = &cobra.Command{
 
 Examples:
   prism validate prism.json
-  prism validate security-metrics.json`,
+  prism validate operations-metrics.json`,
 	Args: cobra.ExactArgs(1),
 	RunE: runValidate,
 }

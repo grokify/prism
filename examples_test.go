@@ -13,7 +13,6 @@ func TestExampleFiles(t *testing.T) {
 		expectedCount int
 		domain        string
 	}{
-		{"examples/security-metrics.json", 5, DomainSecurity},
 		{"examples/operations-metrics.json", 8, DomainOperations},
 	}
 
@@ -68,7 +67,6 @@ func TestExampleFiles(t *testing.T) {
 
 func TestAllExampleFilesExist(t *testing.T) {
 	expectedFiles := []string{
-		"examples/security-metrics.json",
 		"examples/operations-metrics.json",
 	}
 

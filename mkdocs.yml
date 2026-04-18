@@ -58,6 +58,9 @@ nav:
       - prism validate: cli/validate.md
       - prism score: cli/score.md
       - prism catalog: cli/catalog.md
+      - prism goal: cli/goal.md
+      - prism phase: cli/phase.md
+      - prism roadmap: cli/roadmap.md
   - Schema:
       - Overview: schema/index.md
       - Domains: schema/domains.md
@@ -68,14 +71,16 @@ nav:
       - Thresholds: schema/thresholds.md
   - Concepts:
       - Overview: concepts/index.md
+      - Goals: concepts/goals.md
+      - Phases: concepts/phases.md
       - Maturity Model: concepts/maturity.md
       - Customer Awareness: concepts/awareness.md
       - PRISM Score: concepts/scoring.md
       - Framework Mappings: concepts/frameworks.md
   - Examples:
       - Overview: examples/index.md
-      - Security Metrics: examples/security.md
       - Operations Metrics: examples/operations.md
+      - Goal Roadmap: examples/goal-roadmap.md
   - Integrations:
       - Overview: integrations/index.md
       - Dashforge: integrations/dashforge.md

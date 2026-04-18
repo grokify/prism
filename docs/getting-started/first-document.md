@@ -224,5 +224,7 @@ prism score prism.json --detailed
 
 See the [examples directory](https://github.com/grokify/prism/tree/main/examples) for complete working documents:
 
-- `security-metrics.json` - Security-focused metrics
 - `operations-metrics.json` - DORA-aligned operations metrics
+- `goal-roadmap.json` - Goal-driven maturity roadmap with phases
+
+For application security examples, see [prism-appsec](https://github.com/grokify/prism-appsec).
