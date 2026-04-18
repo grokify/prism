@@ -57,8 +57,8 @@ Map metrics to industry standards:
 
 - DORA metrics
 - SRE practices
-- NIST Cybersecurity Framework (see [prism-security](https://github.com/grokify/prism-security))
-- MITRE ATT&CK (see [prism-security](https://github.com/grokify/prism-security))
+- NIST Cybersecurity Framework
+- MITRE ATT&CK
 
 ## Methodology Foundations
 
@@ -119,7 +119,6 @@ PRISM Score (Overall)
 └── Awareness Multiplier
 ```
 
-For security domain scoring, see [prism-security](https://github.com/grokify/prism-security).
 
 ## Getting Started
 

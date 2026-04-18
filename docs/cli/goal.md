@@ -120,6 +120,3 @@ Check progress toward target level:
 prism goal progress goal-reliability --json
 ```
 
-## Domain Extensions
-
-For security-specific goal examples, see [prism-security](https://github.com/grokify/prism-security).

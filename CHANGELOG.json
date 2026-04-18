@@ -44,7 +44,7 @@
       ],
       "documentation": [
         { "description": "README with installation, CLI usage, schema overview, and examples", "commit": "8cda40b" },
-        { "description": "Security metrics example (5 metrics: vuln coverage, MTTR, SAST, threat modeling, pentest)", "commit": "28224c2" },
+        { "description": "Example metrics for operations domain", "commit": "28224c2" },
         { "description": "Operations metrics example (8 DORA-aligned metrics: availability, latency, error rate, deployment frequency, lead time, MTTR, change failure rate, IaC coverage)", "commit": "28224c2" },
         { "description": "Score weight normalization behavior documented in ScoreConfig", "commit": "01b86c6" }
       ],

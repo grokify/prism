@@ -93,8 +93,8 @@ Awareness States:
 Frameworks:
   DORA         - DevOps Research and Assessment
   SRE          - Site Reliability Engineering
-  NIST_CSF     - NIST Cybersecurity Framework (see prism-security)
-  MITRE_ATTACK - MITRE ATT&CK Framework (see prism-security)
+  NIST_CSF     - NIST Cybersecurity Framework
+  MITRE_ATTACK - MITRE ATT&CK Framework
 ```
 
 ## Use Cases

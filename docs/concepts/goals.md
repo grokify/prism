@@ -183,6 +183,3 @@ prism goal progress goal-reliability document.json
 prism goal status document.json
 ```
 
-## Domain Extensions
-
-For security-specific goal examples (security posture, compliance readiness, etc.), see [prism-security](https://github.com/grokify/prism-security).

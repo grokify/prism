@@ -22,13 +22,12 @@ var initCmd = &cobra.Command{
 Examples:
   prism init                          # Create default prism.json with operations metrics
   prism init -d operations -o ops.json # Create ops-focused document
-
-For security metrics examples, see: https://github.com/grokify/prism-security`,
+  prism init -d security -o sec.json  # Create security-focused document`,
 	RunE: runInit,
 }
 
 func init() {
-	initCmd.Flags().StringVarP(&initDomain, "domain", "d", "", "Focus domain (operations). For security examples, see prism-security.")
+	initCmd.Flags().StringVarP(&initDomain, "domain", "d", "", "Focus domain (operations or security)")
 	initCmd.Flags().StringVarP(&initOutput, "output", "o", "prism.json", "Output file path")
 }
 
@@ -74,12 +73,9 @@ func runInit(cmd *cobra.Command, args []string) error {
 		Metrics:  make([]prism.Metric, 0),
 	}
 
-	// Add example metrics (operations only - for security examples see prism-security)
+	// Add example metrics
 	if initDomain == "" || initDomain == prism.DomainOperations {
 		doc.Metrics = append(doc.Metrics, createOperationsMetrics()...)
-	}
-	if initDomain == prism.DomainSecurity {
-		fmt.Println("Note: For security metric examples, see https://github.com/grokify/prism-security")
 	}
 
 	// Marshal to JSON

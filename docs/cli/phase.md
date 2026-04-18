@@ -125,6 +125,3 @@ prism phase metrics phase-q1-2026 --json
 - [prism roadmap](roadmap.md) - Roadmap overview commands
 - [Phases Concept](../concepts/phases.md) - Understanding phases
 
-## Domain Extensions
-
-For security-specific phase examples, see [prism-security](https://github.com/grokify/prism-security).

@@ -28,7 +28,6 @@ prism init
 prism init -d operations -o ops.json
 ```
 
-For security metrics examples, see [prism-security](https://github.com/grokify/prism-security).
 
 ### Validate a document
 
@@ -197,8 +196,8 @@ PRISM metrics can be mapped to external frameworks:
 |-----------|-------------|
 | `DORA` | DevOps Research and Assessment |
 | `SRE` | Site Reliability Engineering |
-| `NIST_CSF` | NIST Cybersecurity Framework (see [prism-security](https://github.com/grokify/prism-security)) |
-| `MITRE_ATTACK` | MITRE ATT&CK Framework (see [prism-security](https://github.com/grokify/prism-security)) |
+| `NIST_CSF` | NIST Cybersecurity Framework |
+| `MITRE_ATTACK` | MITRE ATT&CK Framework |
 
 ## JSON Schema
 
@@ -306,7 +305,6 @@ See the `examples/` directory:
 - `operations-metrics.json` - Operations-focused metrics (DORA metrics, SLOs, reliability)
 - `goal-roadmap.json` - Goal-driven maturity roadmap with phases and initiatives
 
-For security metrics examples, see [prism-security](https://github.com/grokify/prism-security).
 
 ## Library Usage
 

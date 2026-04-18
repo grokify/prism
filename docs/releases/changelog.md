@@ -53,7 +53,7 @@ and commits follow [Conventional Commits](https://www.conventionalcommits.org/en
 ### Documentation
 
 - README with installation, CLI usage, schema overview, and examples
-- Security metrics example (5 metrics: vuln coverage, MTTR, SAST, threat modeling, pentest)
+- Example metrics for operations domain
 - Operations metrics example (8 DORA-aligned metrics: availability, latency, error rate, deployment frequency, lead time, MTTR, change failure rate, IaC coverage)
 - Score weight normalization behavior documented in ScoreConfig
 

@@ -209,4 +209,3 @@ See the [examples directory](https://github.com/grokify/prism/tree/main/examples
 - `operations-metrics.json` - DORA-aligned operations metrics
 - `goal-roadmap.json` - Goal-driven maturity roadmap with phases
 
-For security metrics examples, see [prism-security](https://github.com/grokify/prism-security).

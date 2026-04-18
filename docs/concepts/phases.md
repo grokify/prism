@@ -188,6 +188,3 @@ The roadmap combines all phases to show the journey:
 prism roadmap progress document.json
 ```
 
-## Domain Extensions
-
-For security-specific phase examples, see [prism-security](https://github.com/grokify/prism-security).

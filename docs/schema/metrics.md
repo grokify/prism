@@ -237,6 +237,3 @@ Score metrics represent composite or aggregated scores.
 | Deployment Frequency | `higher_better` |
 | Health Score | `higher_better` |
 
-## Domain Extensions
-
-For security-specific metric examples, see [prism-security](https://github.com/grokify/prism-security).

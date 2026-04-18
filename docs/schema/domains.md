@@ -7,7 +7,7 @@ PRISM is an extensible framework that organizes metrics into domains. The core f
 | Domain | Constant | Description |
 |--------|----------|-------------|
 | Operations | `operations` | Reliability, performance, and efficiency metrics |
-| Security | `security` | Security metrics (see [prism-security](https://github.com/grokify/prism-security)) |
+| Security | `security` | Security metrics |
 
 ## Operations Domain
 
@@ -75,9 +75,7 @@ Operations metrics often align with DORA (DevOps Research and Assessment) metric
 
 ## Security Domain
 
-The security domain is supported by the PRISM framework but security-specific examples, metrics, and goals are provided by the **[prism-security](https://github.com/grokify/prism-security)** extension module.
-
-For security metric examples and detailed documentation, see [prism-security](https://github.com/grokify/prism-security).
+The security domain covers application security, infrastructure security, and compliance metrics.
 
 ## Domain Extensibility
 
@@ -91,11 +89,11 @@ PRISM is designed to be extensible. Domain modules can provide:
 ### Using Domain Modules
 
 ```bash
-# Core prism with operations examples
-prism init -o ops.json
+# Create operations-focused document
+prism init -d operations -o ops.json
 
-# Add security domain content from prism-security
-# Copy metrics, goals, and phases from prism-security examples
+# Create security-focused document
+prism init -d security -o security.json
 ```
 
 ## Domain Weights

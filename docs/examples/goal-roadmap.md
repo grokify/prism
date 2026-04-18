@@ -181,4 +181,3 @@ prism roadmap progress examples/goal-roadmap.json
 - [Phases Concept](../concepts/phases.md)
 - [Operations Metrics Example](operations.md)
 
-For security roadmap examples, see [prism-security](https://github.com/grokify/prism-security).

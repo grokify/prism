@@ -172,6 +172,3 @@ config := &prism.ScoreConfig{
 }
 ```
 
-## Security Stage Examples
-
-For security-specific stage examples (SAST, threat modeling, penetration testing, etc.), see [prism-security](https://github.com/grokify/prism-security).

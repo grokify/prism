@@ -196,6 +196,3 @@ Quality metrics measure code and process quality.
 | Prevention | Pre-deploy validation |
 | Detection | Monitoring, alerting |
 
-### Security Domain (Extension)
-
-For security-specific category examples, see [prism-security](https://github.com/grokify/prism-security).

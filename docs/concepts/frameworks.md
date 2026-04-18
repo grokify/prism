@@ -8,8 +8,8 @@ PRISM metrics can be mapped to industry frameworks to provide context and enable
 |-----------|----------|-------------|
 | DORA | `DORA` | DevOps Research and Assessment |
 | SRE | `SRE` | Site Reliability Engineering |
-| NIST CSF | `NIST_CSF` | NIST Cybersecurity Framework (see prism-security) |
-| MITRE ATT&CK | `MITRE_ATTACK` | MITRE ATT&CK Framework (see prism-security) |
+| NIST CSF | `NIST_CSF` | NIST Cybersecurity Framework |
+| MITRE ATT&CK | `MITRE_ATTACK` | MITRE ATT&CK Framework |
 
 ## Framework Mapping Structure
 
@@ -170,6 +170,3 @@ Framework mappings enable automated compliance reporting:
 3. Identify gaps in framework coverage
 4. Generate framework-specific reports
 
-## Security Frameworks
-
-For security-specific framework mappings (NIST CSF, MITRE ATT&CK), see [prism-security](https://github.com/grokify/prism-security).

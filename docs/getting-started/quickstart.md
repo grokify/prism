@@ -12,7 +12,6 @@ prism init -o prism.json
 
 This creates a document with operations metrics.
 
-For security metrics examples, see [prism-security](https://github.com/grokify/prism-security).
 
 ## 2. Edit Your Metrics
 

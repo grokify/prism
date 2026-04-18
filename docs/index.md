@@ -10,7 +10,7 @@ PRISM is a unified framework for B2B SaaS health metrics that combines SLOs, DMA
 - **5-Level Maturity Model** - Track organizational capability from Reactive to Optimizing
 - **Composite Scoring** - Calculate weighted PRISM scores across domains and lifecycle stages
 - **Customer Awareness Tracking** - Model customer awareness states for proactive communication
-- **Framework Mappings** - Map metrics to DORA and SRE frameworks (security frameworks via [prism-security](https://github.com/grokify/prism-security))
+- **Framework Mappings** - Map metrics to DORA, SRE, NIST CSF, and MITRE ATT&CK frameworks
 - **Machine-Evaluable SLOs** - Define SLOs with operators for programmatic checking
 - **CLI Tool** - Initialize, validate, and score PRISM documents from the command line
 - **JSON Schema** - Auto-generated schema for editor validation and IDE support
@@ -51,7 +51,6 @@ PRISM is a unified framework for B2B SaaS health metrics that combines SLOs, DMA
 }
 ```
 
-For security metrics examples, see [prism-security](https://github.com/grokify/prism-security).
 
 ## PRISM Score
 
