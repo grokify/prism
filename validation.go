@@ -147,6 +147,62 @@ func ValidateWindow(window string) error {
 	return nil
 }
 
+// ValidateGoalStatus validates a goal status value.
+func ValidateGoalStatus(status string) error {
+	if status == "" {
+		return nil // Optional field
+	}
+	if !slices.Contains(AllGoalStatuses(), status) {
+		return fmt.Errorf("invalid goal status %q, must be one of: %s", status, strings.Join(AllGoalStatuses(), ", "))
+	}
+	return nil
+}
+
+// ValidatePhaseStatus validates a phase status value.
+func ValidatePhaseStatus(status string) error {
+	if status == "" {
+		return nil // Optional field
+	}
+	if !slices.Contains(AllPhaseStatuses(), status) {
+		return fmt.Errorf("invalid phase status %q, must be one of: %s", status, strings.Join(AllPhaseStatuses(), ", "))
+	}
+	return nil
+}
+
+// ValidateQuarter validates a quarter value.
+func ValidateQuarter(quarter string) error {
+	if quarter == "" {
+		return nil // Optional field
+	}
+	if !slices.Contains(AllQuarters(), quarter) {
+		return fmt.Errorf("invalid quarter %q, must be one of: %s", quarter, strings.Join(AllQuarters(), ", "))
+	}
+	return nil
+}
+
+// ValidateInitiativeStatus validates an initiative status value.
+func ValidateInitiativeStatus(status string) error {
+	if status == "" {
+		return nil // Optional field
+	}
+	if !slices.Contains(AllInitiativeStatuses(), status) {
+		return fmt.Errorf("invalid initiative status %q, must be one of: %s", status, strings.Join(AllInitiativeStatuses(), ", "))
+	}
+	return nil
+}
+
+// ValidateSLOOperator validates an SLO operator value.
+func ValidateSLOOperator(operator string) error {
+	if operator == "" {
+		return nil // Optional field
+	}
+	validOps := []string{SLOOperatorGTE, SLOOperatorLTE, SLOOperatorEQ, SLOOperatorGT, SLOOperatorLT}
+	if !slices.Contains(validOps, operator) {
+		return fmt.Errorf("invalid SLO operator %q, must be one of: %s", operator, strings.Join(validOps, ", "))
+	}
+	return nil
+}
+
 // Validate validates a Metric and returns validation errors.
 func (m *Metric) Validate() ValidationErrors {
 	var errs ValidationErrors
@@ -270,6 +326,320 @@ func (doc *PRISMDocument) Validate() ValidationErrors {
 					Message: "references non-existent metric ID",
 				})
 			}
+		}
+
+		// Validate initiative status
+		if err := ValidateInitiativeStatus(init.Status); err != nil {
+			errs = append(errs, ValidationError{
+				Field:   fmt.Sprintf("initiatives[%d].status", i),
+				Value:   init.Status,
+				Message: err.Error(),
+			})
+		}
+
+		// Validate goal references
+		for j, goalID := range init.GoalIDs {
+			if doc.GetGoalByID(goalID) == nil {
+				errs = append(errs, ValidationError{
+					Field:   fmt.Sprintf("initiatives[%d].goalIds[%d]", i, j),
+					Value:   goalID,
+					Message: "references non-existent goal ID",
+				})
+			}
+		}
+
+		// Validate phase reference
+		if init.PhaseID != "" && doc.GetPhaseByID(init.PhaseID) == nil {
+			errs = append(errs, ValidationError{
+				Field:   fmt.Sprintf("initiatives[%d].phaseId", i),
+				Value:   init.PhaseID,
+				Message: "references non-existent phase ID",
+			})
+		}
+	}
+
+	// Validate goals
+	for i, goal := range doc.Goals {
+		goalErrs := goal.Validate(doc)
+		for _, e := range goalErrs {
+			e.Field = fmt.Sprintf("goals[%d].%s", i, e.Field)
+			errs = append(errs, e)
+		}
+	}
+
+	// Check for duplicate goal IDs
+	seenGoalIDs := make(map[string]int)
+	for i, g := range doc.Goals {
+		if g.ID != "" {
+			if prevIdx, exists := seenGoalIDs[g.ID]; exists {
+				errs = append(errs, ValidationError{
+					Field:   fmt.Sprintf("goals[%d].id", i),
+					Value:   g.ID,
+					Message: fmt.Sprintf("duplicate ID, also used at goals[%d]", prevIdx),
+				})
+			}
+			seenGoalIDs[g.ID] = i
+		}
+	}
+
+	// Validate phases
+	for i, phase := range doc.Phases {
+		phaseErrs := phase.Validate(doc)
+		for _, e := range phaseErrs {
+			e.Field = fmt.Sprintf("phases[%d].%s", i, e.Field)
+			errs = append(errs, e)
+		}
+	}
+
+	// Check for duplicate phase IDs
+	seenPhaseIDs := make(map[string]int)
+	for i, p := range doc.Phases {
+		if p.ID != "" {
+			if prevIdx, exists := seenPhaseIDs[p.ID]; exists {
+				errs = append(errs, ValidationError{
+					Field:   fmt.Sprintf("phases[%d].id", i),
+					Value:   p.ID,
+					Message: fmt.Sprintf("duplicate ID, also used at phases[%d]", prevIdx),
+				})
+			}
+			seenPhaseIDs[p.ID] = i
+		}
+	}
+
+	return errs
+}
+
+// Validate validates a Goal and returns validation errors.
+func (g *Goal) Validate(doc *PRISMDocument) ValidationErrors {
+	var errs ValidationErrors
+
+	if g.Name == "" {
+		errs = append(errs, ValidationError{Field: "name", Message: "is required"})
+	}
+
+	if err := ValidateGoalStatus(g.Status); err != nil {
+		errs = append(errs, ValidationError{Field: "status", Value: g.Status, Message: err.Error()})
+	}
+
+	if g.CurrentLevel != 0 {
+		if err := ValidateMaturityLevel(g.CurrentLevel); err != nil {
+			errs = append(errs, ValidationError{Field: "currentLevel", Value: fmt.Sprintf("%d", g.CurrentLevel), Message: err.Error()})
+		}
+	}
+
+	if g.TargetLevel != 0 {
+		if err := ValidateMaturityLevel(g.TargetLevel); err != nil {
+			errs = append(errs, ValidationError{Field: "targetLevel", Value: fmt.Sprintf("%d", g.TargetLevel), Message: err.Error()})
+		}
+	}
+
+	// Validate maturity model if present
+	if g.MaturityModel != nil {
+		mmErrs := g.MaturityModel.Validate(doc)
+		for _, e := range mmErrs {
+			e.Field = "maturityModel." + e.Field
+			errs = append(errs, e)
+		}
+	}
+
+	return errs
+}
+
+// Validate validates a GoalMaturityModel and returns validation errors.
+func (gmm *GoalMaturityModel) Validate(doc *PRISMDocument) ValidationErrors {
+	var errs ValidationErrors
+
+	if len(gmm.Levels) == 0 {
+		errs = append(errs, ValidationError{Field: "levels", Message: "at least one level is required"})
+	}
+
+	seenLevels := make(map[int]bool)
+	for i, level := range gmm.Levels {
+		// Validate level number
+		if err := ValidateMaturityLevel(level.Level); err != nil {
+			errs = append(errs, ValidationError{
+				Field:   fmt.Sprintf("levels[%d].level", i),
+				Value:   fmt.Sprintf("%d", level.Level),
+				Message: err.Error(),
+			})
+		}
+
+		// Check for duplicate levels
+		if seenLevels[level.Level] {
+			errs = append(errs, ValidationError{
+				Field:   fmt.Sprintf("levels[%d].level", i),
+				Value:   fmt.Sprintf("%d", level.Level),
+				Message: "duplicate level number",
+			})
+		}
+		seenLevels[level.Level] = true
+
+		// Validate level definition
+		levelErrs := level.Validate(doc)
+		for _, e := range levelErrs {
+			e.Field = fmt.Sprintf("levels[%d].%s", i, e.Field)
+			errs = append(errs, e)
+		}
+	}
+
+	return errs
+}
+
+// Validate validates a GoalMaturityLevel and returns validation errors.
+func (gml *GoalMaturityLevel) Validate(doc *PRISMDocument) ValidationErrors {
+	var errs ValidationErrors
+
+	if gml.Name == "" {
+		errs = append(errs, ValidationError{Field: "name", Message: "is required"})
+	}
+
+	// Validate SLO requirements
+	for i, sloReq := range gml.RequiredSLOs {
+		if sloReq.MetricID == "" {
+			errs = append(errs, ValidationError{
+				Field:   fmt.Sprintf("requiredSLOs[%d].metricId", i),
+				Message: "is required",
+			})
+		} else if doc != nil && doc.GetMetricByID(sloReq.MetricID) == nil {
+			errs = append(errs, ValidationError{
+				Field:   fmt.Sprintf("requiredSLOs[%d].metricId", i),
+				Value:   sloReq.MetricID,
+				Message: "references non-existent metric ID",
+			})
+		}
+	}
+
+	// Validate metric criteria
+	for i, criterion := range gml.MetricCriteria {
+		criterionErrs := criterion.Validate(doc)
+		for _, e := range criterionErrs {
+			e.Field = fmt.Sprintf("metricCriteria[%d].%s", i, e.Field)
+			errs = append(errs, e)
+		}
+	}
+
+	return errs
+}
+
+// Validate validates a MetricCriterion and returns validation errors.
+func (mc *MetricCriterion) Validate(doc *PRISMDocument) ValidationErrors {
+	var errs ValidationErrors
+
+	if mc.MetricID == "" {
+		errs = append(errs, ValidationError{Field: "metricId", Message: "is required"})
+	} else if doc != nil && doc.GetMetricByID(mc.MetricID) == nil {
+		errs = append(errs, ValidationError{
+			Field:   "metricId",
+			Value:   mc.MetricID,
+			Message: "references non-existent metric ID",
+		})
+	}
+
+	if err := ValidateSLOOperator(mc.Operator); err != nil {
+		errs = append(errs, ValidationError{Field: "operator", Value: mc.Operator, Message: err.Error()})
+	} else if mc.Operator == "" {
+		errs = append(errs, ValidationError{Field: "operator", Message: "is required"})
+	}
+
+	return errs
+}
+
+// Validate validates a Phase and returns validation errors.
+func (p *Phase) Validate(doc *PRISMDocument) ValidationErrors {
+	var errs ValidationErrors
+
+	if p.Name == "" {
+		errs = append(errs, ValidationError{Field: "name", Message: "is required"})
+	}
+
+	if p.StartDate == "" {
+		errs = append(errs, ValidationError{Field: "startDate", Message: "is required"})
+	}
+
+	if p.EndDate == "" {
+		errs = append(errs, ValidationError{Field: "endDate", Message: "is required"})
+	}
+
+	if err := ValidatePhaseStatus(p.Status); err != nil {
+		errs = append(errs, ValidationError{Field: "status", Value: p.Status, Message: err.Error()})
+	}
+
+	if err := ValidateQuarter(p.Quarter); err != nil {
+		errs = append(errs, ValidationError{Field: "quarter", Value: p.Quarter, Message: err.Error()})
+	}
+
+	// Validate goal targets
+	for i, target := range p.GoalTargets {
+		if target.GoalID == "" {
+			errs = append(errs, ValidationError{
+				Field:   fmt.Sprintf("goalTargets[%d].goalId", i),
+				Message: "is required",
+			})
+		} else if doc != nil && doc.GetGoalByID(target.GoalID) == nil {
+			errs = append(errs, ValidationError{
+				Field:   fmt.Sprintf("goalTargets[%d].goalId", i),
+				Value:   target.GoalID,
+				Message: "references non-existent goal ID",
+			})
+		}
+
+		if err := ValidateMaturityLevel(target.EnterLevel); err != nil {
+			errs = append(errs, ValidationError{
+				Field:   fmt.Sprintf("goalTargets[%d].enterLevel", i),
+				Value:   fmt.Sprintf("%d", target.EnterLevel),
+				Message: err.Error(),
+			})
+		}
+
+		if err := ValidateMaturityLevel(target.ExitLevel); err != nil {
+			errs = append(errs, ValidationError{
+				Field:   fmt.Sprintf("goalTargets[%d].exitLevel", i),
+				Value:   fmt.Sprintf("%d", target.ExitLevel),
+				Message: err.Error(),
+			})
+		}
+	}
+
+	// Validate swimlanes
+	for i, sw := range p.Swimlanes {
+		swErrs := sw.Validate(doc)
+		for _, e := range swErrs {
+			e.Field = fmt.Sprintf("swimlanes[%d].%s", i, e.Field)
+			errs = append(errs, e)
+		}
+	}
+
+	return errs
+}
+
+// Validate validates a Swimlane and returns validation errors.
+func (sw *Swimlane) Validate(doc *PRISMDocument) ValidationErrors {
+	var errs ValidationErrors
+
+	if sw.Name == "" {
+		errs = append(errs, ValidationError{Field: "name", Message: "is required"})
+	}
+
+	if sw.Domain != "" {
+		if err := ValidateDomain(sw.Domain); err != nil {
+			errs = append(errs, ValidationError{Field: "domain", Value: sw.Domain, Message: err.Error()})
+		}
+	}
+
+	if sw.Stage != "" {
+		if err := ValidateStage(sw.Stage); err != nil {
+			errs = append(errs, ValidationError{Field: "stage", Value: sw.Stage, Message: err.Error()})
+		}
+	}
+
+	// Validate initiative references
+	for i, initID := range sw.InitiativeIDs {
+		if doc != nil && doc.GetInitiativeByID(initID) == nil {
+			errs = append(errs, ValidationError{
+				Field:   fmt.Sprintf("initiativeIds[%d]", i),
+				Value:   initID,
+				Message: "references non-existent initiative ID",
+			})
 		}
 	}
 

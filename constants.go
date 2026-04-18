@@ -95,14 +95,23 @@ func AllAwarenessStates() []string {
 // Framework constants for external framework mappings.
 const (
 	FrameworkNISTCSF     = "NIST_CSF"
+	FrameworkNIST80053   = "NIST_800_53"
 	FrameworkMITREATTACK = "MITRE_ATTACK"
 	FrameworkDORA        = "DORA"
 	FrameworkSRE         = "SRE"
+	FrameworkFEDRAMP     = "FEDRAMP"
 )
 
 // AllFrameworks returns all valid framework values.
 func AllFrameworks() []string {
-	return []string{FrameworkNISTCSF, FrameworkMITREATTACK, FrameworkDORA, FrameworkSRE}
+	return []string{
+		FrameworkNISTCSF,
+		FrameworkNIST80053,
+		FrameworkMITREATTACK,
+		FrameworkDORA,
+		FrameworkSRE,
+		FrameworkFEDRAMP,
+	}
 }
 
 // Metric type constants.

@@ -16,6 +16,9 @@ go install github.com/grokify/prism/cmd/prism@latest
 | [`prism validate`](validate.md) | Validate a PRISM document |
 | [`prism score`](score.md) | Calculate the PRISM score |
 | [`prism catalog`](catalog.md) | List available constants |
+| [`prism goal`](goal.md) | Manage and inspect goals (planned) |
+| [`prism phase`](phase.md) | Manage and inspect phases (planned) |
+| [`prism roadmap`](roadmap.md) | View roadmap overview (planned) |
 
 ## Global Flags
 

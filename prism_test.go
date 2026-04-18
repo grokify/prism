@@ -642,9 +642,9 @@ func TestDataPointTimestampJSONFormat(t *testing.T) {
 
 func TestMeetsSLO(t *testing.T) {
 	tests := []struct {
-		name    string
-		metric  Metric
-		want    bool
+		name   string
+		metric Metric
+		want   bool
 	}{
 		{
 			name:   "no SLO defined",

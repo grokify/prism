@@ -13,6 +13,11 @@ type PRISMDocument struct {
 	Maturity    *MaturityModel `json:"maturity,omitempty"`
 	OKRs        []OKRMapping   `json:"okrs,omitempty"`
 	Initiatives []Initiative   `json:"initiatives,omitempty"`
+
+	// Goal-driven Maturity Roadmap (FEAT_MATURITYROADMAP)
+	Goals   []Goal         `json:"goals,omitempty"`
+	Phases  []Phase        `json:"phases,omitempty"`
+	Roadmap *RoadmapConfig `json:"roadmap,omitempty"`
 }
 
 // Metadata contains document-level metadata.
@@ -89,10 +94,10 @@ type SLI struct {
 
 // SLO represents a Service Level Objective.
 type SLO struct {
-	Target     string      `json:"target"`               // Display string (e.g., ">=99.9%")
-	Operator   string      `json:"operator,omitempty"`   // Machine-readable: "gte", "lte", "eq", "gt", "lt"
-	Value      float64     `json:"value,omitempty"`      // Numeric target value
-	Window     string      `json:"window,omitempty"`     // "7d", "30d", "90d"
+	Target     string      `json:"target"`             // Display string (e.g., ">=99.9%")
+	Operator   string      `json:"operator,omitempty"` // Machine-readable: "gte", "lte", "eq", "gt", "lt"
+	Value      float64     `json:"value,omitempty"`    // Numeric target value
+	Window     string      `json:"window,omitempty"`   // "7d", "30d", "90d"
 	Thresholds *Thresholds `json:"thresholds,omitempty"`
 }
 
@@ -154,15 +159,74 @@ type OKRMapping struct {
 
 // Initiative represents an improvement initiative.
 type Initiative struct {
-	ID          string   `json:"id,omitempty"`
-	Name        string   `json:"name"`
-	Description string   `json:"description,omitempty"`
-	Status      string   `json:"status,omitempty"`
-	Priority    int      `json:"priority,omitempty"`
-	MetricIDs   []string `json:"metricIds,omitempty"`
-	Owner       string   `json:"owner,omitempty"`
-	StartDate   string   `json:"startDate,omitempty"`
-	EndDate     string   `json:"endDate,omitempty"`
+	ID             string   `json:"id,omitempty"`
+	Name           string   `json:"name"`
+	Description    string   `json:"description,omitempty"`
+	Status         string   `json:"status,omitempty"`
+	Priority       int      `json:"priority,omitempty"`
+	MetricIDs      []string `json:"metricIds,omitempty"`
+	Owner          string   `json:"owner,omitempty"`
+	Team           string   `json:"team,omitempty"`
+	DependentTeams []string `json:"dependentTeams,omitempty"`
+	StartDate      string   `json:"startDate,omitempty"`
+	EndDate        string   `json:"endDate,omitempty"`
+
+	// Goal and Phase linkage (FEAT_MATURITYROADMAP)
+	GoalIDs              []string          `json:"goalIds,omitempty"`
+	PhaseID              string            `json:"phaseId,omitempty"`
+	DevCompletionPercent float64           `json:"devCompletionPercent,omitempty"`
+	DeploymentStatus     *DeploymentStatus `json:"deploymentStatus,omitempty"`
+}
+
+// Initiative status constants.
+const (
+	InitiativeStatusPlanned    = "planned"
+	InitiativeStatusNotStarted = "not_started"
+	InitiativeStatusInProgress = "in_progress"
+	InitiativeStatusCompleted  = "completed"
+	InitiativeStatusCancelled  = "cancelled"
+)
+
+// AllInitiativeStatuses returns all valid initiative status values.
+func AllInitiativeStatuses() []string {
+	return []string{
+		InitiativeStatusPlanned,
+		InitiativeStatusNotStarted,
+		InitiativeStatusInProgress,
+		InitiativeStatusCompleted,
+		InitiativeStatusCancelled,
+	}
+}
+
+// DeploymentStatus tracks customer adoption for an initiative.
+type DeploymentStatus struct {
+	Status            string  `json:"status"`                      // not_started, in_progress, completed
+	TotalCustomers    int     `json:"totalCustomers,omitempty"`    // Total customers to deploy to
+	DeployedCustomers int     `json:"deployedCustomers,omitempty"` // Customers deployed
+	AdoptionPercent   float64 `json:"adoptionPercent,omitempty"`   // Calculated adoption percentage
+}
+
+// CalculateAdoptionPercent calculates and updates the adoption percentage.
+func (ds *DeploymentStatus) CalculateAdoptionPercent() float64 {
+	if ds == nil || ds.TotalCustomers == 0 {
+		return 0
+	}
+	ds.AdoptionPercent = float64(ds.DeployedCustomers) / float64(ds.TotalCustomers) * 100
+	return ds.AdoptionPercent
+}
+
+// IsDevComplete returns whether the initiative is development complete.
+func (i *Initiative) IsDevComplete() bool {
+	return i.Status == InitiativeStatusCompleted || i.DevCompletionPercent >= 100
+}
+
+// IsFullyDeployed returns whether the initiative is fully deployed to all customers.
+func (i *Initiative) IsFullyDeployed() bool {
+	if i.DeploymentStatus == nil {
+		return false
+	}
+	return i.DeploymentStatus.Status == InitiativeStatusCompleted ||
+		(i.DeploymentStatus.TotalCustomers > 0 && i.DeploymentStatus.DeployedCustomers >= i.DeploymentStatus.TotalCustomers)
 }
 
 // CalculateStatus computes the status based on current value and thresholds.
@@ -303,6 +367,61 @@ func (doc *PRISMDocument) GetMetricByID(id string) *Metric {
 		}
 	}
 	return nil
+}
+
+// GetGoalByID returns a goal by its ID.
+func (doc *PRISMDocument) GetGoalByID(id string) *Goal {
+	for i := range doc.Goals {
+		if doc.Goals[i].ID == id {
+			return &doc.Goals[i]
+		}
+	}
+	return nil
+}
+
+// GetPhaseByID returns a phase by its ID.
+func (doc *PRISMDocument) GetPhaseByID(id string) *Phase {
+	for i := range doc.Phases {
+		if doc.Phases[i].ID == id {
+			return &doc.Phases[i]
+		}
+	}
+	return nil
+}
+
+// GetInitiativeByID returns an initiative by its ID.
+func (doc *PRISMDocument) GetInitiativeByID(id string) *Initiative {
+	for i := range doc.Initiatives {
+		if doc.Initiatives[i].ID == id {
+			return &doc.Initiatives[i]
+		}
+	}
+	return nil
+}
+
+// GetInitiativesForGoal returns all initiatives linked to the specified goal.
+func (doc *PRISMDocument) GetInitiativesForGoal(goalID string) []Initiative {
+	var result []Initiative
+	for _, init := range doc.Initiatives {
+		for _, gid := range init.GoalIDs {
+			if gid == goalID {
+				result = append(result, init)
+				break
+			}
+		}
+	}
+	return result
+}
+
+// GetInitiativesForPhase returns all initiatives in the specified phase.
+func (doc *PRISMDocument) GetInitiativesForPhase(phaseID string) []Initiative {
+	var result []Initiative
+	for _, init := range doc.Initiatives {
+		if init.PhaseID == phaseID {
+			result = append(result, init)
+		}
+	}
+	return result
 }
 
 // abs returns the absolute value of x.

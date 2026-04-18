@@ -62,6 +62,27 @@
         "value"
       ]
     },
+    "DeploymentStatus": {
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "totalCustomers": {
+          "type": "integer"
+        },
+        "deployedCustomers": {
+          "type": "integer"
+        },
+        "adoptionPercent": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "status"
+      ]
+    },
     "DomainDef": {
       "properties": {
         "name": {
@@ -96,6 +117,94 @@
         "reference"
       ]
     },
+    "Goal": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "priority": {
+          "type": "integer"
+        },
+        "status": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "targetDate": {
+          "type": "string"
+        },
+        "maturityModel": {
+          "$ref": "#/$defs/GoalMaturityModel"
+        },
+        "currentLevel": {
+          "type": "integer"
+        },
+        "targetLevel": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "name"
+      ]
+    },
+    "GoalMaturityLevel": {
+      "properties": {
+        "level": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "requiredSLOs": {
+          "items": {
+            "$ref": "#/$defs/SLORequirement"
+          },
+          "type": "array"
+        },
+        "metricCriteria": {
+          "items": {
+            "$ref": "#/$defs/MetricCriterion"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "level",
+        "name"
+      ]
+    },
+    "GoalMaturityModel": {
+      "properties": {
+        "levels": {
+          "items": {
+            "$ref": "#/$defs/GoalMaturityLevel"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "levels"
+      ]
+    },
     "Initiative": {
       "properties": {
         "id": {
@@ -122,11 +231,35 @@
         "owner": {
           "type": "string"
         },
+        "team": {
+          "type": "string"
+        },
+        "dependentTeams": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "startDate": {
           "type": "string"
         },
         "endDate": {
           "type": "string"
+        },
+        "goalIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "phaseId": {
+          "type": "string"
+        },
+        "devCompletionPercent": {
+          "type": "number"
+        },
+        "deploymentStatus": {
+          "$ref": "#/$defs/DeploymentStatus"
         }
       },
       "additionalProperties": false,
@@ -340,6 +473,26 @@
         "target"
       ]
     },
+    "MetricCriterion": {
+      "properties": {
+        "metricId": {
+          "type": "string"
+        },
+        "operator": {
+          "type": "string"
+        },
+        "value": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "metricId",
+        "operator",
+        "value"
+      ]
+    },
     "OKRMapping": {
       "properties": {
         "objectiveId": {
@@ -401,6 +554,21 @@
             "$ref": "#/$defs/Initiative"
           },
           "type": "array"
+        },
+        "goals": {
+          "items": {
+            "$ref": "#/$defs/Goal"
+          },
+          "type": "array"
+        },
+        "phases": {
+          "items": {
+            "$ref": "#/$defs/Phase"
+          },
+          "type": "array"
+        },
+        "roadmap": {
+          "$ref": "#/$defs/RoadmapConfig"
         }
       },
       "additionalProperties": false,
@@ -408,6 +576,85 @@
       "required": [
         "metrics"
       ]
+    },
+    "Phase": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "quarter": {
+          "type": "string"
+        },
+        "year": {
+          "type": "integer"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "goalTargets": {
+          "items": {
+            "$ref": "#/$defs/PhaseGoalTarget"
+          },
+          "type": "array"
+        },
+        "swimlanes": {
+          "items": {
+            "$ref": "#/$defs/Swimlane"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "name",
+        "startDate",
+        "endDate"
+      ]
+    },
+    "PhaseGoalTarget": {
+      "properties": {
+        "goalId": {
+          "type": "string"
+        },
+        "enterLevel": {
+          "type": "integer"
+        },
+        "exitLevel": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "goalId",
+        "enterLevel",
+        "exitLevel"
+      ]
+    },
+    "RoadmapConfig": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "fiscalYearStart": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
     },
     "SLI": {
       "properties": {
@@ -446,6 +693,49 @@
       "type": "object",
       "required": [
         "target"
+      ]
+    },
+    "SLORequirement": {
+      "properties": {
+        "metricId": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "metricId"
+      ]
+    },
+    "Swimlane": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "stage": {
+          "type": "string"
+        },
+        "initiativeIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "name",
+        "initiativeIds"
       ]
     },
     "Thresholds": {
