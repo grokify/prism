@@ -2,11 +2,11 @@
 
 **Proactive Reliability & Security Maturity Model**
 
-PRISM is a unified framework for B2B SaaS health metrics that combines SLOs, DMAIC, OKRs, and maturity modeling into a single coherent system. It provides structured schemas for defining metrics, calculating composite health scores, and tracking organizational maturity across security and operations domains.
+PRISM is a unified framework for B2B SaaS health metrics that combines SLOs, DMAIC, OKRs, and maturity modeling into a single coherent system. It provides structured schemas for defining metrics, calculating composite health scores, and tracking organizational maturity across operations, security, and quality domains.
 
 ## Key Features
 
-- **Unified Metrics Framework** - Combine security and operations metrics in a single document
+- **Unified Metrics Framework** - Combine operations, security, and quality metrics in a single document
 - **5-Level Maturity Model** - Track organizational capability from Reactive to Optimizing
 - **Composite Scoring** - Calculate weighted PRISM scores across domains and lifecycle stages
 - **Customer Awareness Tracking** - Model customer awareness states for proactive communication
@@ -23,6 +23,14 @@ PRISM is a unified framework for B2B SaaS health metrics that combines SLOs, DMA
 - **Initiative Tracking** - Track deployment status and customer adoption
 - **Progress Reports** - Generate roadmap reports and SLO compliance summaries
 
+## Operations Management (v0.3.0)
+
+- **Three-Layer Model** - Organize metrics by code, infra, and runtime layers
+- **Quality Domain** - Add quality alongside operations and security with ISO 25010 verticals
+- **Team Topology** - Model stream-aligned, platform, enabling, and overlay teams
+- **Service Ownership** - Define services with team ownership and layer assignment
+- **Golden Signals** - Associate latency, traffic, errors, saturation metrics per layer
+
 ## Enterprise Features
 
 - **Dashforge Integration** - Embed PRISM dashboards in dashforge sites or standalone pages
@@ -38,6 +46,23 @@ PRISM is a unified framework for B2B SaaS health metrics that combines SLOs, DMA
     "name": "Acme Corp PRISM",
     "version": "1.0.0"
   },
+  "teams": [
+    {
+      "id": "payments-team",
+      "name": "Payments Team",
+      "type": "stream_aligned",
+      "serviceIds": ["payments-api"]
+    }
+  ],
+  "services": [
+    {
+      "id": "payments-api",
+      "name": "Payments API",
+      "ownerTeamId": "payments-team",
+      "layerId": "runtime",
+      "tier": "tier1"
+    }
+  ],
   "metrics": [
     {
       "id": "ops-availability",
@@ -45,6 +70,8 @@ PRISM is a unified framework for B2B SaaS health metrics that combines SLOs, DMA
       "domain": "operations",
       "stage": "runtime",
       "category": "reliability",
+      "layer": "runtime",
+      "serviceId": "payments-api",
       "metricType": "rate",
       "current": 99.95,
       "target": 99.99,

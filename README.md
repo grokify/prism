@@ -2,7 +2,97 @@
 
 **Proactive Reliability & Security Maturity Model**
 
-PRISM is a unified framework for B2B SaaS health metrics that combines SLOs, DMAIC, OKRs, and maturity modeling into a single coherent system. It provides structured schemas for defining metrics, calculating composite health scores, and tracking organizational maturity across security and operations domains.
+PRISM is a unified framework for B2B SaaS health metrics that combines SLOs, DMAIC, OKRs, and maturity modeling into a single coherent system. It provides structured schemas for defining metrics, calculating composite health scores, and tracking organizational maturity across operations, security, and quality domains.
+
+## Concepts
+
+PRISM organizes metrics using a multi-dimensional model that clarifies ownership, accountability, and measurement across your organization.
+
+### The PRISM Model
+
+```
+                    ┌─────────────────────────────────────────────────┐
+                    │                   DOMAINS                        │
+                    │         (What functional area?)                  │
+                    │   Operations  │  Security  │  Quality           │
+                    └─────────────────────────────────────────────────┘
+                                          │
+          ┌───────────────────────────────┼───────────────────────────────┐
+          │                               │                               │
+          ▼                               ▼                               ▼
+    ┌───────────┐                  ┌───────────┐                  ┌───────────┐
+    │   CODE    │                  │   INFRA   │                  │  RUNTIME  │
+    │  Layer    │                  │   Layer   │                  │   Layer   │
+    └───────────┘                  └───────────┘                  └───────────┘
+          │                               │                               │
+          └───────────────────────────────┼───────────────────────────────┘
+                                          │
+                    ┌─────────────────────────────────────────────────┐
+                    │                   STAGES                         │
+                    │           (When in lifecycle?)                   │
+                    │   Design → Build → Test → Runtime → Response    │
+                    └─────────────────────────────────────────────────┘
+```
+
+### Domains
+
+Domains represent functional areas with their own standards and overlay teams:
+
+| Domain | Description | Overlay Team |
+|--------|-------------|--------------|
+| `operations` | Reliability, performance, efficiency | SRE/Platform |
+| `security` | AppSec, CloudSec, compliance | Security |
+| `quality` | Testing, code quality, defects | QE |
+
+### Layers
+
+Layers represent ownership boundaries in the technology stack:
+
+| Layer | Description | Typical Owner |
+|-------|-------------|---------------|
+| `code` | Application code, libraries, dependencies | Stream-aligned teams |
+| `infra` | Cloud resources, networking, platform | Platform team |
+| `runtime` | Running services, containers, workloads | Stream-aligned + SRE |
+
+### Teams (Team Topologies)
+
+PRISM supports Team Topologies patterns for clear accountability:
+
+| Type | Role | Example |
+|------|------|---------|
+| `stream_aligned` | Build and run services end-to-end | Payments Team |
+| `platform` | Provide infrastructure as a product | Platform Engineering |
+| `enabling` | Help teams adopt new practices | Developer Experience |
+| `overlay` | Define standards across organization | Security Team, QE Team |
+
+### Services
+
+Services are deployable units owned by teams with associated metrics:
+
+```json
+{
+  "id": "payments-api",
+  "name": "Payments API",
+  "ownerTeamId": "payments-team",
+  "layerId": "runtime",
+  "tier": "tier1",
+  "metricIds": ["slo-payments-availability", "slo-payments-latency"]
+}
+```
+
+### Connecting to SLOs and Maturity
+
+The organizational model connects to SLOs and maturity roadmaps:
+
+1. **Metrics** belong to a domain, layer, and optionally a service
+2. **SLOs** are defined on metrics with machine-evaluable targets
+3. **Goals** aggregate SLO requirements into maturity levels
+4. **Teams** own services and are accountable for their SLOs
+5. **Phases** organize goal progression over time (quarters)
+
+```
+Team owns → Service has → Metrics with → SLOs required by → Goals tracked in → Phases
+```
 
 ## Installation
 
@@ -116,16 +206,57 @@ prism dashboard prism.json -o dashboard.json
 prism dashforge prism.json -o dashforge.json
 ```
 
+### Layer commands (v0.3.0)
+
+```bash
+# List all layers
+prism layer list prism.json
+
+# Show layer details with metrics
+prism layer show prism.json runtime
+```
+
+### Team commands (v0.3.0)
+
+```bash
+# List all teams grouped by type
+prism team list prism.json
+
+# Show team details with services
+prism team show prism.json payments-team
+```
+
+### Service commands (v0.3.0)
+
+```bash
+# List all services grouped by layer
+prism service list prism.json
+
+# Show service details with metrics
+prism service show prism.json payments-api
+```
+
 ## Schema Overview
 
 ### Domains
 
-PRISM organizes metrics into two primary domains:
+PRISM organizes metrics into three primary domains:
 
 | Domain | Description |
 |--------|-------------|
-| `security` | Application and infrastructure security metrics |
 | `operations` | Reliability, performance, and efficiency metrics |
+| `security` | Application and infrastructure security metrics |
+| `quality` | Code quality, testing, and defect management metrics |
+
+### Layers
+
+Metrics are classified by ownership layer:
+
+| Layer | Description |
+|-------|-------------|
+| `code` | Application code, libraries, and dependencies |
+| `infra` | Cloud resources, networking, and platform services |
+| `runtime` | Running services, containers, and workloads |
 
 ### Lifecycle Stages
 
@@ -172,6 +303,8 @@ Metrics are mapped to software delivery lifecycle stages:
   "domain": "operations",
   "stage": "runtime",
   "category": "reliability",
+  "layer": "runtime",
+  "serviceId": "payments-api",
   "metricType": "rate",
   "trendDirection": "higher_better",
   "unit": "%",
@@ -365,6 +498,9 @@ Initiatives link to goals and phases with deployment tracking:
 See the `examples/` directory:
 
 - `operations-metrics.json` - Operations-focused metrics (DORA metrics, SLOs, reliability)
+- `operations-layers.json` - Layer-based metric organization with golden signals
+- `team-topology.json` - Full team topology with services and ownership
+- `quality-metrics.json` - Quality domain with ISO 25010 verticals
 - `goal-roadmap.json` - Goal-driven maturity roadmap with phases and initiatives
 
 
