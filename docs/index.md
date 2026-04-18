@@ -15,6 +15,14 @@ PRISM is a unified framework for B2B SaaS health metrics that combines SLOs, DMA
 - **CLI Tool** - Initialize, validate, and score PRISM documents from the command line
 - **JSON Schema** - Auto-generated schema for editor validation and IDE support
 
+## Roadmap Planning (v0.2.0)
+
+- **Goal-Driven Maturity** - Define strategic goals with SLO-backed maturity levels
+- **Phase Planning** - Organize work into quarters with enter/exit maturity targets
+- **Swimlanes** - Group initiatives by domain within phases
+- **Initiative Tracking** - Track deployment status and customer adoption
+- **Progress Reports** - Generate roadmap reports and SLO compliance summaries
+
 ## Enterprise Features
 
 - **Dashforge Integration** - Embed PRISM dashboards in dashforge sites or standalone pages

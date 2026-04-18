@@ -10,15 +10,31 @@ go install github.com/grokify/prism/cmd/prism@latest
 
 ## Commands
 
+### Core Commands
+
 | Command | Description |
 |---------|-------------|
 | [`prism init`](init.md) | Initialize a new PRISM document |
 | [`prism validate`](validate.md) | Validate a PRISM document |
 | [`prism score`](score.md) | Calculate the PRISM score |
 | [`prism catalog`](catalog.md) | List available constants |
-| [`prism goal`](goal.md) | Manage and inspect goals (planned) |
-| [`prism phase`](phase.md) | Manage and inspect phases (planned) |
-| [`prism roadmap`](roadmap.md) | View roadmap overview (planned) |
+
+### Roadmap Commands (v0.2.0)
+
+| Command | Description |
+|---------|-------------|
+| [`prism goal`](goal.md) | Manage and inspect goals |
+| [`prism phase`](phase.md) | Manage and inspect phases |
+| [`prism roadmap`](roadmap.md) | View roadmap overview |
+
+### Reporting Commands (v0.2.0)
+
+| Command | Description |
+|---------|-------------|
+| `prism report` | Generate roadmap reports (Markdown/JSON) |
+| `prism slo-report` | Generate SLO compliance reports |
+| `prism dashboard` | Generate executive dashboards |
+| `prism dashforge` | Convert to dashforge format |
 
 ## Global Flags
 

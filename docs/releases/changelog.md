@@ -8,6 +8,66 @@ and commits follow [Conventional Commits](https://www.conventionalcommits.org/en
 
 ## [Unreleased]
 
+## [v0.2.0] - 2026-04-18
+
+### Highlights
+
+- Goal-driven maturity roadmap with SLO-backed maturity levels
+- Phase-based planning with quarters, swimlanes, and initiative tracking
+- New CLI commands: goal, phase, roadmap, slo-report, dashboard
+- Dashforge integration for dashboard generation
+
+### Added
+
+- Goal type with owner, priority, status, and maturity tracking
+- GoalMaturityModel with 5-level progression and SLO requirements
+- MetricCriterion for maturity level value requirements
+- Goal.CurrentMaturityLevel() calculates achieved level from metrics
+- Phase type for time-bounded planning periods (quarters)
+- PhaseGoalTarget for enter/exit maturity levels per goal
+- Swimlane for organizing initiatives by domain
+- PhaseMetrics for tracking progress at phase boundaries
+- GoalProgress with initiative completion and SLO compliance
+- CalculateGoalProgress(), CalculateInitiativeMetrics(), CalculateSLOCompliance()
+- RoadmapProgress for aggregated roadmap status
+- GetRoadmapProgress() generates full progress view
+- SLOReport with compliance rate and metric status breakdown
+- GenerateSLOReport() creates SLO compliance reports
+- ExecDashboard for high-level status views
+- Markdown report generation for executive summaries
+- Dashforge converter for PRISM to dashforge format
+- Widget generators for metrics, goals, and phases
+- `prism dashboard` command for executive dashboards
+- `prism dashforge` command for dashforge conversion
+- `prism report` command for markdown reports
+- `prism slo-report` command for SLO compliance reports
+- Initiative type with deployment tracking and customer adoption
+- Validation for goal, phase, and initiative references
+
+### Changed
+
+- Refactored to extensible framework architecture with operations examples
+- PRISMDocument extended with Goals, Phases, Initiatives arrays
+- JSON Schema updated with goal, phase, and initiative types
+
+### Documentation
+
+- Roadmap CLI documentation (goal, phase, roadmap commands)
+- Design notes for maturity roadmap implementation
+- Updated examples with operations-focused goal roadmap
+
+### Tests
+
+- Unit tests for Goal, GoalMaturityModel, CurrentMaturityLevel()
+- Unit tests for Phase, PhaseGoalTarget, Swimlane
+- Unit tests for PhaseMetrics calculations
+- Integration tests for SLO report generation
+
+### Infrastructure
+
+- Multi-agent orchestration specs for roadmap generation
+- Example executive dashboard configuration
+
 ## [v0.1.0] - 2026-03-30
 
 ### Highlights
@@ -70,5 +130,6 @@ and commits follow [Conventional Commits](https://www.conventionalcommits.org/en
 - Dependabot configuration for automated dependency updates
 - golangci-lint configuration
 
-[unreleased]: https://github.com/grokify/prism/compare/v0.1.0...HEAD
+[unreleased]: https://github.com/grokify/prism/compare/v0.2.0...HEAD
+[v0.2.0]: https://github.com/grokify/prism/compare/v0.1.0...v0.2.0
 [v0.1.0]: https://github.com/grokify/prism/releases/tag/v0.1.0

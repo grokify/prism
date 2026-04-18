@@ -54,6 +54,68 @@ prism score prism.json --json
 prism catalog
 ```
 
+### Goal commands (v0.2.0)
+
+```bash
+# List all goals
+prism goal list prism.json
+
+# Show goal details
+prism goal show goal-reliability prism.json
+
+# Show goal progress with SLO compliance
+prism goal progress goal-reliability prism.json
+```
+
+### Phase commands (v0.2.0)
+
+```bash
+# List all phases
+prism phase list prism.json
+
+# Show phase details
+prism phase show phase-q1-2026 prism.json
+
+# Show enter/exit metrics for a phase
+prism phase metrics phase-q1-2026 prism.json
+```
+
+### Roadmap commands (v0.2.0)
+
+```bash
+# Show roadmap overview
+prism roadmap show prism.json
+
+# Show progress across all phases and goals
+prism roadmap progress prism.json
+```
+
+### Report commands (v0.2.0)
+
+```bash
+# Generate markdown report (both views)
+prism report prism.json -o report.md
+
+# Generate phase-centric view only
+prism report prism.json --view by-phase
+
+# Generate JSON report
+prism report prism.json --format json
+
+# Generate SLO compliance report
+prism slo-report prism.json
+```
+
+### Dashboard commands (v0.2.0)
+
+```bash
+# Generate executive dashboard
+prism dashboard prism.json -o dashboard.json
+
+# Convert to dashforge format
+prism dashforge prism.json -o dashforge.json
+```
+
 ## Schema Overview
 
 ### Domains
