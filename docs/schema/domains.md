@@ -8,6 +8,7 @@ PRISM is an extensible framework that organizes metrics into domains. The core f
 |--------|----------|-------------|
 | Operations | `operations` | Reliability, performance, and efficiency metrics |
 | Security | `security` | Security metrics |
+| Quality | `quality` | Code quality, testing, and defect management metrics |
 
 ## Operations Domain
 
@@ -77,6 +78,12 @@ Operations metrics often align with DORA (DevOps Research and Assessment) metric
 
 The security domain covers application security, infrastructure security, and compliance metrics.
 
+## Quality Domain
+
+The quality domain covers code quality, testing effectiveness, and defect management. Quality Engineering (QE) teams typically own standards in this domain.
+
+See [Quality Domain](quality.md) for detailed documentation including ISO 25010 quality verticals.
+
 ## Domain Extensibility
 
 PRISM is designed to be extensible. Domain modules can provide:
@@ -102,16 +109,18 @@ In PRISM score calculation, domains have configurable weights:
 
 | Domain | Default Weight |
 |--------|----------------|
-| Operations | 50% |
-| Security | 50% |
+| Operations | 40% |
+| Security | 40% |
+| Quality | 20% |
 
 Weights can be customized in the `ScoreConfig`:
 
 ```go
 config := &prism.ScoreConfig{
     DomainWeights: map[string]float64{
-        "operations": 0.6, // 60% weight
-        "security":   0.4, // 40% weight
+        "operations": 0.5, // 50% weight
+        "security":   0.3, // 30% weight
+        "quality":    0.2, // 20% weight
     },
 }
 ```

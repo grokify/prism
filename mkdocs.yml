@@ -61,12 +61,16 @@ nav:
       - prism goal: cli/goal.md
       - prism phase: cli/phase.md
       - prism roadmap: cli/roadmap.md
+      - prism layer: cli/layer.md
+      - prism team: cli/team.md
+      - prism service: cli/service.md
       - prism report: cli/report.md
       - prism slo-report: cli/slo-report.md
       - prism dashboard: cli/dashboard.md
   - Schema:
       - Overview: schema/index.md
       - Domains: schema/domains.md
+      - Quality Domain: schema/quality.md
       - Lifecycle Stages: schema/stages.md
       - Categories: schema/categories.md
       - Metric Types: schema/metrics.md
@@ -74,6 +78,9 @@ nav:
       - Thresholds: schema/thresholds.md
   - Concepts:
       - Overview: concepts/index.md
+      - Layers: concepts/layers.md
+      - Teams: concepts/teams.md
+      - Services: concepts/services.md
       - Goals: concepts/goals.md
       - Phases: concepts/phases.md
       - Maturity Model: concepts/maturity.md
@@ -83,6 +90,9 @@ nav:
   - Examples:
       - Overview: examples/index.md
       - Operations Metrics: examples/operations.md
+      - Operations with Layers: examples/operations-layers.md
+      - Team Topology: examples/team-topology.md
+      - Quality Metrics: examples/quality-metrics.md
       - Goal Roadmap: examples/goal-roadmap.md
   - Integrations:
       - Overview: integrations/index.md
