@@ -205,6 +205,24 @@
         "levels"
       ]
     },
+    "GoldenSignal": {
+      "properties": {
+        "latency": {
+          "type": "string"
+        },
+        "traffic": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "string"
+        },
+        "saturation": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
     "Initiative": {
       "properties": {
         "id": {
@@ -260,11 +278,39 @@
         },
         "deploymentStatus": {
           "$ref": "#/$defs/DeploymentStatus"
+        },
+        "serviceId": {
+          "type": "string"
         }
       },
       "additionalProperties": false,
       "type": "object",
       "required": [
+        "name"
+      ]
+    },
+    "LayerDef": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "weight": {
+          "type": "number"
+        },
+        "signals": {
+          "$ref": "#/$defs/GoldenSignal"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
         "name"
       ]
     },
@@ -402,6 +448,12 @@
         "category": {
           "type": "string"
         },
+        "layer": {
+          "type": "string"
+        },
+        "qualityVertical": {
+          "type": "string"
+        },
         "metricType": {
           "type": "string"
         },
@@ -451,6 +503,9 @@
           "type": "string"
         },
         "dataSource": {
+          "type": "string"
+        },
+        "serviceId": {
           "type": "string"
         },
         "dataPoints": {
@@ -531,6 +586,24 @@
         "domains": {
           "items": {
             "$ref": "#/$defs/DomainDef"
+          },
+          "type": "array"
+        },
+        "layers": {
+          "items": {
+            "$ref": "#/$defs/LayerDef"
+          },
+          "type": "array"
+        },
+        "teams": {
+          "items": {
+            "$ref": "#/$defs/Team"
+          },
+          "type": "array"
+        },
+        "services": {
+          "items": {
+            "$ref": "#/$defs/Service"
           },
           "type": "array"
         },
@@ -710,6 +783,43 @@
         "metricId"
       ]
     },
+    "Service": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "ownerTeamId": {
+          "type": "string"
+        },
+        "layerId": {
+          "type": "string"
+        },
+        "metricIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "repository": {
+          "type": "string"
+        },
+        "tier": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "name"
+      ]
+    },
     "Swimlane": {
       "properties": {
         "id": {
@@ -736,6 +846,53 @@
       "required": [
         "name",
         "initiativeIds"
+      ]
+    },
+    "Team": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "layerAccountability": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "serviceIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "slack": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "type"
       ]
     },
     "Thresholds": {
