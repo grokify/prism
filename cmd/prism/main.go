@@ -32,4 +32,7 @@ func init() {
 	rootCmd.AddCommand(validateCmd)
 	rootCmd.AddCommand(scoreCmd)
 	rootCmd.AddCommand(catalogCmd)
+	rootCmd.AddCommand(layerCmd)
+	rootCmd.AddCommand(teamCmd)
+	rootCmd.AddCommand(serviceCmd)
 }

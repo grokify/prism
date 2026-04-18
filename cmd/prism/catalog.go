@@ -80,6 +80,24 @@ func runCatalog(cmd *cobra.Command, args []string) error {
 	for _, f := range prism.AllFrameworks() {
 		fmt.Printf("  - %s\n", f)
 	}
+	fmt.Println()
+
+	fmt.Println("Layers:")
+	for _, l := range prism.AllLayers() {
+		fmt.Printf("  - %s\n", l)
+	}
+	fmt.Println()
+
+	fmt.Println("Quality Verticals (ISO 25010):")
+	for _, v := range prism.AllQualityVerticals() {
+		fmt.Printf("  - %s\n", v)
+	}
+	fmt.Println()
+
+	fmt.Println("Team Types:")
+	for _, t := range prism.AllTeamTypes() {
+		fmt.Printf("  - %s\n", t)
+	}
 
 	return nil
 }
