@@ -1,0 +1,54 @@
+{
+  "$schema": "https://raw.githubusercontent.com/plexusone/multi-agent-spec/main/schema/deployment/deployment.schema.json",
+  "team": "maturity-roadmap-team",
+  "targets": [
+    {
+      "name": "claude-code",
+      "platform": "claude-code",
+      "mode": "single-process",
+      "priority": "p1",
+      "output": "agents/plugins",
+      "claudeCode": {
+        "agentDir": "agents/plugins",
+        "format": "markdown",
+        "team_mode": "subagent",
+        "teammate_mode": "in-process"
+      }
+    },
+    {
+      "name": "kiro-cli",
+      "platform": "kiro-cli",
+      "mode": "single-process",
+      "priority": "p2",
+      "output": "agents/kiro",
+      "kiroCli": {
+        "pluginDir": "agents/kiro",
+        "format": "json",
+        "prefix": "prism_"
+      }
+    }
+  ],
+  "runtime": {
+    "defaults": {
+      "timeout": "10m",
+      "retry": {
+        "max_attempts": 2,
+        "backoff": "exponential"
+      }
+    },
+    "steps": {
+      "analyze-goals": {
+        "timeout": "5m"
+      },
+      "design-maturity": {
+        "timeout": "10m"
+      },
+      "plan-initiatives": {
+        "timeout": "10m"
+      },
+      "write-document": {
+        "timeout": "5m"
+      }
+    }
+  }
+}

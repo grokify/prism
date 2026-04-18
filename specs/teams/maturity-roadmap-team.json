@@ -1,0 +1,154 @@
+{
+  "$schema": "https://raw.githubusercontent.com/plexusone/multi-agent-spec/main/schema/orchestration/team.schema.json",
+  "name": "maturity-roadmap-team",
+  "version": "1.0.0",
+  "description": "Team for creating PRISM maturity-based roadmaps with SLO-backed goals",
+  "agents": [
+    "roadmap-orchestrator",
+    "goal-analyst",
+    "maturity-designer",
+    "initiative-planner",
+    "roadmap-writer"
+  ],
+  "orchestrator": "roadmap-orchestrator",
+  "context": "This team creates maturity-based roadmaps using the PRISM framework. PRISM combines SLOs, maturity modeling, and phase-based planning. Each goal has its own 5-level maturity model where levels are backed by specific SLOs that must be met. Initiatives are organized into quarterly phases with clear maturity targets.",
+  "workflow": {
+    "type": "graph",
+    "steps": [
+      {
+        "name": "analyze-goals",
+        "agent": "goal-analyst",
+        "description": "Identify and structure strategic goals",
+        "inputs": [
+          {
+            "name": "requirements",
+            "type": "string",
+            "description": "Business requirements and objectives"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "goals",
+            "type": "array",
+            "description": "Structured goals with current/target levels"
+          },
+          {
+            "name": "rationale",
+            "type": "object",
+            "description": "Rationale for each goal"
+          }
+        ]
+      },
+      {
+        "name": "design-maturity",
+        "agent": "maturity-designer",
+        "depends_on": ["analyze-goals"],
+        "description": "Design maturity models with SLO requirements",
+        "inputs": [
+          {
+            "name": "goals",
+            "type": "array",
+            "from": "analyze-goals.goals"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "metrics",
+            "type": "array",
+            "description": "Metrics with SLO definitions"
+          },
+          {
+            "name": "maturityModels",
+            "type": "object",
+            "description": "Maturity models per goal"
+          }
+        ]
+      },
+      {
+        "name": "plan-initiatives",
+        "agent": "initiative-planner",
+        "depends_on": ["design-maturity"],
+        "description": "Plan initiatives and organize into phases",
+        "inputs": [
+          {
+            "name": "goals",
+            "type": "array",
+            "from": "analyze-goals.goals"
+          },
+          {
+            "name": "metrics",
+            "type": "array",
+            "from": "design-maturity.metrics"
+          },
+          {
+            "name": "maturityModels",
+            "type": "object",
+            "from": "design-maturity.maturityModels"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "initiatives",
+            "type": "array",
+            "description": "Initiatives linked to goals"
+          },
+          {
+            "name": "phases",
+            "type": "array",
+            "description": "Phases with goal targets"
+          }
+        ]
+      },
+      {
+        "name": "write-document",
+        "agent": "roadmap-writer",
+        "depends_on": ["plan-initiatives"],
+        "description": "Assemble and validate PRISM document",
+        "inputs": [
+          {
+            "name": "goals",
+            "type": "array",
+            "from": "analyze-goals.goals"
+          },
+          {
+            "name": "metrics",
+            "type": "array",
+            "from": "design-maturity.metrics"
+          },
+          {
+            "name": "maturityModels",
+            "type": "object",
+            "from": "design-maturity.maturityModels"
+          },
+          {
+            "name": "initiatives",
+            "type": "array",
+            "from": "plan-initiatives.initiatives"
+          },
+          {
+            "name": "phases",
+            "type": "array",
+            "from": "plan-initiatives.phases"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "document",
+            "type": "object",
+            "description": "Complete PRISM document"
+          },
+          {
+            "name": "filePath",
+            "type": "string",
+            "description": "Path to written JSON file"
+          },
+          {
+            "name": "validationResult",
+            "type": "string",
+            "description": "Result of prism validate"
+          }
+        ]
+      }
+    ]
+  }
+}
