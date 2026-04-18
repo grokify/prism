@@ -1,0 +1,218 @@
+{
+  "$schema": "https://github.com/grokify/prism/schema/prism.schema.json",
+  "metadata": {
+    "name": "Team Topology Example",
+    "description": "Example PRISM document demonstrating team topology with services and ownership",
+    "version": "1.0.0"
+  },
+  "domains": [
+    {
+      "name": "operations",
+      "description": "Operational metrics",
+      "weight": 0.5
+    },
+    {
+      "name": "security",
+      "description": "Security metrics",
+      "weight": 0.3
+    },
+    {
+      "name": "quality",
+      "description": "Quality metrics",
+      "weight": 0.2
+    }
+  ],
+  "layers": [
+    {
+      "id": "code",
+      "name": "Code",
+      "description": "Application code and dependencies"
+    },
+    {
+      "id": "infra",
+      "name": "Infrastructure",
+      "description": "Cloud resources and platform services"
+    },
+    {
+      "id": "runtime",
+      "name": "Runtime",
+      "description": "Running services and workloads"
+    }
+  ],
+  "teams": [
+    {
+      "id": "security-team",
+      "name": "Security Team",
+      "description": "Defines and enforces security standards across the organization",
+      "type": "overlay",
+      "domain": "security",
+      "owner": "Jane Smith",
+      "slack": "#security",
+      "email": "security@example.com"
+    },
+    {
+      "id": "qe-team",
+      "name": "Quality Engineering",
+      "description": "Defines quality standards and testing practices",
+      "type": "overlay",
+      "domain": "quality",
+      "owner": "Bob Johnson",
+      "slack": "#quality"
+    },
+    {
+      "id": "platform-team",
+      "name": "Platform Engineering",
+      "description": "Provides infrastructure and developer tooling",
+      "type": "platform",
+      "layerAccountability": ["infra"],
+      "serviceIds": ["kubernetes-platform", "observability-stack"],
+      "owner": "Alice Chen",
+      "slack": "#platform"
+    },
+    {
+      "id": "payments-team",
+      "name": "Payments Team",
+      "description": "Owns the payments domain end-to-end",
+      "type": "stream_aligned",
+      "layerAccountability": ["code", "runtime"],
+      "serviceIds": ["payments-api", "payments-worker"],
+      "owner": "Charlie Brown",
+      "slack": "#payments"
+    },
+    {
+      "id": "users-team",
+      "name": "User Management Team",
+      "description": "Owns user management and authentication",
+      "type": "stream_aligned",
+      "layerAccountability": ["code", "runtime"],
+      "serviceIds": ["users-api"],
+      "owner": "Diana Prince",
+      "slack": "#users"
+    }
+  ],
+  "services": [
+    {
+      "id": "kubernetes-platform",
+      "name": "Kubernetes Platform",
+      "description": "Internal Kubernetes platform",
+      "ownerTeamId": "platform-team",
+      "layerId": "infra",
+      "tier": "tier1"
+    },
+    {
+      "id": "observability-stack",
+      "name": "Observability Stack",
+      "description": "Monitoring, logging, and tracing infrastructure",
+      "ownerTeamId": "platform-team",
+      "layerId": "infra",
+      "tier": "tier1"
+    },
+    {
+      "id": "payments-api",
+      "name": "Payments API",
+      "description": "Core payments processing service",
+      "ownerTeamId": "payments-team",
+      "layerId": "runtime",
+      "tier": "tier1",
+      "repository": "https://github.com/example/payments-api",
+      "metricIds": ["slo-payments-availability", "slo-payments-latency"]
+    },
+    {
+      "id": "payments-worker",
+      "name": "Payments Worker",
+      "description": "Async payment processing jobs",
+      "ownerTeamId": "payments-team",
+      "layerId": "runtime",
+      "tier": "tier2"
+    },
+    {
+      "id": "users-api",
+      "name": "Users API",
+      "description": "User management and authentication service",
+      "ownerTeamId": "users-team",
+      "layerId": "runtime",
+      "tier": "tier1",
+      "repository": "https://github.com/example/users-api"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "slo-payments-availability",
+      "name": "Payments API Availability",
+      "description": "Availability of the payments API",
+      "domain": "operations",
+      "stage": "runtime",
+      "category": "reliability",
+      "layer": "runtime",
+      "serviceId": "payments-api",
+      "metricType": "rate",
+      "trendDirection": "higher_better",
+      "unit": "%",
+      "baseline": 99.0,
+      "current": 99.95,
+      "target": 99.99,
+      "slo": {
+        "target": ">=99.99%",
+        "operator": "gte",
+        "value": 99.99,
+        "window": "30d"
+      },
+      "owner": "Payments Team"
+    },
+    {
+      "id": "slo-payments-latency",
+      "name": "Payments API P99 Latency",
+      "description": "99th percentile latency",
+      "domain": "operations",
+      "stage": "runtime",
+      "category": "reliability",
+      "layer": "runtime",
+      "serviceId": "payments-api",
+      "metricType": "latency",
+      "trendDirection": "lower_better",
+      "unit": "ms",
+      "baseline": 500,
+      "current": 85,
+      "target": 100,
+      "slo": {
+        "target": "<=100ms",
+        "operator": "lte",
+        "value": 100,
+        "window": "7d"
+      },
+      "owner": "Payments Team"
+    },
+    {
+      "id": "sec-sast-findings",
+      "name": "SAST Findings",
+      "description": "Static analysis security findings",
+      "domain": "security",
+      "stage": "build",
+      "category": "detection",
+      "layer": "code",
+      "metricType": "count",
+      "trendDirection": "lower_better",
+      "baseline": 50,
+      "current": 12,
+      "target": 0,
+      "owner": "Security Team"
+    },
+    {
+      "id": "qa-test-coverage",
+      "name": "Test Coverage",
+      "description": "Unit test code coverage",
+      "domain": "quality",
+      "stage": "test",
+      "category": "detection",
+      "layer": "code",
+      "qualityVertical": "functional",
+      "metricType": "coverage",
+      "trendDirection": "higher_better",
+      "unit": "%",
+      "baseline": 60,
+      "current": 82,
+      "target": 80,
+      "owner": "QE Team"
+    }
+  ]
+}

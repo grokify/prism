@@ -1,0 +1,174 @@
+{
+  "$schema": "https://github.com/grokify/prism/schema/prism.schema.json",
+  "metadata": {
+    "name": "Operations with Layers Example",
+    "description": "Example PRISM document demonstrating layer-based metric organization",
+    "version": "1.0.0"
+  },
+  "domains": [
+    {
+      "name": "operations",
+      "description": "Operational reliability and efficiency metrics",
+      "weight": 1.0
+    }
+  ],
+  "layers": [
+    {
+      "id": "code",
+      "name": "Code",
+      "description": "Application code, libraries, and dependencies",
+      "signals": {
+        "errors": "metric-code-lint-errors"
+      }
+    },
+    {
+      "id": "infra",
+      "name": "Infrastructure",
+      "description": "Cloud resources, networking, and platform services",
+      "signals": {
+        "saturation": "metric-infra-cpu"
+      }
+    },
+    {
+      "id": "runtime",
+      "name": "Runtime",
+      "description": "Running services, containers, and workloads",
+      "signals": {
+        "latency": "metric-runtime-p99",
+        "traffic": "metric-runtime-rps",
+        "errors": "metric-runtime-errors",
+        "saturation": "metric-runtime-cpu"
+      }
+    }
+  ],
+  "metrics": [
+    {
+      "id": "metric-code-lint-errors",
+      "name": "Linting Errors",
+      "description": "Number of linting errors in codebase",
+      "domain": "operations",
+      "stage": "build",
+      "category": "quality",
+      "layer": "code",
+      "metricType": "count",
+      "trendDirection": "lower_better",
+      "baseline": 50,
+      "current": 12,
+      "target": 0
+    },
+    {
+      "id": "metric-code-deps-outdated",
+      "name": "Outdated Dependencies",
+      "description": "Number of outdated dependencies",
+      "domain": "operations",
+      "stage": "build",
+      "category": "quality",
+      "layer": "code",
+      "metricType": "count",
+      "trendDirection": "lower_better",
+      "baseline": 25,
+      "current": 8,
+      "target": 0
+    },
+    {
+      "id": "metric-infra-compliance",
+      "name": "Infrastructure Compliance",
+      "description": "Percentage of infrastructure resources compliant with policies",
+      "domain": "operations",
+      "stage": "build",
+      "category": "reliability",
+      "layer": "infra",
+      "metricType": "rate",
+      "trendDirection": "higher_better",
+      "unit": "%",
+      "baseline": 75,
+      "current": 92,
+      "target": 100
+    },
+    {
+      "id": "metric-infra-cpu",
+      "name": "Infrastructure CPU Utilization",
+      "description": "Average CPU utilization across infrastructure",
+      "domain": "operations",
+      "stage": "runtime",
+      "category": "efficiency",
+      "layer": "infra",
+      "metricType": "rate",
+      "trendDirection": "target_value",
+      "unit": "%",
+      "baseline": 80,
+      "current": 55,
+      "target": 60
+    },
+    {
+      "id": "metric-runtime-p99",
+      "name": "P99 Response Latency",
+      "description": "99th percentile response latency",
+      "domain": "operations",
+      "stage": "runtime",
+      "category": "reliability",
+      "layer": "runtime",
+      "metricType": "latency",
+      "trendDirection": "lower_better",
+      "unit": "ms",
+      "baseline": 500,
+      "current": 95,
+      "target": 100,
+      "slo": {
+        "target": "<=100ms",
+        "operator": "lte",
+        "value": 100,
+        "window": "7d"
+      }
+    },
+    {
+      "id": "metric-runtime-rps",
+      "name": "Requests Per Second",
+      "description": "Traffic throughput",
+      "domain": "operations",
+      "stage": "runtime",
+      "category": "efficiency",
+      "layer": "runtime",
+      "metricType": "count",
+      "unit": "req/s",
+      "baseline": 1000,
+      "current": 2500,
+      "target": 5000
+    },
+    {
+      "id": "metric-runtime-errors",
+      "name": "Error Rate",
+      "description": "Percentage of requests resulting in errors",
+      "domain": "operations",
+      "stage": "runtime",
+      "category": "reliability",
+      "layer": "runtime",
+      "metricType": "rate",
+      "trendDirection": "lower_better",
+      "unit": "%",
+      "baseline": 5.0,
+      "current": 0.5,
+      "target": 0.1,
+      "slo": {
+        "target": "<=0.1%",
+        "operator": "lte",
+        "value": 0.1,
+        "window": "30d"
+      }
+    },
+    {
+      "id": "metric-runtime-cpu",
+      "name": "Service CPU Utilization",
+      "description": "CPU utilization of running services",
+      "domain": "operations",
+      "stage": "runtime",
+      "category": "efficiency",
+      "layer": "runtime",
+      "metricType": "rate",
+      "unit": "%",
+      "baseline": 70,
+      "current": 45,
+      "target": 60
+    }
+  ]
+}

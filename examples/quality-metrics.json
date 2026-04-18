@@ -1,0 +1,263 @@
+{
+  "$schema": "https://github.com/grokify/prism/schema/prism.schema.json",
+  "metadata": {
+    "name": "Quality Metrics Example",
+    "description": "Example PRISM document focused on quality domain and ISO 25010 verticals",
+    "version": "1.0.0"
+  },
+  "domains": [
+    {
+      "name": "quality",
+      "description": "Code quality, testing, and defect management metrics",
+      "weight": 1.0
+    }
+  ],
+  "layers": [
+    {
+      "id": "code",
+      "name": "Code",
+      "description": "Application code and dependencies"
+    }
+  ],
+  "teams": [
+    {
+      "id": "qe-team",
+      "name": "Quality Engineering",
+      "description": "Defines quality standards and testing practices",
+      "type": "overlay",
+      "domain": "quality",
+      "owner": "QE Lead"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "qa-unit-coverage",
+      "name": "Unit Test Coverage",
+      "description": "Percentage of code covered by unit tests",
+      "domain": "quality",
+      "stage": "test",
+      "category": "detection",
+      "layer": "code",
+      "qualityVertical": "functional",
+      "metricType": "coverage",
+      "trendDirection": "higher_better",
+      "unit": "%",
+      "baseline": 60,
+      "current": 82,
+      "target": 80,
+      "thresholds": {
+        "green": 80,
+        "yellow": 70,
+        "red": 60
+      },
+      "status": "Green",
+      "slo": {
+        "target": ">=80%",
+        "operator": "gte",
+        "value": 80
+      },
+      "maturityMapping": {
+        "level1": "<50%",
+        "level2": "50-60%",
+        "level3": "60-70%",
+        "level4": "70-80%",
+        "level5": ">=80%"
+      },
+      "owner": "QE Team"
+    },
+    {
+      "id": "qa-integration-coverage",
+      "name": "Integration Test Coverage",
+      "description": "Coverage of integration tests across service boundaries",
+      "domain": "quality",
+      "stage": "test",
+      "category": "detection",
+      "layer": "code",
+      "qualityVertical": "functional",
+      "metricType": "coverage",
+      "trendDirection": "higher_better",
+      "unit": "%",
+      "baseline": 30,
+      "current": 55,
+      "target": 60,
+      "owner": "QE Team"
+    },
+    {
+      "id": "qa-mutation-score",
+      "name": "Mutation Testing Score",
+      "description": "Percentage of mutants killed by tests",
+      "domain": "quality",
+      "stage": "test",
+      "category": "detection",
+      "layer": "code",
+      "qualityVertical": "functional",
+      "metricType": "score",
+      "trendDirection": "higher_better",
+      "unit": "%",
+      "baseline": 40,
+      "current": 68,
+      "target": 80,
+      "owner": "QE Team"
+    },
+    {
+      "id": "qa-test-effectiveness",
+      "name": "Test Effectiveness (DDP)",
+      "description": "Defect Detection Percentage - ratio of defects found in testing vs production",
+      "domain": "quality",
+      "stage": "test",
+      "category": "detection",
+      "layer": "code",
+      "qualityVertical": "functional",
+      "metricType": "rate",
+      "trendDirection": "higher_better",
+      "unit": "%",
+      "baseline": 60,
+      "current": 78,
+      "target": 90,
+      "owner": "QE Team"
+    },
+    {
+      "id": "qa-defect-density",
+      "name": "Defect Density",
+      "description": "Number of defects per thousand lines of code",
+      "domain": "quality",
+      "stage": "runtime",
+      "category": "quality",
+      "layer": "code",
+      "qualityVertical": "reliability",
+      "metricType": "ratio",
+      "trendDirection": "lower_better",
+      "unit": "defects/KLOC",
+      "baseline": 5.0,
+      "current": 2.3,
+      "target": 1.0,
+      "thresholds": {
+        "green": 1.0,
+        "yellow": 3.0,
+        "red": 5.0
+      },
+      "status": "Yellow",
+      "owner": "QE Team"
+    },
+    {
+      "id": "qa-tech-debt-ratio",
+      "name": "Technical Debt Ratio",
+      "description": "Ratio of remediation cost to development cost",
+      "domain": "quality",
+      "stage": "build",
+      "category": "quality",
+      "layer": "code",
+      "qualityVertical": "maintainability",
+      "metricType": "ratio",
+      "trendDirection": "lower_better",
+      "unit": "%",
+      "baseline": 15,
+      "current": 8.5,
+      "target": 5.0,
+      "owner": "QE Team",
+      "dataSource": "sonarqube"
+    },
+    {
+      "id": "qa-code-complexity",
+      "name": "Cyclomatic Complexity",
+      "description": "Average cyclomatic complexity per function",
+      "domain": "quality",
+      "stage": "build",
+      "category": "quality",
+      "layer": "code",
+      "qualityVertical": "maintainability",
+      "metricType": "score",
+      "trendDirection": "lower_better",
+      "baseline": 15,
+      "current": 8,
+      "target": 5,
+      "owner": "QE Team",
+      "dataSource": "sonarqube"
+    },
+    {
+      "id": "qa-code-duplication",
+      "name": "Code Duplication",
+      "description": "Percentage of duplicated code blocks",
+      "domain": "quality",
+      "stage": "build",
+      "category": "quality",
+      "layer": "code",
+      "qualityVertical": "maintainability",
+      "metricType": "rate",
+      "trendDirection": "lower_better",
+      "unit": "%",
+      "baseline": 10,
+      "current": 4.5,
+      "target": 3.0,
+      "owner": "QE Team"
+    },
+    {
+      "id": "qa-bug-fix-time",
+      "name": "Bug Fix Lead Time",
+      "description": "Average time from bug report to fix deployed",
+      "domain": "quality",
+      "stage": "response",
+      "category": "response",
+      "layer": "code",
+      "qualityVertical": "reliability",
+      "metricType": "latency",
+      "trendDirection": "lower_better",
+      "unit": "hours",
+      "baseline": 72,
+      "current": 24,
+      "target": 8,
+      "owner": "QE Team"
+    },
+    {
+      "id": "qa-regression-rate",
+      "name": "Regression Rate",
+      "description": "Percentage of releases with regression bugs",
+      "domain": "quality",
+      "stage": "runtime",
+      "category": "quality",
+      "layer": "code",
+      "qualityVertical": "reliability",
+      "metricType": "rate",
+      "trendDirection": "lower_better",
+      "unit": "%",
+      "baseline": 20,
+      "current": 8,
+      "target": 5,
+      "owner": "QE Team"
+    },
+    {
+      "id": "qa-a11y-compliance",
+      "name": "Accessibility Compliance",
+      "description": "Percentage of pages meeting WCAG 2.1 AA standards",
+      "domain": "quality",
+      "stage": "test",
+      "category": "quality",
+      "layer": "code",
+      "qualityVertical": "usability",
+      "metricType": "rate",
+      "trendDirection": "higher_better",
+      "unit": "%",
+      "baseline": 60,
+      "current": 85,
+      "target": 100,
+      "owner": "QE Team"
+    },
+    {
+      "id": "qa-api-response-time",
+      "name": "API Response Time Budget",
+      "description": "Percentage of API endpoints meeting response time budget",
+      "domain": "quality",
+      "stage": "test",
+      "category": "quality",
+      "layer": "code",
+      "qualityVertical": "performance",
+      "metricType": "rate",
+      "trendDirection": "higher_better",
+      "unit": "%",
+      "baseline": 70,
+      "current": 92,
+      "target": 95,
+      "owner": "QE Team"
+    }
+  ]
+}
