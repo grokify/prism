@@ -1,14 +1,49 @@
 package prism
 
-// Domain constants represent the two primary domains in PRISM.
+// Domain constants represent the three primary domains in PRISM.
 const (
 	DomainSecurity   = "security"
 	DomainOperations = "operations"
+	DomainQuality    = "quality"
 )
 
 // AllDomains returns all valid domain values.
 func AllDomains() []string {
-	return []string{DomainSecurity, DomainOperations}
+	return []string{DomainSecurity, DomainOperations, DomainQuality}
+}
+
+// Layer constants represent ownership boundaries in the stack.
+const (
+	LayerCode    = "code"
+	LayerInfra   = "infra"
+	LayerRuntime = "runtime"
+)
+
+// AllLayers returns all valid layer values.
+func AllLayers() []string {
+	return []string{LayerCode, LayerInfra, LayerRuntime}
+}
+
+// QualityVertical constants based on ISO 25010 quality characteristics.
+const (
+	QualityVerticalFunctional      = "functional"
+	QualityVerticalReliability     = "reliability"
+	QualityVerticalPerformance     = "performance"
+	QualityVerticalSecurity        = "security"
+	QualityVerticalUsability       = "usability"
+	QualityVerticalMaintainability = "maintainability"
+)
+
+// AllQualityVerticals returns all valid ISO 25010 quality vertical values.
+func AllQualityVerticals() []string {
+	return []string{
+		QualityVerticalFunctional,
+		QualityVerticalReliability,
+		QualityVerticalPerformance,
+		QualityVerticalSecurity,
+		QualityVerticalUsability,
+		QualityVerticalMaintainability,
+	}
 }
 
 // Lifecycle stage constants represent stages in the software delivery lifecycle.

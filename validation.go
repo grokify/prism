@@ -73,6 +73,39 @@ func ValidateCategory(category string) error {
 	return nil
 }
 
+// ValidateLayer validates a layer value.
+func ValidateLayer(layer string) error {
+	if layer == "" {
+		return nil // Optional field
+	}
+	if !slices.Contains(AllLayers(), layer) {
+		return fmt.Errorf("invalid layer %q, must be one of: %s", layer, strings.Join(AllLayers(), ", "))
+	}
+	return nil
+}
+
+// ValidateQualityVertical validates an ISO 25010 quality vertical value.
+func ValidateQualityVertical(vertical string) error {
+	if vertical == "" {
+		return nil // Optional field
+	}
+	if !slices.Contains(AllQualityVerticals(), vertical) {
+		return fmt.Errorf("invalid quality vertical %q, must be one of: %s", vertical, strings.Join(AllQualityVerticals(), ", "))
+	}
+	return nil
+}
+
+// ValidateTeamType validates a team type value.
+func ValidateTeamType(teamType string) error {
+	if teamType == "" {
+		return errors.New("team type is required")
+	}
+	if !slices.Contains(AllTeamTypes(), teamType) {
+		return fmt.Errorf("invalid team type %q, must be one of: %s", teamType, strings.Join(AllTeamTypes(), ", "))
+	}
+	return nil
+}
+
 // ValidateMaturityLevel validates a maturity level value.
 func ValidateMaturityLevel(level int) error {
 	if level < MaturityLevel1 || level > MaturityLevel5 {
@@ -223,6 +256,14 @@ func (m *Metric) Validate() ValidationErrors {
 		errs = append(errs, ValidationError{Field: "category", Value: m.Category, Message: err.Error()})
 	}
 
+	if err := ValidateLayer(m.Layer); err != nil {
+		errs = append(errs, ValidationError{Field: "layer", Value: m.Layer, Message: err.Error()})
+	}
+
+	if err := ValidateQualityVertical(m.QualityVertical); err != nil {
+		errs = append(errs, ValidationError{Field: "qualityVertical", Value: m.QualityVertical, Message: err.Error()})
+	}
+
 	if err := ValidateMetricType(m.MetricType); err != nil {
 		errs = append(errs, ValidationError{Field: "metricType", Value: m.MetricType, Message: err.Error()})
 	}
@@ -303,6 +344,83 @@ func (doc *PRISMDocument) Validate() ValidationErrors {
 		}
 	}
 
+	// Validate layers
+	seenLayerIDs := make(map[string]int)
+	for i, layer := range doc.Layers {
+		layerErrs := layer.Validate()
+		for _, e := range layerErrs {
+			e.Field = fmt.Sprintf("layers[%d].%s", i, e.Field)
+			errs = append(errs, e)
+		}
+
+		// Check for duplicate layer IDs
+		if layer.ID != "" {
+			if prevIdx, exists := seenLayerIDs[layer.ID]; exists {
+				errs = append(errs, ValidationError{
+					Field:   fmt.Sprintf("layers[%d].id", i),
+					Value:   layer.ID,
+					Message: fmt.Sprintf("duplicate ID, also used at layers[%d]", prevIdx),
+				})
+			}
+			seenLayerIDs[layer.ID] = i
+		}
+	}
+
+	// Validate teams
+	seenTeamIDs := make(map[string]int)
+	for i, team := range doc.Teams {
+		teamErrs := team.Validate(doc)
+		for _, e := range teamErrs {
+			e.Field = fmt.Sprintf("teams[%d].%s", i, e.Field)
+			errs = append(errs, e)
+		}
+
+		// Check for duplicate team IDs
+		if team.ID != "" {
+			if prevIdx, exists := seenTeamIDs[team.ID]; exists {
+				errs = append(errs, ValidationError{
+					Field:   fmt.Sprintf("teams[%d].id", i),
+					Value:   team.ID,
+					Message: fmt.Sprintf("duplicate ID, also used at teams[%d]", prevIdx),
+				})
+			}
+			seenTeamIDs[team.ID] = i
+		}
+	}
+
+	// Validate services
+	seenServiceIDs := make(map[string]int)
+	for i, service := range doc.Services {
+		serviceErrs := service.Validate(doc)
+		for _, e := range serviceErrs {
+			e.Field = fmt.Sprintf("services[%d].%s", i, e.Field)
+			errs = append(errs, e)
+		}
+
+		// Check for duplicate service IDs
+		if service.ID != "" {
+			if prevIdx, exists := seenServiceIDs[service.ID]; exists {
+				errs = append(errs, ValidationError{
+					Field:   fmt.Sprintf("services[%d].id", i),
+					Value:   service.ID,
+					Message: fmt.Sprintf("duplicate ID, also used at services[%d]", prevIdx),
+				})
+			}
+			seenServiceIDs[service.ID] = i
+		}
+	}
+
+	// Validate metric service references
+	for i, m := range doc.Metrics {
+		if m.ServiceID != "" && doc.GetServiceByID(m.ServiceID) == nil {
+			errs = append(errs, ValidationError{
+				Field:   fmt.Sprintf("metrics[%d].serviceId", i),
+				Value:   m.ServiceID,
+				Message: "references non-existent service ID",
+			})
+		}
+	}
+
 	// Validate OKR metric references
 	for i, okr := range doc.OKRs {
 		for j, metricID := range okr.MetricIDs {
@@ -354,6 +472,15 @@ func (doc *PRISMDocument) Validate() ValidationErrors {
 				Field:   fmt.Sprintf("initiatives[%d].phaseId", i),
 				Value:   init.PhaseID,
 				Message: "references non-existent phase ID",
+			})
+		}
+
+		// Validate service reference
+		if init.ServiceID != "" && doc.GetServiceByID(init.ServiceID) == nil {
+			errs = append(errs, ValidationError{
+				Field:   fmt.Sprintf("initiatives[%d].serviceId", i),
+				Value:   init.ServiceID,
+				Message: "references non-existent service ID",
 			})
 		}
 	}

@@ -9,6 +9,9 @@ type PRISMDocument struct {
 	Schema      string         `json:"$schema,omitempty"`
 	Metadata    *Metadata      `json:"metadata,omitempty"`
 	Domains     []DomainDef    `json:"domains,omitempty"`
+	Layers      []LayerDef     `json:"layers,omitempty"`
+	Teams       []Team         `json:"teams,omitempty"`
+	Services    []Service      `json:"services,omitempty"`
 	Metrics     []Metric       `json:"metrics"`
 	Maturity    *MaturityModel `json:"maturity,omitempty"`
 	OKRs        []OKRMapping   `json:"okrs,omitempty"`
@@ -45,9 +48,11 @@ type Metric struct {
 	Description string `json:"description,omitempty"`
 
 	// PRISM classification
-	Domain   string `json:"domain"`
-	Stage    string `json:"stage"`
-	Category string `json:"category"`
+	Domain          string `json:"domain"`
+	Stage           string `json:"stage"`
+	Category        string `json:"category"`
+	Layer           string `json:"layer,omitempty"`           // code, infra, runtime
+	QualityVertical string `json:"qualityVertical,omitempty"` // ISO 25010: functional, reliability, performance, security, usability, maintainability
 
 	// Measurement
 	MetricType     string  `json:"metricType"`
@@ -80,6 +85,7 @@ type Metric struct {
 	// Ownership
 	Owner      string `json:"owner,omitempty"`
 	DataSource string `json:"dataSource,omitempty"`
+	ServiceID  string `json:"serviceId,omitempty"` // Associated service
 
 	// History
 	DataPoints []DataPoint `json:"dataPoints,omitempty"`
@@ -176,6 +182,9 @@ type Initiative struct {
 	PhaseID              string            `json:"phaseId,omitempty"`
 	DevCompletionPercent float64           `json:"devCompletionPercent,omitempty"`
 	DeploymentStatus     *DeploymentStatus `json:"deploymentStatus,omitempty"`
+
+	// Service linkage
+	ServiceID string `json:"serviceId,omitempty"` // Associated service
 }
 
 // Initiative status constants.
@@ -419,6 +428,58 @@ func (doc *PRISMDocument) GetInitiativesForPhase(phaseID string) []Initiative {
 	for _, init := range doc.Initiatives {
 		if init.PhaseID == phaseID {
 			result = append(result, init)
+		}
+	}
+	return result
+}
+
+// GetLayerByID returns a layer definition by its ID.
+func (doc *PRISMDocument) GetLayerByID(id string) *LayerDef {
+	for i := range doc.Layers {
+		if doc.Layers[i].ID == id {
+			return &doc.Layers[i]
+		}
+	}
+	return nil
+}
+
+// GetMetricsByLayer returns all metrics for the specified layer.
+func (doc *PRISMDocument) GetMetricsByLayer(layer string) []Metric {
+	var result []Metric
+	for _, m := range doc.Metrics {
+		if m.Layer == layer {
+			result = append(result, m)
+		}
+	}
+	return result
+}
+
+// GetTeamByID returns a team by its ID.
+func (doc *PRISMDocument) GetTeamByID(id string) *Team {
+	for i := range doc.Teams {
+		if doc.Teams[i].ID == id {
+			return &doc.Teams[i]
+		}
+	}
+	return nil
+}
+
+// GetServiceByID returns a service by its ID.
+func (doc *PRISMDocument) GetServiceByID(id string) *Service {
+	for i := range doc.Services {
+		if doc.Services[i].ID == id {
+			return &doc.Services[i]
+		}
+	}
+	return nil
+}
+
+// GetMetricsByService returns all metrics for the specified service.
+func (doc *PRISMDocument) GetMetricsByService(serviceID string) []Metric {
+	var result []Metric
+	for _, m := range doc.Metrics {
+		if m.ServiceID == serviceID {
+			result = append(result, m)
 		}
 	}
 	return result
