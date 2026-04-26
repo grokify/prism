@@ -1,0 +1,445 @@
+{
+  "$schema": "../schema/prism.schema.json",
+  "metadata": {
+    "name": "Project Scoring Example",
+    "description": "Demonstrates project scoring framework with prioritized improvement initiatives",
+    "version": "1.0.0",
+    "author": "PRISM Team"
+  },
+  "projectScoring": {
+    "weights": {
+      "kpiImpact": 0.30,
+      "maturityAdvancement": 0.25,
+      "businessValue": 0.20,
+      "effort": 0.15,
+      "dependencies": 0.10
+    },
+    "priorityThresholds": {
+      "critical": 4.0,
+      "high": 3.0,
+      "medium": 2.0,
+      "low": 0.0
+    }
+  },
+  "projects": [
+    {
+      "id": "proj-slo-alerting",
+      "name": "SLO-Based Alerting",
+      "description": "Replace threshold-based alerts with SLO-based alerting using error budgets",
+      "domain": "operations",
+      "layer": "runtime",
+      "owner": "SRE Team",
+      "currentLevel": 3,
+      "targetLevel": 4,
+      "scores": {
+        "kpiImpact": {
+          "score": 4,
+          "justification": "Reduce alert fatigue 50%, improve MTTR 25%"
+        },
+        "maturityAdvancement": {
+          "score": 5,
+          "justification": "Required for Operations M4 (Managed)"
+        },
+        "businessValue": {
+          "score": 4,
+          "justification": "Reduce incident costs, improve reliability"
+        },
+        "effort": {
+          "score": 3,
+          "justification": "4 months, SRE team + platform support"
+        },
+        "dependencies": {
+          "score": 4,
+          "justification": "Needs SLI instrumentation (80% done)"
+        }
+      },
+      "weightedScore": 4.10,
+      "priority": "critical",
+      "targetQuarter": "Q1 2026",
+      "status": "in_progress"
+    },
+    {
+      "id": "proj-pipeline-gates",
+      "name": "Pipeline Security Gates",
+      "description": "Implement security scanning gates in CI/CD pipeline",
+      "domain": "security",
+      "layer": "code",
+      "owner": "Security Team",
+      "currentLevel": 2,
+      "targetLevel": 3,
+      "scores": {
+        "kpiImpact": {
+          "score": 5,
+          "justification": "Eliminate critical vulns in production"
+        },
+        "maturityAdvancement": {
+          "score": 4,
+          "justification": "Required for Security M3 (Defined)"
+        },
+        "businessValue": {
+          "score": 5,
+          "justification": "Compliance requirement, risk reduction"
+        },
+        "effort": {
+          "score": 4,
+          "justification": "2 months, existing tools"
+        },
+        "dependencies": {
+          "score": 4,
+          "justification": "Pipeline infrastructure ready"
+        }
+      },
+      "weightedScore": 4.50,
+      "priority": "critical",
+      "targetQuarter": "Q1 2026",
+      "status": "planned"
+    },
+    {
+      "id": "proj-cloud-posture",
+      "name": "Cloud Security Posture Management",
+      "description": "Deploy CSPM for continuous cloud configuration monitoring",
+      "domain": "security",
+      "layer": "infra",
+      "owner": "Security Team",
+      "currentLevel": 2,
+      "targetLevel": 4,
+      "scores": {
+        "kpiImpact": {
+          "score": 5,
+          "justification": "Eliminate cloud misconfigurations"
+        },
+        "maturityAdvancement": {
+          "score": 5,
+          "justification": "Enables Security M4 (Managed)"
+        },
+        "businessValue": {
+          "score": 5,
+          "justification": "SOC 2, data protection requirements"
+        },
+        "effort": {
+          "score": 3,
+          "justification": "4 months, vendor selection required"
+        },
+        "dependencies": {
+          "score": 3,
+          "justification": "Cloud team collaboration needed"
+        }
+      },
+      "weightedScore": 4.40,
+      "priority": "critical",
+      "targetQuarter": "Q1 2026",
+      "status": "planned"
+    },
+    {
+      "id": "proj-coverage-enforcement",
+      "name": "Test Coverage Enforcement",
+      "description": "Block merges below 80% code coverage threshold",
+      "domain": "quality",
+      "layer": "code",
+      "owner": "QE Team",
+      "currentLevel": 3,
+      "targetLevel": 4,
+      "scores": {
+        "kpiImpact": {
+          "score": 4,
+          "justification": "Increase coverage 68% to 80%"
+        },
+        "maturityAdvancement": {
+          "score": 4,
+          "justification": "Required for Quality M4 (Managed)"
+        },
+        "businessValue": {
+          "score": 4,
+          "justification": "Reduce production defects"
+        },
+        "effort": {
+          "score": 4,
+          "justification": "2 months, tooling exists"
+        },
+        "dependencies": {
+          "score": 4,
+          "justification": "CI/CD infrastructure ready"
+        }
+      },
+      "weightedScore": 4.00,
+      "priority": "critical",
+      "targetQuarter": "Q1 2026",
+      "status": "in_progress"
+    },
+    {
+      "id": "proj-analytics-impl",
+      "name": "Product Analytics Implementation",
+      "description": "Deploy product analytics with activation funnels and feature tracking",
+      "domain": "product",
+      "layer": "adoption",
+      "owner": "Product Team",
+      "currentLevel": 2,
+      "targetLevel": 3,
+      "scores": {
+        "kpiImpact": {
+          "score": 5,
+          "justification": "Enable all adoption metrics"
+        },
+        "maturityAdvancement": {
+          "score": 5,
+          "justification": "Required for Product M3 (Defined)"
+        },
+        "businessValue": {
+          "score": 4,
+          "justification": "Data-driven product decisions"
+        },
+        "effort": {
+          "score": 3,
+          "justification": "3 months implementation"
+        },
+        "dependencies": {
+          "score": 4,
+          "justification": "Engineering support needed"
+        }
+      },
+      "weightedScore": 4.20,
+      "priority": "critical",
+      "targetQuarter": "Q1 2026",
+      "status": "in_progress"
+    },
+    {
+      "id": "proj-auto-rollback",
+      "name": "Automated Rollback",
+      "description": "Implement automated rollback on deployment failures",
+      "domain": "operations",
+      "layer": "runtime",
+      "owner": "Platform Team",
+      "currentLevel": 3,
+      "targetLevel": 4,
+      "scores": {
+        "kpiImpact": {
+          "score": 4,
+          "justification": "Reduce MTTR by 40%"
+        },
+        "maturityAdvancement": {
+          "score": 4,
+          "justification": "Required for Operations M4"
+        },
+        "businessValue": {
+          "score": 4,
+          "justification": "Prevent extended outages"
+        },
+        "effort": {
+          "score": 3,
+          "justification": "3 months, platform team"
+        },
+        "dependencies": {
+          "score": 4,
+          "justification": "Observability in place"
+        }
+      },
+      "weightedScore": 3.85,
+      "priority": "high",
+      "targetQuarter": "Q1 2026",
+      "status": "planned"
+    },
+    {
+      "id": "proj-siem-soar",
+      "name": "SIEM/SOAR Integration",
+      "description": "Implement security information and event management with automated response",
+      "domain": "security",
+      "layer": "runtime",
+      "owner": "Security Team",
+      "currentLevel": 3,
+      "targetLevel": 4,
+      "scores": {
+        "kpiImpact": {
+          "score": 4,
+          "justification": "Reduce detection time from 5min to <1min"
+        },
+        "maturityAdvancement": {
+          "score": 5,
+          "justification": "Required for Security M4 (Managed)"
+        },
+        "businessValue": {
+          "score": 4,
+          "justification": "Compliance, threat response"
+        },
+        "effort": {
+          "score": 2,
+          "justification": "6 months, complex integration"
+        },
+        "dependencies": {
+          "score": 3,
+          "justification": "SIEM infrastructure planned Q2"
+        }
+      },
+      "weightedScore": 3.80,
+      "priority": "high",
+      "targetQuarter": "Q2 2026",
+      "status": "planned"
+    },
+    {
+      "id": "proj-e2e-expansion",
+      "name": "E2E Test Expansion",
+      "description": "Expand end-to-end test coverage for critical user journeys",
+      "domain": "quality",
+      "layer": "runtime",
+      "owner": "QE Team",
+      "currentLevel": 2,
+      "targetLevel": 3,
+      "scores": {
+        "kpiImpact": {
+          "score": 4,
+          "justification": "Increase E2E coverage 55% to 80%"
+        },
+        "maturityAdvancement": {
+          "score": 4,
+          "justification": "Required for Quality M3 (Defined)"
+        },
+        "businessValue": {
+          "score": 3,
+          "justification": "Reduce defect escapes"
+        },
+        "effort": {
+          "score": 3,
+          "justification": "4 months, QE team"
+        },
+        "dependencies": {
+          "score": 4,
+          "justification": "Test infrastructure available"
+        }
+      },
+      "weightedScore": 3.65,
+      "priority": "high",
+      "targetQuarter": "Q1 2026",
+      "status": "in_progress"
+    },
+    {
+      "id": "proj-dora-dashboard",
+      "name": "DORA Metrics Dashboard",
+      "description": "Build executive dashboard for DORA metrics tracking",
+      "domain": "operations",
+      "layer": "code",
+      "owner": "Platform Team",
+      "currentLevel": 3,
+      "targetLevel": 4,
+      "scores": {
+        "kpiImpact": {
+          "score": 3,
+          "justification": "Enable visibility, drive improvement"
+        },
+        "maturityAdvancement": {
+          "score": 4,
+          "justification": "Required for Operations M4"
+        },
+        "businessValue": {
+          "score": 4,
+          "justification": "Executive visibility, culture change"
+        },
+        "effort": {
+          "score": 4,
+          "justification": "6 weeks, platform team"
+        },
+        "dependencies": {
+          "score": 4,
+          "justification": "Data sources available"
+        }
+      },
+      "weightedScore": 3.60,
+      "priority": "high",
+      "targetQuarter": "Q1 2026",
+      "status": "in_progress"
+    },
+    {
+      "id": "proj-runbook-std",
+      "name": "Runbook Standardization",
+      "description": "Create standardized runbooks for common incidents",
+      "domain": "operations",
+      "layer": "support",
+      "owner": "SRE Team",
+      "currentLevel": 2,
+      "targetLevel": 3,
+      "scores": {
+        "kpiImpact": {
+          "score": 3,
+          "justification": "Reduce MTTR by 20%"
+        },
+        "maturityAdvancement": {
+          "score": 4,
+          "justification": "Required for Operations M3"
+        },
+        "businessValue": {
+          "score": 3,
+          "justification": "Operational consistency"
+        },
+        "effort": {
+          "score": 4,
+          "justification": "6 weeks, documentation effort"
+        },
+        "dependencies": {
+          "score": 5,
+          "justification": "No external dependencies"
+        }
+      },
+      "weightedScore": 3.55,
+      "priority": "high",
+      "targetQuarter": "Q2 2026",
+      "status": "planned"
+    },
+    {
+      "id": "proj-security-docs",
+      "name": "Security Documentation Update",
+      "description": "Update security policies and procedures documentation",
+      "domain": "security",
+      "layer": "requirements",
+      "owner": "Security Team",
+      "currentLevel": 2,
+      "targetLevel": 2,
+      "scores": {
+        "kpiImpact": {
+          "score": 2,
+          "justification": "Marginal improvement to compliance metrics"
+        },
+        "maturityAdvancement": {
+          "score": 2,
+          "justification": "Supports M2, not required for M3"
+        },
+        "businessValue": {
+          "score": 3,
+          "justification": "Needed for audit, moderate compliance value"
+        },
+        "effort": {
+          "score": 5,
+          "justification": "2 weeks, existing staff"
+        },
+        "dependencies": {
+          "score": 5,
+          "justification": "None"
+        }
+      },
+      "weightedScore": 2.95,
+      "priority": "medium",
+      "targetQuarter": "Q2 2026",
+      "status": "planned"
+    }
+  ],
+  "summary": {
+    "totalProjects": 11,
+    "byPriority": {
+      "critical": 5,
+      "high": 5,
+      "medium": 1,
+      "low": 0
+    },
+    "byDomain": {
+      "security": 4,
+      "operations": 4,
+      "quality": 2,
+      "product": 1
+    },
+    "byQuarter": {
+      "Q1 2026": 7,
+      "Q2 2026": 4
+    },
+    "byStatus": {
+      "in_progress": 5,
+      "planned": 6
+    }
+  }
+}

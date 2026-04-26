@@ -1,0 +1,555 @@
+{
+  "$schema": "https://github.com/grokify/prism/schema/maturity.schema.json",
+  "metadata": {
+    "name": "Security Maturity Model",
+    "description": "Security domain maturity model with SLO-backed level criteria",
+    "version": "1.0.0",
+    "organization": "Example Corp",
+    "createdAt": "2026-01-15",
+    "updatedAt": "2026-01-15"
+  },
+  "domains": {
+    "security": {
+      "name": "Security",
+      "description": "Application and infrastructure security maturity",
+      "owner": "Security Team",
+      "levels": [
+        {
+          "level": 1,
+          "name": "Reactive",
+          "description": "Ad-hoc security, firefighting mode, no formal processes",
+          "criteria": [],
+          "enablers": []
+        },
+        {
+          "level": 2,
+          "name": "Basic",
+          "description": "Basic security controls in place, some visibility",
+          "criteria": [
+            {
+              "id": "sec-m2-sast-coverage",
+              "name": "SAST Coverage",
+              "description": "Percentage of repositories with SAST scanning enabled",
+              "metricName": "Repositories with SAST scanning",
+              "operator": "gte",
+              "target": 50,
+              "unit": "%",
+              "layer": "code",
+              "category": "prevention",
+              "required": true
+            },
+            {
+              "id": "sec-m2-sca-coverage",
+              "name": "SCA Coverage",
+              "description": "Percentage of repositories with dependency scanning",
+              "metricName": "Repositories with SCA scanning",
+              "operator": "gte",
+              "target": 50,
+              "unit": "%",
+              "layer": "code",
+              "category": "prevention",
+              "required": true
+            },
+            {
+              "id": "sec-m2-vulns-tracked",
+              "name": "Vulnerability Tracking",
+              "description": "Percentage of discovered vulnerabilities logged in tracking system",
+              "metricName": "Vulnerabilities tracked",
+              "operator": "eq",
+              "target": 100,
+              "unit": "%",
+              "layer": "code",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "sec-m2-incident-process",
+              "name": "Incident Process",
+              "description": "Security incident response process is documented",
+              "metricName": "Incident process documented",
+              "operator": "eq",
+              "target": 1,
+              "unit": "",
+              "layer": "runtime",
+              "category": "response",
+              "required": true
+            }
+          ],
+          "enablers": [
+            {
+              "id": "sec-m2-deploy-sast",
+              "name": "Deploy SAST tooling",
+              "description": "Install and configure static analysis security scanner (e.g., Semgrep, SonarQube)",
+              "type": "tooling",
+              "layer": "code",
+              "effort": "2 weeks",
+              "team": "Security",
+              "status": "not_started",
+              "criteriaIds": ["sec-m2-sast-coverage"]
+            },
+            {
+              "id": "sec-m2-deploy-sca",
+              "name": "Deploy SCA tooling",
+              "description": "Install and configure software composition analysis (e.g., Snyk, Dependabot)",
+              "type": "tooling",
+              "layer": "code",
+              "effort": "1 week",
+              "team": "Security",
+              "status": "not_started",
+              "criteriaIds": ["sec-m2-sca-coverage"]
+            },
+            {
+              "id": "sec-m2-vuln-tracking",
+              "name": "Implement vulnerability tracking",
+              "description": "Set up vulnerability tracking workflow in issue tracker",
+              "type": "process",
+              "layer": "code",
+              "effort": "1 week",
+              "team": "Security",
+              "status": "not_started",
+              "criteriaIds": ["sec-m2-vulns-tracked"]
+            },
+            {
+              "id": "sec-m2-incident-runbook",
+              "name": "Document incident response process",
+              "description": "Create security incident response runbook and escalation procedures",
+              "type": "process",
+              "layer": "runtime",
+              "effort": "2 weeks",
+              "team": "Security",
+              "status": "not_started",
+              "criteriaIds": ["sec-m2-incident-process"]
+            }
+          ]
+        },
+        {
+          "level": 3,
+          "name": "Defined",
+          "description": "Integrated security with enforcement, standardized processes",
+          "criteria": [
+            {
+              "id": "sec-m3-sast-coverage",
+              "name": "SAST CI Coverage",
+              "description": "Percentage of repositories with SAST integrated in CI pipeline",
+              "metricName": "Repositories with SAST in CI",
+              "operator": "eq",
+              "target": 100,
+              "unit": "%",
+              "layer": "code",
+              "category": "prevention",
+              "required": true
+            },
+            {
+              "id": "sec-m3-sca-coverage",
+              "name": "SCA CI Coverage",
+              "description": "Percentage of repositories with SCA integrated in CI pipeline",
+              "metricName": "Repositories with SCA in CI",
+              "operator": "eq",
+              "target": 100,
+              "unit": "%",
+              "layer": "code",
+              "category": "prevention",
+              "required": true
+            },
+            {
+              "id": "sec-m3-gates-active",
+              "name": "Security Gates Active",
+              "description": "Percentage of pipelines with security gates that block on critical findings",
+              "metricName": "Pipelines with security gates",
+              "operator": "eq",
+              "target": 100,
+              "unit": "%",
+              "layer": "code",
+              "category": "prevention",
+              "required": true
+            },
+            {
+              "id": "sec-m3-secrets-zero",
+              "name": "No Secrets in Code",
+              "description": "Number of secrets detected in repositories",
+              "metricName": "Secrets in code",
+              "operator": "eq",
+              "target": 0,
+              "unit": "count",
+              "layer": "code",
+              "category": "prevention",
+              "required": true
+            },
+            {
+              "id": "sec-m3-critical-findings",
+              "name": "Zero Critical Findings",
+              "description": "Number of critical/high severity findings in production code",
+              "metricName": "Critical findings in production",
+              "operator": "eq",
+              "target": 0,
+              "unit": "count",
+              "layer": "runtime",
+              "category": "prevention",
+              "required": true
+            },
+            {
+              "id": "sec-m3-cloud-posture",
+              "name": "Cloud Posture Score",
+              "description": "Cloud security posture management compliance score",
+              "metricName": "CSPM compliance score",
+              "operator": "gte",
+              "target": 80,
+              "unit": "%",
+              "layer": "infra",
+              "category": "prevention",
+              "required": true
+            }
+          ],
+          "enablers": [
+            {
+              "id": "sec-m3-ci-integration",
+              "name": "Integrate scanning in CI/CD",
+              "description": "Add SAST and SCA scanning to all CI/CD pipelines",
+              "type": "implementation",
+              "layer": "code",
+              "effort": "3 weeks",
+              "team": "Platform",
+              "status": "not_started",
+              "criteriaIds": ["sec-m3-sast-coverage", "sec-m3-sca-coverage"],
+              "dependsOn": ["sec-m2-deploy-sast", "sec-m2-deploy-sca"]
+            },
+            {
+              "id": "sec-m3-security-gates",
+              "name": "Implement security gates",
+              "description": "Configure CI to block merges and deploys with critical/high findings",
+              "type": "implementation",
+              "layer": "code",
+              "effort": "2 weeks",
+              "team": "Platform",
+              "status": "not_started",
+              "criteriaIds": ["sec-m3-gates-active", "sec-m3-critical-findings"],
+              "dependsOn": ["sec-m3-ci-integration"]
+            },
+            {
+              "id": "sec-m3-secrets-scanning",
+              "name": "Deploy secrets scanning",
+              "description": "Implement pre-commit hooks and CI scanning for secrets detection",
+              "type": "tooling",
+              "layer": "code",
+              "effort": "1 week",
+              "team": "Security",
+              "status": "not_started",
+              "criteriaIds": ["sec-m3-secrets-zero"]
+            },
+            {
+              "id": "sec-m3-cspm-deploy",
+              "name": "Deploy cloud security posture management",
+              "description": "Implement CSPM tooling for continuous cloud configuration monitoring",
+              "type": "tooling",
+              "layer": "infra",
+              "effort": "4 weeks",
+              "team": "Security",
+              "status": "not_started",
+              "criteriaIds": ["sec-m3-cloud-posture"]
+            }
+          ]
+        },
+        {
+          "level": 4,
+          "name": "Managed",
+          "description": "Real-time security with measurement, data-driven decisions",
+          "criteria": [
+            {
+              "id": "sec-m4-mttr-critical",
+              "name": "MTTR Critical Findings",
+              "description": "Mean time to remediate critical security findings",
+              "metricName": "MTTR for critical findings",
+              "operator": "lte",
+              "target": 7,
+              "unit": "days",
+              "layer": "runtime",
+              "category": "response",
+              "required": true
+            },
+            {
+              "id": "sec-m4-mttr-high",
+              "name": "MTTR High Findings",
+              "description": "Mean time to remediate high severity findings",
+              "metricName": "MTTR for high findings",
+              "operator": "lte",
+              "target": 30,
+              "unit": "days",
+              "layer": "runtime",
+              "category": "response",
+              "required": true
+            },
+            {
+              "id": "sec-m4-detection-coverage",
+              "name": "Threat Detection Coverage",
+              "description": "MITRE ATT&CK technique coverage in detection rules",
+              "metricName": "MITRE ATT&CK coverage",
+              "operator": "gte",
+              "target": 70,
+              "unit": "%",
+              "layer": "runtime",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "sec-m4-detection-latency",
+              "name": "Detection Latency",
+              "description": "Time from security event to alert",
+              "metricName": "Event to alert latency",
+              "operator": "lte",
+              "target": 60,
+              "unit": "seconds",
+              "layer": "runtime",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "sec-m4-cloud-posture",
+              "name": "Cloud Posture Score",
+              "description": "Cloud security posture management compliance score",
+              "metricName": "CSPM compliance score",
+              "operator": "gte",
+              "target": 95,
+              "unit": "%",
+              "layer": "infra",
+              "category": "prevention",
+              "required": true
+            },
+            {
+              "id": "sec-m4-pentest-coverage",
+              "name": "Penetration Test Coverage",
+              "description": "Percentage of tier-1 services with annual pentest",
+              "metricName": "Services with pentest coverage",
+              "operator": "eq",
+              "target": 100,
+              "unit": "%",
+              "layer": "runtime",
+              "category": "detection",
+              "required": true
+            }
+          ],
+          "enablers": [
+            {
+              "id": "sec-m4-siem-deploy",
+              "name": "Deploy SIEM/SOAR",
+              "description": "Implement security information and event management with orchestration",
+              "type": "tooling",
+              "layer": "runtime",
+              "effort": "3 months",
+              "team": "Security",
+              "status": "not_started",
+              "criteriaIds": ["sec-m4-detection-coverage", "sec-m4-detection-latency"]
+            },
+            {
+              "id": "sec-m4-mitre-mapping",
+              "name": "Map detections to MITRE ATT&CK",
+              "description": "Categorize all detection rules by MITRE ATT&CK technique",
+              "type": "process",
+              "layer": "runtime",
+              "effort": "4 weeks",
+              "team": "Security",
+              "status": "not_started",
+              "criteriaIds": ["sec-m4-detection-coverage"],
+              "dependsOn": ["sec-m4-siem-deploy"]
+            },
+            {
+              "id": "sec-m4-remediation-sla",
+              "name": "Implement remediation SLAs",
+              "description": "Define and enforce fix timelines by severity with automated tracking",
+              "type": "process",
+              "layer": "runtime",
+              "effort": "2 weeks",
+              "team": "Security",
+              "status": "not_started",
+              "criteriaIds": ["sec-m4-mttr-critical", "sec-m4-mttr-high"]
+            },
+            {
+              "id": "sec-m4-pentest-program",
+              "name": "Establish penetration testing program",
+              "description": "Annual pentest schedule for all tier-1 services",
+              "type": "process",
+              "layer": "runtime",
+              "effort": "2 weeks",
+              "team": "Security",
+              "status": "not_started",
+              "criteriaIds": ["sec-m4-pentest-coverage"]
+            },
+            {
+              "id": "sec-m4-cspm-enhance",
+              "name": "Enhance CSPM with auto-remediation",
+              "description": "Configure automatic remediation for common misconfigurations",
+              "type": "implementation",
+              "layer": "infra",
+              "effort": "4 weeks",
+              "team": "Security + Platform",
+              "status": "not_started",
+              "criteriaIds": ["sec-m4-cloud-posture"],
+              "dependsOn": ["sec-m3-cspm-deploy"]
+            }
+          ]
+        },
+        {
+          "level": 5,
+          "name": "Optimizing",
+          "description": "Proactive, automated security with continuous improvement",
+          "criteria": [
+            {
+              "id": "sec-m5-mttr-critical",
+              "name": "MTTR Critical Findings",
+              "description": "Mean time to remediate critical security findings",
+              "metricName": "MTTR for critical findings",
+              "operator": "lte",
+              "target": 1,
+              "unit": "days",
+              "layer": "runtime",
+              "category": "response",
+              "required": true
+            },
+            {
+              "id": "sec-m5-auto-remediation",
+              "name": "Auto-Remediation Rate",
+              "description": "Percentage of known vulnerability patterns auto-remediated",
+              "metricName": "Auto-remediated findings",
+              "operator": "gte",
+              "target": 80,
+              "unit": "%",
+              "layer": "runtime",
+              "category": "response",
+              "required": true
+            },
+            {
+              "id": "sec-m5-detection-coverage",
+              "name": "Threat Detection Coverage",
+              "description": "MITRE ATT&CK technique coverage in detection rules",
+              "metricName": "MITRE ATT&CK coverage",
+              "operator": "gte",
+              "target": 90,
+              "unit": "%",
+              "layer": "runtime",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "sec-m5-proactive-hunting",
+              "name": "Proactive Threat Hunting",
+              "description": "Number of threat hunting exercises per quarter",
+              "metricName": "Threat hunts per quarter",
+              "operator": "gte",
+              "target": 4,
+              "unit": "count",
+              "layer": "runtime",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "sec-m5-red-team",
+              "name": "Red Team Exercises",
+              "description": "Number of red team/purple team exercises per year",
+              "metricName": "Red team exercises per year",
+              "operator": "gte",
+              "target": 2,
+              "unit": "count",
+              "layer": "runtime",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "sec-m5-zero-day-response",
+              "name": "Zero-Day Response Time",
+              "description": "Time to assess and mitigate zero-day vulnerabilities",
+              "metricName": "Zero-day response time",
+              "operator": "lte",
+              "target": 24,
+              "unit": "hours",
+              "layer": "runtime",
+              "category": "response",
+              "required": true
+            }
+          ],
+          "enablers": [
+            {
+              "id": "sec-m5-auto-remediation-impl",
+              "name": "Implement auto-remediation",
+              "description": "Automated patching and configuration fixes for known patterns",
+              "type": "implementation",
+              "layer": "runtime",
+              "effort": "3 months",
+              "team": "Security + Platform",
+              "status": "not_started",
+              "criteriaIds": ["sec-m5-auto-remediation", "sec-m5-mttr-critical"]
+            },
+            {
+              "id": "sec-m5-threat-hunting",
+              "name": "Establish threat hunting program",
+              "description": "Quarterly proactive threat hunting exercises",
+              "type": "process",
+              "layer": "runtime",
+              "effort": "Ongoing",
+              "team": "Security",
+              "status": "not_started",
+              "criteriaIds": ["sec-m5-proactive-hunting"]
+            },
+            {
+              "id": "sec-m5-red-team-program",
+              "name": "Establish red team program",
+              "description": "Regular adversarial testing of defenses",
+              "type": "process",
+              "layer": "runtime",
+              "effort": "Ongoing",
+              "team": "Security",
+              "status": "not_started",
+              "criteriaIds": ["sec-m5-red-team", "sec-m5-detection-coverage"]
+            },
+            {
+              "id": "sec-m5-zero-day-playbook",
+              "name": "Zero-day response playbook",
+              "description": "Rapid response procedures for zero-day vulnerabilities",
+              "type": "process",
+              "layer": "runtime",
+              "effort": "2 weeks",
+              "team": "Security",
+              "status": "not_started",
+              "criteriaIds": ["sec-m5-zero-day-response"]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "assessments": {
+    "security": {
+      "domain": "security",
+      "assessedAt": "2026-01-15",
+      "assessedBy": "Security Team",
+      "currentLevel": 2,
+      "targetLevel": 4,
+      "criteriaValues": {
+        "sec-m2-sast-coverage": 75,
+        "sec-m2-sca-coverage": 80,
+        "sec-m2-vulns-tracked": 100,
+        "sec-m2-incident-process": 1,
+        "sec-m3-sast-coverage": 60,
+        "sec-m3-sca-coverage": 65,
+        "sec-m3-gates-active": 40,
+        "sec-m3-secrets-zero": 3,
+        "sec-m3-critical-findings": 5,
+        "sec-m3-cloud-posture": 72,
+        "sec-m4-mttr-critical": 14,
+        "sec-m4-mttr-high": 45,
+        "sec-m4-detection-coverage": 55,
+        "sec-m4-detection-latency": 300,
+        "sec-m4-cloud-posture": 72,
+        "sec-m4-pentest-coverage": 60
+      },
+      "enablerStatus": {
+        "sec-m2-deploy-sast": "completed",
+        "sec-m2-deploy-sca": "completed",
+        "sec-m2-vuln-tracking": "completed",
+        "sec-m2-incident-runbook": "completed",
+        "sec-m3-ci-integration": "in_progress",
+        "sec-m3-security-gates": "not_started",
+        "sec-m3-secrets-scanning": "in_progress",
+        "sec-m3-cspm-deploy": "not_started"
+      }
+    }
+  }
+}

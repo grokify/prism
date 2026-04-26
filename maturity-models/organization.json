@@ -1,0 +1,2560 @@
+{
+  "$schema": "https://github.com/grokify/prism/schema/maturity.schema.json",
+  "metadata": {
+    "name": "Organization Maturity Model",
+    "description": "Complete organizational maturity model across Security, Operations, Quality, Product, and AI domains",
+    "version": "1.1.0",
+    "organization": "Example Corp",
+    "createdAt": "2026-01-15",
+    "updatedAt": "2026-04-21"
+  },
+  "kpiThresholds": {
+    "security": [
+      {
+        "id": "sast-coverage",
+        "name": "SAST Coverage",
+        "description": "Percentage of repositories with SAST scanning",
+        "unit": "%",
+        "thresholds": {"m2": 50, "m3": 100, "m4": 100, "m5": 100},
+        "current": 75
+      },
+      {
+        "id": "sca-coverage",
+        "name": "SCA Coverage",
+        "description": "Percentage of repositories with dependency scanning",
+        "unit": "%",
+        "thresholds": {"m2": 50, "m3": 100, "m4": 100, "m5": 100},
+        "current": 80
+      },
+      {
+        "id": "critical-vulns",
+        "name": "Critical Vulnerabilities",
+        "description": "Critical vulnerabilities in production",
+        "unit": "count",
+        "operator": "lte",
+        "thresholds": {"m2": "tracked", "m3": 0, "m4": 0, "m5": 0},
+        "current": 5
+      },
+      {
+        "id": "secrets-in-code",
+        "name": "Secrets in Code",
+        "description": "Exposed credentials in repositories",
+        "unit": "count",
+        "operator": "lte",
+        "thresholds": {"m2": "scanned", "m3": 0, "m4": 0, "m5": 0},
+        "current": 0
+      },
+      {
+        "id": "mttr-critical",
+        "name": "MTTR Critical",
+        "description": "Mean time to remediate critical findings",
+        "unit": "days",
+        "operator": "lte",
+        "thresholds": {"m2": "tracked", "m3": 14, "m4": 7, "m5": 1},
+        "current": 14
+      },
+      {
+        "id": "cloud-posture",
+        "name": "Cloud Posture Score",
+        "description": "CSPM compliance score",
+        "unit": "%",
+        "thresholds": {"m2": null, "m3": 80, "m4": 90, "m5": 95},
+        "current": 72
+      },
+      {
+        "id": "detection-coverage",
+        "name": "Detection Coverage",
+        "description": "MITRE ATT&CK technique coverage",
+        "unit": "%",
+        "thresholds": {"m2": null, "m3": null, "m4": 70, "m5": 90},
+        "current": 55
+      }
+    ],
+    "operational-excellence": [
+      {
+        "id": "deploy-frequency",
+        "name": "Deployment Frequency",
+        "description": "How often code is deployed to production",
+        "unit": "frequency",
+        "thresholds": {"m2": "monthly", "m3": "weekly", "m4": "daily", "m5": "on-demand"},
+        "current": "2x/week"
+      },
+      {
+        "id": "lead-time",
+        "name": "Lead Time for Changes",
+        "description": "Time from commit to production",
+        "unit": "time",
+        "thresholds": {"m2": "1 month", "m3": "1 week", "m4": "1 day", "m5": "1 hour"},
+        "current": "5 days"
+      },
+      {
+        "id": "mttr",
+        "name": "Mean Time to Recovery",
+        "description": "Time to recover from incidents",
+        "unit": "time",
+        "thresholds": {"m2": "1 week", "m3": "1 day", "m4": "4 hours", "m5": "1 hour"},
+        "current": "4 hours"
+      },
+      {
+        "id": "change-failure-rate",
+        "name": "Change Failure Rate",
+        "description": "Percentage of deployments causing failures",
+        "unit": "%",
+        "operator": "lte",
+        "thresholds": {"m2": 45, "m3": 30, "m4": 15, "m5": 5},
+        "current": 18
+      },
+      {
+        "id": "availability",
+        "name": "Service Availability",
+        "description": "Tier-1 service uptime",
+        "unit": "%",
+        "thresholds": {"m2": 99.0, "m3": 99.5, "m4": 99.9, "m5": 99.99},
+        "current": 99.92
+      },
+      {
+        "id": "slo-coverage",
+        "name": "SLO Coverage",
+        "description": "Tier-1 services with defined SLOs",
+        "unit": "%",
+        "thresholds": {"m2": null, "m3": 100, "m4": 100, "m5": 100},
+        "current": 100
+      },
+      {
+        "id": "error-budgets",
+        "name": "Error Budget Tracking",
+        "description": "Services with error budget tracking",
+        "unit": "%",
+        "thresholds": {"m2": null, "m3": null, "m4": 100, "m5": 100},
+        "current": 60
+      },
+      {
+        "id": "runbook-coverage",
+        "name": "Runbook Coverage",
+        "description": "Incidents with documented runbooks",
+        "unit": "%",
+        "thresholds": {"m2": null, "m3": 80, "m4": 95, "m5": 100},
+        "current": 85
+      }
+    ],
+    "quality": [
+      {
+        "id": "unit-coverage",
+        "name": "Unit Test Coverage",
+        "description": "Code coverage percentage",
+        "unit": "%",
+        "thresholds": {"m2": "any", "m3": 70, "m4": 80, "m5": 90},
+        "current": 68
+      },
+      {
+        "id": "e2e-coverage",
+        "name": "E2E Test Coverage",
+        "description": "Critical paths with E2E tests",
+        "unit": "%",
+        "thresholds": {"m2": null, "m3": 80, "m4": 90, "m5": 95},
+        "current": 65
+      },
+      {
+        "id": "test-pass-rate",
+        "name": "Test Pass Rate",
+        "description": "Percentage of tests passing",
+        "unit": "%",
+        "thresholds": {"m2": "tracked", "m3": 98, "m4": 99, "m5": 99.9},
+        "current": 96
+      },
+      {
+        "id": "defect-density",
+        "name": "Defect Density",
+        "description": "Defects per thousand lines of code",
+        "unit": "per KLOC",
+        "operator": "lte",
+        "thresholds": {"m2": "tracked", "m3": 1.0, "m4": 0.5, "m5": 0.2},
+        "current": 0.8
+      },
+      {
+        "id": "escape-rate",
+        "name": "Defect Escape Rate",
+        "description": "Defects found in production vs total",
+        "unit": "%",
+        "operator": "lte",
+        "thresholds": {"m2": "tracked", "m3": 15, "m4": 10, "m5": 2},
+        "current": 12
+      },
+      {
+        "id": "flaky-test-rate",
+        "name": "Flaky Test Rate",
+        "description": "Percentage of unreliable tests",
+        "unit": "%",
+        "operator": "lte",
+        "thresholds": {"m2": null, "m3": 5, "m4": 2, "m5": 1},
+        "current": 3
+      },
+      {
+        "id": "quality-gates",
+        "name": "Quality Gates Active",
+        "description": "Pipelines with enforced quality gates",
+        "unit": "%",
+        "thresholds": {"m2": null, "m3": 100, "m4": 100, "m5": 100},
+        "current": 80
+      }
+    ],
+    "product": [
+      {
+        "id": "spec-clarity",
+        "name": "Spec Clarity",
+        "description": "Features with acceptance criteria",
+        "unit": "%",
+        "thresholds": {"m2": 50, "m3": 90, "m4": 95, "m5": 99},
+        "current": 65
+      },
+      {
+        "id": "activation-rate",
+        "name": "User Activation Rate",
+        "description": "Users completing onboarding",
+        "unit": "%",
+        "thresholds": {"m2": "tracked", "m3": 60, "m4": 75, "m5": 85},
+        "current": 55
+      },
+      {
+        "id": "feature-adoption",
+        "name": "Feature Adoption",
+        "description": "Features with adoption tracking",
+        "unit": "%",
+        "thresholds": {"m2": null, "m3": 80, "m4": 90, "m5": 100},
+        "current": 50
+      },
+      {
+        "id": "retention-30d",
+        "name": "30-Day Retention",
+        "description": "Users still active at 30 days",
+        "unit": "%",
+        "thresholds": {"m2": "tracked", "m3": "tracked", "m4": 80, "m5": 90},
+        "current": 72
+      },
+      {
+        "id": "churn-rate",
+        "name": "Monthly Churn Rate",
+        "description": "Monthly customer churn",
+        "unit": "%",
+        "operator": "lte",
+        "thresholds": {"m2": "tracked", "m3": "tracked", "m4": 3, "m5": 2},
+        "current": 4.5
+      },
+      {
+        "id": "nps",
+        "name": "Net Promoter Score",
+        "description": "Customer satisfaction score",
+        "unit": "score",
+        "thresholds": {"m2": null, "m3": "tracked", "m4": 50, "m5": 70},
+        "current": 42
+      },
+      {
+        "id": "time-to-value",
+        "name": "Time to Value",
+        "description": "Days to first user value",
+        "unit": "days",
+        "operator": "lte",
+        "thresholds": {"m2": "tracked", "m3": 14, "m4": 7, "m5": 3},
+        "current": 14
+      },
+      {
+        "id": "ab-testing",
+        "name": "A/B Testing Coverage",
+        "description": "Features with A/B tests",
+        "unit": "%",
+        "thresholds": {"m2": null, "m3": null, "m4": 50, "m5": 80},
+        "current": 20
+      }
+    ],
+    "ai": [
+      {
+        "id": "tool-adoption",
+        "name": "AI Tool Adoption",
+        "description": "Teams using approved AI tools",
+        "unit": "%",
+        "thresholds": {"m2": 50, "m3": 80, "m4": 90, "m5": 95},
+        "current": 60
+      },
+      {
+        "id": "training-coverage",
+        "name": "AI Training Coverage",
+        "description": "Staff with AI training completed",
+        "unit": "%",
+        "thresholds": {"m2": 50, "m3": 80, "m4": 90, "m5": 95},
+        "current": 45
+      },
+      {
+        "id": "coding-assistant",
+        "name": "AI Coding Assistant Usage",
+        "description": "Developers with AI assistants",
+        "unit": "%",
+        "thresholds": {"m2": null, "m3": 80, "m4": 90, "m5": 95},
+        "current": 55
+      },
+      {
+        "id": "prompt-library",
+        "name": "Prompt Library",
+        "description": "Shared prompt/template library",
+        "unit": "boolean",
+        "thresholds": {"m2": null, "m3": true, "m4": true, "m5": true},
+        "current": false
+      },
+      {
+        "id": "ai-code-review",
+        "name": "AI Code Review",
+        "description": "PRs with AI-assisted review",
+        "unit": "%",
+        "thresholds": {"m2": null, "m3": 50, "m4": 80, "m5": 95},
+        "current": 20
+      },
+      {
+        "id": "productivity-gain",
+        "name": "AI Productivity Gain",
+        "description": "Measured productivity improvement",
+        "unit": "%",
+        "thresholds": {"m2": null, "m3": null, "m4": 20, "m5": 40},
+        "current": 15
+      },
+      {
+        "id": "roi-tracked",
+        "name": "AI ROI Tracking",
+        "description": "AI investment return measured",
+        "unit": "boolean",
+        "thresholds": {"m2": null, "m3": null, "m4": true, "m5": true},
+        "current": false
+      },
+      {
+        "id": "ai-accuracy",
+        "name": "AI Output Accuracy",
+        "description": "AI-generated content acceptance rate",
+        "unit": "%",
+        "thresholds": {"m2": null, "m3": null, "m4": 80, "m5": 90},
+        "current": 75
+      },
+      {
+        "id": "autonomous-agents",
+        "name": "Autonomous AI Agents",
+        "description": "Workflows handled by AI agents",
+        "unit": "%",
+        "thresholds": {"m2": null, "m3": null, "m4": null, "m5": 30},
+        "current": 5
+      }
+    ]
+  },
+  "domains": {
+    "security": {
+      "name": "Security",
+      "description": "Application and infrastructure security maturity",
+      "owner": "Security Team",
+      "levels": [
+        {
+          "level": 1,
+          "name": "Reactive",
+          "description": "Ad-hoc security, firefighting mode, no formal processes",
+          "criteria": [],
+          "enablers": []
+        },
+        {
+          "level": 2,
+          "name": "Basic",
+          "description": "Basic security controls in place, some visibility",
+          "criteria": [
+            {
+              "id": "sec-m2-sast-coverage",
+              "name": "SAST Coverage",
+              "description": "Percentage of repositories with SAST scanning enabled",
+              "metricName": "Repositories with SAST scanning",
+              "operator": "gte",
+              "target": 50,
+              "unit": "%",
+              "layer": "code",
+              "category": "prevention",
+              "required": true
+            },
+            {
+              "id": "sec-m2-sca-coverage",
+              "name": "SCA Coverage",
+              "description": "Percentage of repositories with dependency scanning",
+              "metricName": "Repositories with SCA scanning",
+              "operator": "gte",
+              "target": 50,
+              "unit": "%",
+              "layer": "code",
+              "category": "prevention",
+              "required": true
+            },
+            {
+              "id": "sec-m2-vulns-tracked",
+              "name": "Vulnerability Tracking",
+              "description": "Percentage of discovered vulnerabilities logged in tracking system",
+              "metricName": "Vulnerabilities tracked",
+              "operator": "eq",
+              "target": 100,
+              "unit": "%",
+              "layer": "code",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "sec-m2-incident-process",
+              "name": "Incident Process",
+              "description": "Security incident response process is documented",
+              "metricName": "Incident process documented",
+              "operator": "eq",
+              "target": 1,
+              "unit": "",
+              "layer": "runtime",
+              "category": "response",
+              "required": true
+            }
+          ],
+          "enablers": [
+            {
+              "id": "sec-m2-deploy-sast",
+              "name": "Deploy SAST tooling",
+              "description": "Install and configure static analysis security scanner",
+              "type": "tooling",
+              "layer": "code",
+              "effort": "2 weeks",
+              "team": "Security",
+              "status": "not_started",
+              "criteriaIds": ["sec-m2-sast-coverage"]
+            },
+            {
+              "id": "sec-m2-deploy-sca",
+              "name": "Deploy SCA tooling",
+              "description": "Install and configure software composition analysis",
+              "type": "tooling",
+              "layer": "code",
+              "effort": "1 week",
+              "team": "Security",
+              "status": "not_started",
+              "criteriaIds": ["sec-m2-sca-coverage"]
+            },
+            {
+              "id": "sec-m2-vuln-tracking",
+              "name": "Implement vulnerability tracking",
+              "description": "Set up vulnerability tracking workflow in issue tracker",
+              "type": "process",
+              "layer": "code",
+              "effort": "1 week",
+              "team": "Security",
+              "status": "not_started",
+              "criteriaIds": ["sec-m2-vulns-tracked"]
+            },
+            {
+              "id": "sec-m2-incident-runbook",
+              "name": "Document incident response process",
+              "description": "Create security incident response runbook and escalation procedures",
+              "type": "process",
+              "layer": "runtime",
+              "effort": "2 weeks",
+              "team": "Security",
+              "status": "not_started",
+              "criteriaIds": ["sec-m2-incident-process"]
+            }
+          ]
+        },
+        {
+          "level": 3,
+          "name": "Defined",
+          "description": "Integrated security with enforcement, standardized processes",
+          "criteria": [
+            {
+              "id": "sec-m3-sast-ci",
+              "name": "SAST CI Coverage",
+              "metricName": "Repositories with SAST in CI",
+              "operator": "eq",
+              "target": 100,
+              "unit": "%",
+              "layer": "code",
+              "category": "prevention",
+              "required": true
+            },
+            {
+              "id": "sec-m3-gates-active",
+              "name": "Security Gates Active",
+              "metricName": "Pipelines with security gates",
+              "operator": "eq",
+              "target": 100,
+              "unit": "%",
+              "layer": "code",
+              "category": "prevention",
+              "required": true
+            },
+            {
+              "id": "sec-m3-secrets-zero",
+              "name": "No Secrets in Code",
+              "metricName": "Secrets in code",
+              "operator": "eq",
+              "target": 0,
+              "unit": "count",
+              "layer": "code",
+              "category": "prevention",
+              "required": true
+            },
+            {
+              "id": "sec-m3-critical-zero",
+              "name": "Zero Critical Findings",
+              "metricName": "Critical findings in production",
+              "operator": "eq",
+              "target": 0,
+              "unit": "count",
+              "layer": "runtime",
+              "category": "prevention",
+              "required": true
+            },
+            {
+              "id": "sec-m3-cloud-posture",
+              "name": "Cloud Posture Score",
+              "metricName": "CSPM compliance score",
+              "operator": "gte",
+              "target": 80,
+              "unit": "%",
+              "layer": "infra",
+              "category": "prevention",
+              "required": true
+            }
+          ],
+          "enablers": [
+            {
+              "id": "sec-m3-ci-integration",
+              "name": "Integrate scanning in CI/CD",
+              "description": "Add SAST and SCA scanning to all CI/CD pipelines",
+              "type": "implementation",
+              "layer": "code",
+              "effort": "3 weeks",
+              "team": "Platform",
+              "status": "not_started",
+              "criteriaIds": ["sec-m3-sast-ci"],
+              "dependsOn": ["sec-m2-deploy-sast"]
+            },
+            {
+              "id": "sec-m3-security-gates",
+              "name": "Implement security gates",
+              "description": "Configure CI to block merges with critical findings",
+              "type": "implementation",
+              "layer": "code",
+              "effort": "2 weeks",
+              "team": "Platform",
+              "status": "not_started",
+              "criteriaIds": ["sec-m3-gates-active", "sec-m3-critical-zero"],
+              "dependsOn": ["sec-m3-ci-integration"]
+            },
+            {
+              "id": "sec-m3-secrets-scanning",
+              "name": "Deploy secrets scanning",
+              "description": "Implement pre-commit hooks for secrets detection",
+              "type": "tooling",
+              "layer": "code",
+              "effort": "1 week",
+              "team": "Security",
+              "status": "not_started",
+              "criteriaIds": ["sec-m3-secrets-zero"]
+            },
+            {
+              "id": "sec-m3-cspm",
+              "name": "Deploy CSPM",
+              "description": "Implement cloud security posture management",
+              "type": "tooling",
+              "layer": "infra",
+              "effort": "4 weeks",
+              "team": "Security",
+              "status": "not_started",
+              "criteriaIds": ["sec-m3-cloud-posture"]
+            }
+          ]
+        },
+        {
+          "level": 4,
+          "name": "Managed",
+          "description": "Real-time security with measurement, data-driven decisions",
+          "criteria": [
+            {
+              "id": "sec-m4-mttr-critical",
+              "name": "MTTR Critical",
+              "metricName": "MTTR for critical findings",
+              "operator": "lte",
+              "target": 7,
+              "unit": "days",
+              "layer": "runtime",
+              "category": "response",
+              "required": true
+            },
+            {
+              "id": "sec-m4-detection-coverage",
+              "name": "Detection Coverage",
+              "metricName": "MITRE ATT&CK coverage",
+              "operator": "gte",
+              "target": 70,
+              "unit": "%",
+              "layer": "runtime",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "sec-m4-detection-latency",
+              "name": "Detection Latency",
+              "metricName": "Event to alert latency",
+              "operator": "lte",
+              "target": 60,
+              "unit": "seconds",
+              "layer": "runtime",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "sec-m4-pentest",
+              "name": "Pentest Coverage",
+              "metricName": "Tier-1 services with annual pentest",
+              "operator": "eq",
+              "target": 100,
+              "unit": "%",
+              "layer": "runtime",
+              "category": "detection",
+              "required": true
+            }
+          ],
+          "enablers": [
+            {
+              "id": "sec-m4-siem",
+              "name": "Deploy SIEM/SOAR",
+              "description": "Implement security information and event management",
+              "type": "tooling",
+              "layer": "runtime",
+              "effort": "3 months",
+              "team": "Security",
+              "status": "not_started",
+              "criteriaIds": ["sec-m4-detection-coverage", "sec-m4-detection-latency"]
+            },
+            {
+              "id": "sec-m4-remediation-sla",
+              "name": "Implement remediation SLAs",
+              "description": "Define and enforce fix timelines by severity",
+              "type": "process",
+              "layer": "runtime",
+              "effort": "2 weeks",
+              "team": "Security",
+              "status": "not_started",
+              "criteriaIds": ["sec-m4-mttr-critical"]
+            },
+            {
+              "id": "sec-m4-pentest-program",
+              "name": "Establish pentest program",
+              "description": "Annual pentest schedule for tier-1 services",
+              "type": "process",
+              "layer": "runtime",
+              "effort": "2 weeks",
+              "team": "Security",
+              "status": "not_started",
+              "criteriaIds": ["sec-m4-pentest"]
+            }
+          ]
+        },
+        {
+          "level": 5,
+          "name": "Optimizing",
+          "description": "Proactive, automated security with continuous improvement",
+          "criteria": [
+            {
+              "id": "sec-m5-mttr-critical",
+              "name": "MTTR Critical",
+              "metricName": "MTTR for critical findings",
+              "operator": "lte",
+              "target": 1,
+              "unit": "days",
+              "layer": "runtime",
+              "category": "response",
+              "required": true
+            },
+            {
+              "id": "sec-m5-auto-remediation",
+              "name": "Auto-Remediation Rate",
+              "metricName": "Auto-remediated findings",
+              "operator": "gte",
+              "target": 80,
+              "unit": "%",
+              "layer": "runtime",
+              "category": "response",
+              "required": true
+            },
+            {
+              "id": "sec-m5-detection-coverage",
+              "name": "Detection Coverage",
+              "metricName": "MITRE ATT&CK coverage",
+              "operator": "gte",
+              "target": 90,
+              "unit": "%",
+              "layer": "runtime",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "sec-m5-red-team",
+              "name": "Red Team Exercises",
+              "metricName": "Red team exercises per year",
+              "operator": "gte",
+              "target": 2,
+              "unit": "count",
+              "layer": "runtime",
+              "category": "detection",
+              "required": true
+            }
+          ],
+          "enablers": [
+            {
+              "id": "sec-m5-auto-remediation-impl",
+              "name": "Implement auto-remediation",
+              "description": "Automated patching and configuration fixes",
+              "type": "implementation",
+              "layer": "runtime",
+              "effort": "3 months",
+              "team": "Security + Platform",
+              "status": "not_started",
+              "criteriaIds": ["sec-m5-auto-remediation", "sec-m5-mttr-critical"]
+            },
+            {
+              "id": "sec-m5-red-team-program",
+              "name": "Establish red team program",
+              "description": "Regular adversarial testing of defenses",
+              "type": "process",
+              "layer": "runtime",
+              "effort": "Ongoing",
+              "team": "Security",
+              "status": "not_started",
+              "criteriaIds": ["sec-m5-red-team", "sec-m5-detection-coverage"]
+            }
+          ]
+        }
+      ]
+    },
+    "operational-excellence": {
+      "name": "Operational Excellence",
+      "description": "Reliability, efficiency, and delivery excellence across all value streams",
+      "owner": "SRE Team",
+      "levels": [
+        {
+          "level": 1,
+          "name": "Reactive",
+          "description": "Ad-hoc operations, manual processes, firefighting mode",
+          "criteria": [],
+          "enablers": []
+        },
+        {
+          "level": 2,
+          "name": "Basic",
+          "description": "Basic monitoring, some CI/CD, documented processes",
+          "criteria": [
+            {
+              "id": "ops-m2-monitoring",
+              "name": "Basic Monitoring",
+              "metricName": "Services with uptime monitoring",
+              "operator": "gte",
+              "target": 80,
+              "unit": "%",
+              "layer": "runtime",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "ops-m2-cicd",
+              "name": "CI/CD Pipeline",
+              "metricName": "Services with CI/CD pipeline",
+              "operator": "gte",
+              "target": 50,
+              "unit": "%",
+              "layer": "code",
+              "category": "efficiency",
+              "required": true
+            },
+            {
+              "id": "ops-m2-oncall",
+              "name": "On-Call Rotation",
+              "metricName": "On-call rotation documented",
+              "operator": "eq",
+              "target": 1,
+              "unit": "",
+              "layer": "support",
+              "category": "response",
+              "required": true
+            },
+            {
+              "id": "ops-m2-incidents-tracked",
+              "name": "Incidents Tracked",
+              "metricName": "Incidents logged in tracking system",
+              "operator": "eq",
+              "target": 100,
+              "unit": "%",
+              "layer": "support",
+              "category": "response",
+              "required": true
+            }
+          ],
+          "enablers": [
+            {
+              "id": "ops-m2-monitoring-deploy",
+              "name": "Deploy monitoring",
+              "description": "Implement uptime and basic health monitoring",
+              "type": "tooling",
+              "layer": "runtime",
+              "effort": "2 weeks",
+              "team": "SRE",
+              "status": "not_started",
+              "criteriaIds": ["ops-m2-monitoring"]
+            },
+            {
+              "id": "ops-m2-cicd-setup",
+              "name": "Set up CI/CD",
+              "description": "Implement basic CI/CD pipelines",
+              "type": "implementation",
+              "layer": "code",
+              "effort": "3 weeks",
+              "team": "Platform",
+              "status": "not_started",
+              "criteriaIds": ["ops-m2-cicd"]
+            },
+            {
+              "id": "ops-m2-oncall-setup",
+              "name": "Establish on-call",
+              "description": "Document on-call rotation and escalation",
+              "type": "process",
+              "layer": "support",
+              "effort": "1 week",
+              "team": "SRE",
+              "status": "not_started",
+              "criteriaIds": ["ops-m2-oncall"]
+            },
+            {
+              "id": "ops-m2-incident-tracking",
+              "name": "Implement incident tracking",
+              "description": "Set up incident tracking workflow",
+              "type": "process",
+              "layer": "support",
+              "effort": "1 week",
+              "team": "SRE",
+              "status": "not_started",
+              "criteriaIds": ["ops-m2-incidents-tracked"]
+            }
+          ]
+        },
+        {
+          "level": 3,
+          "name": "Defined",
+          "description": "Standardized CI/CD, SLOs defined, runbooks documented",
+          "criteria": [
+            {
+              "id": "ops-m3-cicd-coverage",
+              "name": "CI/CD Coverage",
+              "metricName": "Services with standardized CI/CD",
+              "operator": "eq",
+              "target": 100,
+              "unit": "%",
+              "layer": "code",
+              "category": "efficiency",
+              "required": true
+            },
+            {
+              "id": "ops-m3-slo-defined",
+              "name": "SLOs Defined",
+              "metricName": "Tier-1 services with SLOs",
+              "operator": "eq",
+              "target": 100,
+              "unit": "%",
+              "layer": "runtime",
+              "category": "reliability",
+              "required": true
+            },
+            {
+              "id": "ops-m3-runbooks",
+              "name": "Runbook Coverage",
+              "metricName": "Incidents with runbooks",
+              "operator": "gte",
+              "target": 80,
+              "unit": "%",
+              "layer": "support",
+              "category": "response",
+              "required": true
+            },
+            {
+              "id": "ops-m3-deploy-freq",
+              "name": "Deployment Frequency",
+              "metricName": "Deployments per week",
+              "operator": "gte",
+              "target": 1,
+              "unit": "per week",
+              "layer": "code",
+              "category": "efficiency",
+              "required": true
+            },
+            {
+              "id": "ops-m3-availability",
+              "name": "Service Availability",
+              "metricName": "Tier-1 service availability",
+              "operator": "gte",
+              "target": 99.5,
+              "unit": "%",
+              "layer": "runtime",
+              "category": "reliability",
+              "required": true
+            }
+          ],
+          "enablers": [
+            {
+              "id": "ops-m3-cicd-standardize",
+              "name": "Standardize CI/CD",
+              "description": "Implement consistent CI/CD across all services",
+              "type": "implementation",
+              "layer": "code",
+              "effort": "4 weeks",
+              "team": "Platform",
+              "status": "not_started",
+              "criteriaIds": ["ops-m3-cicd-coverage"],
+              "dependsOn": ["ops-m2-cicd-setup"]
+            },
+            {
+              "id": "ops-m3-slo-program",
+              "name": "Define SLOs",
+              "description": "Define SLOs for all tier-1 services",
+              "type": "process",
+              "layer": "runtime",
+              "effort": "3 weeks",
+              "team": "SRE",
+              "status": "not_started",
+              "criteriaIds": ["ops-m3-slo-defined", "ops-m3-availability"]
+            },
+            {
+              "id": "ops-m3-runbook-program",
+              "name": "Create runbooks",
+              "description": "Document runbooks for common incidents",
+              "type": "process",
+              "layer": "support",
+              "effort": "4 weeks",
+              "team": "SRE",
+              "status": "not_started",
+              "criteriaIds": ["ops-m3-runbooks"]
+            }
+          ]
+        },
+        {
+          "level": 4,
+          "name": "Managed",
+          "description": "Error budgets, DORA high performer, data-driven operations",
+          "criteria": [
+            {
+              "id": "ops-m4-deploy-freq",
+              "name": "Deployment Frequency",
+              "metricName": "Deployments per day",
+              "operator": "gte",
+              "target": 1,
+              "unit": "per day",
+              "layer": "code",
+              "category": "efficiency",
+              "required": true
+            },
+            {
+              "id": "ops-m4-lead-time",
+              "name": "Lead Time",
+              "metricName": "Lead time for changes",
+              "operator": "lte",
+              "target": 7,
+              "unit": "days",
+              "layer": "code",
+              "category": "efficiency",
+              "required": true
+            },
+            {
+              "id": "ops-m4-mttr",
+              "name": "MTTR",
+              "metricName": "Mean time to recovery",
+              "operator": "lte",
+              "target": 4,
+              "unit": "hours",
+              "layer": "runtime",
+              "category": "response",
+              "required": true
+            },
+            {
+              "id": "ops-m4-cfr",
+              "name": "Change Failure Rate",
+              "metricName": "Change failure rate",
+              "operator": "lte",
+              "target": 15,
+              "unit": "%",
+              "layer": "code",
+              "category": "reliability",
+              "required": true
+            },
+            {
+              "id": "ops-m4-availability",
+              "name": "Service Availability",
+              "metricName": "Tier-1 service availability",
+              "operator": "gte",
+              "target": 99.9,
+              "unit": "%",
+              "layer": "runtime",
+              "category": "reliability",
+              "required": true
+            },
+            {
+              "id": "ops-m4-error-budgets",
+              "name": "Error Budgets",
+              "metricName": "Services with error budget tracking",
+              "operator": "eq",
+              "target": 100,
+              "unit": "%",
+              "layer": "runtime",
+              "category": "reliability",
+              "required": true
+            }
+          ],
+          "enablers": [
+            {
+              "id": "ops-m4-error-budget-impl",
+              "name": "Implement error budgets",
+              "description": "Track and enforce error budgets for SLOs",
+              "type": "implementation",
+              "layer": "runtime",
+              "effort": "4 weeks",
+              "team": "SRE",
+              "status": "not_started",
+              "criteriaIds": ["ops-m4-error-budgets"],
+              "dependsOn": ["ops-m3-slo-program"]
+            },
+            {
+              "id": "ops-m4-dora-dashboard",
+              "name": "Implement DORA dashboard",
+              "description": "Track DORA metrics with dashboards",
+              "type": "implementation",
+              "layer": "code",
+              "effort": "3 weeks",
+              "team": "Platform",
+              "status": "not_started",
+              "criteriaIds": ["ops-m4-deploy-freq", "ops-m4-lead-time", "ops-m4-cfr"]
+            },
+            {
+              "id": "ops-m4-auto-rollback",
+              "name": "Implement auto-rollback",
+              "description": "Automated rollback on deployment failures",
+              "type": "implementation",
+              "layer": "runtime",
+              "effort": "3 weeks",
+              "team": "Platform",
+              "status": "not_started",
+              "criteriaIds": ["ops-m4-mttr", "ops-m4-cfr"]
+            }
+          ]
+        },
+        {
+          "level": 5,
+          "name": "Optimizing",
+          "description": "Elite DORA performance, self-healing, proactive operations",
+          "criteria": [
+            {
+              "id": "ops-m5-deploy-freq",
+              "name": "Deployment Frequency",
+              "metricName": "Deployments on-demand",
+              "operator": "gte",
+              "target": 5,
+              "unit": "per day",
+              "layer": "code",
+              "category": "efficiency",
+              "required": true
+            },
+            {
+              "id": "ops-m5-lead-time",
+              "name": "Lead Time",
+              "metricName": "Lead time for changes",
+              "operator": "lte",
+              "target": 1,
+              "unit": "hours",
+              "layer": "code",
+              "category": "efficiency",
+              "required": true
+            },
+            {
+              "id": "ops-m5-mttr",
+              "name": "MTTR",
+              "metricName": "Mean time to recovery",
+              "operator": "lte",
+              "target": 1,
+              "unit": "hours",
+              "layer": "runtime",
+              "category": "response",
+              "required": true
+            },
+            {
+              "id": "ops-m5-cfr",
+              "name": "Change Failure Rate",
+              "metricName": "Change failure rate",
+              "operator": "lte",
+              "target": 5,
+              "unit": "%",
+              "layer": "code",
+              "category": "reliability",
+              "required": true
+            },
+            {
+              "id": "ops-m5-self-healing",
+              "name": "Self-Healing Coverage",
+              "metricName": "Incidents auto-remediated",
+              "operator": "gte",
+              "target": 50,
+              "unit": "%",
+              "layer": "runtime",
+              "category": "response",
+              "required": true
+            },
+            {
+              "id": "ops-m5-availability",
+              "name": "Service Availability",
+              "metricName": "Tier-1 service availability",
+              "operator": "gte",
+              "target": 99.99,
+              "unit": "%",
+              "layer": "runtime",
+              "category": "reliability",
+              "required": true
+            }
+          ],
+          "enablers": [
+            {
+              "id": "ops-m5-self-healing-impl",
+              "name": "Implement self-healing",
+              "description": "Auto-remediation for common failure modes",
+              "type": "implementation",
+              "layer": "runtime",
+              "effort": "3 months",
+              "team": "SRE + Platform",
+              "status": "not_started",
+              "criteriaIds": ["ops-m5-self-healing", "ops-m5-mttr"]
+            },
+            {
+              "id": "ops-m5-chaos",
+              "name": "Chaos engineering program",
+              "description": "Regular chaos engineering exercises",
+              "type": "process",
+              "layer": "runtime",
+              "effort": "Ongoing",
+              "team": "SRE",
+              "status": "not_started",
+              "criteriaIds": ["ops-m5-availability"]
+            }
+          ]
+        }
+      ]
+    },
+    "quality": {
+      "name": "Quality",
+      "description": "Software quality, testing, and defect management maturity",
+      "owner": "QE Team",
+      "levels": [
+        {
+          "level": 1,
+          "name": "Reactive",
+          "description": "Ad-hoc testing, no automation, firefighting defects",
+          "criteria": [],
+          "enablers": []
+        },
+        {
+          "level": 2,
+          "name": "Basic",
+          "description": "Some unit tests, basic CI, defects tracked",
+          "criteria": [
+            {
+              "id": "qa-m2-unit-tests",
+              "name": "Unit Test Existence",
+              "metricName": "Repositories with unit tests",
+              "operator": "gte",
+              "target": 50,
+              "unit": "%",
+              "layer": "code",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "qa-m2-ci-tests",
+              "name": "CI Test Execution",
+              "metricName": "Pipelines running tests",
+              "operator": "gte",
+              "target": 50,
+              "unit": "%",
+              "layer": "code",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "qa-m2-defects-tracked",
+              "name": "Defects Tracked",
+              "metricName": "Defects logged in tracking system",
+              "operator": "eq",
+              "target": 100,
+              "unit": "%",
+              "layer": "code",
+              "category": "detection",
+              "required": true
+            }
+          ],
+          "enablers": [
+            {
+              "id": "qa-m2-test-framework",
+              "name": "Deploy test framework",
+              "description": "Establish unit testing framework and conventions",
+              "type": "tooling",
+              "layer": "code",
+              "effort": "2 weeks",
+              "team": "QE",
+              "status": "not_started",
+              "criteriaIds": ["qa-m2-unit-tests"]
+            },
+            {
+              "id": "qa-m2-ci-integration",
+              "name": "Integrate tests in CI",
+              "description": "Run tests automatically in CI pipeline",
+              "type": "implementation",
+              "layer": "code",
+              "effort": "1 week",
+              "team": "Platform",
+              "status": "not_started",
+              "criteriaIds": ["qa-m2-ci-tests"]
+            },
+            {
+              "id": "qa-m2-defect-workflow",
+              "name": "Implement defect tracking",
+              "description": "Set up defect tracking workflow",
+              "type": "process",
+              "layer": "code",
+              "effort": "1 week",
+              "team": "QE",
+              "status": "not_started",
+              "criteriaIds": ["qa-m2-defects-tracked"]
+            }
+          ]
+        },
+        {
+          "level": 3,
+          "name": "Defined",
+          "description": "Coverage targets, E2E tests, quality gates enforced",
+          "criteria": [
+            {
+              "id": "qa-m3-unit-coverage",
+              "name": "Unit Test Coverage",
+              "metricName": "Code coverage",
+              "operator": "gte",
+              "target": 70,
+              "unit": "%",
+              "layer": "code",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "qa-m3-e2e-coverage",
+              "name": "E2E Test Coverage",
+              "metricName": "Critical paths with E2E tests",
+              "operator": "gte",
+              "target": 80,
+              "unit": "%",
+              "layer": "runtime",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "qa-m3-quality-gates",
+              "name": "Quality Gates Active",
+              "metricName": "Pipelines with quality gates",
+              "operator": "eq",
+              "target": 100,
+              "unit": "%",
+              "layer": "code",
+              "category": "prevention",
+              "required": true
+            },
+            {
+              "id": "qa-m3-flaky-rate",
+              "name": "Flaky Test Rate",
+              "metricName": "Flaky test percentage",
+              "operator": "lte",
+              "target": 5,
+              "unit": "%",
+              "layer": "code",
+              "category": "reliability",
+              "required": true
+            },
+            {
+              "id": "qa-m3-test-pass-rate",
+              "name": "Test Pass Rate",
+              "metricName": "Test pass rate",
+              "operator": "gte",
+              "target": 98,
+              "unit": "%",
+              "layer": "code",
+              "category": "reliability",
+              "required": true
+            }
+          ],
+          "enablers": [
+            {
+              "id": "qa-m3-coverage-enforcement",
+              "name": "Enforce coverage targets",
+              "description": "Block merges below coverage threshold",
+              "type": "implementation",
+              "layer": "code",
+              "effort": "2 weeks",
+              "team": "Platform",
+              "status": "not_started",
+              "criteriaIds": ["qa-m3-unit-coverage", "qa-m3-quality-gates"]
+            },
+            {
+              "id": "qa-m3-e2e-framework",
+              "name": "Implement E2E testing",
+              "description": "Deploy E2E test framework and coverage",
+              "type": "implementation",
+              "layer": "runtime",
+              "effort": "4 weeks",
+              "team": "QE",
+              "status": "not_started",
+              "criteriaIds": ["qa-m3-e2e-coverage"]
+            },
+            {
+              "id": "qa-m3-flaky-elimination",
+              "name": "Eliminate flaky tests",
+              "description": "Identify and fix flaky tests",
+              "type": "process",
+              "layer": "code",
+              "effort": "3 weeks",
+              "team": "QE",
+              "status": "not_started",
+              "criteriaIds": ["qa-m3-flaky-rate", "qa-m3-test-pass-rate"]
+            }
+          ]
+        },
+        {
+          "level": 4,
+          "name": "Managed",
+          "description": "High coverage, performance testing, defect metrics tracked",
+          "criteria": [
+            {
+              "id": "qa-m4-unit-coverage",
+              "name": "Unit Test Coverage",
+              "metricName": "Code coverage",
+              "operator": "gte",
+              "target": 80,
+              "unit": "%",
+              "layer": "code",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "qa-m4-defect-density",
+              "name": "Defect Density",
+              "metricName": "Defects per KLOC",
+              "operator": "lte",
+              "target": 0.5,
+              "unit": "per KLOC",
+              "layer": "code",
+              "category": "reliability",
+              "required": true
+            },
+            {
+              "id": "qa-m4-escape-rate",
+              "name": "Defect Escape Rate",
+              "metricName": "Defects found in production",
+              "operator": "lte",
+              "target": 10,
+              "unit": "%",
+              "layer": "runtime",
+              "category": "prevention",
+              "required": true
+            },
+            {
+              "id": "qa-m4-perf-tests",
+              "name": "Performance Testing",
+              "metricName": "Services with perf tests",
+              "operator": "gte",
+              "target": 80,
+              "unit": "%",
+              "layer": "runtime",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "qa-m4-mttr-defects",
+              "name": "Defect MTTR",
+              "metricName": "Mean time to fix defects",
+              "operator": "lte",
+              "target": 5,
+              "unit": "days",
+              "layer": "code",
+              "category": "response",
+              "required": true
+            }
+          ],
+          "enablers": [
+            {
+              "id": "qa-m4-perf-framework",
+              "name": "Implement performance testing",
+              "description": "Deploy performance test framework",
+              "type": "implementation",
+              "layer": "runtime",
+              "effort": "4 weeks",
+              "team": "QE",
+              "status": "not_started",
+              "criteriaIds": ["qa-m4-perf-tests"]
+            },
+            {
+              "id": "qa-m4-quality-dashboard",
+              "name": "Quality metrics dashboard",
+              "description": "Track defect density, escape rate, MTTR",
+              "type": "implementation",
+              "layer": "code",
+              "effort": "2 weeks",
+              "team": "QE",
+              "status": "not_started",
+              "criteriaIds": ["qa-m4-defect-density", "qa-m4-escape-rate", "qa-m4-mttr-defects"]
+            }
+          ]
+        },
+        {
+          "level": 5,
+          "name": "Optimizing",
+          "description": "Continuous testing, predictive quality, near-zero escapes",
+          "criteria": [
+            {
+              "id": "qa-m5-coverage",
+              "name": "Test Coverage",
+              "metricName": "Code coverage",
+              "operator": "gte",
+              "target": 90,
+              "unit": "%",
+              "layer": "code",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "qa-m5-escape-rate",
+              "name": "Defect Escape Rate",
+              "metricName": "Defects found in production",
+              "operator": "lte",
+              "target": 2,
+              "unit": "%",
+              "layer": "runtime",
+              "category": "prevention",
+              "required": true
+            },
+            {
+              "id": "qa-m5-canary",
+              "name": "Canary Testing",
+              "metricName": "Deployments with canary testing",
+              "operator": "eq",
+              "target": 100,
+              "unit": "%",
+              "layer": "runtime",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "qa-m5-flaky-rate",
+              "name": "Flaky Test Rate",
+              "metricName": "Flaky test percentage",
+              "operator": "lte",
+              "target": 1,
+              "unit": "%",
+              "layer": "code",
+              "category": "reliability",
+              "required": true
+            }
+          ],
+          "enablers": [
+            {
+              "id": "qa-m5-canary-impl",
+              "name": "Implement canary testing",
+              "description": "Automated canary deployments with quality gates",
+              "type": "implementation",
+              "layer": "runtime",
+              "effort": "4 weeks",
+              "team": "Platform + QE",
+              "status": "not_started",
+              "criteriaIds": ["qa-m5-canary", "qa-m5-escape-rate"]
+            },
+            {
+              "id": "qa-m5-predictive",
+              "name": "Predictive quality analysis",
+              "description": "ML-based defect prediction",
+              "type": "implementation",
+              "layer": "code",
+              "effort": "3 months",
+              "team": "QE",
+              "status": "not_started",
+              "criteriaIds": ["qa-m5-escape-rate"]
+            }
+          ]
+        }
+      ]
+    },
+    "product": {
+      "name": "Product",
+      "description": "Product requirements, adoption, and customer success maturity",
+      "owner": "Product Team",
+      "levels": [
+        {
+          "level": 1,
+          "name": "Reactive",
+          "description": "Ad-hoc requirements, no analytics, guessing on adoption",
+          "criteria": [],
+          "enablers": []
+        },
+        {
+          "level": 2,
+          "name": "Basic",
+          "description": "Basic specs, some analytics, features tracked",
+          "criteria": [
+            {
+              "id": "prod-m2-specs",
+              "name": "Spec Documentation",
+              "metricName": "Features with specifications",
+              "operator": "gte",
+              "target": 50,
+              "unit": "%",
+              "layer": "requirements",
+              "category": "prevention",
+              "required": true
+            },
+            {
+              "id": "prod-m2-analytics",
+              "name": "Basic Analytics",
+              "metricName": "Analytics deployed",
+              "operator": "eq",
+              "target": 1,
+              "unit": "",
+              "layer": "adoption",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "prod-m2-feature-tracking",
+              "name": "Feature Tracking",
+              "metricName": "Features tracked in roadmap",
+              "operator": "eq",
+              "target": 100,
+              "unit": "%",
+              "layer": "requirements",
+              "category": "detection",
+              "required": true
+            }
+          ],
+          "enablers": [
+            {
+              "id": "prod-m2-spec-template",
+              "name": "Create spec template",
+              "description": "Establish product specification template",
+              "type": "process",
+              "layer": "requirements",
+              "effort": "1 week",
+              "team": "Product",
+              "status": "not_started",
+              "criteriaIds": ["prod-m2-specs"]
+            },
+            {
+              "id": "prod-m2-analytics-deploy",
+              "name": "Deploy analytics",
+              "description": "Implement product analytics platform",
+              "type": "tooling",
+              "layer": "adoption",
+              "effort": "3 weeks",
+              "team": "Product + Engineering",
+              "status": "not_started",
+              "criteriaIds": ["prod-m2-analytics"]
+            },
+            {
+              "id": "prod-m2-roadmap-tool",
+              "name": "Implement roadmap tracking",
+              "description": "Set up feature roadmap tracking",
+              "type": "tooling",
+              "layer": "requirements",
+              "effort": "1 week",
+              "team": "Product",
+              "status": "not_started",
+              "criteriaIds": ["prod-m2-feature-tracking"]
+            }
+          ]
+        },
+        {
+          "level": 3,
+          "name": "Defined",
+          "description": "Acceptance criteria, activation funnels, adoption tracked",
+          "criteria": [
+            {
+              "id": "prod-m3-acceptance-criteria",
+              "name": "Acceptance Criteria",
+              "metricName": "Features with acceptance criteria",
+              "operator": "gte",
+              "target": 90,
+              "unit": "%",
+              "layer": "requirements",
+              "category": "prevention",
+              "required": true
+            },
+            {
+              "id": "prod-m3-activation-tracked",
+              "name": "Activation Tracking",
+              "metricName": "Activation funnel instrumented",
+              "operator": "eq",
+              "target": 1,
+              "unit": "",
+              "layer": "adoption",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "prod-m3-feature-adoption",
+              "name": "Feature Adoption Tracking",
+              "metricName": "Features with adoption metrics",
+              "operator": "gte",
+              "target": 80,
+              "unit": "%",
+              "layer": "adoption",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "prod-m3-nps",
+              "name": "NPS Tracking",
+              "metricName": "NPS measured",
+              "operator": "eq",
+              "target": 1,
+              "unit": "",
+              "layer": "support",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "prod-m3-activation-rate",
+              "name": "Activation Rate",
+              "metricName": "User activation rate",
+              "operator": "gte",
+              "target": 60,
+              "unit": "%",
+              "layer": "adoption",
+              "category": "efficiency",
+              "required": true
+            }
+          ],
+          "enablers": [
+            {
+              "id": "prod-m3-acceptance-process",
+              "name": "Implement acceptance criteria process",
+              "description": "Require acceptance criteria for all features",
+              "type": "process",
+              "layer": "requirements",
+              "effort": "2 weeks",
+              "team": "Product",
+              "status": "not_started",
+              "criteriaIds": ["prod-m3-acceptance-criteria"]
+            },
+            {
+              "id": "prod-m3-funnel-instrumentation",
+              "name": "Instrument activation funnel",
+              "description": "Track user activation journey",
+              "type": "implementation",
+              "layer": "adoption",
+              "effort": "3 weeks",
+              "team": "Product + Engineering",
+              "status": "not_started",
+              "criteriaIds": ["prod-m3-activation-tracked", "prod-m3-activation-rate"]
+            },
+            {
+              "id": "prod-m3-nps-program",
+              "name": "Implement NPS tracking",
+              "description": "Set up NPS surveys and tracking",
+              "type": "tooling",
+              "layer": "support",
+              "effort": "2 weeks",
+              "team": "Product",
+              "status": "not_started",
+              "criteriaIds": ["prod-m3-nps"]
+            }
+          ]
+        },
+        {
+          "level": 4,
+          "name": "Managed",
+          "description": "A/B testing, data-driven decisions, high activation",
+          "criteria": [
+            {
+              "id": "prod-m4-ab-testing",
+              "name": "A/B Testing",
+              "metricName": "Features with A/B tests",
+              "operator": "gte",
+              "target": 50,
+              "unit": "%",
+              "layer": "adoption",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "prod-m4-activation-rate",
+              "name": "Activation Rate",
+              "metricName": "User activation rate",
+              "operator": "gte",
+              "target": 75,
+              "unit": "%",
+              "layer": "adoption",
+              "category": "efficiency",
+              "required": true
+            },
+            {
+              "id": "prod-m4-retention",
+              "name": "30-Day Retention",
+              "metricName": "30-day user retention",
+              "operator": "gte",
+              "target": 80,
+              "unit": "%",
+              "layer": "adoption",
+              "category": "reliability",
+              "required": true
+            },
+            {
+              "id": "prod-m4-churn",
+              "name": "Monthly Churn",
+              "metricName": "Monthly churn rate",
+              "operator": "lte",
+              "target": 3,
+              "unit": "%",
+              "layer": "adoption",
+              "category": "reliability",
+              "required": true
+            },
+            {
+              "id": "prod-m4-nps",
+              "name": "NPS Score",
+              "metricName": "Net Promoter Score",
+              "operator": "gte",
+              "target": 50,
+              "unit": "",
+              "layer": "support",
+              "category": "reliability",
+              "required": true
+            },
+            {
+              "id": "prod-m4-time-to-value",
+              "name": "Time to Value",
+              "metricName": "Time to first value",
+              "operator": "lte",
+              "target": 7,
+              "unit": "days",
+              "layer": "adoption",
+              "category": "efficiency",
+              "required": true
+            }
+          ],
+          "enablers": [
+            {
+              "id": "prod-m4-ab-platform",
+              "name": "Deploy A/B testing platform",
+              "description": "Implement experimentation infrastructure",
+              "type": "tooling",
+              "layer": "adoption",
+              "effort": "4 weeks",
+              "team": "Platform + Product",
+              "status": "not_started",
+              "criteriaIds": ["prod-m4-ab-testing"]
+            },
+            {
+              "id": "prod-m4-onboarding-optimize",
+              "name": "Optimize onboarding",
+              "description": "Improve activation funnel conversion",
+              "type": "implementation",
+              "layer": "adoption",
+              "effort": "6 weeks",
+              "team": "Product + Engineering",
+              "status": "not_started",
+              "criteriaIds": ["prod-m4-activation-rate", "prod-m4-time-to-value"]
+            },
+            {
+              "id": "prod-m4-retention-program",
+              "name": "Retention improvement program",
+              "description": "Analyze and improve retention drivers",
+              "type": "process",
+              "layer": "adoption",
+              "effort": "Ongoing",
+              "team": "Product",
+              "status": "not_started",
+              "criteriaIds": ["prod-m4-retention", "prod-m4-churn"]
+            }
+          ]
+        },
+        {
+          "level": 5,
+          "name": "Optimizing",
+          "description": "Personalization, predictive churn, continuous discovery",
+          "criteria": [
+            {
+              "id": "prod-m5-activation-rate",
+              "name": "Activation Rate",
+              "metricName": "User activation rate",
+              "operator": "gte",
+              "target": 85,
+              "unit": "%",
+              "layer": "adoption",
+              "category": "efficiency",
+              "required": true
+            },
+            {
+              "id": "prod-m5-churn",
+              "name": "Monthly Churn",
+              "metricName": "Monthly churn rate",
+              "operator": "lte",
+              "target": 2,
+              "unit": "%",
+              "layer": "adoption",
+              "category": "reliability",
+              "required": true
+            },
+            {
+              "id": "prod-m5-churn-prediction",
+              "name": "Churn Prediction",
+              "metricName": "Churn prediction accuracy",
+              "operator": "gte",
+              "target": 80,
+              "unit": "%",
+              "layer": "adoption",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "prod-m5-personalization",
+              "name": "Personalization",
+              "metricName": "Users with personalized experience",
+              "operator": "gte",
+              "target": 80,
+              "unit": "%",
+              "layer": "adoption",
+              "category": "efficiency",
+              "required": true
+            },
+            {
+              "id": "prod-m5-nps",
+              "name": "NPS Score",
+              "metricName": "Net Promoter Score",
+              "operator": "gte",
+              "target": 70,
+              "unit": "",
+              "layer": "support",
+              "category": "reliability",
+              "required": true
+            }
+          ],
+          "enablers": [
+            {
+              "id": "prod-m5-churn-model",
+              "name": "Implement churn prediction",
+              "description": "ML-based churn prediction and intervention",
+              "type": "implementation",
+              "layer": "adoption",
+              "effort": "3 months",
+              "team": "Data + Product",
+              "status": "not_started",
+              "criteriaIds": ["prod-m5-churn-prediction", "prod-m5-churn"]
+            },
+            {
+              "id": "prod-m5-personalization-impl",
+              "name": "Implement personalization",
+              "description": "Personalized user experiences",
+              "type": "implementation",
+              "layer": "adoption",
+              "effort": "3 months",
+              "team": "Engineering + Product",
+              "status": "not_started",
+              "criteriaIds": ["prod-m5-personalization", "prod-m5-activation-rate"]
+            }
+          ]
+        }
+      ]
+    },
+    "ai": {
+      "name": "AI",
+      "description": "AI adoption and integration maturity across all value streams",
+      "owner": "AI Center of Excellence",
+      "levels": [
+        {
+          "level": 1,
+          "name": "Reactive",
+          "description": "Ad-hoc AI usage, individual experiments, no governance",
+          "criteria": [],
+          "enablers": []
+        },
+        {
+          "level": 2,
+          "name": "Basic",
+          "description": "Approved AI tools, basic governance, initial training",
+          "criteria": [
+            {
+              "id": "ai-m2-tool-adoption",
+              "name": "AI Tool Adoption",
+              "description": "Percentage of teams using approved AI tools",
+              "metricName": "Teams with AI tools",
+              "operator": "gte",
+              "target": 50,
+              "unit": "%",
+              "layer": "engineering",
+              "category": "adoption",
+              "required": true
+            },
+            {
+              "id": "ai-m2-policy",
+              "name": "AI Usage Policy",
+              "description": "AI usage policy documented and communicated",
+              "metricName": "AI policy exists",
+              "operator": "eq",
+              "target": 1,
+              "unit": "",
+              "layer": "governance",
+              "category": "prevention",
+              "required": true
+            },
+            {
+              "id": "ai-m2-training",
+              "name": "AI Training Coverage",
+              "description": "Percentage of staff completed AI awareness training",
+              "metricName": "Staff with AI training",
+              "operator": "gte",
+              "target": 50,
+              "unit": "%",
+              "layer": "enablement",
+              "category": "efficiency",
+              "required": true
+            },
+            {
+              "id": "ai-m2-spend-tracked",
+              "name": "AI Spend Tracking",
+              "description": "AI tool spend is tracked and visible",
+              "metricName": "AI spend tracked",
+              "operator": "eq",
+              "target": 1,
+              "unit": "",
+              "layer": "governance",
+              "category": "detection",
+              "required": true
+            }
+          ],
+          "enablers": [
+            {
+              "id": "ai-m2-tool-selection",
+              "name": "Select and approve AI tools",
+              "description": "Evaluate and approve AI coding assistants and productivity tools",
+              "type": "process",
+              "layer": "governance",
+              "effort": "4 weeks",
+              "team": "AI CoE + Security",
+              "status": "not_started",
+              "criteriaIds": ["ai-m2-tool-adoption"]
+            },
+            {
+              "id": "ai-m2-policy-create",
+              "name": "Create AI usage policy",
+              "description": "Document acceptable use, data handling, and security requirements",
+              "type": "process",
+              "layer": "governance",
+              "effort": "2 weeks",
+              "team": "AI CoE + Legal",
+              "status": "not_started",
+              "criteriaIds": ["ai-m2-policy"]
+            },
+            {
+              "id": "ai-m2-training-program",
+              "name": "Deploy AI training program",
+              "description": "Create and deliver AI awareness and best practices training",
+              "type": "process",
+              "layer": "enablement",
+              "effort": "3 weeks",
+              "team": "AI CoE + L&D",
+              "status": "not_started",
+              "criteriaIds": ["ai-m2-training"]
+            },
+            {
+              "id": "ai-m2-cost-tracking",
+              "name": "Implement AI cost tracking",
+              "description": "Set up cost allocation and tracking for AI tools",
+              "type": "implementation",
+              "layer": "governance",
+              "effort": "1 week",
+              "team": "Finance + IT",
+              "status": "not_started",
+              "criteriaIds": ["ai-m2-spend-tracked"]
+            }
+          ]
+        },
+        {
+          "level": 3,
+          "name": "Defined",
+          "description": "Standardized AI tools, prompt libraries, quality guidelines",
+          "criteria": [
+            {
+              "id": "ai-m3-coding-assistant",
+              "name": "AI Coding Assistant Coverage",
+              "description": "Percentage of developers using AI coding assistants",
+              "metricName": "Developers with AI assistants",
+              "operator": "gte",
+              "target": 80,
+              "unit": "%",
+              "layer": "engineering",
+              "category": "adoption",
+              "required": true
+            },
+            {
+              "id": "ai-m3-prompt-library",
+              "name": "Prompt Library Established",
+              "description": "Shared prompt/template library for common tasks",
+              "metricName": "Prompt library exists",
+              "operator": "eq",
+              "target": 1,
+              "unit": "",
+              "layer": "enablement",
+              "category": "efficiency",
+              "required": true
+            },
+            {
+              "id": "ai-m3-code-review",
+              "name": "AI Code Review",
+              "description": "Percentage of PRs with AI-assisted review",
+              "metricName": "PRs with AI review",
+              "operator": "gte",
+              "target": 50,
+              "unit": "%",
+              "layer": "engineering",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "ai-m3-docs-generation",
+              "name": "AI Documentation",
+              "description": "Percentage of new docs with AI assistance",
+              "metricName": "Docs with AI assistance",
+              "operator": "gte",
+              "target": 50,
+              "unit": "%",
+              "layer": "engineering",
+              "category": "efficiency",
+              "required": true
+            },
+            {
+              "id": "ai-m3-quality-guidelines",
+              "name": "AI Quality Guidelines",
+              "description": "Guidelines for AI output review and validation",
+              "metricName": "AI quality guidelines exist",
+              "operator": "eq",
+              "target": 1,
+              "unit": "",
+              "layer": "governance",
+              "category": "prevention",
+              "required": true
+            },
+            {
+              "id": "ai-m3-support-automation",
+              "name": "AI Support Automation",
+              "description": "Percentage of support tickets with AI assistance",
+              "metricName": "Tickets with AI assistance",
+              "operator": "gte",
+              "target": 30,
+              "unit": "%",
+              "layer": "support",
+              "category": "efficiency",
+              "required": true
+            }
+          ],
+          "enablers": [
+            {
+              "id": "ai-m3-coding-rollout",
+              "name": "Roll out AI coding assistants",
+              "description": "Deploy AI coding assistants to all development teams",
+              "type": "implementation",
+              "layer": "engineering",
+              "effort": "4 weeks",
+              "team": "Platform + AI CoE",
+              "status": "not_started",
+              "criteriaIds": ["ai-m3-coding-assistant"],
+              "dependsOn": ["ai-m2-tool-selection"]
+            },
+            {
+              "id": "ai-m3-prompt-library-create",
+              "name": "Create prompt library",
+              "description": "Build shared repository of prompts and templates",
+              "type": "implementation",
+              "layer": "enablement",
+              "effort": "3 weeks",
+              "team": "AI CoE",
+              "status": "not_started",
+              "criteriaIds": ["ai-m3-prompt-library"]
+            },
+            {
+              "id": "ai-m3-ci-integration",
+              "name": "Integrate AI in CI/CD",
+              "description": "Add AI-powered code review to CI pipeline",
+              "type": "implementation",
+              "layer": "engineering",
+              "effort": "3 weeks",
+              "team": "Platform",
+              "status": "not_started",
+              "criteriaIds": ["ai-m3-code-review"]
+            },
+            {
+              "id": "ai-m3-quality-standards",
+              "name": "Define AI quality standards",
+              "description": "Create guidelines for reviewing and validating AI output",
+              "type": "process",
+              "layer": "governance",
+              "effort": "2 weeks",
+              "team": "AI CoE + QE",
+              "status": "not_started",
+              "criteriaIds": ["ai-m3-quality-guidelines"]
+            },
+            {
+              "id": "ai-m3-support-ai",
+              "name": "Deploy AI support tools",
+              "description": "Implement AI-assisted ticket routing and response",
+              "type": "implementation",
+              "layer": "support",
+              "effort": "6 weeks",
+              "team": "Support + AI CoE",
+              "status": "not_started",
+              "criteriaIds": ["ai-m3-support-automation"]
+            }
+          ]
+        },
+        {
+          "level": 4,
+          "name": "Managed",
+          "description": "AI integrated in workflows, ROI tracked, quality measured",
+          "criteria": [
+            {
+              "id": "ai-m4-roi-tracked",
+              "name": "AI ROI Tracking",
+              "description": "AI investment ROI measured and reported",
+              "metricName": "AI ROI tracked",
+              "operator": "eq",
+              "target": 1,
+              "unit": "",
+              "layer": "governance",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "ai-m4-productivity-gain",
+              "name": "AI Productivity Gain",
+              "description": "Measured productivity improvement from AI tools",
+              "metricName": "AI productivity improvement",
+              "operator": "gte",
+              "target": 20,
+              "unit": "%",
+              "layer": "engineering",
+              "category": "efficiency",
+              "required": true
+            },
+            {
+              "id": "ai-m4-test-generation",
+              "name": "AI Test Generation",
+              "description": "Percentage of test cases with AI assistance",
+              "metricName": "Tests with AI assistance",
+              "operator": "gte",
+              "target": 50,
+              "unit": "%",
+              "layer": "engineering",
+              "category": "efficiency",
+              "required": true
+            },
+            {
+              "id": "ai-m4-incident-ai",
+              "name": "AI Incident Response",
+              "description": "Percentage of incidents with AI-assisted diagnosis",
+              "metricName": "Incidents with AI diagnosis",
+              "operator": "gte",
+              "target": 50,
+              "unit": "%",
+              "layer": "operations",
+              "category": "response",
+              "required": true
+            },
+            {
+              "id": "ai-m4-security-ai",
+              "name": "AI Security Analysis",
+              "description": "AI-powered security scanning in pipelines",
+              "metricName": "Repos with AI security scan",
+              "operator": "gte",
+              "target": 80,
+              "unit": "%",
+              "layer": "security",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "ai-m4-support-resolution",
+              "name": "AI Support Resolution",
+              "description": "Percentage of tickets auto-resolved by AI",
+              "metricName": "Tickets auto-resolved",
+              "operator": "gte",
+              "target": 30,
+              "unit": "%",
+              "layer": "support",
+              "category": "efficiency",
+              "required": true
+            },
+            {
+              "id": "ai-m4-accuracy",
+              "name": "AI Output Accuracy",
+              "description": "Acceptance rate of AI-generated content",
+              "metricName": "AI output acceptance rate",
+              "operator": "gte",
+              "target": 80,
+              "unit": "%",
+              "layer": "engineering",
+              "category": "reliability",
+              "required": true
+            }
+          ],
+          "enablers": [
+            {
+              "id": "ai-m4-metrics-dashboard",
+              "name": "Deploy AI metrics dashboard",
+              "description": "Track AI usage, productivity, and ROI metrics",
+              "type": "implementation",
+              "layer": "governance",
+              "effort": "4 weeks",
+              "team": "AI CoE + Analytics",
+              "status": "not_started",
+              "criteriaIds": ["ai-m4-roi-tracked", "ai-m4-productivity-gain", "ai-m4-accuracy"]
+            },
+            {
+              "id": "ai-m4-test-ai",
+              "name": "Implement AI test generation",
+              "description": "Deploy AI-powered test case generation",
+              "type": "implementation",
+              "layer": "engineering",
+              "effort": "6 weeks",
+              "team": "QE + AI CoE",
+              "status": "not_started",
+              "criteriaIds": ["ai-m4-test-generation"]
+            },
+            {
+              "id": "ai-m4-aiops",
+              "name": "Deploy AIOps capabilities",
+              "description": "AI-powered incident detection and diagnosis",
+              "type": "implementation",
+              "layer": "operations",
+              "effort": "8 weeks",
+              "team": "SRE + AI CoE",
+              "status": "not_started",
+              "criteriaIds": ["ai-m4-incident-ai"]
+            },
+            {
+              "id": "ai-m4-security-ai-impl",
+              "name": "Deploy AI security scanning",
+              "description": "Integrate AI-powered vulnerability detection",
+              "type": "implementation",
+              "layer": "security",
+              "effort": "4 weeks",
+              "team": "Security + AI CoE",
+              "status": "not_started",
+              "criteriaIds": ["ai-m4-security-ai"]
+            }
+          ]
+        },
+        {
+          "level": 5,
+          "name": "Optimizing",
+          "description": "AI-native processes, autonomous agents, continuous innovation",
+          "criteria": [
+            {
+              "id": "ai-m5-autonomous-agents",
+              "name": "Autonomous AI Agents",
+              "description": "AI agents handling end-to-end workflows",
+              "metricName": "Workflows with AI agents",
+              "operator": "gte",
+              "target": 30,
+              "unit": "%",
+              "layer": "engineering",
+              "category": "efficiency",
+              "required": true
+            },
+            {
+              "id": "ai-m5-custom-models",
+              "name": "Custom AI Models",
+              "description": "Organization-specific fine-tuned models deployed",
+              "metricName": "Custom models in production",
+              "operator": "gte",
+              "target": 3,
+              "unit": "count",
+              "layer": "engineering",
+              "category": "efficiency",
+              "required": true
+            },
+            {
+              "id": "ai-m5-self-healing",
+              "name": "AI Self-Healing",
+              "description": "Percentage of incidents auto-remediated by AI",
+              "metricName": "Incidents auto-remediated",
+              "operator": "gte",
+              "target": 40,
+              "unit": "%",
+              "layer": "operations",
+              "category": "response",
+              "required": true
+            },
+            {
+              "id": "ai-m5-predictive",
+              "name": "AI Predictive Analytics",
+              "description": "AI-powered prediction for defects, churn, incidents",
+              "metricName": "Predictive models active",
+              "operator": "gte",
+              "target": 3,
+              "unit": "count",
+              "layer": "analytics",
+              "category": "detection",
+              "required": true
+            },
+            {
+              "id": "ai-m5-innovation-pipeline",
+              "name": "AI Innovation Pipeline",
+              "description": "Continuous AI experimentation and improvement",
+              "metricName": "AI experiments per quarter",
+              "operator": "gte",
+              "target": 5,
+              "unit": "count",
+              "layer": "governance",
+              "category": "efficiency",
+              "required": true
+            },
+            {
+              "id": "ai-m5-productivity-gain",
+              "name": "AI Productivity Gain",
+              "description": "Overall productivity improvement from AI",
+              "metricName": "AI productivity improvement",
+              "operator": "gte",
+              "target": 40,
+              "unit": "%",
+              "layer": "engineering",
+              "category": "efficiency",
+              "required": true
+            }
+          ],
+          "enablers": [
+            {
+              "id": "ai-m5-agent-platform",
+              "name": "Deploy AI agent platform",
+              "description": "Infrastructure for autonomous AI agents",
+              "type": "implementation",
+              "layer": "engineering",
+              "effort": "3 months",
+              "team": "Platform + AI CoE",
+              "status": "not_started",
+              "criteriaIds": ["ai-m5-autonomous-agents"]
+            },
+            {
+              "id": "ai-m5-model-ops",
+              "name": "Implement ModelOps",
+              "description": "MLOps pipeline for custom model training and deployment",
+              "type": "implementation",
+              "layer": "engineering",
+              "effort": "3 months",
+              "team": "ML Engineering + AI CoE",
+              "status": "not_started",
+              "criteriaIds": ["ai-m5-custom-models"]
+            },
+            {
+              "id": "ai-m5-self-healing-impl",
+              "name": "Implement AI self-healing",
+              "description": "Autonomous incident detection and remediation",
+              "type": "implementation",
+              "layer": "operations",
+              "effort": "3 months",
+              "team": "SRE + AI CoE",
+              "status": "not_started",
+              "criteriaIds": ["ai-m5-self-healing"],
+              "dependsOn": ["ai-m4-aiops"]
+            },
+            {
+              "id": "ai-m5-innovation-program",
+              "name": "Establish AI innovation program",
+              "description": "Continuous experimentation and improvement process",
+              "type": "process",
+              "layer": "governance",
+              "effort": "Ongoing",
+              "team": "AI CoE",
+              "status": "not_started",
+              "criteriaIds": ["ai-m5-innovation-pipeline"]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "assessments": {
+    "security": {
+      "domain": "security",
+      "assessedAt": "2026-01-15",
+      "assessedBy": "Security Team",
+      "currentLevel": 2,
+      "targetLevel": 4,
+      "criteriaValues": {
+        "sec-m2-sast-coverage": 75,
+        "sec-m2-sca-coverage": 80,
+        "sec-m2-vulns-tracked": 100,
+        "sec-m2-incident-process": 1,
+        "sec-m3-sast-ci": 60,
+        "sec-m3-gates-active": 40,
+        "sec-m3-secrets-zero": 3,
+        "sec-m3-critical-zero": 5,
+        "sec-m3-cloud-posture": 72,
+        "sec-m4-mttr-critical": 14,
+        "sec-m4-detection-coverage": 55,
+        "sec-m4-detection-latency": 300,
+        "sec-m4-pentest": 60
+      },
+      "enablerStatus": {
+        "sec-m2-deploy-sast": "completed",
+        "sec-m2-deploy-sca": "completed",
+        "sec-m2-vuln-tracking": "completed",
+        "sec-m2-incident-runbook": "completed",
+        "sec-m3-ci-integration": "in_progress",
+        "sec-m3-security-gates": "not_started",
+        "sec-m3-secrets-scanning": "in_progress",
+        "sec-m3-cspm": "not_started"
+      }
+    },
+    "operational-excellence": {
+      "domain": "operational-excellence",
+      "assessedAt": "2026-01-15",
+      "assessedBy": "SRE Team",
+      "currentLevel": 3,
+      "targetLevel": 4,
+      "criteriaValues": {
+        "ops-m2-monitoring": 100,
+        "ops-m2-cicd": 100,
+        "ops-m2-oncall": 1,
+        "ops-m2-incidents-tracked": 100,
+        "ops-m3-cicd-coverage": 95,
+        "ops-m3-slo-defined": 80,
+        "ops-m3-runbooks": 75,
+        "ops-m3-deploy-freq": 3,
+        "ops-m3-availability": 99.7,
+        "ops-m4-deploy-freq": 0.5,
+        "ops-m4-lead-time": 14,
+        "ops-m4-mttr": 6,
+        "ops-m4-cfr": 18,
+        "ops-m4-availability": 99.7,
+        "ops-m4-error-budgets": 40
+      },
+      "enablerStatus": {
+        "ops-m2-monitoring-deploy": "completed",
+        "ops-m2-cicd-setup": "completed",
+        "ops-m2-oncall-setup": "completed",
+        "ops-m2-incident-tracking": "completed",
+        "ops-m3-cicd-standardize": "completed",
+        "ops-m3-slo-program": "in_progress",
+        "ops-m3-runbook-program": "in_progress",
+        "ops-m4-error-budget-impl": "not_started",
+        "ops-m4-dora-dashboard": "in_progress",
+        "ops-m4-auto-rollback": "not_started"
+      }
+    },
+    "quality": {
+      "domain": "quality",
+      "assessedAt": "2026-01-15",
+      "assessedBy": "QE Team",
+      "currentLevel": 2,
+      "targetLevel": 4,
+      "criteriaValues": {
+        "qa-m2-unit-tests": 90,
+        "qa-m2-ci-tests": 85,
+        "qa-m2-defects-tracked": 100,
+        "qa-m3-unit-coverage": 68,
+        "qa-m3-e2e-coverage": 55,
+        "qa-m3-quality-gates": 60,
+        "qa-m3-flaky-rate": 8,
+        "qa-m3-test-pass-rate": 96,
+        "qa-m4-unit-coverage": 68,
+        "qa-m4-defect-density": 0.8,
+        "qa-m4-escape-rate": 15,
+        "qa-m4-perf-tests": 30,
+        "qa-m4-mttr-defects": 8
+      },
+      "enablerStatus": {
+        "qa-m2-test-framework": "completed",
+        "qa-m2-ci-integration": "completed",
+        "qa-m2-defect-workflow": "completed",
+        "qa-m3-coverage-enforcement": "in_progress",
+        "qa-m3-e2e-framework": "in_progress",
+        "qa-m3-flaky-elimination": "not_started"
+      }
+    },
+    "product": {
+      "domain": "product",
+      "assessedAt": "2026-01-15",
+      "assessedBy": "Product Team",
+      "currentLevel": 2,
+      "targetLevel": 4,
+      "criteriaValues": {
+        "prod-m2-specs": 70,
+        "prod-m2-analytics": 1,
+        "prod-m2-feature-tracking": 100,
+        "prod-m3-acceptance-criteria": 65,
+        "prod-m3-activation-tracked": 1,
+        "prod-m3-feature-adoption": 50,
+        "prod-m3-nps": 1,
+        "prod-m3-activation-rate": 55,
+        "prod-m4-ab-testing": 20,
+        "prod-m4-activation-rate": 55,
+        "prod-m4-retention": 72,
+        "prod-m4-churn": 4.5,
+        "prod-m4-nps": 42,
+        "prod-m4-time-to-value": 14
+      },
+      "enablerStatus": {
+        "prod-m2-spec-template": "completed",
+        "prod-m2-analytics-deploy": "completed",
+        "prod-m2-roadmap-tool": "completed",
+        "prod-m3-acceptance-process": "in_progress",
+        "prod-m3-funnel-instrumentation": "completed",
+        "prod-m3-nps-program": "completed",
+        "prod-m4-ab-platform": "not_started",
+        "prod-m4-onboarding-optimize": "not_started",
+        "prod-m4-retention-program": "not_started"
+      }
+    },
+    "ai": {
+      "domain": "ai",
+      "assessedAt": "2026-01-15",
+      "assessedBy": "AI Center of Excellence",
+      "currentLevel": 2,
+      "targetLevel": 4,
+      "criteriaValues": {
+        "ai-m2-tool-adoption": 60,
+        "ai-m2-policy": 1,
+        "ai-m2-training": 45,
+        "ai-m2-spend-tracked": 1,
+        "ai-m3-coding-assistant": 55,
+        "ai-m3-prompt-library": 0,
+        "ai-m3-code-review": 20,
+        "ai-m3-docs-generation": 30,
+        "ai-m3-quality-guidelines": 0,
+        "ai-m3-support-automation": 15,
+        "ai-m4-roi-tracked": 0,
+        "ai-m4-productivity-gain": 15,
+        "ai-m4-test-generation": 10,
+        "ai-m4-incident-ai": 5,
+        "ai-m4-security-ai": 25,
+        "ai-m4-support-resolution": 10,
+        "ai-m4-accuracy": 75
+      },
+      "enablerStatus": {
+        "ai-m2-tool-selection": "completed",
+        "ai-m2-policy-create": "completed",
+        "ai-m2-training-program": "in_progress",
+        "ai-m2-cost-tracking": "completed",
+        "ai-m3-coding-rollout": "in_progress",
+        "ai-m3-prompt-library-create": "not_started",
+        "ai-m3-ci-integration": "not_started",
+        "ai-m3-quality-standards": "not_started",
+        "ai-m3-support-ai": "not_started"
+      }
+    }
+  }
+}

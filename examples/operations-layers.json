@@ -14,6 +14,14 @@
   ],
   "layers": [
     {
+      "id": "requirements",
+      "name": "Requirements",
+      "description": "Product ideation, specifications, and design",
+      "signals": {
+        "traffic": "metric-req-throughput"
+      }
+    },
+    {
       "id": "code",
       "name": "Code",
       "description": "Application code, libraries, and dependencies",
@@ -38,6 +46,25 @@
         "traffic": "metric-runtime-rps",
         "errors": "metric-runtime-errors",
         "saturation": "metric-runtime-cpu"
+      }
+    },
+    {
+      "id": "adoption",
+      "name": "Adoption",
+      "description": "Product analytics, user engagement, and self-service",
+      "signals": {
+        "traffic": "metric-adoption-dau",
+        "errors": "metric-adoption-churn"
+      }
+    },
+    {
+      "id": "support",
+      "name": "Support",
+      "description": "Customer support, incident management, and escalations",
+      "signals": {
+        "latency": "metric-support-resolution-time",
+        "traffic": "metric-support-ticket-volume",
+        "errors": "metric-support-escalation-rate"
       }
     }
   ],
@@ -169,6 +196,163 @@
       "baseline": 70,
       "current": 45,
       "target": 60
+    },
+    {
+      "id": "metric-req-throughput",
+      "name": "Requirements Throughput",
+      "description": "Number of requirements completed per sprint",
+      "domain": "operations",
+      "stage": "design",
+      "category": "efficiency",
+      "layer": "requirements",
+      "metricType": "count",
+      "trendDirection": "higher_better",
+      "unit": "reqs/sprint",
+      "baseline": 8,
+      "current": 12,
+      "target": 15
+    },
+    {
+      "id": "metric-req-clarity",
+      "name": "Requirements Clarity Score",
+      "description": "Percentage of requirements with acceptance criteria",
+      "domain": "operations",
+      "stage": "design",
+      "category": "quality",
+      "layer": "requirements",
+      "metricType": "rate",
+      "trendDirection": "higher_better",
+      "unit": "%",
+      "baseline": 60,
+      "current": 85,
+      "target": 95
+    },
+    {
+      "id": "metric-adoption-dau",
+      "name": "Daily Active Users",
+      "description": "Number of daily active users",
+      "domain": "operations",
+      "stage": "runtime",
+      "category": "efficiency",
+      "layer": "adoption",
+      "metricType": "count",
+      "trendDirection": "higher_better",
+      "baseline": 1000,
+      "current": 2500,
+      "target": 5000
+    },
+    {
+      "id": "metric-adoption-activation",
+      "name": "User Activation Rate",
+      "description": "Percentage of new users completing activation",
+      "domain": "operations",
+      "stage": "runtime",
+      "category": "reliability",
+      "layer": "adoption",
+      "metricType": "rate",
+      "trendDirection": "higher_better",
+      "unit": "%",
+      "baseline": 40,
+      "current": 65,
+      "target": 80,
+      "slo": {
+        "target": ">=80%",
+        "operator": "gte",
+        "value": 80,
+        "window": "30d"
+      }
+    },
+    {
+      "id": "metric-adoption-churn",
+      "name": "Monthly Churn Rate",
+      "description": "Percentage of users churning per month",
+      "domain": "operations",
+      "stage": "runtime",
+      "category": "reliability",
+      "layer": "adoption",
+      "metricType": "rate",
+      "trendDirection": "lower_better",
+      "unit": "%",
+      "baseline": 8.0,
+      "current": 3.5,
+      "target": 2.0,
+      "slo": {
+        "target": "<=2%",
+        "operator": "lte",
+        "value": 2.0,
+        "window": "30d"
+      }
+    },
+    {
+      "id": "metric-support-resolution-time",
+      "name": "Ticket Resolution Time",
+      "description": "Average time to resolve support tickets",
+      "domain": "operations",
+      "stage": "response",
+      "category": "reliability",
+      "layer": "support",
+      "metricType": "latency",
+      "trendDirection": "lower_better",
+      "unit": "hours",
+      "baseline": 48,
+      "current": 12,
+      "target": 8,
+      "slo": {
+        "target": "<=8h",
+        "operator": "lte",
+        "value": 8,
+        "window": "7d"
+      }
+    },
+    {
+      "id": "metric-support-ticket-volume",
+      "name": "Support Ticket Volume",
+      "description": "Number of support tickets per day",
+      "domain": "operations",
+      "stage": "runtime",
+      "category": "efficiency",
+      "layer": "support",
+      "metricType": "count",
+      "unit": "tickets/day",
+      "baseline": 100,
+      "current": 45,
+      "target": 30
+    },
+    {
+      "id": "metric-support-escalation-rate",
+      "name": "Escalation Rate",
+      "description": "Percentage of tickets requiring escalation",
+      "domain": "operations",
+      "stage": "response",
+      "category": "reliability",
+      "layer": "support",
+      "metricType": "rate",
+      "trendDirection": "lower_better",
+      "unit": "%",
+      "baseline": 25,
+      "current": 10,
+      "target": 5,
+      "slo": {
+        "target": "<=5%",
+        "operator": "lte",
+        "value": 5,
+        "window": "30d"
+      }
+    },
+    {
+      "id": "metric-support-csat",
+      "name": "Customer Satisfaction",
+      "description": "Customer satisfaction score from support interactions",
+      "domain": "operations",
+      "stage": "response",
+      "category": "quality",
+      "layer": "support",
+      "metricType": "score",
+      "trendDirection": "higher_better",
+      "unit": "/5",
+      "baseline": 3.5,
+      "current": 4.2,
+      "target": 4.5
     }
   ]
 }

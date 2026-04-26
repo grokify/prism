@@ -24,6 +24,11 @@
   ],
   "layers": [
     {
+      "id": "requirements",
+      "name": "Requirements",
+      "description": "Product ideation, specifications, and design"
+    },
+    {
       "id": "code",
       "name": "Code",
       "description": "Application code and dependencies"
@@ -37,6 +42,16 @@
       "id": "runtime",
       "name": "Runtime",
       "description": "Running services and workloads"
+    },
+    {
+      "id": "adoption",
+      "name": "Adoption",
+      "description": "Product analytics, user engagement, and self-service"
+    },
+    {
+      "id": "support",
+      "name": "Support",
+      "description": "Customer support, incident management, and escalations"
     }
   ],
   "teams": [
@@ -88,6 +103,26 @@
       "serviceIds": ["users-api"],
       "owner": "Diana Prince",
       "slack": "#users"
+    },
+    {
+      "id": "product-team",
+      "name": "Product Team",
+      "description": "Owns product requirements and adoption metrics",
+      "type": "stream_aligned",
+      "layerAccountability": ["requirements", "adoption"],
+      "serviceIds": ["product-analytics"],
+      "owner": "Eve Wilson",
+      "slack": "#product"
+    },
+    {
+      "id": "support-team",
+      "name": "Customer Support",
+      "description": "Handles customer support and escalations",
+      "type": "stream_aligned",
+      "layerAccountability": ["support"],
+      "serviceIds": ["support-portal", "ticketing-system"],
+      "owner": "Frank Miller",
+      "slack": "#support"
     }
   ],
   "services": [
@@ -133,6 +168,32 @@
       "layerId": "runtime",
       "tier": "tier1",
       "repository": "https://github.com/example/users-api"
+    },
+    {
+      "id": "product-analytics",
+      "name": "Product Analytics",
+      "description": "User engagement and adoption tracking",
+      "ownerTeamId": "product-team",
+      "layerId": "adoption",
+      "tier": "tier2",
+      "metricIds": ["metric-feature-adoption", "metric-user-activation"]
+    },
+    {
+      "id": "support-portal",
+      "name": "Support Portal",
+      "description": "Customer-facing support portal",
+      "ownerTeamId": "support-team",
+      "layerId": "support",
+      "tier": "tier2"
+    },
+    {
+      "id": "ticketing-system",
+      "name": "Ticketing System",
+      "description": "Internal ticket management system",
+      "ownerTeamId": "support-team",
+      "layerId": "support",
+      "tier": "tier2",
+      "metricIds": ["metric-ticket-resolution", "metric-first-contact-resolution"]
     }
   ],
   "metrics": [
@@ -213,6 +274,102 @@
       "current": 82,
       "target": 80,
       "owner": "QE Team"
+    },
+    {
+      "id": "metric-req-completion",
+      "name": "Requirements Completion Rate",
+      "description": "Percentage of requirements completed on time",
+      "domain": "operations",
+      "stage": "design",
+      "category": "reliability",
+      "layer": "requirements",
+      "metricType": "rate",
+      "trendDirection": "higher_better",
+      "unit": "%",
+      "baseline": 70,
+      "current": 85,
+      "target": 90,
+      "owner": "Product Team"
+    },
+    {
+      "id": "metric-feature-adoption",
+      "name": "Feature Adoption Rate",
+      "description": "Percentage of users adopting new features within 30 days",
+      "domain": "operations",
+      "stage": "runtime",
+      "category": "efficiency",
+      "layer": "adoption",
+      "serviceId": "product-analytics",
+      "metricType": "rate",
+      "trendDirection": "higher_better",
+      "unit": "%",
+      "baseline": 20,
+      "current": 45,
+      "target": 60,
+      "owner": "Product Team"
+    },
+    {
+      "id": "metric-user-activation",
+      "name": "User Activation Rate",
+      "description": "Percentage of new users completing activation flow",
+      "domain": "operations",
+      "stage": "runtime",
+      "category": "reliability",
+      "layer": "adoption",
+      "serviceId": "product-analytics",
+      "metricType": "rate",
+      "trendDirection": "higher_better",
+      "unit": "%",
+      "baseline": 50,
+      "current": 72,
+      "target": 85,
+      "slo": {
+        "target": ">=85%",
+        "operator": "gte",
+        "value": 85,
+        "window": "30d"
+      },
+      "owner": "Product Team"
+    },
+    {
+      "id": "metric-ticket-resolution",
+      "name": "Ticket Resolution Time",
+      "description": "Average time to resolve support tickets",
+      "domain": "operations",
+      "stage": "response",
+      "category": "reliability",
+      "layer": "support",
+      "serviceId": "ticketing-system",
+      "metricType": "latency",
+      "trendDirection": "lower_better",
+      "unit": "hours",
+      "baseline": 24,
+      "current": 8,
+      "target": 4,
+      "slo": {
+        "target": "<=4h",
+        "operator": "lte",
+        "value": 4,
+        "window": "7d"
+      },
+      "owner": "Support Team"
+    },
+    {
+      "id": "metric-first-contact-resolution",
+      "name": "First Contact Resolution",
+      "description": "Percentage of tickets resolved on first contact",
+      "domain": "operations",
+      "stage": "response",
+      "category": "efficiency",
+      "layer": "support",
+      "serviceId": "ticketing-system",
+      "metricType": "rate",
+      "trendDirection": "higher_better",
+      "unit": "%",
+      "baseline": 50,
+      "current": 68,
+      "target": 75,
+      "owner": "Support Team"
     }
   ]
 }
