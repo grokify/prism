@@ -7,6 +7,79 @@
   "maintainers": ["grokify"],
   "releases": [
     {
+      "version": "v0.3.0",
+      "date": "2026-04-26",
+      "highlights": [
+        { "description": "Extended value stream layers: requirements, code, infra, runtime, adoption, support" },
+        { "description": "Quality domain with ISO 25010-aligned metrics" },
+        { "description": "Team Topologies support with stream-aligned, platform, enabling, and overlay teams" },
+        { "description": "Analysis package for gap detection and initiative recommendations" },
+        { "description": "Export to structured-plan formats (OKR, V2MOM, Roadmap)" },
+        { "description": "Developer documentation for open source contributors" }
+      ],
+      "added": [
+        { "description": "Quality domain constant for code quality and testing metrics", "commit": "c64f926" },
+        { "description": "Extended Layer constants: requirements, code, infra, runtime, adoption, support", "commit": "3755373" },
+        { "description": "Layer type with ID, name, description, and owner", "commit": "c64f926" },
+        { "description": "Team type with Team Topologies patterns (stream_aligned, platform, enabling, overlay)", "commit": "c64f926" },
+        { "description": "Service type with tier, owner team, layer, and metric associations", "commit": "c64f926" },
+        { "description": "analysis/ package with Analyze() for comprehensive document analysis", "commit": "d2c8d4f" },
+        { "description": "Gap detection: maturity gaps, SLO gaps, coverage gaps, initiative gaps", "commit": "d2c8d4f" },
+        { "description": "Recommendation engine for initiative suggestions", "commit": "d2c8d4f" },
+        { "description": "export/ package for structured-plan format conversion", "commit": "88ca9f7" },
+        { "description": "ConvertToOKR() exports goals as OKR objectives with SLO key results", "commit": "88ca9f7" },
+        { "description": "ConvertToV2MOM() exports to Salesforce V2MOM format", "commit": "88ca9f7" },
+        { "description": "ConvertToRoadmap() exports phases as roadmap with deliverables", "commit": "88ca9f7" },
+        { "description": "maturity/ package for standalone maturity model specs", "commit": "679fe10" },
+        { "description": "Spec type with multi-domain maturity models and KPI thresholds", "commit": "679fe10" },
+        { "description": "Criterion and Enabler types for level requirements and tasks", "commit": "679fe10" },
+        { "description": "XLSX export for maturity model spreadsheets", "commit": "679fe10" },
+        { "description": "Marp export for maturity model presentations", "commit": "679fe10" },
+        { "description": "output/ package with multi-format Formatter", "commit": "3c1a425" },
+        { "description": "TOON format (Token-Optimized Object Notation) for LLM efficiency", "commit": "3c1a425" },
+        { "description": "TableData and DetailData types for structured output", "commit": "3c1a425" },
+        { "description": "scaffold/ package for document templates", "commit": "2da8bcc" },
+        { "description": "NewDocument() creates documents with specified domains", "commit": "2da8bcc" },
+        { "description": "OperationsMetrics() and SecurityMetrics() example generators", "commit": "2da8bcc" },
+        { "description": "`prism layer list` and `prism layer show` commands", "commit": "325d697" },
+        { "description": "`prism team list` and `prism team show` commands", "commit": "325d697" },
+        { "description": "`prism service list` and `prism service show` commands", "commit": "325d697" },
+        { "description": "`prism analyze` command with gap detection and LLM prompt generation", "commit": "79b05da" },
+        { "description": "`prism export okr` command for OKR document export", "commit": "79b05da" },
+        { "description": "`prism export v2mom` command for V2MOM document export", "commit": "79b05da" },
+        { "description": "`prism export roadmap` command for roadmap document export", "commit": "79b05da" },
+        { "description": "`prism initiative list` and `prism initiative show` commands", "commit": "79b05da" },
+        { "description": "`prism format` command for document reformatting", "commit": "79b05da" }
+      ],
+      "changed": [
+        { "description": "PRISMDocument extended with Layers, Teams, Services arrays", "commit": "c64f926" },
+        { "description": "Metric type extended with layerId and serviceId references", "commit": "3755373" },
+        { "description": "Score calculation updated to handle sparse data gracefully", "commit": "3755373" },
+        { "description": "JSON Schema regenerated with new types", "commit": "a4e4331" }
+      ],
+      "documentation": [
+        { "description": "Developer guide with architecture and contributing docs", "commit": "16224e2" },
+        { "description": "Concepts section with layers, teams, services, and organizational model", "commit": "865a675" },
+        { "description": "Operations management documentation with golden signals", "commit": "5697da5" },
+        { "description": "CLI reference for all new commands", "commit": "a16a5e2" },
+        { "description": "Design docs reorganized into docs/design/maturity/ directory", "commit": "1cff605" },
+        { "description": "Structured-plan integration documentation", "commit": "a16a5e2" },
+        { "description": "Maturity strategies and project scoring concepts", "commit": "a16a5e2" }
+      ],
+      "tests": [
+        { "description": "CLI tests for layer, team, service commands", "commit": "24949a8" },
+        { "description": "Score calculation tests with sparse data", "commit": "24949a8" },
+        { "description": "Analysis package unit tests", "commit": "d2c8d4f" },
+        { "description": "Export package unit tests for OKR, V2MOM, Roadmap", "commit": "88ca9f7" },
+        { "description": "CLI integration tests", "commit": "24949a8" }
+      ],
+      "infrastructure": [
+        { "description": "Updated dependencies: echartify v0.2.0, structured-plan v0.10.0, dashforge v0.2.0, omniframe v0.1.0", "commit": "9aeceb2" },
+        { "description": "Example maturity models for operations, security, product, AI domains", "commit": "ebf6c8d" },
+        { "description": "Updated .gitignore for planning docs and generated files", "commit": "92483b6" }
+      ]
+    },
+    {
       "version": "v0.2.0",
       "date": "2026-04-18",
       "highlights": [
