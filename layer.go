@@ -19,9 +19,14 @@ type GoldenSignal struct {
 	Saturation string `json:"saturation,omitempty"` // Resource utilization metric ID
 }
 
-// DefaultLayers returns the default layer definitions.
+// DefaultLayers returns the default layer definitions in value stream order.
 func DefaultLayers() []LayerDef {
 	return []LayerDef{
+		{
+			ID:          LayerRequirements,
+			Name:        "Requirements",
+			Description: "Product ideation, specifications, and design",
+		},
 		{
 			ID:          LayerCode,
 			Name:        "Code",
@@ -36,6 +41,16 @@ func DefaultLayers() []LayerDef {
 			ID:          LayerRuntime,
 			Name:        "Runtime",
 			Description: "Running services, containers, and workloads",
+		},
+		{
+			ID:          LayerAdoption,
+			Name:        "Adoption",
+			Description: "Product analytics, user engagement, and self-service",
+		},
+		{
+			ID:          LayerSupport,
+			Name:        "Support",
+			Description: "Customer support, incident management, and escalations",
 		},
 	}
 }

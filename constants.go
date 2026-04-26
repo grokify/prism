@@ -12,16 +12,26 @@ func AllDomains() []string {
 	return []string{DomainSecurity, DomainOperations, DomainQuality}
 }
 
-// Layer constants represent ownership boundaries in the stack.
+// Layer constants represent value stream phases from ideation to support.
 const (
-	LayerCode    = "code"
-	LayerInfra   = "infra"
-	LayerRuntime = "runtime"
+	LayerRequirements = "requirements"
+	LayerCode         = "code"
+	LayerInfra        = "infra"
+	LayerRuntime      = "runtime"
+	LayerAdoption     = "adoption"
+	LayerSupport      = "support"
 )
 
-// AllLayers returns all valid layer values.
+// AllLayers returns all valid layer values in value stream order.
 func AllLayers() []string {
-	return []string{LayerCode, LayerInfra, LayerRuntime}
+	return []string{
+		LayerRequirements,
+		LayerCode,
+		LayerInfra,
+		LayerRuntime,
+		LayerAdoption,
+		LayerSupport,
+	}
 }
 
 // QualityVertical constants based on ISO 25010 quality characteristics.

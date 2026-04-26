@@ -1,5 +1,5 @@
-// Package prism provides the PRISM (Proactive Reliability & Security Maturity Model)
-// framework for B2B SaaS health metrics combining SLOs, DMAIC, OKRs, and maturity modeling.
+// Package prism provides the PRISM (Platform for Reliability, Improvement, and Strategic Maturity)
+// framework for COO-level organizational health monitoring combining SLOs, maturity modeling, and OKRs.
 package prism
 
 import "time"

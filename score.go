@@ -1,5 +1,7 @@
 package prism
 
+import "strings"
+
 // PRISMScore represents the composite PRISM score for a document.
 type PRISMScore struct {
 	Overall            float64     `json:"overall"`
@@ -46,14 +48,33 @@ type CellScore struct {
 // The awareness multiplier is applied after normalization:
 //
 //	Overall = BaseScore × AwarenessScore
+//
+// # Sparse Data Handling
+//
+// By default, SkipEmptyCells is true, which means cells with no metrics AND
+// no maturity data are excluded from the weighted average. This prevents
+// sparse data from unfairly penalizing the score.
+//
+// Set SkipEmptyCells to false to include all cells (original behavior).
+//
+// # Goal-Based Maturity
+//
+// Set UseGoalMaturity to true to derive maturity scores from goals instead
+// of the global maturity model. This is useful when goals have maturity
+// levels defined but the global maturity cells are empty.
 type ScoreConfig struct {
 	MaturityWeight    float64            `json:"maturityWeight"`
 	PerformanceWeight float64            `json:"performanceWeight"`
 	StageWeights      map[string]float64 `json:"stageWeights"`
 	DomainWeights     map[string]float64 `json:"domainWeights"`
+	SkipEmptyCells    bool               `json:"skipEmptyCells"`  // Skip cells with no data (default: true)
+	UseGoalMaturity   bool               `json:"useGoalMaturity"` // Use goal maturity instead of global cells
+	ScopedDomains     []string           `json:"scopedDomains"`   // Only score these domains (empty = all)
+	ScopedStages      []string           `json:"scopedStages"`    // Only score these stages (empty = all)
 }
 
 // DefaultScoreConfig returns the default score configuration.
+// By default, empty cells are skipped to avoid penalizing sparse data.
 func DefaultScoreConfig() *ScoreConfig {
 	return &ScoreConfig{
 		MaturityWeight:    0.4,
@@ -69,7 +90,34 @@ func DefaultScoreConfig() *ScoreConfig {
 			DomainSecurity:   0.5,
 			DomainOperations: 0.5,
 		},
+		SkipEmptyCells:  true,  // Don't penalize for missing data
+		UseGoalMaturity: false, // Use global maturity model by default
 	}
+}
+
+// LegacyScoreConfig returns the original score configuration that includes
+// all cells (even empty ones) in the calculation. Use this for backwards
+// compatibility with older scoring behavior.
+func LegacyScoreConfig() *ScoreConfig {
+	config := DefaultScoreConfig()
+	config.SkipEmptyCells = false
+	return config
+}
+
+// GetScopedDomains returns domains to score, defaulting to all domains.
+func (c *ScoreConfig) GetScopedDomains() []string {
+	if len(c.ScopedDomains) > 0 {
+		return c.ScopedDomains
+	}
+	return AllDomains()
+}
+
+// GetScopedStages returns stages to score, defaulting to all stages.
+func (c *ScoreConfig) GetScopedStages() []string {
+	if len(c.ScopedStages) > 0 {
+		return c.ScopedStages
+	}
+	return AllStages()
 }
 
 // GetStageWeight returns the weight for a stage, defaulting to equal weight.
@@ -99,13 +147,14 @@ func (c *ScoreConfig) GetDomainWeight(domain string) float64 {
 // The score is computed as follows:
 //
 //  1. For each domain/stage cell, compute a CellScore combining:
-//     - MaturityScore: currentLevel / 5 (from maturity model)
+//     - MaturityScore: currentLevel / 5 (from maturity model or goals)
 //     - PerformanceScore: average ProgressToTarget() of metrics in that cell
 //     - CellScore = (MaturityWeight × MaturityScore) + (PerformanceWeight × PerformanceScore)
 //
 //  2. Compute weighted average of all cell scores:
 //     - Each cell has weight = DomainWeight × StageWeight
 //     - BaseScore = Σ(CellScore × Weight) / Σ(Weight)
+//     - Empty cells are skipped by default (configurable via SkipEmptyCells)
 //
 //  3. Apply awareness multiplier (if provided):
 //     - Overall = BaseScore × AwarenessScore
@@ -139,9 +188,22 @@ func (doc *PRISMDocument) CalculatePRISMScore(config *ScoreConfig, awareness *Cu
 	var totalMaturity, totalPerformance float64
 	var cellCount int
 
-	for _, domain := range AllDomains() {
-		for _, stage := range AllStages() {
+	for _, domain := range config.GetScopedDomains() {
+		for _, stage := range config.GetScopedStages() {
 			cellScore := doc.calculateCellScore(domain, stage, config)
+
+			// Check if cell has data
+			hasMetrics := len(doc.getMetricsForCell(domain, stage)) > 0
+			hasMaturity := cellScore.MaturityScore > 0
+
+			// Skip empty cells if configured
+			if config.SkipEmptyCells && !hasMetrics && !hasMaturity {
+				// Still add to CellScores for visibility, but mark as empty
+				cellScore.Weight = 0 // Zero weight means it won't affect the average
+				score.CellScores = append(score.CellScores, cellScore)
+				continue
+			}
+
 			score.CellScores = append(score.CellScores, cellScore)
 
 			weight := cellScore.Weight
@@ -174,7 +236,7 @@ func (doc *PRISMDocument) CalculatePRISMScore(config *ScoreConfig, awareness *Cu
 		score.OperationsScore = operationsWeightedSum / operationsWeight
 	}
 
-	// Calculate averages
+	// Calculate averages (only for non-empty cells)
 	if cellCount > 0 {
 		score.MaturityAverage = totalMaturity / float64(cellCount)
 		score.PerformanceAverage = totalPerformance / float64(cellCount)
@@ -197,8 +259,10 @@ func (doc *PRISMDocument) calculateCellScore(domain, stage string, config *Score
 		Weight: config.GetDomainWeight(domain) * config.GetStageWeight(stage),
 	}
 
-	// Get maturity score from maturity model
-	if doc.Maturity != nil {
+	// Get maturity score - either from goals or global maturity model
+	if config.UseGoalMaturity {
+		cs.MaturityScore = doc.calculateGoalMaturityForDomain(domain)
+	} else if doc.Maturity != nil {
 		cell := doc.Maturity.GetCell(domain, stage)
 		if cell != nil {
 			cs.MaturityScore = cell.CalculateMaturityScore()
@@ -220,6 +284,77 @@ func (doc *PRISMDocument) calculateCellScore(domain, stage string, config *Score
 		(config.PerformanceWeight * cs.PerformanceScore)
 
 	return cs
+}
+
+// calculateGoalMaturityForDomain calculates average maturity from goals in a domain.
+// This is used when UseGoalMaturity is true to derive maturity from goals instead
+// of the global maturity model.
+func (doc *PRISMDocument) calculateGoalMaturityForDomain(domain string) float64 {
+	var totalLevel float64
+	var goalCount int
+
+	for i := range doc.Goals {
+		goal := &doc.Goals[i]
+		// Check if goal is in this domain (by owner or explicit domain field)
+		if doc.goalBelongsToDomain(*goal, domain) {
+			// Use the goal's current level
+			level := goal.CurrentLevel
+			if level == 0 {
+				// If CurrentLevel isn't set, try to calculate it
+				level = goal.CurrentMaturityLevel(doc)
+			}
+			if level > 0 {
+				totalLevel += float64(level)
+				goalCount++
+			}
+		}
+	}
+
+	if goalCount == 0 {
+		return 0.0
+	}
+
+	// Return as percentage of max level (5)
+	return (totalLevel / float64(goalCount)) / 5.0
+}
+
+// goalBelongsToDomain checks if a goal belongs to a domain.
+// This is a heuristic based on goal owner or naming conventions.
+// Note: Currently always returns true as fallback (conservative approach).
+//
+//nolint:unparam // Returns true by design to include all goals
+func (doc *PRISMDocument) goalBelongsToDomain(goal Goal, domain string) bool {
+	// Check by owner
+	ownerLower := strings.ToLower(goal.Owner)
+	switch domain {
+	case DomainSecurity:
+		if strings.Contains(ownerLower, "security") {
+			return true
+		}
+	case DomainOperations:
+		if strings.Contains(ownerLower, "sre") ||
+			strings.Contains(ownerLower, "platform") ||
+			strings.Contains(ownerLower, "engineering") ||
+			strings.Contains(ownerLower, "operations") {
+			return true
+		}
+	case DomainQuality:
+		if strings.Contains(ownerLower, "quality") ||
+			strings.Contains(ownerLower, "qe") ||
+			strings.Contains(ownerLower, "test") {
+			return true
+		}
+	}
+
+	// Check by goal name
+	nameLower := strings.ToLower(goal.Name)
+	if strings.Contains(nameLower, domain) {
+		return true
+	}
+
+	// If no domain can be determined, include in all domains (conservative approach)
+	// This ensures goals without explicit domain attribution still contribute
+	return true
 }
 
 // getMetricsForCell returns metrics matching the domain and stage.
