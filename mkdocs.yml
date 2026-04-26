@@ -54,6 +54,7 @@ nav:
       - Your First Document: getting-started/first-document.md
   - CLI Reference:
       - Overview: cli/index.md
+      - Conventions: cli/conventions.md
       - prism init: cli/init.md
       - prism validate: cli/validate.md
       - prism score: cli/score.md
@@ -87,6 +88,8 @@ nav:
       - Goals: concepts/goals.md
       - Phases: concepts/phases.md
       - Maturity Model: concepts/maturity.md
+      - Maturity Strategies: concepts/maturity-strategies.md
+      - Project Scoring: concepts/project-scoring.md
       - Customer Awareness: concepts/awareness.md
       - PRISM Score: concepts/scoring.md
       - Framework Mappings: concepts/frameworks.md
@@ -99,9 +102,16 @@ nav:
       - Goal Roadmap: examples/goal-roadmap.md
   - Integrations:
       - Overview: integrations/index.md
+      - Structured Plan: integrations/structured-plan.md
       - Dashforge: integrations/dashforge.md
       - Marp Presentations: integrations/marp.md
       - Excel Export: integrations/excel.md
+  - Design:
+      - Maturity:
+          - Codegen: design/maturity/FEAT_MATURITY_CODEGEN.md
+          - SLO Design: design/maturity/FEAT_MATURITY_SLO_DESIGN.md
+          - Roadmap Plan: design/maturity/FEAT_MATURITYROADMAP_PLAN.md
+          - Roadmap PRD: design/maturity/FEAT_MATURITYROADMAP_PRD.md
   - API Reference:
       - Go Library: api/library.md
       - Types: api/types.md
