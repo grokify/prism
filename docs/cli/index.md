@@ -26,15 +26,31 @@ go install github.com/grokify/prism/cmd/prism@latest
 | [`prism goal`](goal.md) | Manage and inspect goals |
 | [`prism phase`](phase.md) | Manage and inspect phases |
 | [`prism roadmap`](roadmap.md) | View roadmap overview |
+| [`prism initiative`](initiative.md) | List and inspect initiatives |
 
 ### Reporting Commands (v0.2.0)
 
 | Command | Description |
 |---------|-------------|
-| `prism report` | Generate roadmap reports (Markdown/JSON) |
-| `prism slo-report` | Generate SLO compliance reports |
-| `prism dashboard` | Generate executive dashboards |
+| [`prism report`](report.md) | Generate roadmap reports (Markdown/JSON) |
+| [`prism slo-report`](slo-report.md) | Generate SLO compliance reports |
+| [`prism dashboard`](dashboard.md) | Generate executive dashboards |
 | `prism dashforge` | Convert to dashforge format |
+
+### Organizational Commands (v0.3.0)
+
+| Command | Description |
+|---------|-------------|
+| [`prism layer`](layer.md) | List and inspect value stream layers |
+| [`prism team`](team.md) | List and inspect teams |
+| [`prism service`](service.md) | List and inspect services |
+
+### Analysis & Export Commands (v0.3.0)
+
+| Command | Description |
+|---------|-------------|
+| [`prism analyze`](analyze.md) | Analyze document and generate recommendations |
+| [`prism export`](export.md) | Export to OKR/V2MOM formats |
 
 ## Global Flags
 

@@ -276,6 +276,175 @@ if prism.IsValidCategory("prevention") {
 }
 ```
 
+## Analysis Package
+
+The `analysis` package provides document analysis and gap identification.
+
+### Analyze Document
+
+```go
+import "github.com/grokify/prism/analysis"
+
+result := analysis.Analyze(doc)
+
+// Summary statistics
+fmt.Printf("Goals: %d\n", result.Summary.TotalGoals)
+fmt.Printf("SLO Compliance: %.1f%%\n", result.Summary.SLOCompliance)
+fmt.Printf("Avg Maturity Gap: %.1f\n", result.Summary.AvgMaturityGap)
+
+// Goal analysis
+for _, ga := range result.Goals {
+    fmt.Printf("%s: M%d → M%d (gap: %d)\n",
+        ga.GoalName, ga.CurrentLevel, ga.TargetLevel, ga.Gap)
+}
+
+// Identified gaps
+for _, gap := range result.Gaps {
+    fmt.Printf("[%s] %s: %s\n", gap.Severity, gap.Type, gap.Description)
+}
+```
+
+### Calculate Roadmap Progress
+
+```go
+progress := analysis.CalculateRoadmapProgress(doc)
+
+fmt.Printf("Overall: %.1f%%\n", progress.OverallCompletion)
+
+for _, pp := range progress.PhaseProgress {
+    fmt.Printf("%s: %.1f%% complete\n", pp.PhaseName, pp.Completion)
+}
+
+for _, gp := range progress.GoalProgress {
+    fmt.Printf("%s: M%d → M%d\n", gp.GoalName, gp.CurrentLevel, gp.TargetLevel)
+}
+```
+
+### Filter Gaps
+
+```go
+// Filter by type
+maturityGaps := analysis.FilterGapsByType(result.Gaps, analysis.GapTypeMaturity)
+sloGaps := analysis.FilterGapsByType(result.Gaps, analysis.GapTypeSLO)
+
+// Filter by severity
+highPriority := analysis.FilterGapsBySeverity(result.Gaps, analysis.SeverityHigh)
+
+// Count by severity
+counts := analysis.CountGapsBySeverity(result.Gaps)
+fmt.Printf("High: %d, Medium: %d, Low: %d\n",
+    counts[analysis.SeverityHigh],
+    counts[analysis.SeverityMedium],
+    counts[analysis.SeverityLow])
+```
+
+## Export Package
+
+The `export` package converts PRISM documents to OKR and V2MOM formats.
+
+### Export to OKR
+
+```go
+import "github.com/grokify/prism/export"
+
+okrDoc := export.ConvertToOKR(doc)
+
+// Access objectives
+for _, obj := range okrDoc.Objectives {
+    fmt.Printf("Objective: %s\n", obj.Title)
+    for _, kr := range obj.KeyResults {
+        fmt.Printf("  KR: %s (%.1f%%)\n", kr.Title, kr.Score*100)
+    }
+}
+
+// Serialize to JSON
+data, _ := json.MarshalIndent(okrDoc, "", "  ")
+fmt.Println(string(data))
+```
+
+### Export to V2MOM
+
+```go
+v2momDoc := export.ConvertToV2MOM(doc)
+
+fmt.Printf("Vision: %s\n", v2momDoc.Vision)
+fmt.Printf("Values: %v\n", v2momDoc.Values)
+
+for _, method := range v2momDoc.Methods {
+    fmt.Printf("Method: %s\n", method.Name)
+    for _, measure := range method.Measures {
+        fmt.Printf("  Measure: %s = %.2f (target: %s)\n",
+            measure.Name, measure.Current, measure.Target)
+    }
+}
+```
+
+### Convert Individual Elements
+
+```go
+// Convert single goal to objective
+objective := export.GoalToObjective(goal, doc)
+
+// Convert SLO to key result
+keyResult := export.SLOToKeyResult(metric, maturityLevel, doc)
+
+// Convert goal to V2MOM method
+method := export.GoalToMethod(goal, doc, 1) // priority 1
+```
+
+## Output Package
+
+The `output` package provides formatting utilities for CLI and reports.
+
+### Helper Functions
+
+```go
+import "github.com/grokify/prism/output"
+
+// Truncate strings for display
+name := output.TruncateString("Very Long Service Name", 15) // "Very Long Se..."
+
+// Format SLO operators
+symbol := output.OperatorSymbol("gte") // ">="
+symbol = output.OperatorSymbol("lte")  // "<="
+
+// Safe percentage calculation
+pct := output.SafePercent(3, 4) // 75.0
+
+// Goal status based on maturity
+status := output.GoalStatus(3, 5) // "Behind"
+status = output.GoalStatus(5, 5)  // "Achieved"
+
+// Maturity level names
+name := output.MaturityLevelName(1) // "Reactive"
+name = output.MaturityLevelName(5)  // "Optimizing"
+
+// Status symbols
+sym := output.StatusSymbol("completed") // "[x]"
+sym = output.StatusSymbol("in_progress") // "[~]"
+sym = output.StatusSymbol("blocked")     // "[!]"
+```
+
+### Formatter
+
+```go
+formatter := output.NewFormatter("text")
+
+// Write table
+formatter.WriteTable(&output.TableData{
+    Title:   "Goals",
+    Headers: []string{"NAME", "CURRENT", "TARGET"},
+    Rows: [][]string{
+        {"Reliability", "M3", "M5"},
+        {"Velocity", "M3", "M4"},
+    },
+    Summary: "Total: 2 goals",
+})
+
+// Write JSON
+formatter.WriteJSON(data)
+```
+
 ## JSON Schema
 
 ### Access Embedded Schema

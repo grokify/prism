@@ -6,6 +6,7 @@ PRISM integrates with various tools and platforms for reporting, visualization, 
 
 | Integration | Status | Description |
 |-------------|--------|-------------|
+| [Structured-Plan](structured-plan.md) | Available | Roadmap, OKR, and V2MOM export |
 | [Dashforge](dashforge.md) | Planned | Dashboard generation and embedding |
 | [Marp](marp.md) | Planned | Presentation generation |
 | [Excel](excel.md) | Planned | XLSX export for stakeholders |
@@ -24,18 +25,18 @@ PRISM integrates with various tools and platforms for reporting, visualization, 
 │               (github.com/grokify/prism)                    │
 └─────────────────────────────────────────────────────────────┘
                               │
-          ┌───────────────────┼───────────────────┐
-          ▼                   ▼                   ▼
-    ┌──────────┐       ┌──────────┐       ┌──────────┐
-    │ Dashforge│       │   Marp   │       │   Excel  │
-    │Dashboard │       │  Slides  │       │   XLSX   │
-    └──────────┘       └──────────┘       └──────────┘
-          │                   │                   │
-          ▼                   ▼                   ▼
-    ┌──────────┐       ┌──────────┐       ┌──────────┐
-    │   HTML   │       │   PDF    │       │   XLSX   │
-    │Dashboard │       │  Slides  │       │  Report  │
-    └──────────┘       └──────────┘       └──────────┘
+     ┌────────────┬───────────┼───────────┬────────────┐
+     ▼            ▼           ▼           ▼            ▼
+┌──────────┐┌──────────┐┌──────────┐┌──────────┐┌──────────┐
+│Structured││ Dashforge││   Marp   ││   Excel  ││   CLI    │
+│   Plan   ││Dashboard ││  Slides  ││   XLSX   ││ Reports  │
+└──────────┘└──────────┘└──────────┘└──────────┘└──────────┘
+     │            │           │           │            │
+     ▼            ▼           ▼           ▼            ▼
+┌──────────┐┌──────────┐┌──────────┐┌──────────┐┌──────────┐
+│ Roadmap  ││   HTML   ││   PDF    ││   XLSX   ││ Markdown │
+│ OKR/V2MOM││Dashboard ││  Slides  ││  Report  ││  Reports │
+└──────────┘└──────────┘└──────────┘└──────────┘└──────────┘
 ```
 
 ## Use Cases

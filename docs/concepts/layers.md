@@ -1,20 +1,43 @@
 # Layers
 
-PRISM uses a three-layer model to organize metrics by ownership boundaries in the technology stack. This helps clarify accountability and enables targeted improvements at each level.
+PRISM uses a value stream model to organize metrics across the full product lifecycle. This clarifies ownership from ideation through customer support.
 
-## The Three Layers
+## The Value Stream
 
-| Layer | Constant | Description |
-|-------|----------|-------------|
-| Code | `code` | Application code, libraries, and dependencies |
-| Infrastructure | `infra` | Cloud resources, networking, and platform services |
-| Runtime | `runtime` | Running services, containers, and workloads |
+```
+Requirements → Code → Infra → Runtime → Adoption → Support
+```
+
+| Layer | Description | Typical Owner |
+|-------|-------------|---------------|
+| `requirements` | Product ideation, specs, design | Product/Design |
+| `code` | Application code, libraries, dependencies | Dev teams |
+| `infra` | Cloud resources, networking, platform | Platform team |
+| `runtime` | Running services, production workloads | Stream-aligned + SRE |
+| `adoption` | Product analytics, user engagement | Product/Growth |
+| `support` | Customer support, incident management | Support/CS |
 
 ## Layer Definitions
 
+### Requirements Layer
+
+The requirements layer covers product ideation and specification:
+
+- Product requirements documents (PRDs)
+- Design specifications
+- User research and validation
+- Feature prioritization
+
+**Example metrics:**
+
+- Requirements clarity score
+- Spec completion rate
+- Design review coverage
+- User research coverage
+
 ### Code Layer
 
-The code layer encompasses everything related to the application source code:
+The code layer encompasses application development:
 
 - Source code quality and coverage
 - Dependency management and vulnerabilities
@@ -30,7 +53,7 @@ The code layer encompasses everything related to the application source code:
 
 ### Infrastructure Layer
 
-The infrastructure layer covers the platform and resources that support applications:
+The infrastructure layer covers platform and resources:
 
 - Cloud resource configuration
 - Network security controls
@@ -46,7 +69,7 @@ The infrastructure layer covers the platform and resources that support applicat
 
 ### Runtime Layer
 
-The runtime layer focuses on deployed services in production:
+The runtime layer focuses on production systems:
 
 - Service availability and performance
 - Runtime security monitoring
@@ -60,16 +83,50 @@ The runtime layer focuses on deployed services in production:
 - Error rate
 - Mean time to recovery
 
+### Adoption Layer
+
+The adoption layer tracks product usage and engagement:
+
+- Feature adoption rates
+- User activation and retention
+- Self-service success rates
+- Product analytics (Pendo, Amplitude, etc.)
+
+**Example metrics:**
+
+- Feature adoption rate
+- User activation percentage
+- Self-service completion rate
+- DAU/MAU ratio
+- Time to value
+
+### Support Layer
+
+The support layer covers customer assistance:
+
+- Support ticket volume and resolution
+- Escalation patterns
+- Customer satisfaction
+- Knowledge base effectiveness
+
+**Example metrics:**
+
+- Ticket resolution time
+- First contact resolution rate
+- Customer satisfaction (CSAT)
+- Escalation rate
+- Knowledge base deflection rate
+
 ## Golden Signals
 
 Each layer can define golden signals based on Google SRE's four golden signals:
 
 | Signal | Description | Example |
 |--------|-------------|---------|
-| Latency | Time to serve requests | P99 response time |
-| Traffic | Request throughput | Requests per second |
-| Errors | Error rate | 5xx error percentage |
-| Saturation | Resource utilization | CPU/memory usage |
+| Latency | Time to complete | Response time, resolution time |
+| Traffic | Throughput | Requests/sec, tickets/day |
+| Errors | Error rate | 5xx errors, failed tickets |
+| Saturation | Resource utilization | CPU usage, agent capacity |
 
 ### Defining Golden Signals
 
@@ -85,32 +142,35 @@ Each layer can define golden signals based on Google SRE's four golden signals:
         "errors": "metric-error-rate",
         "saturation": "metric-cpu-usage"
       }
+    },
+    {
+      "id": "support",
+      "name": "Support",
+      "signals": {
+        "latency": "metric-resolution-time",
+        "traffic": "metric-tickets-per-day",
+        "errors": "metric-escalation-rate",
+        "saturation": "metric-agent-utilization"
+      }
     }
   ]
 }
 ```
 
-## Layer and Domain Relationship
+## Layers vs Stages
 
-Layers are orthogonal to domains:
+Layers and stages are orthogonal dimensions:
 
 | Dimension | Purpose | Values |
 |-----------|---------|--------|
-| Domain | Functional area | operations, security, quality |
-| Layer | Ownership boundary | code, infra, runtime |
+| **Layer** | Where in value stream | requirements, code, infra, runtime, adoption, support |
+| **Stage** | When in delivery cycle | design, build, test, runtime, response |
 
-A metric belongs to one domain AND one layer:
+A metric belongs to one layer AND one stage. For example:
 
-```json
-{
-  "id": "sec-runtime-threats",
-  "name": "Runtime Threat Detection",
-  "domain": "security",
-  "layer": "runtime",
-  "stage": "runtime",
-  "category": "detection"
-}
-```
+- Support layer + Design stage = Designing support processes
+- Support layer + Runtime stage = Handling live tickets
+- Support layer + Response stage = Escalation management
 
 ## Layer Accountability
 
@@ -120,16 +180,28 @@ Teams can declare layer accountability:
 {
   "teams": [
     {
+      "id": "product-team",
+      "name": "Product Team",
+      "type": "stream_aligned",
+      "layerAccountability": ["requirements", "adoption"]
+    },
+    {
       "id": "platform-team",
       "name": "Platform Team",
       "type": "platform",
-      "layerAccountability": ["infra", "runtime"]
+      "layerAccountability": ["infra"]
     },
     {
       "id": "app-team",
       "name": "Application Team",
       "type": "stream_aligned",
-      "layerAccountability": ["code"]
+      "layerAccountability": ["code", "runtime"]
+    },
+    {
+      "id": "support-team",
+      "name": "Support Team",
+      "type": "stream_aligned",
+      "layerAccountability": ["support"]
     }
   ]
 }
@@ -146,13 +218,14 @@ prism layer list prism.json
 Show layer details with associated metrics:
 
 ```bash
-prism layer show prism.json runtime
+prism layer show prism.json adoption
 ```
 
 ## Best Practices
 
-1. **Assign every metric to a layer** - Clarifies ownership
-2. **Define golden signals** - Standardizes observability per layer
-3. **Map teams to layers** - Establishes accountability
-4. **Cover all layers** - Ensure metrics across the full stack
-5. **Use layers for filtering** - Generate layer-specific reports
+1. **Cover the full value stream** - Ensure metrics across all layers
+2. **Assign every metric to a layer** - Clarifies ownership
+3. **Define golden signals** - Standardizes observability per layer
+4. **Map teams to layers** - Establishes accountability
+5. **Track handoffs** - Measure transitions between layers
+6. **Use layers for reporting** - Generate layer-specific dashboards

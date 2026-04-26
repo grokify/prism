@@ -29,13 +29,16 @@ Domains represent functional areas with overlay teams that define standards:
 
 ### [Layers](layers.md)
 
-Layers represent ownership boundaries in the technology stack:
+Layers represent the full value stream from ideation to support:
 
 | Layer | Description | Typical Owner |
 |-------|-------------|---------------|
+| Requirements | Product ideation, specs, design | Product/Design |
 | Code | Application code, libraries, dependencies | Stream-aligned teams |
 | Infra | Cloud resources, networking, platform | Platform team |
-| Runtime | Running services, containers, workloads | Stream-aligned + SRE |
+| Runtime | Running services, production workloads | Stream-aligned + SRE |
+| Adoption | Product analytics, user engagement | Product/Growth |
+| Support | Customer support, incident management | Support/CS |
 
 Each layer can define **golden signals** (latency, traffic, errors, saturation) pointing to specific metrics.
 

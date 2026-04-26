@@ -1,6 +1,6 @@
 # Domains
 
-PRISM is an extensible framework that organizes metrics into domains. The core framework provides base domain support, with domain-specific content available through extension modules.
+PRISM (Platform for Reliability, Improvement, and Strategic Maturity) is an extensible framework that organizes metrics into domains. The core framework provides base domain support, with domain-specific content available through extension modules.
 
 ## Core Domains
 

@@ -1,8 +1,8 @@
 # PRISM
 
-**Proactive Reliability & Security Maturity Model**
+**Platform for Reliability, Improvement, and Strategic Maturity**
 
-PRISM is a unified framework for B2B SaaS health metrics that combines SLOs, DMAIC, OKRs, and maturity modeling into a single coherent system. It provides structured schemas for defining metrics, calculating composite health scores, and tracking organizational maturity across operations, security, and quality domains.
+PRISM is an Operational Product Management platform for COO-level organizational health monitoring. It provides a unified framework for B2B SaaS health metrics that combines SLOs, maturity modeling, and OKRs into a single coherent system. PRISM enables organizations to understand current health and drive improvement projects across operations, security, quality, product, and AI domains.
 
 ## Key Features
 
@@ -25,11 +25,22 @@ PRISM is a unified framework for B2B SaaS health metrics that combines SLOs, DMA
 
 ## Operations Management (v0.3.0)
 
-- **Three-Layer Model** - Organize metrics by code, infra, and runtime layers
+- **Value Stream Layers** - Full lifecycle from requirements through support (requirements, code, infra, runtime, adoption, support)
 - **Quality Domain** - Add quality alongside operations and security with ISO 25010 verticals
 - **Team Topology** - Model stream-aligned, platform, enabling, and overlay teams
 - **Service Ownership** - Define services with team ownership and layer assignment
 - **Golden Signals** - Associate latency, traffic, errors, saturation metrics per layer
+- **Adoption Metrics** - Track product analytics (Pendo, Amplitude) and user engagement
+- **Support Metrics** - Monitor ticket volume, resolution time, customer satisfaction
+
+## Analysis & Export (v0.3.0)
+
+- **Document Analysis** - Analyze goals, phases, and SLOs to identify gaps and recommendations
+- **Gap Identification** - Find maturity gaps, SLO compliance issues, and initiative gaps
+- **Roadmap Export** - Export to structured-plan/roadmap format with deployment/adoption tracking
+- **OKR Export** - Export to Objectives and Key Results format for structured-plan
+- **V2MOM Export** - Export to Vision, Values, Methods, Obstacles, Measures format
+- **LLM Prompts** - Generate prompts for AI-assisted initiative planning
 
 ## Enterprise Features
 
@@ -98,6 +109,82 @@ The PRISM score provides a single composite metric (0.0-1.0) representing organi
 | ≥0.50 | Medium | Adequate, room for improvement |
 | ≥0.25 | Weak | Significant gaps |
 | <0.25 | Critical | Immediate attention required |
+
+## Integration with Structured-Plan
+
+PRISM integrates with [structured-plan](https://github.com/grokify/structured-plan) to provide a complete operational planning workflow. PRISM serves as the source of truth for requirements (maturity models, SLOs), while structured-plan handles execution tracking (OKRs, roadmaps).
+
+### Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                         PRISM (Source of Truth)                 │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐          │
+│  │    Goals     │  │   Maturity   │  │     SLOs     │          │
+│  │              │  │    Models    │  │              │          │
+│  │ "Reliability"│  │  M1→M2→M3→M4│  │ avail>=99.9% │          │
+│  └──────────────┘  └──────────────┘  └──────────────┘          │
+└───────────────────────────┬─────────────────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                      LLM Analysis Layer                         │
+│                                                                 │
+│  Input: PRISM requirements + context (team capacity, etc.)      │
+│  Output: Suggested initiatives, phase mapping, dependencies     │
+│                                                                 │
+│  "To reach M3 reliability by Q2, you need:                      │
+│   - Q1: Observability platform (enables SLO measurement)        │
+│   - Q1: Incident runbooks (reduces MTTR)                        │
+│   - Q2: SLO dashboards (tracks compliance)"                     │
+└───────────────────────────┬─────────────────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                 Structured-Plan (Execution)                     │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐          │
+│  │     OKR      │  │   V2MOM      │  │   Roadmap    │          │
+│  │              │  │              │  │              │          │
+│  │ Objectives   │  │ Methods      │  │ Phases       │          │
+│  │ Key Results  │  │ Measures     │  │ Deliverables │          │
+│  └──────────────┘  └──────────────┘  └──────────────┘          │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### Data Flow
+
+| PRISM Concept | Roadmap Export | OKR Export |
+|---------------|----------------|------------|
+| Phase | Phase | — |
+| Phase.GoalTargets | Phase.Goals, SuccessCriteria | PhaseTargets |
+| Goal | — | Objective (one per maturity level) |
+| SLO/MetricCriterion | SuccessCriteria | Key Result |
+| Initiative | Deliverable | — |
+| DeploymentStatus | RolloutStatus | — |
+
+**RolloutStatus** tracks B2B SaaS deployment and adoption:
+
+- **deployedCustomers** - Customers with feature available (rolled out)
+- **adoptedCustomers** - Customers actively using the feature
+- **status** - `not_started`, `rolling_out`, `deployed`, `adopted`, `paused`, `rolled_back`
+
+### Workflow
+
+1. **Define requirements in PRISM** - Goals, maturity models, SLOs
+2. **Analyze with LLM** - Generate initiative recommendations to achieve targets
+3. **Export to structured-plan** - Roadmap/OKR/V2MOM format
+4. **Track execution** - Monitor progress against phase targets
+
+```bash
+# Analyze PRISM document and suggest initiatives
+prism analyze prism.json
+
+# Export as roadmap with deployment tracking
+prism export roadmap prism.json --with-okrs -o roadmap.json
+
+# Or export as OKR-only document
+prism export okr prism.json -o roadmap.okr.json
+```
 
 ## Getting Started
 
