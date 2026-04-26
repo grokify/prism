@@ -1,5 +1,28 @@
 # PRISM
 
+[![Go CI][go-ci-svg]][go-ci-url]
+[![Go Lint][go-lint-svg]][go-lint-url]
+[![Go SAST][go-sast-svg]][go-sast-url]
+[![Go Report Card][goreport-svg]][goreport-url]
+[![Docs][docs-godoc-svg]][docs-godoc-url]
+[![Docs][docs-mkdoc-svg]][docs-mkdoc-url]
+[![License][license-svg]][license-url]
+
+ [go-ci-svg]: https://github.com/grokify/prism/actions/workflows/go-ci.yaml/badge.svg?branch=main
+ [go-ci-url]: https://github.com/grokify/prism/actions/workflows/go-ci.yaml
+ [go-lint-svg]: https://github.com/grokify/prism/actions/workflows/go-lint.yaml/badge.svg?branch=main
+ [go-lint-url]: https://github.com/grokify/prism/actions/workflows/go-lint.yaml
+ [go-sast-svg]: https://github.com/grokify/prism/actions/workflows/go-sast-codeql.yaml/badge.svg?branch=main
+ [go-sast-url]: https://github.com/grokify/prism/actions/workflows/go-sast-codeql.yaml
+ [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/prism
+ [goreport-url]: https://goreportcard.com/report/github.com/grokify/prism
+ [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/prism
+ [docs-godoc-url]: https://pkg.go.dev/github.com/grokify/prism
+ [docs-mkdoc-svg]: https://img.shields.io/badge/docs-guide-blue.svg
+ [docs-mkdoc-url]: https://grokify.dev/prism
+ [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
+ [license-url]: https://github.com/grokify/prism/blob/main/LICENSE
+
 **Platform for Reliability, Improvement, and Strategic Maturity**
 
 PRISM is an Operational Product Management platform for COO-level organizational health monitoring. It provides a unified framework for B2B SaaS health metrics that combines SLOs, maturity modeling, and OKRs into a single coherent system. PRISM enables organizations to understand current health and drive improvement projects across operations, security, quality, product, and AI domains.
