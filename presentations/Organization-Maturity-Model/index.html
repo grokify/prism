@@ -1,0 +1,4685 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Platform for Reliability, Improvement, and Strategic Maturity - Operational Product Management">
+      
+      
+      
+        <link rel="canonical" href="https://grokify.github.io/prism/presentations/Organization-Maturity-Model/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>Organization Maturity Model - PRISM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#organization-maturity-model" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="PRISM" class="md-header__button md-logo" aria-label="PRISM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PRISM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Organization Maturity Model
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/grokify/prism" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    grokify/prism
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/installation/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../cli/" class="md-tabs__link">
+          
+  
+  
+  CLI Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../schema/" class="md-tabs__link">
+          
+  
+  
+  Schema
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../concepts/" class="md-tabs__link">
+          
+  
+  
+  Concepts
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../examples/" class="md-tabs__link">
+          
+  
+  
+  Examples
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../integrations/" class="md-tabs__link">
+          
+  
+  
+  Integrations
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../developer/" class="md-tabs__link">
+          
+  
+  
+  Developer
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../design/maturity/FEAT_MATURITY_CODEGEN/" class="md-tabs__link">
+          
+  
+  
+  Design
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api/library/" class="md-tabs__link">
+          
+  
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../releases/changelog/" class="md-tabs__link">
+          
+  
+  
+  Releases
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="PRISM" class="md-nav__button md-logo" aria-label="PRISM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    PRISM
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/grokify/prism" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    grokify/prism
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting Started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quick Start
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/first-document/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Your First Document
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    CLI Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            CLI Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/conventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Conventions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/init/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    prism init
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/validate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    prism validate
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/score/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    prism score
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/catalog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    prism catalog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/goal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    prism goal
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/phase/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    prism phase
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    prism roadmap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/initiative/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    prism initiative
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/layer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    prism layer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/team/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    prism team
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    prism service
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/report/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    prism report
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/slo-report/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    prism slo-report
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    prism dashboard
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/analyze/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    prism analyze
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    prism export
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Schema
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Schema
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/domains/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Domains
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/quality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quality Domain
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/stages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lifecycle Stages
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/categories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Categories
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Metric Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/slos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SLIs & SLOs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/thresholds/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Thresholds
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Concepts
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Concepts
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/layers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Layers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/teams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Teams
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Services
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/goals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Goals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/phases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Phases
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/maturity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Maturity Model
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/maturity-strategies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Maturity Strategies
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/project-scoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Project Scoring
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/awareness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Customer Awareness
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/scoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PRISM Score
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/frameworks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Framework Mappings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Examples
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Operations Metrics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/operations-layers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Operations with Layers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/team-topology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Team Topology
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/quality-metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quality Metrics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/goal-roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Goal Roadmap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Integrations
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Integrations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/structured-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Structured Plan
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/dashforge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dashforge
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/marp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Marp Presentations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/excel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Excel Export
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Developer
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Developer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer/contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Design
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Design
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_1" id="__nav_9_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Maturity
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_1">
+            <span class="md-nav__icon md-icon"></span>
+            Maturity
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design/maturity/FEAT_MATURITY_CODEGEN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Codegen
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design/maturity/FEAT_MATURITY_SLO_DESIGN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SLO Design
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design/maturity/FEAT_MATURITYROADMAP_PLAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Roadmap Plan
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design/maturity/FEAT_MATURITYROADMAP_PRD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Roadmap PRD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    API Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            API Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/library/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Go Library
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Releases
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            Releases
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Changelog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/v0.2.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.2.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/v0.1.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.1.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-unified-framework-for-b2b-saas-health-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      A Unified Framework for B2B SaaS Health Metrics
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<!-- _class: lead -->
+
+<h1 id="organization-maturity-model">Organization Maturity Model</h1>
+<h2 id="a-unified-framework-for-b2b-saas-health-metrics">A Unified Framework for B2B SaaS Health Metrics</h2>
+<p><strong>Security | Operational Excellence | Quality | Product | AI</strong></p>
+<hr />
+<!-- _class: lead -->
+
+<h1 id="executive-overview">Executive Overview</h1>
+<hr />
+<h1 id="the-challenge">The Challenge</h1>
+<h2 id="fragmented-metrics-across-the-organization">Fragmented Metrics Across the Organization</h2>
+<ul>
+<li><strong>Security</strong> tracks vulnerabilities, compliance, threat detection</li>
+<li><strong>Engineering</strong> tracks DORA metrics, SLOs, incidents</li>
+<li><strong>Quality</strong> tracks coverage, defects, test results</li>
+<li><strong>Product</strong> tracks adoption, activation, churn</li>
+<li><strong>AI</strong> tracks adoption, productivity, governance</li>
+</ul>
+<p><strong>Result:</strong> No unified view of organizational health</p>
+<hr />
+<h1 id="the-impact">The Impact</h1>
+<h2 id="what-fragmentation-costs-us">What Fragmentation Costs Us</h2>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Siloed dashboards</td>
+<td>Leaders see different pictures</td>
+</tr>
+<tr>
+<td>Inconsistent maturity</td>
+<td>Some areas advanced, others neglected</td>
+</tr>
+<tr>
+<td>Unclear accountability</td>
+<td>Who owns cross-cutting metrics?</td>
+</tr>
+<tr>
+<td>Competing priorities</td>
+<td>No framework for trade-offs</td>
+</tr>
+<tr>
+<td>Reactive posture</td>
+<td>Firefighting instead of improving</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="the-solution">The Solution</h1>
+<h2 id="one-framework-unified-view">One Framework, Unified View</h2>
+<p>This maturity model provides:</p>
+<ul>
+<li><strong>Unified metrics</strong> across all domains</li>
+<li><strong>Maturity levels</strong> to measure capability</li>
+<li><strong>Clear accountability</strong> through team ownership</li>
+<li><strong>Progression strategies</strong> to guide improvement</li>
+<li><strong>Roadmap</strong> to track advancement</li>
+</ul>
+<hr />
+<h1 id="three-dimensions">Three Dimensions</h1>
+<h2 id="value-stream-domains-and-lifecycle">Value Stream, Domains, and Lifecycle</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>┌─────────────────────────────────────────────────────────────────┐
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│                      VALUE STREAM LAYERS                        │
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│   Requirements → Code → Infra → Runtime → Adoption → Support    │
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>└─────────────────────────────────────────────────────────────────┘
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>                              │
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        ┌──────────┬──────────┼──────────┬──────────┐
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        │          │          │          │          │
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        ▼          ▼          ▼          ▼          ▼
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  │ OP. EXC. │ │ SECURITY │ │ QUALITY  │ │ PRODUCT  │ │    AI    │
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  └──────────┘ └──────────┘ └──────────┘ └──────────┘ └──────────┘
+</code></pre></div>
+<hr />
+<h1 id="value-stream-layers">Value Stream Layers</h1>
+<h2 id="from-ideation-to-support">From Ideation to Support</h2>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Description</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requirements</strong></td>
+<td>Product ideation, specs, design</td>
+<td>Product</td>
+</tr>
+<tr>
+<td><strong>Code</strong></td>
+<td>Application code, libraries, dependencies</td>
+<td>Engineering</td>
+</tr>
+<tr>
+<td><strong>Infra</strong></td>
+<td>Cloud resources, networking, platform</td>
+<td>Platform</td>
+</tr>
+<tr>
+<td><strong>Runtime</strong></td>
+<td>Running services, production workloads</td>
+<td>SRE</td>
+</tr>
+<tr>
+<td><strong>Adoption</strong></td>
+<td>Product analytics, user engagement</td>
+<td>Product/Growth</td>
+</tr>
+<tr>
+<td><strong>Support</strong></td>
+<td>Customer support, incident management</td>
+<td>Support</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="five-domains">Five Domains</h1>
+<h2 id="functional-areas-with-standards">Functional Areas with Standards</h2>
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Focus</th>
+<th>Key Metrics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Operational Excellence</strong></td>
+<td>Reliability, efficiency</td>
+<td>DORA, SLOs, golden signals</td>
+</tr>
+<tr>
+<td><strong>Security</strong></td>
+<td>Protection, compliance</td>
+<td>Vulnerabilities, MTTR, compliance</td>
+</tr>
+<tr>
+<td><strong>Quality</strong></td>
+<td>Testing, defects</td>
+<td>Coverage, defect density, escape rate</td>
+</tr>
+<tr>
+<td><strong>Product</strong></td>
+<td>Adoption, retention</td>
+<td>Activation, churn, NPS</td>
+</tr>
+<tr>
+<td><strong>AI</strong></td>
+<td>AI integration</td>
+<td>Adoption, productivity, governance</td>
+</tr>
+</tbody>
+</table>
+<p>Each domain has an <strong>overlay team</strong> that sets standards across all layers.</p>
+<hr />
+<h1 id="maturity-model">Maturity Model</h1>
+<h2 id="5-levels-of-capability">5 Levels of Capability</h2>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>M1</strong></td>
+<td>Reactive</td>
+<td>Ad-hoc, firefighting, heroics</td>
+</tr>
+<tr>
+<td><strong>M2</strong></td>
+<td>Basic</td>
+<td>Documented, some repeatability</td>
+</tr>
+<tr>
+<td><strong>M3</strong></td>
+<td>Defined</td>
+<td>Standardized, consistent execution</td>
+</tr>
+<tr>
+<td><strong>M4</strong></td>
+<td>Managed</td>
+<td>Data-driven, measured, controlled</td>
+</tr>
+<tr>
+<td><strong>M5</strong></td>
+<td>Optimizing</td>
+<td>Continuous improvement, automated</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="maturity-examples">Maturity Examples</h1>
+<h2 id="what-each-level-looks-like">What Each Level Looks Like</h2>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Operational Excellence</th>
+<th>Security</th>
+<th>Quality</th>
+<th>AI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M1</td>
+<td>No SLOs, manual deploys</td>
+<td>Ad-hoc scanning</td>
+<td>No automation</td>
+<td>Ad-hoc usage</td>
+</tr>
+<tr>
+<td>M2</td>
+<td>Basic monitoring</td>
+<td>Scheduled scans</td>
+<td>Some unit tests</td>
+<td>Approved tools</td>
+</tr>
+<tr>
+<td>M3</td>
+<td>SLOs defined, CI/CD</td>
+<td>Integrated scanning</td>
+<td>Test automation</td>
+<td>Prompt libraries</td>
+</tr>
+<tr>
+<td>M4</td>
+<td>Error budgets, DORA</td>
+<td>Real-time detection</td>
+<td>Quality gates</td>
+<td>ROI tracked</td>
+</tr>
+<tr>
+<td>M5</td>
+<td>Self-healing</td>
+<td>Auto-remediation</td>
+<td>Continuous testing</td>
+<td>AI-native</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="current-state-summary">Current State Summary</h1>
+<h2 id="where-we-are-today">Where We Are Today</h2>
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Current</th>
+<th>Target</th>
+<th>Gap</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Security</strong></td>
+<td>M2</td>
+<td>M4</td>
+<td>CI integration, SIEM</td>
+</tr>
+<tr>
+<td><strong>Operational Excellence</strong></td>
+<td>M3</td>
+<td>M4</td>
+<td>Error budgets, DORA</td>
+</tr>
+<tr>
+<td><strong>Quality</strong></td>
+<td>M2</td>
+<td>M4</td>
+<td>Coverage, E2E tests</td>
+</tr>
+<tr>
+<td><strong>Product</strong></td>
+<td>M2</td>
+<td>M4</td>
+<td>Analytics, A/B testing</td>
+</tr>
+<tr>
+<td><strong>AI</strong></td>
+<td>M2</td>
+<td>M4</td>
+<td>Prompt library, ROI</td>
+</tr>
+</tbody>
+</table>
+<p><em>Note: Replace with actual assessment data</em></p>
+<hr />
+<h1 id="progression-strategies">Progression Strategies</h1>
+<h2 id="how-should-we-advance">How Should We Advance?</h2>
+<table>
+<thead>
+<tr>
+<th>Strategy</th>
+<th>Approach</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Spike</strong></td>
+<td>One area to M5, others M2</td>
+<td>Competitive differentiation</td>
+</tr>
+<tr>
+<td><strong>Wave</strong></td>
+<td>All together (M2→M3→M4→M5)</td>
+<td>Balanced, low risk</td>
+</tr>
+<tr>
+<td><strong>Targeted</strong></td>
+<td>Priority to M4, others M3</td>
+<td>Resource-constrained</td>
+</tr>
+<tr>
+<td><strong>Foundation</strong></td>
+<td>All to M3, then selective</td>
+<td>Standardization first</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="recommended-approach">Recommended Approach</h1>
+<h2 id="foundation-targeted">Foundation + Targeted</h2>
+<p><strong>Phase 1 (6 months):</strong> Establish foundation</p>
+<ul>
+<li>All areas to <strong>M3</strong> (Defined)</li>
+<li>Standardize processes, metrics, accountability</li>
+</ul>
+<p><strong>Phase 2 (6 months):</strong> Advance priorities</p>
+<ul>
+<li>Operational Excellence/Runtime to <strong>M4</strong></li>
+<li>Security/Code to <strong>M4</strong></li>
+</ul>
+<p><strong>Phase 3 (12 months):</strong> Optimize</p>
+<ul>
+<li>Selected areas to <strong>M5</strong></li>
+<li>Based on business value</li>
+</ul>
+<hr />
+<h1 id="roadmap-overview">Roadmap Overview</h1>
+<h2 id="quarterly-progression">Quarterly Progression</h2>
+<table>
+<thead>
+<tr>
+<th>Quarter</th>
+<th>Focus</th>
+<th>Exit Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Q1</strong></td>
+<td>Foundation</td>
+<td>All domains M2→M3 in Code, Infra</td>
+</tr>
+<tr>
+<td><strong>Q2</strong></td>
+<td>Runtime</td>
+<td>Operational Excellence/Runtime to M4</td>
+</tr>
+<tr>
+<td><strong>Q3</strong></td>
+<td>Security + AI</td>
+<td>Security to M4, AI to M3</td>
+</tr>
+<tr>
+<td><strong>Q4</strong></td>
+<td>Optimization</td>
+<td>Top 2 areas to M5</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<!-- _class: lead -->
+
+<h1 id="security-domain">Security Domain</h1>
+<p><strong>Prevention, Detection, and Response</strong></p>
+<hr />
+<h1 id="security-overview">Security Overview</h1>
+<h2 id="what-we-measure">What We Measure</h2>
+<p>The Security domain focuses on <strong>protecting systems and data</strong>:</p>
+<ul>
+<li><strong>Prevention</strong> - Secure coding, vulnerability management</li>
+<li><strong>Detection</strong> - Threat detection, anomaly identification</li>
+<li><strong>Response</strong> - Incident response, remediation time</li>
+</ul>
+<p><strong>Goal:</strong> Shift security left while maintaining runtime protection</p>
+<hr />
+<h1 id="security-across-the-value-stream">Security Across the Value Stream</h1>
+<h2 id="layer-responsibilities">Layer Responsibilities</h2>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Security Focus</th>
+<th>Key Metrics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requirements</strong></td>
+<td>Threat modeling, security requirements</td>
+<td>Coverage %</td>
+</tr>
+<tr>
+<td><strong>Code</strong></td>
+<td>SAST, SCA, secrets scanning</td>
+<td>Findings count, MTTR</td>
+</tr>
+<tr>
+<td><strong>Infra</strong></td>
+<td>Cloud security, IaC scanning</td>
+<td>Misconfigurations</td>
+</tr>
+<tr>
+<td><strong>Runtime</strong></td>
+<td>DAST, WAF, runtime protection</td>
+<td>Threats blocked</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="security-kpis">Security KPIs</h1>
+<h2 id="core-metrics-by-maturity-level">Core Metrics by Maturity Level</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>M2</th>
+<th>M3</th>
+<th>M4</th>
+<th>M5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SAST Coverage</strong></td>
+<td>≥50%</td>
+<td>100%</td>
+<td>100%</td>
+<td>100%</td>
+</tr>
+<tr>
+<td><strong>Critical Vulns</strong></td>
+<td>Tracked</td>
+<td>0 in prod</td>
+<td>0 in prod</td>
+<td>Auto-fixed</td>
+</tr>
+<tr>
+<td><strong>Secrets in Code</strong></td>
+<td>Scanned</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td><strong>MTTR (Critical)</strong></td>
+<td>Tracked</td>
+<td>&lt;14 days</td>
+<td>&lt;7 days</td>
+<td>&lt;1 day</td>
+</tr>
+<tr>
+<td><strong>Cloud Posture</strong></td>
+<td>-</td>
+<td>≥80%</td>
+<td>≥90%</td>
+<td>≥95%</td>
+</tr>
+<tr>
+<td><strong>Detection Coverage</strong></td>
+<td>-</td>
+<td>-</td>
+<td>≥70%</td>
+<td>≥90%</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="security-maturity-levels">Security Maturity Levels</h1>
+<h2 id="what-each-level-means">What Each Level Means</h2>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Description</th>
+<th>Indicators</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>M1</strong></td>
+<td>Reactive</td>
+<td>Ad-hoc scanning, no process</td>
+</tr>
+<tr>
+<td><strong>M2</strong></td>
+<td>Basic</td>
+<td>Scheduled scans, manual review</td>
+</tr>
+<tr>
+<td><strong>M3</strong></td>
+<td>Defined</td>
+<td>Integrated scanning, policies enforced</td>
+</tr>
+<tr>
+<td><strong>M4</strong></td>
+<td>Managed</td>
+<td>Real-time detection, automated response</td>
+</tr>
+<tr>
+<td><strong>M5</strong></td>
+<td>Optimizing</td>
+<td>Predictive security, auto-remediation</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="security-level-requirements">Security Level Requirements</h1>
+<h2 id="m2-m3-m4">M2 → M3 → M4</h2>
+<p><strong>M2 (Basic):</strong>
+- SAST/SCA tools deployed
+- Vulnerabilities tracked
+- Incident process documented</p>
+<p><strong>M3 (Defined):</strong>
+- 100% repos scanned in CI
+- Security gates block critical findings
+- 0 secrets in code</p>
+<p><strong>M4 (Managed):</strong>
+- MTTR &lt; 7 days for critical
+- MITRE coverage &gt; 70%
+- SIEM/SOAR operational</p>
+<hr />
+<h1 id="security-current-state">Security Current State</h1>
+<h2 id="assessment-summary">Assessment Summary</h2>
+<table>
+<thead>
+<tr>
+<th>KPI</th>
+<th>Current</th>
+<th>Level</th>
+<th>M3 Target</th>
+<th>M4 Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SAST Coverage</td>
+<td>75%</td>
+<td>M2</td>
+<td>100%</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>Critical Vulns</td>
+<td>5</td>
+<td>M2</td>
+<td>0 in prod</td>
+<td>0 in prod</td>
+</tr>
+<tr>
+<td>Secrets in Code</td>
+<td>3</td>
+<td>M2</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>MTTR (Critical)</td>
+<td>14 days</td>
+<td>M2</td>
+<td>&lt;14 days</td>
+<td>&lt;7 days</td>
+</tr>
+<tr>
+<td>Cloud Posture</td>
+<td>72%</td>
+<td>M2</td>
+<td>≥80%</td>
+<td>≥90%</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="security-roadmap">Security Roadmap</h1>
+<h2 id="prioritized-initiatives">Prioritized Initiatives</h2>
+<table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Impact</th>
+<th>Timeline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pipeline security gates</td>
+<td>M2→M3 Code</td>
+<td>Q1</td>
+</tr>
+<tr>
+<td>Cloud posture management</td>
+<td>M2→M4 Infra</td>
+<td>Q1</td>
+</tr>
+<tr>
+<td>SIEM/SOAR integration</td>
+<td>M3→M4 Runtime</td>
+<td>Q2</td>
+</tr>
+<tr>
+<td>Secrets scanning</td>
+<td>M3 Code</td>
+<td>Q1</td>
+</tr>
+<tr>
+<td>Auto-remediation</td>
+<td>M4→M5 Code</td>
+<td>Q3</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<!-- _class: lead -->
+
+<h1 id="operational-excellence-domain">Operational Excellence Domain</h1>
+<p><strong>Reliability, Efficiency, and Performance</strong></p>
+<hr />
+<h1 id="operational-excellence-overview">Operational Excellence Overview</h1>
+<h2 id="what-we-measure_1">What We Measure</h2>
+<p>The Operational Excellence domain focuses on <strong>system reliability and delivery efficiency</strong>:</p>
+<ul>
+<li><strong>Reliability</strong> - Availability, latency, error rates</li>
+<li><strong>Efficiency</strong> - Deployment frequency, lead time, resource utilization</li>
+<li><strong>Response</strong> - Incident detection, recovery, post-mortems</li>
+</ul>
+<p><strong>Goal:</strong> Deliver reliable services efficiently with rapid recovery</p>
+<hr />
+<h1 id="operational-excellence-across-value-stream">Operational Excellence Across Value Stream</h1>
+<h2 id="layer-responsibilities_1">Layer Responsibilities</h2>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Focus</th>
+<th>Key Metrics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Code</strong></td>
+<td>Build quality, CI/CD</td>
+<td>Build success rate, lead time</td>
+</tr>
+<tr>
+<td><strong>Infra</strong></td>
+<td>Platform reliability</td>
+<td>Resource utilization, drift</td>
+</tr>
+<tr>
+<td><strong>Runtime</strong></td>
+<td>Service health</td>
+<td>Availability, latency, errors</td>
+</tr>
+<tr>
+<td><strong>Support</strong></td>
+<td>Incident management</td>
+<td>MTTR, escalation rate</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="dora-metrics">DORA Metrics</h1>
+<h2 id="mapped-to-maturity-levels">Mapped to Maturity Levels</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>M2</th>
+<th>M3</th>
+<th>M4</th>
+<th>M5 (Elite)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Deploy Frequency</strong></td>
+<td>Monthly</td>
+<td>Weekly</td>
+<td>Daily</td>
+<td>On-demand</td>
+</tr>
+<tr>
+<td><strong>Lead Time</strong></td>
+<td>1 month</td>
+<td>1 week</td>
+<td>&lt;1 week</td>
+<td>&lt;1 hour</td>
+</tr>
+<tr>
+<td><strong>MTTR</strong></td>
+<td>&lt;1 week</td>
+<td>&lt;1 day</td>
+<td>&lt;4 hours</td>
+<td>&lt;1 hour</td>
+</tr>
+<tr>
+<td><strong>Change Failure Rate</strong></td>
+<td>&lt;45%</td>
+<td>&lt;30%</td>
+<td>&lt;15%</td>
+<td>&lt;5%</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="slos-and-error-budgets">SLOs and Error Budgets</h1>
+<h2 id="target-based-reliability">Target-Based Reliability</h2>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>SLO</th>
+<th>Current</th>
+<th>Error Budget</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API Gateway</td>
+<td>99.95% availability</td>
+<td>99.92%</td>
+<td>-3 hours</td>
+</tr>
+<tr>
+<td>Payments</td>
+<td>99.99% availability</td>
+<td>99.995%</td>
+<td>+4 hours</td>
+</tr>
+<tr>
+<td>User Service</td>
+<td>P99 &lt; 200ms</td>
+<td>185ms</td>
+<td>Within budget</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Error Budget = Allowed failures before SLO breach</strong></p>
+<hr />
+<h1 id="operational-excellence-maturity">Operational Excellence Maturity</h1>
+<h2 id="what-each-level-means_1">What Each Level Means</h2>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Description</th>
+<th>Indicators</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>M1</strong></td>
+<td>Reactive</td>
+<td>No SLOs, manual deploys, firefighting</td>
+</tr>
+<tr>
+<td><strong>M2</strong></td>
+<td>Basic</td>
+<td>Basic monitoring, some CI/CD, incident response</td>
+</tr>
+<tr>
+<td><strong>M3</strong></td>
+<td>Defined</td>
+<td>SLOs defined, CI/CD standard, runbooks</td>
+</tr>
+<tr>
+<td><strong>M4</strong></td>
+<td>Managed</td>
+<td>Error budgets, DORA tracked, auto-scaling</td>
+</tr>
+<tr>
+<td><strong>M5</strong></td>
+<td>Optimizing</td>
+<td>Self-healing, &lt;1h lead time, proactive</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="operational-excellence-current-state">Operational Excellence Current State</h1>
+<h2 id="assessment-summary_1">Assessment Summary</h2>
+<table>
+<thead>
+<tr>
+<th>KPI</th>
+<th>Current</th>
+<th>Level</th>
+<th>M3</th>
+<th>M4</th>
+<th>M5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Deploy Frequency</td>
+<td>2x/week</td>
+<td>M3</td>
+<td>Weekly</td>
+<td>Daily</td>
+<td>On-demand</td>
+</tr>
+<tr>
+<td>Lead Time</td>
+<td>5 days</td>
+<td>M3</td>
+<td>1 week</td>
+<td>1 day</td>
+<td>1 hour</td>
+</tr>
+<tr>
+<td>MTTR</td>
+<td>4 hours</td>
+<td>M4</td>
+<td>1 day</td>
+<td>4 hours</td>
+<td>1 hour</td>
+</tr>
+<tr>
+<td>Change Failure Rate</td>
+<td>18%</td>
+<td>M4</td>
+<td>≤30%</td>
+<td>≤15%</td>
+<td>≤5%</td>
+</tr>
+<tr>
+<td>Availability</td>
+<td>99.92%</td>
+<td>M4</td>
+<td>99.5%</td>
+<td>99.9%</td>
+<td>99.99%</td>
+</tr>
+<tr>
+<td>SLO Coverage</td>
+<td>100%</td>
+<td>M3+</td>
+<td>100%</td>
+<td>100%</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>Runbook Coverage</td>
+<td>85%</td>
+<td>M3</td>
+<td>≥80%</td>
+<td>≥95%</td>
+<td>100%</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="operational-excellence-roadmap">Operational Excellence Roadmap</h1>
+<h2 id="prioritized-initiatives_1">Prioritized Initiatives</h2>
+<table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Impact</th>
+<th>Timeline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SLO-based alerting</td>
+<td>M3→M4 Runtime</td>
+<td>Q1</td>
+</tr>
+<tr>
+<td>Automated rollback</td>
+<td>M3→M4 Runtime</td>
+<td>Q1</td>
+</tr>
+<tr>
+<td>DORA dashboard</td>
+<td>M3→M4 Code</td>
+<td>Q1</td>
+</tr>
+<tr>
+<td>Runbook standardization</td>
+<td>M2→M3 Support</td>
+<td>Q2</td>
+</tr>
+<tr>
+<td>Chaos engineering</td>
+<td>M4→M5 Runtime</td>
+<td>Q3</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<!-- _class: lead -->
+
+<h1 id="quality-domain">Quality Domain</h1>
+<p><strong>Testing, Defects, and Quality Assurance</strong></p>
+<hr />
+<h1 id="quality-overview">Quality Overview</h1>
+<h2 id="what-we-measure_2">What We Measure</h2>
+<p>The Quality domain focuses on <strong>software quality and testing effectiveness</strong>:</p>
+<ul>
+<li><strong>Coverage</strong> - Test coverage across code and features</li>
+<li><strong>Defects</strong> - Finding and fixing bugs early</li>
+<li><strong>Prevention</strong> - Quality gates that prevent escapes</li>
+</ul>
+<p><strong>Goal:</strong> High-quality releases with minimal production defects</p>
+<hr />
+<h1 id="quality-across-the-value-stream">Quality Across the Value Stream</h1>
+<h2 id="layer-responsibilities_2">Layer Responsibilities</h2>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Quality Focus</th>
+<th>Key Metrics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requirements</strong></td>
+<td>Acceptance criteria, testability</td>
+<td>Spec coverage</td>
+</tr>
+<tr>
+<td><strong>Code</strong></td>
+<td>Unit tests, static analysis</td>
+<td>Code coverage</td>
+</tr>
+<tr>
+<td><strong>Infra</strong></td>
+<td>Infrastructure testing</td>
+<td>IaC test coverage</td>
+</tr>
+<tr>
+<td><strong>Runtime</strong></td>
+<td>Production quality monitoring</td>
+<td>Defect escape rate</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="quality-kpis">Quality KPIs</h1>
+<h2 id="core-metrics">Core Metrics</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Description</th>
+<th>Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Code Coverage</strong></td>
+<td>% of code tested</td>
+<td>&gt;80%</td>
+</tr>
+<tr>
+<td><strong>Test Pass Rate</strong></td>
+<td>% of tests passing</td>
+<td>&gt;99%</td>
+</tr>
+<tr>
+<td><strong>Defect Density</strong></td>
+<td>Defects per KLOC</td>
+<td>&lt;0.5</td>
+</tr>
+<tr>
+<td><strong>Escape Rate</strong></td>
+<td>Defects found post-release</td>
+<td>&lt;5%</td>
+</tr>
+<tr>
+<td><strong>MTTR (Defects)</strong></td>
+<td>Time to fix defects</td>
+<td>&lt;3 days</td>
+</tr>
+<tr>
+<td><strong>Flaky Test Rate</strong></td>
+<td>Unreliable tests</td>
+<td>&lt;1%</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="quality-maturity-levels">Quality Maturity Levels</h1>
+<h2 id="what-each-level-means_2">What Each Level Means</h2>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Description</th>
+<th>Indicators</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>M1</strong></td>
+<td>Reactive</td>
+<td>Manual testing, no automation</td>
+</tr>
+<tr>
+<td><strong>M2</strong></td>
+<td>Basic</td>
+<td>Some unit tests, basic CI</td>
+</tr>
+<tr>
+<td><strong>M3</strong></td>
+<td>Defined</td>
+<td>Test automation, quality gates</td>
+</tr>
+<tr>
+<td><strong>M4</strong></td>
+<td>Managed</td>
+<td>Coverage targets, defect tracking</td>
+</tr>
+<tr>
+<td><strong>M5</strong></td>
+<td>Optimizing</td>
+<td>Continuous testing, predictive quality</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="quality-current-state">Quality Current State</h1>
+<h2 id="assessment-summary_2">Assessment Summary</h2>
+<table>
+<thead>
+<tr>
+<th>KPI</th>
+<th>Current</th>
+<th>Level</th>
+<th>M3</th>
+<th>M4</th>
+<th>M5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unit Test Coverage</td>
+<td>68%</td>
+<td>M2</td>
+<td>≥70%</td>
+<td>≥80%</td>
+<td>≥90%</td>
+</tr>
+<tr>
+<td>E2E Test Coverage</td>
+<td>65%</td>
+<td>M2</td>
+<td>≥80%</td>
+<td>≥90%</td>
+<td>≥95%</td>
+</tr>
+<tr>
+<td>Test Pass Rate</td>
+<td>96%</td>
+<td>M2</td>
+<td>≥98%</td>
+<td>≥99%</td>
+<td>≥99.9%</td>
+</tr>
+<tr>
+<td>Defect Density</td>
+<td>0.8/KLOC</td>
+<td>M3</td>
+<td>≤1.0</td>
+<td>≤0.5</td>
+<td>≤0.2</td>
+</tr>
+<tr>
+<td>Escape Rate</td>
+<td>12%</td>
+<td>M3</td>
+<td>≤15%</td>
+<td>≤10%</td>
+<td>≤2%</td>
+</tr>
+<tr>
+<td>Flaky Test Rate</td>
+<td>3%</td>
+<td>M3</td>
+<td>≤5%</td>
+<td>≤2%</td>
+<td>≤1%</td>
+</tr>
+<tr>
+<td>Quality Gates</td>
+<td>80%</td>
+<td>M2</td>
+<td>100%</td>
+<td>100%</td>
+<td>100%</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="quality-roadmap">Quality Roadmap</h1>
+<h2 id="prioritized-initiatives_2">Prioritized Initiatives</h2>
+<table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Impact</th>
+<th>Timeline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Coverage enforcement</td>
+<td>M3→M4 Code</td>
+<td>Q1</td>
+</tr>
+<tr>
+<td>E2E test expansion</td>
+<td>M2→M3 Runtime</td>
+<td>Q1</td>
+</tr>
+<tr>
+<td>Flaky test elimination</td>
+<td>Quality reliability</td>
+<td>Q1</td>
+</tr>
+<tr>
+<td>Performance test automation</td>
+<td>M3→M4 Test</td>
+<td>Q2</td>
+</tr>
+<tr>
+<td>Production quality monitoring</td>
+<td>M2→M4 Runtime</td>
+<td>Q2</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<!-- _class: lead -->
+
+<h1 id="product-domain">Product Domain</h1>
+<p><strong>Requirements, Adoption, and Customer Success</strong></p>
+<hr />
+<h1 id="product-overview">Product Overview</h1>
+<h2 id="what-we-measure_3">What We Measure</h2>
+<p>The Product domain spans <strong>two value stream layers</strong>:</p>
+<ul>
+<li><strong>Requirements</strong> - Product ideation, specs, design clarity</li>
+<li><strong>Adoption</strong> - User engagement, activation, retention</li>
+</ul>
+<p><strong>Goal:</strong> Ship the right features that customers adopt and love</p>
+<hr />
+<h1 id="product-across-the-value-stream">Product Across the Value Stream</h1>
+<h2 id="layer-responsibilities_3">Layer Responsibilities</h2>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Product Focus</th>
+<th>Key Metrics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requirements</strong></td>
+<td>Spec clarity, design quality</td>
+<td>Completion rate, clarity score</td>
+</tr>
+<tr>
+<td><strong>Adoption</strong></td>
+<td>User engagement, feature usage</td>
+<td>Activation, retention, adoption</td>
+</tr>
+<tr>
+<td><strong>Support</strong></td>
+<td>Customer feedback loop</td>
+<td>NPS, feedback volume</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="product-kpis">Product KPIs</h1>
+<h2 id="core-metrics_1">Core Metrics</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Description</th>
+<th>Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Spec Clarity</strong></td>
+<td>% with acceptance criteria</td>
+<td>&gt;95%</td>
+</tr>
+<tr>
+<td><strong>User Activation</strong></td>
+<td>% completing onboarding</td>
+<td>&gt;80%</td>
+</tr>
+<tr>
+<td><strong>Feature Adoption</strong></td>
+<td>% using new features (30d)</td>
+<td>&gt;60%</td>
+</tr>
+<tr>
+<td><strong>Time to Value</strong></td>
+<td>Days to first value</td>
+<td>&lt;7 days</td>
+</tr>
+<tr>
+<td><strong>30d Retention</strong></td>
+<td>% still active at 30 days</td>
+<td>&gt;85%</td>
+</tr>
+<tr>
+<td><strong>Churn Rate</strong></td>
+<td>Monthly churn</td>
+<td>&lt;3%</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="product-maturity-levels">Product Maturity Levels</h1>
+<h2 id="what-each-level-means_3">What Each Level Means</h2>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Description</th>
+<th>Indicators</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>M1</strong></td>
+<td>Reactive</td>
+<td>No specs, no analytics, guessing</td>
+</tr>
+<tr>
+<td><strong>M2</strong></td>
+<td>Basic</td>
+<td>Basic specs, some usage tracking</td>
+</tr>
+<tr>
+<td><strong>M3</strong></td>
+<td>Defined</td>
+<td>Spec templates, analytics dashboards</td>
+</tr>
+<tr>
+<td><strong>M4</strong></td>
+<td>Managed</td>
+<td>Data-driven decisions, experimentation</td>
+</tr>
+<tr>
+<td><strong>M5</strong></td>
+<td>Optimizing</td>
+<td>Predictive analytics, continuous discovery</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="product-current-state">Product Current State</h1>
+<h2 id="assessment-summary_3">Assessment Summary</h2>
+<table>
+<thead>
+<tr>
+<th>KPI</th>
+<th>Current</th>
+<th>Level</th>
+<th>M3</th>
+<th>M4</th>
+<th>M5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spec Clarity</td>
+<td>65%</td>
+<td>M2</td>
+<td>≥90%</td>
+<td>≥95%</td>
+<td>≥99%</td>
+</tr>
+<tr>
+<td>Activation Rate</td>
+<td>55%</td>
+<td>M2</td>
+<td>≥60%</td>
+<td>≥75%</td>
+<td>≥85%</td>
+</tr>
+<tr>
+<td>Feature Adoption</td>
+<td>50%</td>
+<td>M2</td>
+<td>≥80%</td>
+<td>≥90%</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>30-Day Retention</td>
+<td>72%</td>
+<td>M3</td>
+<td>tracked</td>
+<td>≥80%</td>
+<td>≥90%</td>
+</tr>
+<tr>
+<td>Churn Rate</td>
+<td>4.5%</td>
+<td>M3</td>
+<td>tracked</td>
+<td>≤3%</td>
+<td>≤2%</td>
+</tr>
+<tr>
+<td>NPS</td>
+<td>42</td>
+<td>M3</td>
+<td>tracked</td>
+<td>≥50</td>
+<td>≥70</td>
+</tr>
+<tr>
+<td>Time to Value</td>
+<td>14 days</td>
+<td>M3</td>
+<td>≤14 days</td>
+<td>≤7 days</td>
+<td>≤3 days</td>
+</tr>
+<tr>
+<td>A/B Testing</td>
+<td>20%</td>
+<td>M3</td>
+<td>-</td>
+<td>≥50%</td>
+<td>≥80%</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="product-roadmap">Product Roadmap</h1>
+<h2 id="prioritized-initiatives_3">Prioritized Initiatives</h2>
+<table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Impact</th>
+<th>Timeline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Analytics implementation</td>
+<td>M2→M3 Adoption</td>
+<td>Q1</td>
+</tr>
+<tr>
+<td>Spec template rollout</td>
+<td>M2→M3 Requirements</td>
+<td>Q1</td>
+</tr>
+<tr>
+<td>Activation flow optimization</td>
+<td>Activation +15%</td>
+<td>Q1</td>
+</tr>
+<tr>
+<td>A/B testing platform</td>
+<td>M3→M4 Adoption</td>
+<td>Q2</td>
+</tr>
+<tr>
+<td>Customer health scoring</td>
+<td>M4→M5 Adoption</td>
+<td>Q3</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<!-- _class: lead -->
+
+<h1 id="ai-domain">AI Domain</h1>
+<p><strong>AI Adoption and Integration</strong></p>
+<hr />
+<h1 id="ai-overview">AI Overview</h1>
+<h2 id="what-we-measure_4">What We Measure</h2>
+<p>The AI domain focuses on <strong>AI adoption across all value streams</strong>:</p>
+<ul>
+<li><strong>Adoption</strong> - Tool usage, training coverage</li>
+<li><strong>Productivity</strong> - Efficiency gains, ROI</li>
+<li><strong>Governance</strong> - Policy, quality, security</li>
+</ul>
+<p><strong>Goal:</strong> Accelerate productivity through responsible AI integration</p>
+<hr />
+<h1 id="ai-across-the-value-stream">AI Across the Value Stream</h1>
+<h2 id="layer-responsibilities_4">Layer Responsibilities</h2>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>AI Focus</th>
+<th>Key Metrics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Engineering</strong></td>
+<td>Code assistants, test generation</td>
+<td>Developer adoption, productivity</td>
+</tr>
+<tr>
+<td><strong>Operations</strong></td>
+<td>AIOps, incident response</td>
+<td>Auto-diagnosis rate</td>
+</tr>
+<tr>
+<td><strong>Security</strong></td>
+<td>AI-powered scanning</td>
+<td>Detection coverage</td>
+</tr>
+<tr>
+<td><strong>Support</strong></td>
+<td>Ticket automation</td>
+<td>Auto-resolution rate</td>
+</tr>
+<tr>
+<td><strong>Governance</strong></td>
+<td>Policy, ROI tracking</td>
+<td>Compliance, spend</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="ai-kpis">AI KPIs</h1>
+<h2 id="core-metrics_2">Core Metrics</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Description</th>
+<th>Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tool Adoption</strong></td>
+<td>Teams using AI tools</td>
+<td>80%</td>
+</tr>
+<tr>
+<td><strong>Training Coverage</strong></td>
+<td>Staff with AI training</td>
+<td>80%</td>
+</tr>
+<tr>
+<td><strong>Coding Assistant Usage</strong></td>
+<td>Developers with AI assistants</td>
+<td>80%</td>
+</tr>
+<tr>
+<td><strong>Productivity Gain</strong></td>
+<td>Measured improvement</td>
+<td>&gt;20%</td>
+</tr>
+<tr>
+<td><strong>AI Output Accuracy</strong></td>
+<td>Acceptance rate</td>
+<td>&gt;80%</td>
+</tr>
+<tr>
+<td><strong>ROI Tracked</strong></td>
+<td>Investment return measured</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="ai-maturity-levels">AI Maturity Levels</h1>
+<h2 id="what-each-level-means_4">What Each Level Means</h2>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Description</th>
+<th>Indicators</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>M1</strong></td>
+<td>Reactive</td>
+<td>Ad-hoc AI usage, no governance</td>
+</tr>
+<tr>
+<td><strong>M2</strong></td>
+<td>Basic</td>
+<td>Approved tools, policy, basic training</td>
+</tr>
+<tr>
+<td><strong>M3</strong></td>
+<td>Defined</td>
+<td>Prompt libraries, AI in CI/CD, quality guidelines</td>
+</tr>
+<tr>
+<td><strong>M4</strong></td>
+<td>Managed</td>
+<td>ROI tracked, AIOps, AI security scanning</td>
+</tr>
+<tr>
+<td><strong>M5</strong></td>
+<td>Optimizing</td>
+<td>Autonomous agents, custom models, self-healing</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="ai-level-requirements">AI Level Requirements</h1>
+<h2 id="m2-m3-m4_1">M2 → M3 → M4</h2>
+<p><strong>M2 (Basic):</strong>
+- AI tools approved and deployed
+- Usage policy documented
+- 50% staff trained
+- Spend tracked</p>
+<p><strong>M3 (Defined):</strong>
+- 80% developers with AI assistants
+- Prompt/template library established
+- AI code review in 50% PRs
+- Quality guidelines defined</p>
+<p><strong>M4 (Managed):</strong>
+- ROI measured and reported
+- 20%+ productivity improvement
+- AI in incident response
+- AI security scanning in 80% repos</p>
+<hr />
+<h1 id="ai-current-state">AI Current State</h1>
+<h2 id="assessment-summary_4">Assessment Summary</h2>
+<table>
+<thead>
+<tr>
+<th>KPI</th>
+<th>Current</th>
+<th>Level</th>
+<th>M3</th>
+<th>M4</th>
+<th>M5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tool Adoption</td>
+<td>60%</td>
+<td>M2</td>
+<td>≥80%</td>
+<td>≥90%</td>
+<td>≥95%</td>
+</tr>
+<tr>
+<td>Training Coverage</td>
+<td>45%</td>
+<td>M1</td>
+<td>≥80%</td>
+<td>≥90%</td>
+<td>≥95%</td>
+</tr>
+<tr>
+<td>Coding Assistant</td>
+<td>55%</td>
+<td>M2</td>
+<td>≥80%</td>
+<td>≥90%</td>
+<td>≥95%</td>
+</tr>
+<tr>
+<td>Prompt Library</td>
+<td>No</td>
+<td>M2</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>AI Code Review</td>
+<td>20%</td>
+<td>M2</td>
+<td>≥50%</td>
+<td>≥80%</td>
+<td>≥95%</td>
+</tr>
+<tr>
+<td>Productivity Gain</td>
+<td>15%</td>
+<td>M3</td>
+<td>-</td>
+<td>≥20%</td>
+<td>≥40%</td>
+</tr>
+<tr>
+<td>ROI Tracked</td>
+<td>No</td>
+<td>M3</td>
+<td>-</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>AI Accuracy</td>
+<td>75%</td>
+<td>M3</td>
+<td>-</td>
+<td>≥80%</td>
+<td>≥90%</td>
+</tr>
+<tr>
+<td>Autonomous Agents</td>
+<td>5%</td>
+<td>M4</td>
+<td>-</td>
+<td>-</td>
+<td>≥30%</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="ai-roadmap">AI Roadmap</h1>
+<h2 id="prioritized-initiatives_4">Prioritized Initiatives</h2>
+<table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Impact</th>
+<th>Timeline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Roll out AI coding assistants</td>
+<td>M2→M3 Engineering</td>
+<td>Q1</td>
+</tr>
+<tr>
+<td>Create prompt library</td>
+<td>M3 Enablement</td>
+<td>Q1</td>
+</tr>
+<tr>
+<td>AI training program</td>
+<td>M2 Foundation</td>
+<td>Q1</td>
+</tr>
+<tr>
+<td>Integrate AI in CI/CD</td>
+<td>M3 Engineering</td>
+<td>Q2</td>
+</tr>
+<tr>
+<td>Deploy AI metrics dashboard</td>
+<td>M3→M4 Governance</td>
+<td>Q2</td>
+</tr>
+<tr>
+<td>AIOps implementation</td>
+<td>M4 Operations</td>
+<td>Q3</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<!-- _class: lead -->
+
+<h1 id="summary-and-next-steps">Summary and Next Steps</h1>
+<hr />
+<h1 id="cross-domain-summary">Cross-Domain Summary</h1>
+<h2 id="maturity-progression-plan">Maturity Progression Plan</h2>
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Current</th>
+<th>Q2 Target</th>
+<th>Q4 Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Security</strong></td>
+<td>M2</td>
+<td>M3</td>
+<td>M4</td>
+</tr>
+<tr>
+<td><strong>Operational Excellence</strong></td>
+<td>M3</td>
+<td>M4</td>
+<td>M4</td>
+</tr>
+<tr>
+<td><strong>Quality</strong></td>
+<td>M2</td>
+<td>M3</td>
+<td>M4</td>
+</tr>
+<tr>
+<td><strong>Product</strong></td>
+<td>M2</td>
+<td>M3</td>
+<td>M4</td>
+</tr>
+<tr>
+<td><strong>AI</strong></td>
+<td>M2</td>
+<td>M3</td>
+<td>M4</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="investment-required">Investment Required</h1>
+<h2 id="resources-and-commitment">Resources and Commitment</h2>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Investment</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tooling</strong></td>
+<td>Platform improvements</td>
+<td>Automation, observability, AI</td>
+</tr>
+<tr>
+<td><strong>Training</strong></td>
+<td>Team enablement</td>
+<td>SRE, security, quality, AI practices</td>
+</tr>
+<tr>
+<td><strong>Headcount</strong></td>
+<td>Enabling team</td>
+<td>Cross-functional improvement</td>
+</tr>
+<tr>
+<td><strong>Time</strong></td>
+<td>Team allocation</td>
+<td>20% on maturity initiatives</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="success-metrics">Success Metrics</h1>
+<h2 id="how-well-measure-progress">How We'll Measure Progress</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Current</th>
+<th>6 Month</th>
+<th>12 Month</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Average Maturity</td>
+<td>M2.4</td>
+<td>M3.0</td>
+<td>M3.5</td>
+</tr>
+<tr>
+<td>SLO Compliance</td>
+<td>85%</td>
+<td>95%</td>
+<td>99%</td>
+</tr>
+<tr>
+<td>MTTR</td>
+<td>4 hours</td>
+<td>2 hours</td>
+<td>1 hour</td>
+</tr>
+<tr>
+<td>Deployment Frequency</td>
+<td>Weekly</td>
+<td>Daily</td>
+<td>On-demand</td>
+</tr>
+<tr>
+<td>AI Productivity Gain</td>
+<td>15%</td>
+<td>25%</td>
+<td>40%</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="next-steps">Next Steps</h1>
+<h2 id="immediate-actions">Immediate Actions</h2>
+<ol>
+<li><strong>Approve</strong> maturity model as the unified metrics framework</li>
+<li><strong>Conduct</strong> baseline maturity assessment per domain</li>
+<li><strong>Select</strong> progression strategy (recommend: Foundation + Targeted)</li>
+<li><strong>Assign</strong> domain overlay owners</li>
+<li><strong>Kickoff</strong> Q1 initiatives</li>
+</ol>
+<hr />
+<h1 id="discussion">Discussion</h1>
+<h2 id="questions">Questions?</h2>
+<p><strong>Key Decisions Needed:</strong></p>
+<ul>
+<li>[ ] Approve maturity framework adoption</li>
+<li>[ ] Select progression strategy</li>
+<li>[ ] Allocate resources for Q1 initiatives</li>
+<li>[ ] Assign executive sponsors per domain</li>
+</ul>
+<hr />
+<!-- _class: lead -->
+
+<h1 id="appendix">Appendix</h1>
+<hr />
+<h1 id="team-accountability">Team Accountability</h1>
+<h2 id="team-topologies-integration">Team Topologies Integration</h2>
+<table>
+<thead>
+<tr>
+<th>Team Type</th>
+<th>Role</th>
+<th>Accountability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Stream-Aligned</strong></td>
+<td>Build and run services</td>
+<td>Layer metrics (code, runtime)</td>
+</tr>
+<tr>
+<td><strong>Platform</strong></td>
+<td>Provide infrastructure</td>
+<td>Infra layer metrics</td>
+</tr>
+<tr>
+<td><strong>Enabling</strong></td>
+<td>Help teams adopt practices</td>
+<td>Cross-team improvement</td>
+</tr>
+<tr>
+<td><strong>Overlay</strong></td>
+<td>Define domain standards</td>
+<td>Domain-wide metrics</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Every metric has an owner. Every team knows their KPIs.</strong></p>
+<hr />
+<h1 id="framework-mappings">Framework Mappings</h1>
+<h2 id="industry-alignment">Industry Alignment</h2>
+<table>
+<thead>
+<tr>
+<th>Framework</th>
+<th>Mapping</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DORA</strong></td>
+<td>Operational Excellence metrics</td>
+</tr>
+<tr>
+<td><strong>SRE</strong></td>
+<td>Golden signals (latency, traffic, errors, saturation)</td>
+</tr>
+<tr>
+<td><strong>NIST CSF</strong></td>
+<td>Security domain stages</td>
+</tr>
+<tr>
+<td><strong>MITRE ATT&amp;CK</strong></td>
+<td>Security detection metrics</td>
+</tr>
+<tr>
+<td><strong>ISO 25010</strong></td>
+<td>Quality characteristics</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="project-prioritization">Project Prioritization</h1>
+<h2 id="scoring-framework">Scoring Framework</h2>
+<table>
+<thead>
+<tr>
+<th>Factor</th>
+<th>Weight</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KPI Impact</td>
+<td>30%</td>
+<td>Expected metric improvement</td>
+</tr>
+<tr>
+<td>Maturity</td>
+<td>25%</td>
+<td>Enables level progression</td>
+</tr>
+<tr>
+<td>Business Value</td>
+<td>20%</td>
+<td>Revenue, risk, compliance</td>
+</tr>
+<tr>
+<td>Effort</td>
+<td>15%</td>
+<td>Time and resources (inverse)</td>
+</tr>
+<tr>
+<td>Dependencies</td>
+<td>10%</td>
+<td>Blockers (inverse)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Projects scored 1-5 on each factor, weighted total determines priority.</strong></p>
+<hr />
+<h1 id="glossary">Glossary</h1>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SLO</strong></td>
+<td>Service Level Objective - target for a metric</td>
+</tr>
+<tr>
+<td><strong>SLI</strong></td>
+<td>Service Level Indicator - the measurement</td>
+</tr>
+<tr>
+<td><strong>DORA</strong></td>
+<td>DevOps Research and Assessment metrics</td>
+</tr>
+<tr>
+<td><strong>MTTR</strong></td>
+<td>Mean Time to Recovery</td>
+</tr>
+<tr>
+<td><strong>CFR</strong></td>
+<td>Change Failure Rate</td>
+</tr>
+<tr>
+<td><strong>AIOps</strong></td>
+<td>AI for IT Operations</td>
+</tr>
+<tr>
+<td><strong>CSPM</strong></td>
+<td>Cloud Security Posture Management</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/grokify/prism" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>
