@@ -4,6 +4,7 @@ go 1.26.1
 
 require (
 	github.com/grokify/echartify v0.2.0
+	github.com/grokify/oscompat v0.2.0
 	github.com/grokify/structured-plan v0.10.0
 	github.com/plexusone/dashforge v0.2.0
 	github.com/plexusone/omniframe v0.1.0

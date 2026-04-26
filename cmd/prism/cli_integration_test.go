@@ -1,11 +1,12 @@
 package main
 
 import (
-	"bytes"
 	"os"
 	"path/filepath"
 	"strings"
 	"testing"
+
+	"github.com/grokify/oscompat/testutil"
 )
 
 // getTeamTopologyFile returns the path to the team-topology.json example file
@@ -46,22 +47,14 @@ func TestLayerListCommandJSON(t *testing.T) {
 	layerJSONOutput = true
 	defer func() { layerJSONOutput = false }()
 
-	// Capture stdout
-	old := os.Stdout
-	r, w, _ := os.Pipe()
-	os.Stdout = w
+	var runErr error
+	output := testutil.CaptureStdout(func() {
+		runErr = runLayerList(layerListCmd, []string{exampleFile})
+	})
 
-	err := runLayerList(layerListCmd, []string{exampleFile})
-	if err != nil {
-		t.Errorf("runLayerList with JSON failed: %v", err)
+	if runErr != nil {
+		t.Errorf("runLayerList with JSON failed: %v", runErr)
 	}
-
-	w.Close()
-	os.Stdout = old
-
-	var buf bytes.Buffer
-	_, _ = buf.ReadFrom(r)
-	output := buf.String()
 
 	// Check that output contains JSON array
 	if !strings.Contains(output, "[") || !strings.Contains(output, "]") {
@@ -108,22 +101,14 @@ func TestLayerShowWithSignals(t *testing.T) {
 
 	layerJSONOutput = false
 
-	// Capture stdout to verify output contains signals
-	old := os.Stdout
-	r, w, _ := os.Pipe()
-	os.Stdout = w
+	var runErr error
+	output := testutil.CaptureStdout(func() {
+		runErr = runLayerShow(layerShowCmd, []string{exampleFile, "runtime"})
+	})
 
-	err := runLayerShow(layerShowCmd, []string{exampleFile, "runtime"})
-	if err != nil {
-		t.Errorf("runLayerShow failed: %v", err)
+	if runErr != nil {
+		t.Errorf("runLayerShow failed: %v", runErr)
 	}
-
-	w.Close()
-	os.Stdout = old
-
-	var buf bytes.Buffer
-	_, _ = buf.ReadFrom(r)
-	output := buf.String()
 
 	// Check that output contains golden signals
 	if !strings.Contains(output, "Golden Signals") {
@@ -156,22 +141,14 @@ func TestTeamListCommandJSON(t *testing.T) {
 	teamJSONOutput = true
 	defer func() { teamJSONOutput = false }()
 
-	// Capture stdout
-	old := os.Stdout
-	r, w, _ := os.Pipe()
-	os.Stdout = w
+	var runErr error
+	output := testutil.CaptureStdout(func() {
+		runErr = runTeamList(teamListCmd, []string{exampleFile})
+	})
 
-	err := runTeamList(teamListCmd, []string{exampleFile})
-	if err != nil {
-		t.Errorf("runTeamList with JSON failed: %v", err)
+	if runErr != nil {
+		t.Errorf("runTeamList with JSON failed: %v", runErr)
 	}
-
-	w.Close()
-	os.Stdout = old
-
-	var buf bytes.Buffer
-	_, _ = buf.ReadFrom(r)
-	output := buf.String()
 
 	// Check that output contains JSON array
 	if !strings.Contains(output, "[") || !strings.Contains(output, "]") {
@@ -234,22 +211,14 @@ func TestServiceListCommandJSON(t *testing.T) {
 	serviceJSONOutput = true
 	defer func() { serviceJSONOutput = false }()
 
-	// Capture stdout
-	old := os.Stdout
-	r, w, _ := os.Pipe()
-	os.Stdout = w
+	var runErr error
+	output := testutil.CaptureStdout(func() {
+		runErr = runServiceList(serviceListCmd, []string{exampleFile})
+	})
 
-	err := runServiceList(serviceListCmd, []string{exampleFile})
-	if err != nil {
-		t.Errorf("runServiceList with JSON failed: %v", err)
+	if runErr != nil {
+		t.Errorf("runServiceList with JSON failed: %v", runErr)
 	}
-
-	w.Close()
-	os.Stdout = old
-
-	var buf bytes.Buffer
-	_, _ = buf.ReadFrom(r)
-	output := buf.String()
 
 	// Check that output contains JSON array
 	if !strings.Contains(output, "[") || !strings.Contains(output, "]") {
@@ -313,22 +282,14 @@ func TestAnalyzeCommandJSON(t *testing.T) {
 	analyzeOutputFormat = "json"
 	defer func() { analyzeOutputFormat = "text" }()
 
-	// Capture stdout
-	old := os.Stdout
-	r, w, _ := os.Pipe()
-	os.Stdout = w
+	var runErr error
+	output := testutil.CaptureStdout(func() {
+		runErr = runAnalyze(analyzeCmd, []string{exampleFile})
+	})
 
-	err := runAnalyze(analyzeCmd, []string{exampleFile})
-	if err != nil {
-		t.Errorf("runAnalyze with JSON failed: %v", err)
+	if runErr != nil {
+		t.Errorf("runAnalyze with JSON failed: %v", runErr)
 	}
-
-	w.Close()
-	os.Stdout = old
-
-	var buf bytes.Buffer
-	_, _ = buf.ReadFrom(r)
-	output := buf.String()
 
 	// Check that output contains JSON structure
 	if !strings.Contains(output, "summary") {
@@ -346,22 +307,14 @@ func TestAnalyzeCommandPrompt(t *testing.T) {
 	analyzeOutputFormat = "prompt"
 	defer func() { analyzeOutputFormat = "text" }()
 
-	// Capture stdout
-	old := os.Stdout
-	r, w, _ := os.Pipe()
-	os.Stdout = w
+	var runErr error
+	output := testutil.CaptureStdout(func() {
+		runErr = runAnalyze(analyzeCmd, []string{exampleFile})
+	})
 
-	err := runAnalyze(analyzeCmd, []string{exampleFile})
-	if err != nil {
-		t.Errorf("runAnalyze with prompt failed: %v", err)
+	if runErr != nil {
+		t.Errorf("runAnalyze with prompt failed: %v", runErr)
 	}
-
-	w.Close()
-	os.Stdout = old
-
-	var buf bytes.Buffer
-	_, _ = buf.ReadFrom(r)
-	output := buf.String()
 
 	// Check that output contains prompt structure
 	if !strings.Contains(output, "# PRISM Analysis Prompt") {
@@ -379,22 +332,14 @@ func TestExportOKRCommand(t *testing.T) {
 	// Reset flags - output to stdout
 	exportOutputDir = ""
 
-	// Capture stdout
-	old := os.Stdout
-	r, w, _ := os.Pipe()
-	os.Stdout = w
+	var runErr error
+	output := testutil.CaptureStdout(func() {
+		runErr = runExportOKR(exportOKRCmd, []string{exampleFile})
+	})
 
-	err := runExportOKR(exportOKRCmd, []string{exampleFile})
-	if err != nil {
-		t.Errorf("runExportOKR failed: %v", err)
+	if runErr != nil {
+		t.Errorf("runExportOKR failed: %v", runErr)
 	}
-
-	w.Close()
-	os.Stdout = old
-
-	var buf bytes.Buffer
-	_, _ = buf.ReadFrom(r)
-	output := buf.String()
 
 	// Check that output contains OKR structure
 	if !strings.Contains(output, "objectives") {
@@ -415,22 +360,14 @@ func TestExportV2MOMCommand(t *testing.T) {
 	// Reset flags - output to stdout
 	exportOutputDir = ""
 
-	// Capture stdout
-	old := os.Stdout
-	r, w, _ := os.Pipe()
-	os.Stdout = w
+	var runErr error
+	output := testutil.CaptureStdout(func() {
+		runErr = runExportV2MOM(exportV2MOMCmd, []string{exampleFile})
+	})
 
-	err := runExportV2MOM(exportV2MOMCmd, []string{exampleFile})
-	if err != nil {
-		t.Errorf("runExportV2MOM failed: %v", err)
+	if runErr != nil {
+		t.Errorf("runExportV2MOM failed: %v", runErr)
 	}
-
-	w.Close()
-	os.Stdout = old
-
-	var buf bytes.Buffer
-	_, _ = buf.ReadFrom(r)
-	output := buf.String()
 
 	// Check that output contains V2MOM structure
 	if !strings.Contains(output, "vision") {
@@ -599,22 +536,14 @@ func TestInitiativeListCommandJSON(t *testing.T) {
 	initiativeByGoal = false
 	defer func() { initiativeOutputFormat = "text" }()
 
-	// Capture stdout
-	old := os.Stdout
-	r, w, _ := os.Pipe()
-	os.Stdout = w
+	var runErr error
+	output := testutil.CaptureStdout(func() {
+		runErr = runInitiativeList(initiativeListCmd, []string{exampleFile})
+	})
 
-	err := runInitiativeList(initiativeListCmd, []string{exampleFile})
-	if err != nil {
-		t.Errorf("runInitiativeList with JSON failed: %v", err)
+	if runErr != nil {
+		t.Errorf("runInitiativeList with JSON failed: %v", runErr)
 	}
-
-	w.Close()
-	os.Stdout = old
-
-	var buf bytes.Buffer
-	_, _ = buf.ReadFrom(r)
-	output := buf.String()
 
 	// Check that output contains JSON array
 	if !strings.Contains(output, "[") || !strings.Contains(output, "]") {
@@ -647,22 +576,14 @@ func TestInitiativeShowCommandJSON(t *testing.T) {
 	initiativeOutputFormat = "json"
 	defer func() { initiativeOutputFormat = "text" }()
 
-	// Capture stdout
-	old := os.Stdout
-	r, w, _ := os.Pipe()
-	os.Stdout = w
+	var runErr error
+	output := testutil.CaptureStdout(func() {
+		runErr = runInitiativeShow(initiativeShowCmd, []string{exampleFile, "init-ci-cd"})
+	})
 
-	err := runInitiativeShow(initiativeShowCmd, []string{exampleFile, "init-ci-cd"})
-	if err != nil {
-		t.Errorf("runInitiativeShow with JSON failed: %v", err)
+	if runErr != nil {
+		t.Errorf("runInitiativeShow with JSON failed: %v", runErr)
 	}
-
-	w.Close()
-	os.Stdout = old
-
-	var buf bytes.Buffer
-	_, _ = buf.ReadFrom(r)
-	output := buf.String()
 
 	// Check that output contains initiative fields
 	if !strings.Contains(output, "init-ci-cd") {
@@ -784,22 +705,14 @@ func TestInitCommandWithInvalidDomain(t *testing.T) {
 
 // TestCatalogCommand tests the catalog command
 func TestCatalogCommand(t *testing.T) {
-	// Capture stdout
-	old := os.Stdout
-	r, w, _ := os.Pipe()
-	os.Stdout = w
+	var runErr error
+	output := testutil.CaptureStdout(func() {
+		runErr = runCatalog(catalogCmd, []string{})
+	})
 
-	err := runCatalog(catalogCmd, []string{})
-	if err != nil {
-		t.Errorf("runCatalog failed: %v", err)
+	if runErr != nil {
+		t.Errorf("runCatalog failed: %v", runErr)
 	}
-
-	w.Close()
-	os.Stdout = old
-
-	var buf bytes.Buffer
-	_, _ = buf.ReadFrom(r)
-	output := buf.String()
 
 	// Verify output contains expected sections
 	if !strings.Contains(output, "Domains:") {
@@ -828,22 +741,14 @@ func TestReportCommand(t *testing.T) {
 	reportOutput = ""
 	reportView = "both"
 
-	// Capture stdout
-	old := os.Stdout
-	r, w, _ := os.Pipe()
-	os.Stdout = w
+	var runErr error
+	output := testutil.CaptureStdout(func() {
+		runErr = runReport(reportCmd, []string{exampleFile})
+	})
 
-	err := runReport(reportCmd, []string{exampleFile})
-	if err != nil {
-		t.Errorf("runReport failed: %v", err)
+	if runErr != nil {
+		t.Errorf("runReport failed: %v", runErr)
 	}
-
-	w.Close()
-	os.Stdout = old
-
-	var buf bytes.Buffer
-	_, _ = buf.ReadFrom(r)
-	output := buf.String()
 
 	// Verify markdown output
 	if !strings.Contains(output, "#") {
@@ -863,22 +768,14 @@ func TestReportCommandJSON(t *testing.T) {
 	reportView = "both"
 	defer func() { reportFormat = "markdown" }()
 
-	// Capture stdout
-	old := os.Stdout
-	r, w, _ := os.Pipe()
-	os.Stdout = w
+	var runErr error
+	output := testutil.CaptureStdout(func() {
+		runErr = runReport(reportCmd, []string{exampleFile})
+	})
 
-	err := runReport(reportCmd, []string{exampleFile})
-	if err != nil {
-		t.Errorf("runReport with JSON failed: %v", err)
+	if runErr != nil {
+		t.Errorf("runReport with JSON failed: %v", runErr)
 	}
-
-	w.Close()
-	os.Stdout = old
-
-	var buf bytes.Buffer
-	_, _ = buf.ReadFrom(r)
-	output := buf.String()
 
 	// Verify JSON output
 	if !strings.Contains(output, "{") || !strings.Contains(output, "}") {
@@ -923,22 +820,14 @@ func TestDashboardCommand(t *testing.T) {
 	dashboardFormat = "json"
 	dashboardOutput = ""
 
-	// Capture stdout
-	old := os.Stdout
-	r, w, _ := os.Pipe()
-	os.Stdout = w
+	var runErr error
+	output := testutil.CaptureStdout(func() {
+		runErr = runDashboard(dashboardCmd, []string{exampleFile})
+	})
 
-	err := runDashboard(dashboardCmd, []string{exampleFile})
-	if err != nil {
-		t.Errorf("runDashboard failed: %v", err)
+	if runErr != nil {
+		t.Errorf("runDashboard failed: %v", runErr)
 	}
-
-	w.Close()
-	os.Stdout = old
-
-	var buf bytes.Buffer
-	_, _ = buf.ReadFrom(r)
-	output := buf.String()
 
 	// Verify JSON output
 	if !strings.Contains(output, "{") || !strings.Contains(output, "}") {
@@ -957,22 +846,14 @@ func TestDashboardCommandMarkdown(t *testing.T) {
 	dashboardOutput = ""
 	defer func() { dashboardFormat = "json" }()
 
-	// Capture stdout
-	old := os.Stdout
-	r, w, _ := os.Pipe()
-	os.Stdout = w
+	var runErr error
+	output := testutil.CaptureStdout(func() {
+		runErr = runDashboard(dashboardCmd, []string{exampleFile})
+	})
 
-	err := runDashboard(dashboardCmd, []string{exampleFile})
-	if err != nil {
-		t.Errorf("runDashboard markdown failed: %v", err)
+	if runErr != nil {
+		t.Errorf("runDashboard markdown failed: %v", runErr)
 	}
-
-	w.Close()
-	os.Stdout = old
-
-	var buf bytes.Buffer
-	_, _ = buf.ReadFrom(r)
-	output := buf.String()
 
 	// Verify markdown output
 	if !strings.Contains(output, "#") {
@@ -990,22 +871,14 @@ func TestSLOReportCommand(t *testing.T) {
 	// Reset flags
 	sloReportFormat = "json"
 
-	// Capture stdout
-	old := os.Stdout
-	r, w, _ := os.Pipe()
-	os.Stdout = w
+	var runErr error
+	output := testutil.CaptureStdout(func() {
+		runErr = runSLOReport(sloReportCmd, []string{exampleFile})
+	})
 
-	err := runSLOReport(sloReportCmd, []string{exampleFile})
-	if err != nil {
-		t.Errorf("runSLOReport failed: %v", err)
+	if runErr != nil {
+		t.Errorf("runSLOReport failed: %v", runErr)
 	}
-
-	w.Close()
-	os.Stdout = old
-
-	var buf bytes.Buffer
-	_, _ = buf.ReadFrom(r)
-	output := buf.String()
 
 	// Verify JSON output
 	if !strings.Contains(output, "{") || !strings.Contains(output, "}") {
@@ -1023,22 +896,14 @@ func TestSLOReportCommandMarkdown(t *testing.T) {
 	sloReportFormat = "markdown"
 	defer func() { sloReportFormat = "json" }()
 
-	// Capture stdout
-	old := os.Stdout
-	r, w, _ := os.Pipe()
-	os.Stdout = w
+	var runErr error
+	output := testutil.CaptureStdout(func() {
+		runErr = runSLOReport(sloReportCmd, []string{exampleFile})
+	})
 
-	err := runSLOReport(sloReportCmd, []string{exampleFile})
-	if err != nil {
-		t.Errorf("runSLOReport markdown failed: %v", err)
+	if runErr != nil {
+		t.Errorf("runSLOReport markdown failed: %v", runErr)
 	}
-
-	w.Close()
-	os.Stdout = old
-
-	var buf bytes.Buffer
-	_, _ = buf.ReadFrom(r)
-	output := buf.String()
 
 	// Verify markdown output
 	if !strings.Contains(output, "#") {
@@ -1056,22 +921,14 @@ func TestSLOReportCommandMatrix(t *testing.T) {
 	sloReportFormat = "matrix"
 	defer func() { sloReportFormat = "json" }()
 
-	// Capture stdout
-	old := os.Stdout
-	r, w, _ := os.Pipe()
-	os.Stdout = w
+	var runErr error
+	output := testutil.CaptureStdout(func() {
+		runErr = runSLOReport(sloReportCmd, []string{exampleFile})
+	})
 
-	err := runSLOReport(sloReportCmd, []string{exampleFile})
-	if err != nil {
-		t.Errorf("runSLOReport matrix failed: %v", err)
+	if runErr != nil {
+		t.Errorf("runSLOReport matrix failed: %v", runErr)
 	}
-
-	w.Close()
-	os.Stdout = old
-
-	var buf bytes.Buffer
-	_, _ = buf.ReadFrom(r)
-	output := buf.String()
 
 	// Verify matrix output (should have table-like structure)
 	if len(output) == 0 {

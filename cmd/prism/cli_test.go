@@ -1,12 +1,12 @@
 package main
 
 import (
-	"bytes"
 	"os"
 	"path/filepath"
 	"strings"
 	"testing"
 
+	"github.com/grokify/oscompat/testutil"
 	"github.com/grokify/prism/analysis"
 )
 
@@ -41,22 +41,14 @@ func TestGoalListCommandJSON(t *testing.T) {
 	goalOutputFormat = "json"
 	defer func() { goalOutputFormat = "text" }()
 
-	// Capture stdout
-	old := os.Stdout
-	r, w, _ := os.Pipe()
-	os.Stdout = w
+	var runErr error
+	output := testutil.CaptureStdout(func() {
+		runErr = runGoalList(goalListCmd, []string{exampleFile})
+	})
 
-	err := runGoalList(goalListCmd, []string{exampleFile})
-	if err != nil {
-		t.Errorf("runGoalList with JSON failed: %v", err)
+	if runErr != nil {
+		t.Errorf("runGoalList with JSON failed: %v", runErr)
 	}
-
-	w.Close()
-	os.Stdout = old
-
-	var buf bytes.Buffer
-	_, _ = buf.ReadFrom(r) // Error ignored as it's just test output
-	output := buf.String()
 
 	// Check that output contains JSON array
 	if !strings.Contains(output, "[") || !strings.Contains(output, "]") {
