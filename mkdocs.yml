@@ -106,6 +106,10 @@ nav:
       - Dashforge: integrations/dashforge.md
       - Marp Presentations: integrations/marp.md
       - Excel Export: integrations/excel.md
+  - Developer:
+      - Overview: developer/index.md
+      - Architecture: developer/architecture.md
+      - Contributing: developer/contributing.md
   - Design:
       - Maturity:
           - Codegen: design/maturity/FEAT_MATURITY_CODEGEN.md
