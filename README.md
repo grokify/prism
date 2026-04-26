@@ -574,11 +574,11 @@ PRISM integrates with [structured-plan](https://github.com/grokify/structured-pl
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                         PRISM (Source of Truth)                 │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐          │
-│  │    Goals     │  │   Maturity   │  │     SLOs     │          │
-│  │              │  │    Models    │  │              │          │
-│  │ "Reliability"│  │  M1→M2→M3→M4│  │ avail>=99.9% │          │
-│  └──────────────┘  └──────────────┘  └──────────────┘          │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐           │
+│  │    Goals     │  │   Maturity   │  │     SLOs     │           │
+│  │              │  │    Models    │  │              │           │
+│  │ "Reliability"│  │  M1→M2→M3→M4 │  │ avail>=99.9% │           │
+│  └──────────────┘  └──────────────┘  └──────────────┘           │
 └───────────────────────────┬─────────────────────────────────────┘
                             │
                             ▼
@@ -597,12 +597,12 @@ PRISM integrates with [structured-plan](https://github.com/grokify/structured-pl
                             ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                 Structured-Plan (Execution)                     │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐          │
-│  │     OKR      │  │   V2MOM      │  │   Roadmap    │          │
-│  │              │  │              │  │              │          │
-│  │ Objectives   │  │ Methods      │  │ Phases       │          │
-│  │ Key Results  │  │ Measures     │  │ Deliverables │          │
-│  └──────────────┘  └──────────────┘  └──────────────┘          │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐           │
+│  │     OKR      │  │   V2MOM      │  │   Roadmap    │           │
+│  │              │  │              │  │              │           │
+│  │ Objectives   │  │ Methods      │  │ Phases       │           │
+│  │ Key Results  │  │ Measures     │  │ Deliverables │           │
+│  └──────────────┘  └──────────────┘  └──────────────┘           │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
