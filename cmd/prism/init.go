@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/grokify/prism"
+	"github.com/grokify/prism/scaffold"
 	"github.com/spf13/cobra"
 )
 
@@ -32,50 +33,22 @@ func init() {
 }
 
 func runInit(cmd *cobra.Command, args []string) error {
-	// Determine which domains to include
-	var domains []prism.DomainDef
-	var domainNames []string
+	var doc *prism.PRISMDocument
 
-	if initDomain == "" {
-		// Include both domains
-		domains = []prism.DomainDef{
-			{Name: prism.DomainSecurity, Description: "Security metrics and controls", Weight: 0.5},
-			{Name: prism.DomainOperations, Description: "Operational metrics and SLOs", Weight: 0.5},
-		}
-		domainNames = prism.AllDomains()
-	} else {
-		// Include only the specified domain
-		switch initDomain {
-		case prism.DomainSecurity:
-			domains = []prism.DomainDef{
-				{Name: prism.DomainSecurity, Description: "Security metrics and controls", Weight: 1.0},
-			}
-		case prism.DomainOperations:
-			domains = []prism.DomainDef{
-				{Name: prism.DomainOperations, Description: "Operational metrics and SLOs", Weight: 1.0},
-			}
-		default:
-			return fmt.Errorf("invalid domain %q, must be 'security' or 'operations'", initDomain)
-		}
-		domainNames = []string{initDomain}
-	}
-
-	// Create document with metadata
-	doc := &prism.PRISMDocument{
-		Schema: "https://github.com/grokify/prism/schema/prism.schema.json",
-		Metadata: &prism.Metadata{
-			Name:        "My PRISM Document",
-			Description: "PRISM metrics for SaaS health monitoring",
-			Version:     "1.0.0",
-		},
-		Domains:  domains,
-		Maturity: prism.NewMaturityModelForDomains(domainNames),
-		Metrics:  make([]prism.Metric, 0),
-	}
-
-	// Add example metrics
-	if initDomain == "" || initDomain == prism.DomainOperations {
-		doc.Metrics = append(doc.Metrics, createOperationsMetrics()...)
+	// Create document based on domain selection
+	switch initDomain {
+	case "":
+		// Default: both security and operations
+		doc = scaffold.NewDocument(prism.DomainSecurity, prism.DomainOperations)
+		doc.Metrics = append(doc.Metrics, scaffold.OperationsMetrics()...)
+	case prism.DomainSecurity:
+		doc = scaffold.NewDocument(prism.DomainSecurity)
+		doc.Metrics = append(doc.Metrics, scaffold.SecurityMetrics()...)
+	case prism.DomainOperations:
+		doc = scaffold.NewDocument(prism.DomainOperations)
+		doc.Metrics = append(doc.Metrics, scaffold.OperationsMetrics()...)
+	default:
+		return fmt.Errorf("invalid domain %q, must be 'security' or 'operations'", initDomain)
 	}
 
 	// Marshal to JSON
@@ -93,45 +66,4 @@ func runInit(cmd *cobra.Command, args []string) error {
 	return nil
 }
 
-func createOperationsMetrics() []prism.Metric {
-	return []prism.Metric{
-		{
-			ID:             "ops-availability-01",
-			Name:           "Service Availability",
-			Description:    "Percentage of time the service is available",
-			Domain:         prism.DomainOperations,
-			Stage:          prism.StageRuntime,
-			Category:       prism.CategoryReliability,
-			MetricType:     prism.MetricTypeRate,
-			TrendDirection: prism.TrendHigherBetter,
-			Unit:           "%",
-			Baseline:       99.0,
-			Current:        99.9,
-			Target:         99.95,
-			Thresholds:     &prism.Thresholds{Green: 99.9, Yellow: 99.5, Red: 99.0},
-			SLI:            &prism.SLI{Name: "Availability", Formula: "successful_requests / total_requests"},
-			SLO:            &prism.SLO{Target: ">=99.95%", Window: prism.Window30Days},
-			FrameworkMappings: []prism.FrameworkMapping{
-				{Framework: prism.FrameworkSRE, Reference: "availability-slo"},
-				{Framework: prism.FrameworkDORA, Reference: "availability"},
-			},
-		},
-		{
-			ID:             "ops-latency-01",
-			Name:           "P99 Latency",
-			Description:    "99th percentile response latency",
-			Domain:         prism.DomainOperations,
-			Stage:          prism.StageRuntime,
-			Category:       prism.CategoryEfficiency,
-			MetricType:     prism.MetricTypeLatency,
-			TrendDirection: prism.TrendLowerBetter,
-			Unit:           "ms",
-			Baseline:       500,
-			Current:        200,
-			Target:         100,
-			Thresholds:     &prism.Thresholds{Green: 150, Yellow: 300, Red: 500},
-			SLI:            &prism.SLI{Name: "Latency", Formula: "percentile(response_time, 99)"},
-			SLO:            &prism.SLO{Target: "<=100ms", Window: prism.Window7Days},
-		},
-	}
-}
+// createOperationsMetrics moved to scaffold package as scaffold.OperationsMetrics()

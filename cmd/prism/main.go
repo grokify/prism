@@ -19,9 +19,9 @@ func main() {
 
 var rootCmd = &cobra.Command{
 	Use:   "prism",
-	Short: "PRISM CLI - Proactive Reliability & Security Maturity Model",
-	Long: `PRISM is a unified framework for B2B SaaS health metrics combining
-SLOs, DMAIC, OKRs, and maturity modeling.
+	Short: "PRISM CLI - Platform for Reliability, Improvement, and Strategic Maturity",
+	Long: `PRISM is an Operational Product Management platform for COO-level
+organizational health monitoring combining SLOs, maturity modeling, and OKRs.
 
 Use the subcommands to create, validate, and score PRISM documents.`,
 	Version: version,
@@ -35,4 +35,10 @@ func init() {
 	rootCmd.AddCommand(layerCmd)
 	rootCmd.AddCommand(teamCmd)
 	rootCmd.AddCommand(serviceCmd)
+	rootCmd.AddCommand(goalCmd)
+	rootCmd.AddCommand(phaseCmd)
+	rootCmd.AddCommand(roadmapCmd)
+	rootCmd.AddCommand(initiativeCmd)
+	rootCmd.AddCommand(exportCmd)
+	rootCmd.AddCommand(analyzeCmd)
 }

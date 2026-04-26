@@ -10,8 +10,10 @@ import (
 )
 
 var (
-	scoreJSON     bool
-	scoreDetailed bool
+	scoreOutputFormat string
+	scoreDetailed     bool
+	scoreGoals        bool
+	scoreLegacy       bool
 )
 
 var scoreCmd = &cobra.Command{
@@ -22,17 +24,24 @@ var scoreCmd = &cobra.Command{
 The score combines maturity levels, metric performance, and optionally
 customer awareness data into a single health score (0.0-1.0).
 
+By default, empty cells (no metrics and no maturity data) are skipped
+to avoid penalizing sparse data. Use --legacy to include all cells.
+
 Examples:
   prism score prism.json
-  prism score prism.json --json
-  prism score prism.json --detailed`,
+  prism score prism.json -f json
+  prism score prism.json --detailed
+  prism score prism.json --goals     # Use goal maturity instead of global cells
+  prism score prism.json --legacy    # Include empty cells (original behavior)`,
 	Args: cobra.ExactArgs(1),
 	RunE: runScore,
 }
 
 func init() {
-	scoreCmd.Flags().BoolVar(&scoreJSON, "json", false, "Output as JSON")
+	scoreCmd.Flags().StringVarP(&scoreOutputFormat, "format", "f", "text", "Output format (json|text|markdown|toon)")
 	scoreCmd.Flags().BoolVar(&scoreDetailed, "detailed", false, "Show detailed breakdown")
+	scoreCmd.Flags().BoolVar(&scoreGoals, "goals", false, "Use goal-level maturity instead of global maturity model")
+	scoreCmd.Flags().BoolVar(&scoreLegacy, "legacy", false, "Include empty cells in scoring (original behavior)")
 }
 
 func runScore(cmd *cobra.Command, args []string) error {
@@ -57,10 +66,18 @@ func runScore(cmd *cobra.Command, args []string) error {
 	}
 
 	// Calculate score
-	config := prism.DefaultScoreConfig()
+	var config *prism.ScoreConfig
+	if scoreLegacy {
+		config = prism.LegacyScoreConfig()
+	} else {
+		config = prism.DefaultScoreConfig()
+	}
+	if scoreGoals {
+		config.UseGoalMaturity = true
+	}
 	score := doc.CalculatePRISMScore(config, nil)
 
-	if scoreJSON {
+	if scoreOutputFormat == "json" {
 		return outputScoreJSON(score)
 	}
 
