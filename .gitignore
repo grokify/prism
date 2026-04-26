@@ -18,3 +18,10 @@ Thumbs.db
 
 # Ideation/chat logs
 IDEATION_CHAT*.md
+
+# Planning documents
+PLAN.md
+TASKS.md
+
+# Generated files
+*.xlsx
