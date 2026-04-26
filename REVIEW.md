@@ -5,7 +5,7 @@
 
 ## Summary
 
-PRISM is a Go library + CLI for defining, validating, scoring, and tracking maturity across security and operations domains. It combines SLOs, DMAIC, OKRs, and a 5-level maturity model into a single JSON document format.
+PRISM (Platform for Reliability, Improvement, and Strategic Maturity) is a Go library + CLI for COO-level organizational health monitoring. It combines SLOs, maturity modeling, and OKRs into a single JSON document format for tracking maturity across operations, security, quality, product, and AI domains.
 
 The goal-driven maturity roadmap feature (FEAT_MATURITYROADMAP) has been implemented at the data model level but the CLI commands for it are missing.
 

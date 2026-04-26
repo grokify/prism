@@ -1,8 +1,8 @@
 # PRISM
 
-**Proactive Reliability & Security Maturity Model**
+**Platform for Reliability, Improvement, and Strategic Maturity**
 
-PRISM is a unified framework for B2B SaaS health metrics that combines SLOs, DMAIC, OKRs, and maturity modeling into a single coherent system. It provides structured schemas for defining metrics, calculating composite health scores, and tracking organizational maturity across operations, security, and quality domains.
+PRISM is an Operational Product Management platform for COO-level organizational health monitoring. It provides a unified framework for B2B SaaS health metrics that combines SLOs, maturity modeling, and OKRs into a single coherent system. PRISM enables organizations to understand current health and drive improvement projects across operations, security, quality, product, and AI domains.
 
 ## Concepts
 
@@ -11,27 +11,31 @@ PRISM organizes metrics using a multi-dimensional model that clarifies ownership
 ### The PRISM Model
 
 ```
-                    ┌─────────────────────────────────────────────────┐
-                    │                   DOMAINS                        │
-                    │         (What functional area?)                  │
-                    │   Operations  │  Security  │  Quality           │
-                    └─────────────────────────────────────────────────┘
-                                          │
-          ┌───────────────────────────────┼───────────────────────────────┐
-          │                               │                               │
-          ▼                               ▼                               ▼
-    ┌───────────┐                  ┌───────────┐                  ┌───────────┐
-    │   CODE    │                  │   INFRA   │                  │  RUNTIME  │
-    │  Layer    │                  │   Layer   │                  │   Layer   │
-    └───────────┘                  └───────────┘                  └───────────┘
-          │                               │                               │
-          └───────────────────────────────┼───────────────────────────────┘
-                                          │
-                    ┌─────────────────────────────────────────────────┐
-                    │                   STAGES                         │
-                    │           (When in lifecycle?)                   │
-                    │   Design → Build → Test → Runtime → Response    │
-                    └─────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                              VALUE STREAM LAYERS                            │
+│                          (Where in the value stream?)                       │
+│                                                                             │
+│  Requirements → Code → Infra → Runtime → Adoption → Support                 │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                      │
+        ┌─────────────────────────────┼─────────────────────────────┐
+        │                             │                             │
+        ▼                             ▼                             ▼
+  ┌───────────┐                ┌───────────┐                ┌───────────┐
+  │ OPERATIONS│                │ SECURITY  │                │  QUALITY  │
+  │  Domain   │                │  Domain   │                │  Domain   │
+  └───────────┘                └───────────┘                └───────────┘
+        │                             │                             │
+        └─────────────────────────────┼─────────────────────────────┘
+                                      │
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           LIFECYCLE STAGES                                  │
+│                        (When in delivery cycle?)                            │
+│                                                                             │
+│            Design → Build → Test → Runtime → Response                       │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ### Domains
@@ -46,13 +50,16 @@ Domains represent functional areas with their own standards and overlay teams:
 
 ### Layers
 
-Layers represent ownership boundaries in the technology stack:
+Layers represent the full value stream from ideation to support:
 
 | Layer | Description | Typical Owner |
 |-------|-------------|---------------|
+| `requirements` | Product ideation, specs, design | Product/Design |
 | `code` | Application code, libraries, dependencies | Stream-aligned teams |
 | `infra` | Cloud resources, networking, platform | Platform team |
-| `runtime` | Running services, containers, workloads | Stream-aligned + SRE |
+| `runtime` | Running services, production workloads | Stream-aligned + SRE |
+| `adoption` | Product analytics, user engagement | Product/Growth |
+| `support` | Customer support, incident management | Support/CS |
 
 ### Teams (Team Topologies)
 
@@ -180,6 +187,22 @@ prism roadmap show prism.json
 prism roadmap progress prism.json
 ```
 
+### Initiative commands (v0.3.0)
+
+```bash
+# List all initiatives by status
+prism initiative list prism.json
+
+# List initiatives by phase
+prism initiative list prism.json --by-phase
+
+# List initiatives by goal
+prism initiative list prism.json --by-goal
+
+# Show initiative details
+prism initiative show prism.json init-monitoring
+```
+
 ### Report commands (v0.2.0)
 
 ```bash
@@ -236,6 +259,29 @@ prism service list prism.json
 prism service show prism.json payments-api
 ```
 
+### Analyze command (v0.3.0)
+
+```bash
+# Analyze document and show gaps
+prism analyze prism.json
+
+# Output as JSON for automation
+prism analyze prism.json -f json
+
+# Generate LLM prompt for initiative recommendations
+prism analyze prism.json -f prompt
+```
+
+### Export commands (v0.3.0)
+
+```bash
+# Export as OKR document
+prism export okr prism.json -o roadmap.okr.json
+
+# Export as V2MOM document
+prism export v2mom prism.json -o roadmap.v2mom.json
+```
+
 ## Schema Overview
 
 ### Domains
@@ -250,13 +296,16 @@ PRISM organizes metrics into three primary domains:
 
 ### Layers
 
-Metrics are classified by ownership layer:
+Metrics are classified by value stream layer:
 
 | Layer | Description |
 |-------|-------------|
+| `requirements` | Product ideation, specifications, and design |
 | `code` | Application code, libraries, and dependencies |
 | `infra` | Cloud resources, networking, and platform services |
 | `runtime` | Running services, containers, and workloads |
+| `adoption` | Product analytics, user engagement, and self-service |
+| `support` | Customer support, incident management, and escalations |
 
 ### Lifecycle Stages
 
@@ -491,6 +540,75 @@ Initiatives link to goals and phases with deployment tracking:
     "adoptionPercent": 100
   }
 }
+```
+
+## Integration with Structured-Plan
+
+PRISM integrates with [structured-plan](https://github.com/grokify/structured-plan) to provide a complete operational planning workflow. PRISM serves as the source of truth for requirements (maturity models, SLOs), while structured-plan handles execution tracking (OKRs, roadmaps).
+
+### Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                         PRISM (Source of Truth)                 │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐          │
+│  │    Goals     │  │   Maturity   │  │     SLOs     │          │
+│  │              │  │    Models    │  │              │          │
+│  │ "Reliability"│  │  M1→M2→M3→M4│  │ avail>=99.9% │          │
+│  └──────────────┘  └──────────────┘  └──────────────┘          │
+└───────────────────────────┬─────────────────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                      LLM Analysis Layer                         │
+│                                                                 │
+│  Input: PRISM requirements + context (team capacity, etc.)      │
+│  Output: Suggested initiatives, phase mapping, dependencies     │
+│                                                                 │
+│  "To reach M3 reliability by Q2, you need:                      │
+│   - Q1: Observability platform (enables SLO measurement)        │
+│   - Q1: Incident runbooks (reduces MTTR)                        │
+│   - Q2: SLO dashboards (tracks compliance)"                     │
+└───────────────────────────┬─────────────────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                 Structured-Plan (Execution)                     │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐          │
+│  │     OKR      │  │   V2MOM      │  │   Roadmap    │          │
+│  │              │  │              │  │              │          │
+│  │ Objectives   │  │ Methods      │  │ Phases       │          │
+│  │ Key Results  │  │ Measures     │  │ Deliverables │          │
+│  └──────────────┘  └──────────────┘  └──────────────┘          │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### Data Flow
+
+| PRISM Concept | Structured-Plan Concept |
+|---------------|-------------------------|
+| Goal | OKR Objective |
+| Goal.TargetLevel | Objective Target |
+| SLO (per maturity level) | Key Result |
+| Phase.GoalTargets | PhaseTargets in Key Results |
+| Initiative | Deliverable (in roadmap phase) |
+
+### Workflow
+
+1. **Define requirements in PRISM** - Goals, maturity models, SLOs
+2. **Analyze with LLM** - Generate initiative recommendations to achieve targets
+3. **Export to structured-plan** - OKR/V2MOM/Roadmap format
+4. **Track execution** - Monitor progress against phase targets
+
+```bash
+# Analyze PRISM document and suggest initiatives
+prism analyze prism.json
+
+# Export as OKR document for structured-plan
+prism export okr prism.json -o roadmap.okr.json
+
+# Export as V2MOM document
+prism export v2mom prism.json -o roadmap.v2mom.json
 ```
 
 ## Examples

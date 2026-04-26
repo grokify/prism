@@ -1,5 +1,5 @@
 site_name: PRISM
-site_description: Proactive Reliability & Security Maturity Model - Enterprise Metrics Management
+site_description: Platform for Reliability, Improvement, and Strategic Maturity - Operational Product Management
 site_url: https://grokify.github.io/prism/
 repo_url: https://github.com/grokify/prism
 repo_name: grokify/prism
@@ -61,12 +61,15 @@ nav:
       - prism goal: cli/goal.md
       - prism phase: cli/phase.md
       - prism roadmap: cli/roadmap.md
+      - prism initiative: cli/initiative.md
       - prism layer: cli/layer.md
       - prism team: cli/team.md
       - prism service: cli/service.md
       - prism report: cli/report.md
       - prism slo-report: cli/slo-report.md
       - prism dashboard: cli/dashboard.md
+      - prism analyze: cli/analyze.md
+      - prism export: cli/export.md
   - Schema:
       - Overview: schema/index.md
       - Domains: schema/domains.md
