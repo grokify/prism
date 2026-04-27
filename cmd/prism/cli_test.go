@@ -42,9 +42,12 @@ func TestGoalListCommandJSON(t *testing.T) {
 	defer func() { goalOutputFormat = "text" }()
 
 	var runErr error
-	output := testutil.CaptureStdout(func() {
+	output, captureErr := testutil.CaptureStdout(func() {
 		runErr = runGoalList(goalListCmd, []string{exampleFile})
 	})
+	if captureErr != nil {
+		t.Fatalf("CaptureStdout failed: %v", captureErr)
+	}
 
 	if runErr != nil {
 		t.Errorf("runGoalList with JSON failed: %v", runErr)

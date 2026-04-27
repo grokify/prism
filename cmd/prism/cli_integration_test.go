@@ -48,9 +48,12 @@ func TestLayerListCommandJSON(t *testing.T) {
 	defer func() { layerJSONOutput = false }()
 
 	var runErr error
-	output := testutil.CaptureStdout(func() {
+	output, captureErr := testutil.CaptureStdout(func() {
 		runErr = runLayerList(layerListCmd, []string{exampleFile})
 	})
+	if captureErr != nil {
+		t.Fatalf("CaptureStdout failed: %v", captureErr)
+	}
 
 	if runErr != nil {
 		t.Errorf("runLayerList with JSON failed: %v", runErr)
@@ -102,9 +105,12 @@ func TestLayerShowWithSignals(t *testing.T) {
 	layerJSONOutput = false
 
 	var runErr error
-	output := testutil.CaptureStdout(func() {
+	output, captureErr := testutil.CaptureStdout(func() {
 		runErr = runLayerShow(layerShowCmd, []string{exampleFile, "runtime"})
 	})
+	if captureErr != nil {
+		t.Fatalf("CaptureStdout failed: %v", captureErr)
+	}
 
 	if runErr != nil {
 		t.Errorf("runLayerShow failed: %v", runErr)
@@ -142,9 +148,12 @@ func TestTeamListCommandJSON(t *testing.T) {
 	defer func() { teamJSONOutput = false }()
 
 	var runErr error
-	output := testutil.CaptureStdout(func() {
+	output, captureErr := testutil.CaptureStdout(func() {
 		runErr = runTeamList(teamListCmd, []string{exampleFile})
 	})
+	if captureErr != nil {
+		t.Fatalf("CaptureStdout failed: %v", captureErr)
+	}
 
 	if runErr != nil {
 		t.Errorf("runTeamList with JSON failed: %v", runErr)
@@ -212,9 +221,12 @@ func TestServiceListCommandJSON(t *testing.T) {
 	defer func() { serviceJSONOutput = false }()
 
 	var runErr error
-	output := testutil.CaptureStdout(func() {
+	output, captureErr := testutil.CaptureStdout(func() {
 		runErr = runServiceList(serviceListCmd, []string{exampleFile})
 	})
+	if captureErr != nil {
+		t.Fatalf("CaptureStdout failed: %v", captureErr)
+	}
 
 	if runErr != nil {
 		t.Errorf("runServiceList with JSON failed: %v", runErr)
@@ -283,9 +295,12 @@ func TestAnalyzeCommandJSON(t *testing.T) {
 	defer func() { analyzeOutputFormat = "text" }()
 
 	var runErr error
-	output := testutil.CaptureStdout(func() {
+	output, captureErr := testutil.CaptureStdout(func() {
 		runErr = runAnalyze(analyzeCmd, []string{exampleFile})
 	})
+	if captureErr != nil {
+		t.Fatalf("CaptureStdout failed: %v", captureErr)
+	}
 
 	if runErr != nil {
 		t.Errorf("runAnalyze with JSON failed: %v", runErr)
@@ -308,9 +323,12 @@ func TestAnalyzeCommandPrompt(t *testing.T) {
 	defer func() { analyzeOutputFormat = "text" }()
 
 	var runErr error
-	output := testutil.CaptureStdout(func() {
+	output, captureErr := testutil.CaptureStdout(func() {
 		runErr = runAnalyze(analyzeCmd, []string{exampleFile})
 	})
+	if captureErr != nil {
+		t.Fatalf("CaptureStdout failed: %v", captureErr)
+	}
 
 	if runErr != nil {
 		t.Errorf("runAnalyze with prompt failed: %v", runErr)
@@ -333,9 +351,12 @@ func TestExportOKRCommand(t *testing.T) {
 	exportOutputDir = ""
 
 	var runErr error
-	output := testutil.CaptureStdout(func() {
+	output, captureErr := testutil.CaptureStdout(func() {
 		runErr = runExportOKR(exportOKRCmd, []string{exampleFile})
 	})
+	if captureErr != nil {
+		t.Fatalf("CaptureStdout failed: %v", captureErr)
+	}
 
 	if runErr != nil {
 		t.Errorf("runExportOKR failed: %v", runErr)
@@ -361,9 +382,12 @@ func TestExportV2MOMCommand(t *testing.T) {
 	exportOutputDir = ""
 
 	var runErr error
-	output := testutil.CaptureStdout(func() {
+	output, captureErr := testutil.CaptureStdout(func() {
 		runErr = runExportV2MOM(exportV2MOMCmd, []string{exampleFile})
 	})
+	if captureErr != nil {
+		t.Fatalf("CaptureStdout failed: %v", captureErr)
+	}
 
 	if runErr != nil {
 		t.Errorf("runExportV2MOM failed: %v", runErr)
@@ -537,9 +561,12 @@ func TestInitiativeListCommandJSON(t *testing.T) {
 	defer func() { initiativeOutputFormat = "text" }()
 
 	var runErr error
-	output := testutil.CaptureStdout(func() {
+	output, captureErr := testutil.CaptureStdout(func() {
 		runErr = runInitiativeList(initiativeListCmd, []string{exampleFile})
 	})
+	if captureErr != nil {
+		t.Fatalf("CaptureStdout failed: %v", captureErr)
+	}
 
 	if runErr != nil {
 		t.Errorf("runInitiativeList with JSON failed: %v", runErr)
@@ -577,9 +604,12 @@ func TestInitiativeShowCommandJSON(t *testing.T) {
 	defer func() { initiativeOutputFormat = "text" }()
 
 	var runErr error
-	output := testutil.CaptureStdout(func() {
+	output, captureErr := testutil.CaptureStdout(func() {
 		runErr = runInitiativeShow(initiativeShowCmd, []string{exampleFile, "init-ci-cd"})
 	})
+	if captureErr != nil {
+		t.Fatalf("CaptureStdout failed: %v", captureErr)
+	}
 
 	if runErr != nil {
 		t.Errorf("runInitiativeShow with JSON failed: %v", runErr)
@@ -706,9 +736,12 @@ func TestInitCommandWithInvalidDomain(t *testing.T) {
 // TestCatalogCommand tests the catalog command
 func TestCatalogCommand(t *testing.T) {
 	var runErr error
-	output := testutil.CaptureStdout(func() {
+	output, captureErr := testutil.CaptureStdout(func() {
 		runErr = runCatalog(catalogCmd, []string{})
 	})
+	if captureErr != nil {
+		t.Fatalf("CaptureStdout failed: %v", captureErr)
+	}
 
 	if runErr != nil {
 		t.Errorf("runCatalog failed: %v", runErr)
@@ -742,9 +775,12 @@ func TestReportCommand(t *testing.T) {
 	reportView = "both"
 
 	var runErr error
-	output := testutil.CaptureStdout(func() {
+	output, captureErr := testutil.CaptureStdout(func() {
 		runErr = runReport(reportCmd, []string{exampleFile})
 	})
+	if captureErr != nil {
+		t.Fatalf("CaptureStdout failed: %v", captureErr)
+	}
 
 	if runErr != nil {
 		t.Errorf("runReport failed: %v", runErr)
@@ -769,9 +805,12 @@ func TestReportCommandJSON(t *testing.T) {
 	defer func() { reportFormat = "markdown" }()
 
 	var runErr error
-	output := testutil.CaptureStdout(func() {
+	output, captureErr := testutil.CaptureStdout(func() {
 		runErr = runReport(reportCmd, []string{exampleFile})
 	})
+	if captureErr != nil {
+		t.Fatalf("CaptureStdout failed: %v", captureErr)
+	}
 
 	if runErr != nil {
 		t.Errorf("runReport with JSON failed: %v", runErr)
@@ -821,9 +860,12 @@ func TestDashboardCommand(t *testing.T) {
 	dashboardOutput = ""
 
 	var runErr error
-	output := testutil.CaptureStdout(func() {
+	output, captureErr := testutil.CaptureStdout(func() {
 		runErr = runDashboard(dashboardCmd, []string{exampleFile})
 	})
+	if captureErr != nil {
+		t.Fatalf("CaptureStdout failed: %v", captureErr)
+	}
 
 	if runErr != nil {
 		t.Errorf("runDashboard failed: %v", runErr)
@@ -847,9 +889,12 @@ func TestDashboardCommandMarkdown(t *testing.T) {
 	defer func() { dashboardFormat = "json" }()
 
 	var runErr error
-	output := testutil.CaptureStdout(func() {
+	output, captureErr := testutil.CaptureStdout(func() {
 		runErr = runDashboard(dashboardCmd, []string{exampleFile})
 	})
+	if captureErr != nil {
+		t.Fatalf("CaptureStdout failed: %v", captureErr)
+	}
 
 	if runErr != nil {
 		t.Errorf("runDashboard markdown failed: %v", runErr)
@@ -872,9 +917,12 @@ func TestSLOReportCommand(t *testing.T) {
 	sloReportFormat = "json"
 
 	var runErr error
-	output := testutil.CaptureStdout(func() {
+	output, captureErr := testutil.CaptureStdout(func() {
 		runErr = runSLOReport(sloReportCmd, []string{exampleFile})
 	})
+	if captureErr != nil {
+		t.Fatalf("CaptureStdout failed: %v", captureErr)
+	}
 
 	if runErr != nil {
 		t.Errorf("runSLOReport failed: %v", runErr)
@@ -897,9 +945,12 @@ func TestSLOReportCommandMarkdown(t *testing.T) {
 	defer func() { sloReportFormat = "json" }()
 
 	var runErr error
-	output := testutil.CaptureStdout(func() {
+	output, captureErr := testutil.CaptureStdout(func() {
 		runErr = runSLOReport(sloReportCmd, []string{exampleFile})
 	})
+	if captureErr != nil {
+		t.Fatalf("CaptureStdout failed: %v", captureErr)
+	}
 
 	if runErr != nil {
 		t.Errorf("runSLOReport markdown failed: %v", runErr)
@@ -922,9 +973,12 @@ func TestSLOReportCommandMatrix(t *testing.T) {
 	defer func() { sloReportFormat = "json" }()
 
 	var runErr error
-	output := testutil.CaptureStdout(func() {
+	output, captureErr := testutil.CaptureStdout(func() {
 		runErr = runSLOReport(sloReportCmd, []string{exampleFile})
 	})
+	if captureErr != nil {
+		t.Fatalf("CaptureStdout failed: %v", captureErr)
+	}
 
 	if runErr != nil {
 		t.Errorf("runSLOReport matrix failed: %v", runErr)
