@@ -7,8 +7,8 @@ github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc h1:U9qPSI2PIWSS1
 github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/grokify/echartify v0.2.0 h1:to4WzrjhZVFgiyNipUrTUwZC+GaGDGla5785XY8WTTA=
 github.com/grokify/echartify v0.2.0/go.mod h1:cN+QWPcYLMk/dYVFOLH6X8iScAGvSIMYbaf6c7Z4UWg=
-github.com/grokify/oscompat v0.2.0 h1:kNIPRxoPUGUY5k3S6lyEjXfrkczJKLX32qVC8p8UzUo=
-github.com/grokify/oscompat v0.2.0/go.mod h1:Ekex/WzHaA39LNt5xbeQRASo74NEXAIqBlqdvNF2oUM=
+github.com/grokify/oscompat v0.3.0 h1:OsZNfRRLkfShSBu8jOLwtVQLj9/gOw3UjVe//XeV5uU=
+github.com/grokify/oscompat v0.3.0/go.mod h1:Ekex/WzHaA39LNt5xbeQRASo74NEXAIqBlqdvNF2oUM=
 github.com/grokify/structured-plan v0.10.0 h1:SR3Uaq7UnkUtV4DSJthIWFIB0eur+kfClWSsM0iwc0A=
 github.com/grokify/structured-plan v0.10.0/go.mod h1:hn8NE1wbpUOBeSvI21JAYGyItuBTrNjqMX6cniVQE2o=
 github.com/inconshreveable/mousetrap v1.1.0 h1:wN+x4NVGpMsO7ErUn/mUI3vEoE6Jt13X2s0bqwp9tc8=
