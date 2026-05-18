@@ -33,10 +33,10 @@ A unified framework for capability-driven organizational intelligence, connectin
 │                             prism                           │
 │                  Unified Orchestration Layer                │
 └─────────────────────────────────────────────────────────────┘
-                              │
+                                │
 ┌─────────────────────────────────────────────────────────────┐
-│                         prism-core                          │
-│       Shared primitives: Domain, Layer, Stage, Maturity     │
+│                          prism-core                         │
+│      Shared primitives: Domain, Layer, Stage, Maturity      │
 └─────────────────────────────────────────────────────────────┘
         │                       │                     │
         ▼                       ▼                     ▼
