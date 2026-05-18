@@ -1,0 +1,11 @@
+# Ideation notes (raw, unformalized)
+IDEATION_CHAT*.md
+
+# Binaries
+/prism
+*.exe
+
+# IDE
+.idea/
+.vscode/
+*.swp
