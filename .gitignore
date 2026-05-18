@@ -1,6 +1,9 @@
 # Ideation notes (raw, unformalized)
 IDEATION_CHAT*.md
 
+# MkDocs generated site
+site/
+
 # Binaries
 /prism
 *.exe
