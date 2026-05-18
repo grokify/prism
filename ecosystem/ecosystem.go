@@ -5,22 +5,37 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"path/filepath"
 
 	capability "github.com/grokify/prism-capability"
+	"github.com/grokify/prism-execution/goals/okr"
+	"github.com/grokify/prism-execution/roadmap"
+	intelligence "github.com/grokify/prism-intelligence"
 )
 
 // Config defines the ecosystem configuration.
 type Config struct {
 	Name string `json:"name" yaml:"name"`
 
-	Capability CapabilityConfig `json:"capability" yaml:"capability"`
-	// Intelligence IntelligenceConfig `json:"intelligence" yaml:"intelligence"`
-	// Execution    ExecutionConfig    `json:"execution" yaml:"execution"`
+	Capability   CapabilityConfig   `json:"capability" yaml:"capability"`
+	Intelligence IntelligenceConfig `json:"intelligence" yaml:"intelligence"`
+	Execution    ExecutionConfig    `json:"execution" yaml:"execution"`
 }
 
 // CapabilityConfig defines capability stack sources.
 type CapabilityConfig struct {
 	Files []string `json:"files" yaml:"files"`
+}
+
+// IntelligenceConfig defines intelligence document sources.
+type IntelligenceConfig struct {
+	Files []string `json:"files" yaml:"files"`
+}
+
+// ExecutionConfig defines execution document sources.
+type ExecutionConfig struct {
+	OKRs     []string `json:"okrs" yaml:"okrs"`
+	Roadmaps []string `json:"roadmaps" yaml:"roadmaps"`
 }
 
 // Ecosystem holds loaded documents from all PRISM modules.
@@ -29,10 +44,9 @@ type Ecosystem struct {
 
 	// Loaded documents
 	CapabilityStacks []*capability.CapabilityStack
-	// MaturityModel    *intelligence.MaturityModel
-	// MaturityState    *intelligence.MaturityState
-	// Roadmaps         []*execution.Roadmap
-	// OKRs             []*execution.OKR
+	PRISMDocuments   []*intelligence.PRISMDocument
+	OKRSets          []*okr.OKRSet
+	Roadmaps         []*roadmap.Roadmap
 }
 
 // Load creates an Ecosystem from a configuration.
@@ -40,6 +54,9 @@ func Load(config Config) (*Ecosystem, error) {
 	eco := &Ecosystem{
 		Config:           config,
 		CapabilityStacks: make([]*capability.CapabilityStack, 0),
+		PRISMDocuments:   make([]*intelligence.PRISMDocument, 0),
+		OKRSets:          make([]*okr.OKRSet, 0),
+		Roadmaps:         make([]*roadmap.Roadmap, 0),
 	}
 
 	// Load capability stacks
@@ -49,6 +66,33 @@ func Load(config Config) (*Ecosystem, error) {
 			return nil, fmt.Errorf("loading capability stack %s: %w", file, err)
 		}
 		eco.CapabilityStacks = append(eco.CapabilityStacks, stack)
+	}
+
+	// Load PRISM documents (intelligence)
+	for _, file := range config.Intelligence.Files {
+		doc, err := loadPRISMDocument(file)
+		if err != nil {
+			return nil, fmt.Errorf("loading PRISM document %s: %w", file, err)
+		}
+		eco.PRISMDocuments = append(eco.PRISMDocuments, doc)
+	}
+
+	// Load OKRs
+	for _, file := range config.Execution.OKRs {
+		okrSet, err := loadOKRSet(file)
+		if err != nil {
+			return nil, fmt.Errorf("loading OKR set %s: %w", file, err)
+		}
+		eco.OKRSets = append(eco.OKRSets, okrSet)
+	}
+
+	// Load Roadmaps
+	for _, file := range config.Execution.Roadmaps {
+		rm, err := loadRoadmap(file)
+		if err != nil {
+			return nil, fmt.Errorf("loading roadmap %s: %w", file, err)
+		}
+		eco.Roadmaps = append(eco.Roadmaps, rm)
 	}
 
 	return eco, nil
@@ -68,6 +112,49 @@ func LoadFromFile(path string) (*Ecosystem, error) {
 
 	return Load(config)
 }
+
+// loadPRISMDocument loads a PRISMDocument from a JSON file.
+func loadPRISMDocument(path string) (*intelligence.PRISMDocument, error) {
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+	var doc intelligence.PRISMDocument
+	if err := json.Unmarshal(data, &doc); err != nil {
+		return nil, err
+	}
+	return &doc, nil
+}
+
+// loadOKRSet loads an OKRSet from a JSON file.
+func loadOKRSet(path string) (*okr.OKRSet, error) {
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+	var okrSet okr.OKRSet
+	if err := json.Unmarshal(data, &okrSet); err != nil {
+		return nil, err
+	}
+	return &okrSet, nil
+}
+
+// loadRoadmap loads a Roadmap from a JSON file.
+func loadRoadmap(path string) (*roadmap.Roadmap, error) {
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+	var rm roadmap.Roadmap
+	if err := json.Unmarshal(data, &rm); err != nil {
+		return nil, err
+	}
+	return &rm, nil
+}
+
+// =============================================================================
+// Capability Queries
+// =============================================================================
 
 // AllCapabilities returns all capabilities from all stacks.
 func (e *Ecosystem) AllCapabilities() []capability.Capability {
@@ -108,28 +195,253 @@ func (e *Ecosystem) CapabilitiesByDomain(domain string) []capability.Capability 
 	return caps
 }
 
-// Validate validates all loaded documents and cross-references.
-func (e *Ecosystem) Validate() error {
-	// Validate each capability stack
-	for i, stack := range e.CapabilityStacks {
-		if errs := stack.Validate(); errs.HasErrors() {
-			return fmt.Errorf("capability stack %d: %w", i, errs)
+// =============================================================================
+// Intelligence Queries
+// =============================================================================
+
+// AllMetrics returns all metrics from all PRISM documents.
+func (e *Ecosystem) AllMetrics() []intelligence.Metric {
+	var metrics []intelligence.Metric
+	for _, doc := range e.PRISMDocuments {
+		metrics = append(metrics, doc.Metrics...)
+	}
+	return metrics
+}
+
+// GetMetricByID finds a metric by ID across all PRISM documents.
+func (e *Ecosystem) GetMetricByID(id string) *intelligence.Metric {
+	for _, doc := range e.PRISMDocuments {
+		if m := doc.GetMetricByID(id); m != nil {
+			return m
 		}
 	}
-
-	// TODO: Cross-reference validation
-	// - Check prismRef.sliIds exist in MaturityModel
-	// - Check initiative.capabilityId exist in CapabilityStacks
-
 	return nil
 }
 
+// AllServices returns all services from all PRISM documents.
+func (e *Ecosystem) AllServices() []intelligence.Service {
+	var services []intelligence.Service
+	for _, doc := range e.PRISMDocuments {
+		services = append(services, doc.Services...)
+	}
+	return services
+}
+
+// GetServiceByID finds a service by ID across all PRISM documents.
+func (e *Ecosystem) GetServiceByID(id string) *intelligence.Service {
+	for _, doc := range e.PRISMDocuments {
+		if s := doc.GetServiceByID(id); s != nil {
+			return s
+		}
+	}
+	return nil
+}
+
+// AllInitiatives returns all initiatives from all PRISM documents.
+func (e *Ecosystem) AllInitiatives() []intelligence.Initiative {
+	var initiatives []intelligence.Initiative
+	for _, doc := range e.PRISMDocuments {
+		initiatives = append(initiatives, doc.Initiatives...)
+	}
+	return initiatives
+}
+
+// GetInitiativeByID finds an initiative by ID across all PRISM documents.
+func (e *Ecosystem) GetInitiativeByID(id string) *intelligence.Initiative {
+	for _, doc := range e.PRISMDocuments {
+		if init := doc.GetInitiativeByID(id); init != nil {
+			return init
+		}
+	}
+	return nil
+}
+
+// =============================================================================
+// Execution Queries
+// =============================================================================
+
+// AllObjectives returns all objectives from all OKR sets.
+func (e *Ecosystem) AllObjectives() []okr.Objective {
+	var objectives []okr.Objective
+	for _, okrSet := range e.OKRSets {
+		objectives = append(objectives, okrSet.ToObjectives()...)
+	}
+	return objectives
+}
+
+// GetObjectiveByID finds an objective by ID across all OKR sets.
+func (e *Ecosystem) GetObjectiveByID(id string) *okr.Objective {
+	for _, obj := range e.AllObjectives() {
+		if obj.ID == id {
+			return &obj
+		}
+	}
+	return nil
+}
+
+// AllPhases returns all roadmap phases from all roadmaps.
+func (e *Ecosystem) AllPhases() []roadmap.Phase {
+	var phases []roadmap.Phase
+	for _, rm := range e.Roadmaps {
+		phases = append(phases, rm.Phases...)
+	}
+	return phases
+}
+
+// GetPhaseByID finds a phase by ID across all roadmaps.
+func (e *Ecosystem) GetPhaseByID(id string) *roadmap.Phase {
+	for _, rm := range e.Roadmaps {
+		for _, phase := range rm.Phases {
+			if phase.ID == id {
+				return &phase
+			}
+		}
+	}
+	return nil
+}
+
+// =============================================================================
+// Cross-Module Queries
+// =============================================================================
+
+// CapabilityContext provides full context for a capability across all modules.
+type CapabilityContext struct {
+	Capability *capability.Capability
+	Metrics    []intelligence.Metric
+}
+
+// GetCapabilityContext returns full context for a capability ID.
+// Currently links capabilities to metrics via the capability's PRISMRef.SLIIDs.
+func (e *Ecosystem) GetCapabilityContext(capabilityID string) *CapabilityContext {
+	cap := e.GetCapabilityByID(capabilityID)
+	if cap == nil {
+		return nil
+	}
+
+	ctx := &CapabilityContext{
+		Capability: cap,
+		Metrics:    make([]intelligence.Metric, 0),
+	}
+
+	// Find metrics linked via PRISMRef.SLIIDs
+	if cap.PRISMRef != nil {
+		sliIDs := make(map[string]bool)
+		for _, sliID := range cap.PRISMRef.SLIIDs {
+			sliIDs[sliID] = true
+		}
+		for _, m := range e.AllMetrics() {
+			if sliIDs[m.ID] {
+				ctx.Metrics = append(ctx.Metrics, m)
+			}
+		}
+	}
+
+	return ctx
+}
+
+// =============================================================================
+// Validation
+// =============================================================================
+
+// ValidationError represents a cross-module validation error.
+type ValidationError struct {
+	Module  string `json:"module"`
+	Type    string `json:"type"`
+	ID      string `json:"id"`
+	Field   string `json:"field"`
+	RefID   string `json:"refId,omitempty"`
+	Message string `json:"message"`
+}
+
+// ValidationErrors is a collection of validation errors.
+type ValidationErrors []ValidationError
+
+// HasErrors returns true if there are validation errors.
+func (ve ValidationErrors) HasErrors() bool {
+	return len(ve) > 0
+}
+
+// Error implements the error interface.
+func (ve ValidationErrors) Error() string {
+	if len(ve) == 0 {
+		return ""
+	}
+	return fmt.Sprintf("%d validation errors", len(ve))
+}
+
+// Validate validates all loaded documents and cross-references.
+func (e *Ecosystem) Validate() ValidationErrors {
+	var errs ValidationErrors
+
+	// Validate each capability stack
+	for i, stack := range e.CapabilityStacks {
+		if stackErrs := stack.Validate(); stackErrs.HasErrors() {
+			for _, err := range stackErrs {
+				errs = append(errs, ValidationError{
+					Module:  "capability",
+					Type:    "stack",
+					ID:      fmt.Sprintf("stack[%d]", i),
+					Field:   err.Field,
+					Message: err.Message,
+				})
+			}
+		}
+	}
+
+	// Validate each PRISM document
+	for i, doc := range e.PRISMDocuments {
+		if docErrs := doc.Validate(); docErrs.HasErrors() {
+			for _, err := range docErrs {
+				errs = append(errs, ValidationError{
+					Module:  "intelligence",
+					Type:    "document",
+					ID:      fmt.Sprintf("doc[%d]", i),
+					Field:   err.Field,
+					Message: err.Message,
+				})
+			}
+		}
+	}
+
+	// Cross-reference validation: capability → SLI references
+	for _, cap := range e.AllCapabilities() {
+		if cap.PRISMRef != nil {
+			for _, sliID := range cap.PRISMRef.SLIIDs {
+				if e.GetMetricByID(sliID) == nil {
+					errs = append(errs, ValidationError{
+						Module:  "capability",
+						Type:    "capability",
+						ID:      cap.ID,
+						Field:   "prismRef.sliIds",
+						RefID:   sliID,
+						Message: "references non-existent metric/SLI",
+					})
+				}
+			}
+		}
+	}
+
+	return errs
+}
+
+// =============================================================================
+// Statistics
+// =============================================================================
+
 // Stats returns summary statistics about the ecosystem.
 type Stats struct {
-	CapabilityStacks int            `json:"capabilityStacks"`
-	TotalCapabilities int           `json:"totalCapabilities"`
-	ByStatus         map[string]int `json:"byStatus"`
-	ByDomain         map[string]int `json:"byDomain"`
+	CapabilityStacks  int            `json:"capabilityStacks"`
+	TotalCapabilities int            `json:"totalCapabilities"`
+	PRISMDocuments    int            `json:"prismDocuments"`
+	TotalMetrics      int            `json:"totalMetrics"`
+	TotalServices     int            `json:"totalServices"`
+	TotalInitiatives  int            `json:"totalInitiatives"`
+	TotalOKRSets      int            `json:"totalOkrSets"`
+	TotalObjectives   int            `json:"totalObjectives"`
+	TotalRoadmaps     int            `json:"totalRoadmaps"`
+	TotalPhases       int            `json:"totalPhases"`
+	ByStatus          map[string]int `json:"byStatus"`
+	ByDomain          map[string]int `json:"byDomain"`
 }
 
 // Stats returns ecosystem statistics.
@@ -137,6 +449,14 @@ func (e *Ecosystem) Stats() Stats {
 	stats := Stats{
 		CapabilityStacks:  len(e.CapabilityStacks),
 		TotalCapabilities: 0,
+		PRISMDocuments:    len(e.PRISMDocuments),
+		TotalMetrics:      len(e.AllMetrics()),
+		TotalServices:     len(e.AllServices()),
+		TotalInitiatives:  len(e.AllInitiatives()),
+		TotalOKRSets:      len(e.OKRSets),
+		TotalObjectives:   len(e.AllObjectives()),
+		TotalRoadmaps:     len(e.Roadmaps),
+		TotalPhases:       len(e.AllPhases()),
 		ByStatus:          make(map[string]int),
 		ByDomain:          make(map[string]int),
 	}
@@ -161,4 +481,48 @@ func (e *Ecosystem) Stats() Stats {
 	}
 
 	return stats
+}
+
+// =============================================================================
+// File Loading Helpers
+// =============================================================================
+
+// LoadFromDirectory loads an ecosystem from a directory structure.
+// Expected structure:
+//
+//	ecosystem/
+//	  capability/
+//	    *.json
+//	  intelligence/
+//	    *.json
+//	  execution/
+//	    okrs/*.json
+//	    roadmaps/*.json
+func LoadFromDirectory(dir string) (*Ecosystem, error) {
+	config := Config{
+		Name: filepath.Base(dir),
+	}
+
+	// Scan capability files
+	capDir := filepath.Join(dir, "capability")
+	if files, err := filepath.Glob(filepath.Join(capDir, "*.json")); err == nil {
+		config.Capability.Files = files
+	}
+
+	// Scan intelligence files
+	intDir := filepath.Join(dir, "intelligence")
+	if files, err := filepath.Glob(filepath.Join(intDir, "*.json")); err == nil {
+		config.Intelligence.Files = files
+	}
+
+	// Scan execution files
+	execDir := filepath.Join(dir, "execution")
+	if files, err := filepath.Glob(filepath.Join(execDir, "okrs", "*.json")); err == nil {
+		config.Execution.OKRs = files
+	}
+	if files, err := filepath.Glob(filepath.Join(execDir, "roadmaps", "*.json")); err == nil {
+		config.Execution.Roadmaps = files
+	}
+
+	return Load(config)
 }
