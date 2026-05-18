@@ -1,6 +1,26 @@
 # PRISM
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/grokify/prism.svg)](https://pkg.go.dev/github.com/grokify/prism)
+[![Go CI][go-ci-svg]][go-ci-url]
+[![Go Lint][go-lint-svg]][go-lint-url]
+[![Go SAST][go-sast-svg]][go-sast-url]
+[![Go Report Card][goreport-svg]][goreport-url]
+[![Docs][docs-godoc-svg]][docs-godoc-url]
+[![License][license-svg]][license-url]
+
+ [go-ci-svg]: https://github.com/grokify/prism/actions/workflows/go-ci.yaml/badge.svg?branch=main
+ [go-ci-url]: https://github.com/grokify/prism/actions/workflows/go-ci.yaml
+ [go-lint-svg]: https://github.com/grokify/prism/actions/workflows/go-lint.yaml/badge.svg?branch=main
+ [go-lint-url]: https://github.com/grokify/prism/actions/workflows/go-lint.yaml
+ [go-sast-svg]: https://github.com/grokify/prism/actions/workflows/go-sast-codeql.yaml/badge.svg?branch=main
+ [go-sast-url]: https://github.com/grokify/prism/actions/workflows/go-sast-codeql.yaml
+ [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/prism
+ [goreport-url]: https://goreportcard.com/report/github.com/grokify/prism
+ [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/prism
+ [docs-godoc-url]: https://pkg.go.dev/github.com/grokify/prism
+ [docs-mkdoc-svg]: https://img.shields.io/badge/docs-guide-blue.svg
+ [docs-mkdoc-url]: https://grokify.dev/prism
+ [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
+ [license-url]: https://github.com/grokify/prism/blob/main/LICENSE
 
 **P**latform for **R**eliability, **I**ntelligence, **S**trategy & **M**aturity
 
@@ -9,21 +29,27 @@ A unified framework for capability-driven organizational intelligence, connectin
 ## Ecosystem
 
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│                              prism                                   │
-│                    Unified Orchestration Layer                       │
-└─────────────────────────────────────────────────────────────────────┘
-        │                    │                    │
-        ▼                    ▼                    ▼
-┌───────────────┐    ┌───────────────┐    ┌───────────────┐
-│prism-capability│   │prism-intelligence│  │prism-execution│
-│               │    │                 │    │               │
-│ "What we need"│───▶│ "How we measure"│───▶│ "How we act" │
-└───────────────┘    └───────────────┘    └───────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│                             prism                           │
+│                  Unified Orchestration Layer                │
+└─────────────────────────────────────────────────────────────┘
+                              │
+┌─────────────────────────────────────────────────────────────┐
+│                         prism-core                          │
+│       Shared primitives: Domain, Layer, Stage, Maturity     │
+└─────────────────────────────────────────────────────────────┘
+        │                       │                     │
+        ▼                       ▼                     ▼
+┌────────────────┐    ┌──────────────────┐    ┌───────────────┐
+│prism-capability│    │prism-intelligence│    │prism-execution│
+│                │    │                  │    │               │
+│ "What we need" │───>│ "How we measure" │───>│ "How we act"  │
+└────────────────┘    └──────────────────┘    └───────────────┘
 ```
 
 | Module | Purpose | Key Artifacts |
 |--------|---------|---------------|
+| [prism-core](https://github.com/grokify/prism-core) | Shared primitives | Domain, Layer, Stage, MaturityLevel, TeamType |
 | [prism-capability](https://github.com/grokify/prism-capability) | What capabilities exist | Capability stacks, layers, dependencies |
 | [prism-intelligence](https://github.com/grokify/prism-intelligence) | How we measure maturity | SLI/SLO definitions, maturity state |
 | [prism-execution](https://github.com/grokify/prism-execution) | How we improve | OKRs, roadmaps, initiatives |
@@ -154,19 +180,21 @@ This project is in active development. Current phase: **Foundation**
 
 | Module | Latest Version | Status |
 |--------|----------------|--------|
-| [prism-capability](https://github.com/grokify/prism-capability) | v0.2.0 | Released |
-| [prism-intelligence](https://github.com/grokify/prism-intelligence) | v0.8.0 | Released |
-| [prism-execution](https://github.com/grokify/prism-execution) | v0.11.0 | Released |
-| prism (this repo) | v0.1.0 | In development |
+| [prism-core](https://github.com/grokify/prism-core) | v0.1.0 | Released |
+| [prism-capability](https://github.com/grokify/prism-capability) | v0.3.0 | Released |
+| [prism-intelligence](https://github.com/grokify/prism-intelligence) | v0.9.0 | Released |
+| [prism-execution](https://github.com/grokify/prism-execution) | v0.12.0 | Released |
+| prism (this repo) | v0.7.0 | Released |
 
 ### Roadmap
 
-- [x] prism-capability v0.2.0 released
-- [x] prism-intelligence v0.8.0 released
-- [x] prism-execution v0.11.0 released
+- [x] prism-core v0.1.0 released
+- [x] prism-capability v0.3.0 released
+- [x] prism-intelligence v0.9.0 released
+- [x] prism-execution v0.12.0 released
 - [x] Repository restructuring complete
-- [ ] Orchestrator types and loading
-- [ ] Cross-module validation
+- [x] Orchestrator types and loading
+- [x] Cross-module integration
 - [ ] Unified CLI
 - [ ] Dashboard generation
 

@@ -1,0 +1,62 @@
+site_name: PRISM
+site_description: Platform for Reliability, Intelligence, Strategy & Maturity - Unified ecosystem orchestrator
+site_url: https://grokify.github.io/prism/
+repo_url: https://github.com/grokify/prism
+repo_name: grokify/prism
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+plugins:
+  - search
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
+  - tables
+  - attr_list
+  - md_in_html
+
+nav:
+  - Home: index.md
+  - Ecosystem: ECOSYSTEM.md
+  - Modules:
+      - prism-core: https://github.com/grokify/prism-core
+      - prism-capability: https://github.com/grokify/prism-capability
+      - prism-intelligence: https://grokify.github.io/prism-intelligence/
+      - prism-execution: https://grokify.github.io/prism-execution/
+  - Releases:
+      - v0.7.0: releases/v0.7.0.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/grokify/prism
