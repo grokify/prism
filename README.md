@@ -184,7 +184,7 @@ This project is in active development. Current phase: **Foundation**
 | [prism-capability](https://github.com/grokify/prism-capability) | v0.3.0 | Released |
 | [prism-intelligence](https://github.com/grokify/prism-intelligence) | v0.9.0 | Released |
 | [prism-execution](https://github.com/grokify/prism-execution) | v0.12.0 | Released |
-| prism (this repo) | v0.7.0 | Released |
+| prism (this repo) | v0.8.0 | In Development |
 
 ### Roadmap
 

@@ -54,6 +54,7 @@ nav:
       - prism-intelligence: https://grokify.github.io/prism-intelligence/
       - prism-execution: https://grokify.github.io/prism-execution/
   - Releases:
+      - v0.8.0: releases/v0.8.0.md
       - v0.7.0: releases/v0.7.0.md
 
 extra:

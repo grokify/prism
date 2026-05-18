@@ -7,13 +7,29 @@
   "maintainers": ["grokify"],
   "releases": [
     {
+      "version": "v0.8.0",
+      "date": "2026-05-18",
+      "highlights": [
+        { "description": "CLI for ecosystem loading, validation, and statistics" }
+      ],
+      "added": [
+        { "description": "CLI with ecosystem, validate, and stats commands", "commit": "19ba787" },
+        { "description": "Cobra-based command structure for prism CLI", "commit": "19ba787" }
+      ],
+      "dependencies": [
+        { "description": "Add github.com/spf13/cobra v1.10.2 for CLI", "commit": "19ba787" }
+      ],
+      "documentation": [
+        { "description": "Update changelog and release notes for CLI", "commit": "bb6a982" }
+      ]
+    },
+    {
       "version": "v0.7.0",
       "date": "2026-05-18",
       "highlights": [
         { "description": "Repository repurposed as PRISM ecosystem orchestrator" },
         { "description": "prism-intelligence (maturity modeling) moved to separate repository" },
-        { "description": "Unified orchestration layer connecting prism-capability, prism-intelligence, and prism-execution" },
-        { "description": "CLI for ecosystem loading, validation, and statistics" }
+        { "description": "Unified orchestration layer connecting prism-capability, prism-intelligence, and prism-execution" }
       ],
       "breaking": [
         { "description": "Previous prism functionality (maturity modeling) moved to github.com/grokify/prism-intelligence", "commit": "d93378f" },
@@ -26,16 +42,13 @@
         { "description": "Cross-module queries: GetCapabilityContext, AllMetrics, AllInitiatives", "commit": "f44e15b" },
         { "description": "Cross-module validation for capability → SLI references", "commit": "f44e15b" },
         { "description": "Statistics aggregation across all modules", "commit": "f44e15b" },
-        { "description": "Ecosystem tests validating integration", "commit": "31b8179" },
-        { "description": "CLI with ecosystem, validate, and stats commands" },
-        { "description": "Cobra-based command structure for prism CLI" }
+        { "description": "Ecosystem tests validating integration", "commit": "31b8179" }
       ],
       "dependencies": [
         { "description": "Add github.com/grokify/prism-core v0.1.0", "commit": "f71dd5c" },
         { "description": "Add github.com/grokify/prism-capability v0.3.0", "commit": "f71dd5c" },
         { "description": "Add github.com/grokify/prism-intelligence v0.9.0", "commit": "f71dd5c" },
-        { "description": "Add github.com/grokify/prism-execution v0.12.0", "commit": "f71dd5c" },
-        { "description": "Add github.com/spf13/cobra v1.10.2 for CLI" }
+        { "description": "Add github.com/grokify/prism-execution v0.12.0", "commit": "f71dd5c" }
       ],
       "documentation": [
         { "description": "README with ecosystem architecture and quick start guide" },
