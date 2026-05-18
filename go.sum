@@ -1,2 +1,10 @@
+github.com/grokify/prism-capability v0.3.0 h1:hQAveDphsqQOpPf8s59x4DxUHz0z7cnZBDghTGWCjv8=
+github.com/grokify/prism-capability v0.3.0/go.mod h1:Grnh28YRGCNCOaz+0yAzAndFMIObwSBmfw7znFh7JRg=
+github.com/grokify/prism-core v0.1.0 h1:IG4NJ6Zyx5tEY8THF+vqDIQyKo/6Im1RNplCblU7ByQ=
+github.com/grokify/prism-core v0.1.0/go.mod h1:MGwhaaZdFW8WShYx3lqzGkcx8f07xFDbwd+u+4uBAT0=
+github.com/grokify/prism-execution v0.12.0 h1:BSFJbLS+57NtJNXVxlM+zzs7P8Gm/JlBWQSb7abGK5A=
+github.com/grokify/prism-execution v0.12.0/go.mod h1:rxr+cqzC3Aqne4sF6m4XaWumyMZCXexp/VFjxtacjQg=
+github.com/grokify/prism-intelligence v0.9.0 h1:8WQMOs1xVY6UrYAh3jLsUeSMr8GmVnkDDt+NKLQ2gGk=
+github.com/grokify/prism-intelligence v0.9.0/go.mod h1:APdYqpGHJveJY5f6C3D8DjWN5MAYLRndT2Fen9ozYIo=
 golang.org/x/text v0.37.0 h1:Cqjiwd9eSg8e0QAkyCaQTNHFIIzWtidPahFWR83rTrc=
 golang.org/x/text v0.37.0/go.mod h1:a5sjxXGs9hsn/AJVwuElvCAo9v8QYLzvavO5z2PiM38=
