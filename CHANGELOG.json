@@ -12,7 +12,8 @@
       "highlights": [
         { "description": "Repository repurposed as PRISM ecosystem orchestrator" },
         { "description": "prism-intelligence (maturity modeling) moved to separate repository" },
-        { "description": "Unified orchestration layer connecting prism-capability, prism-intelligence, and prism-execution" }
+        { "description": "Unified orchestration layer connecting prism-capability, prism-intelligence, and prism-execution" },
+        { "description": "CLI for ecosystem loading, validation, and statistics" }
       ],
       "breaking": [
         { "description": "Previous prism functionality (maturity modeling) moved to github.com/grokify/prism-intelligence", "commit": "d93378f" },
@@ -25,13 +26,16 @@
         { "description": "Cross-module queries: GetCapabilityContext, AllMetrics, AllInitiatives", "commit": "f44e15b" },
         { "description": "Cross-module validation for capability → SLI references", "commit": "f44e15b" },
         { "description": "Statistics aggregation across all modules", "commit": "f44e15b" },
-        { "description": "Ecosystem tests validating integration", "commit": "31b8179" }
+        { "description": "Ecosystem tests validating integration", "commit": "31b8179" },
+        { "description": "CLI with ecosystem, validate, and stats commands" },
+        { "description": "Cobra-based command structure for prism CLI" }
       ],
       "dependencies": [
         { "description": "Add github.com/grokify/prism-core v0.1.0", "commit": "f71dd5c" },
         { "description": "Add github.com/grokify/prism-capability v0.3.0", "commit": "f71dd5c" },
         { "description": "Add github.com/grokify/prism-intelligence v0.9.0", "commit": "f71dd5c" },
-        { "description": "Add github.com/grokify/prism-execution v0.12.0", "commit": "f71dd5c" }
+        { "description": "Add github.com/grokify/prism-execution v0.12.0", "commit": "f71dd5c" },
+        { "description": "Add github.com/spf13/cobra v1.10.2 for CLI" }
       ],
       "documentation": [
         { "description": "README with ecosystem architecture and quick start guide" },

@@ -195,7 +195,7 @@ This project is in active development. Current phase: **Foundation**
 - [x] Repository restructuring complete
 - [x] Orchestrator types and loading
 - [x] Cross-module integration
-- [ ] Unified CLI
+- [x] Unified CLI
 - [ ] Dashboard generation
 
 ## License
