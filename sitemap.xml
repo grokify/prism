@@ -2,14 +2,58 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://grokify.github.io/prism/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-05-24</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/ECOSYSTEM/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-05-24</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/prism/cli/</loc>
+         <lastmod>2026-05-24</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/prism/cli/capability/</loc>
+         <lastmod>2026-05-24</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/prism/cli/ecosystem/</loc>
+         <lastmod>2026-05-24</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/prism/cli/maturity/</loc>
+         <lastmod>2026-05-24</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/prism/cli/roadmap/</loc>
+         <lastmod>2026-05-24</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/prism/cli/site/</loc>
+         <lastmod>2026-05-24</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/prism/getting-started/installation/</loc>
+         <lastmod>2026-05-24</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/prism/getting-started/quickstart/</loc>
+         <lastmod>2026-05-24</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/prism/guide/configuration/</loc>
+         <lastmod>2026-05-24</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/prism/guide/integration/</loc>
+         <lastmod>2026-05-24</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/releases/v0.7.0/</loc>
-         <lastmod>2026-05-18</lastmod>
+         <lastmod>2026-05-24</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/prism/releases/v0.8.0/</loc>
+         <lastmod>2026-05-24</lastmod>
     </url>
 </urlset>
