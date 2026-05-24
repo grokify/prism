@@ -9,6 +9,9 @@ site/assets/
 site/search/
 site/ECOSYSTEM/
 site/releases/
+site/cli/
+site/getting-started/
+site/guide/
 
 # Binaries
 /prism
