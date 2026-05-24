@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/grokify/prism/site"
+	"github.com/grokify/prism/sitegen"
 	"github.com/spf13/cobra"
 )
 
@@ -185,7 +185,7 @@ func runSiteGenerate(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	config := site.Config{
+	config := sitegen.Config{
 		Title:             siteTitle,
 		Description:       siteDescription,
 		StackPaths:        stackPaths,
@@ -200,7 +200,7 @@ func runSiteGenerate(cmd *cobra.Command, args []string) error {
 		AggregationMethod: aggMethod,
 	}
 
-	gen := site.NewGenerator(config)
+	gen := sitegen.NewGenerator(config)
 
 	fmt.Fprintf(os.Stderr, "Generating site...\n")
 	fmt.Fprintf(os.Stderr, "  Stacks: %v\n", stackPaths)

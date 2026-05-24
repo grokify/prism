@@ -26,7 +26,7 @@
 //
 //   - roadmap.json: Defines OKRs, initiatives, and roadmap items.
 //     See github.com/grokify/prism-roadmap for the schema.
-package site
+package sitegen
 
 import (
 	"encoding/json"

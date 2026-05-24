@@ -1,4 +1,4 @@
-package site
+package sitegen
 
 // homepageTemplate is the HTML template for the homepage.
 const homepageTemplate = `<!DOCTYPE html>

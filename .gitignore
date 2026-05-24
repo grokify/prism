@@ -1,17 +1,8 @@
 # Ideation notes (raw, unformalized)
 IDEATION_CHAT*.md
 
-# MkDocs generated site (but not site/*.go source files)
-site/*.html
-site/*.xml
-site/*.xml.gz
-site/assets/
-site/search/
-site/ECOSYSTEM/
-site/releases/
-site/cli/
-site/getting-started/
-site/guide/
+# MkDocs generated site
+site/
 
 # Binaries
 /prism
