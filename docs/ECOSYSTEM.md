@@ -83,7 +83,7 @@ The PRISM ecosystem follows a top-down planning flow where each artifact informs
 
 ## Core Concepts
 
-### From IDEATION_CHAT Analysis
+### Core Principles
 
 The PRISM ecosystem is grounded in these principles:
 
@@ -445,4 +445,3 @@ require (
 - [prism-capability README](https://github.com/grokify/prism-capability)
 - [prism-maturity README](https://github.com/grokify/prism-maturity)
 - [prism-roadmap README](https://github.com/grokify/prism-roadmap)
-- [IDEATION_CHAT.md](./IDEATION_CHAT.md) - Original concept exploration
