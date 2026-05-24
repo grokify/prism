@@ -1081,9 +1081,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
+  <a href="#highlights" class="md-nav__link">
     <span class="md-ellipsis">
-      Overview
+      Highlights
     </span>
   </a>
   
@@ -1100,18 +1100,27 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#cli" class="md-nav__link">
+  <a href="#unified-cli" class="md-nav__link">
     <span class="md-ellipsis">
-      CLI
+      Unified CLI
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#cli-flags" class="md-nav__link">
+  <a href="#static-site-generator" class="md-nav__link">
     <span class="md-ellipsis">
-      CLI Flags
+      Static Site Generator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-renames" class="md-nav__link">
+    <span class="md-ellipsis">
+      Module Renames
     </span>
   </a>
   
@@ -1119,6 +1128,39 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changed
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Changed">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#package-rename" class="md-nav__link">
+    <span class="md-ellipsis">
+      Package Rename
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dependencies
+    </span>
+  </a>
   
 </li>
       
@@ -1132,9 +1174,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#dependencies" class="md-nav__link">
+  <a href="#documentation" class="md-nav__link">
     <span class="md-ellipsis">
-      Dependencies
+      Documentation
     </span>
   </a>
   
@@ -1215,9 +1257,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
+  <a href="#highlights" class="md-nav__link">
     <span class="md-ellipsis">
-      Overview
+      Highlights
     </span>
   </a>
   
@@ -1234,18 +1276,27 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#cli" class="md-nav__link">
+  <a href="#unified-cli" class="md-nav__link">
     <span class="md-ellipsis">
-      CLI
+      Unified CLI
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#cli-flags" class="md-nav__link">
+  <a href="#static-site-generator" class="md-nav__link">
     <span class="md-ellipsis">
-      CLI Flags
+      Static Site Generator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-renames" class="md-nav__link">
+    <span class="md-ellipsis">
+      Module Renames
     </span>
   </a>
   
@@ -1253,6 +1304,39 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changed
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Changed">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#package-rename" class="md-nav__link">
+    <span class="md-ellipsis">
+      Package Rename
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dependencies
+    </span>
+  </a>
   
 </li>
       
@@ -1266,9 +1350,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#dependencies" class="md-nav__link">
+  <a href="#documentation" class="md-nav__link">
     <span class="md-ellipsis">
-      Dependencies
+      Documentation
     </span>
   </a>
   
@@ -1303,54 +1387,104 @@
 
 
 <h1 id="v080-release-notes">v0.8.0 Release Notes</h1>
-<p><strong>Release Date:</strong> 2026-05-18</p>
-<h2 id="overview">Overview</h2>
-<p>This release adds the <code>prism</code> CLI for command-line access to ecosystem operations.</p>
+<p><strong>Release Date:</strong> 2026-05-24</p>
+<h2 id="highlights">Highlights</h2>
+<ul>
+<li><strong>Unified CLI</strong> - Single CLI integrating all PRISM ecosystem modules</li>
+<li><strong>Static Site Generator</strong> - HTML dashboards for capability maturity visualization</li>
+<li><strong>Module Renames</strong> - prism-intelligence → prism-maturity, prism-execution → prism-roadmap</li>
+</ul>
 <h2 id="whats-new">What's New</h2>
-<h3 id="cli">CLI</h3>
-<p>The <code>prism</code> CLI provides command-line access to ecosystem operations:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Load an ecosystem and view statistics</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>prism<span class="w"> </span>ecosystem<span class="w"> </span>load<span class="w"> </span>--dir<span class="w"> </span>./ecosystem
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Validate all documents</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>prism<span class="w"> </span>validate<span class="w"> </span>--config<span class="w"> </span>prism.yaml
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># Show ecosystem statistics</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>prism<span class="w"> </span>stats<span class="w"> </span>--dir<span class="w"> </span>./ecosystem<span class="w"> </span>--json
+<h3 id="unified-cli">Unified CLI</h3>
+<p>The <code>prism</code> CLI now integrates commands from all ecosystem modules:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Capability stack commands (from prism-capability)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>prism<span class="w"> </span>capability<span class="w"> </span>list<span class="w"> </span>stack.json
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>prism<span class="w"> </span>capability<span class="w"> </span>show<span class="w"> </span>stack.json<span class="w"> </span>sast
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>prism<span class="w"> </span>capability<span class="w"> </span>render<span class="w"> </span>stack.json<span class="w"> </span>--format<span class="w"> </span>html
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># Maturity commands (from prism-maturity)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>prism<span class="w"> </span>maturity<span class="w"> </span>model<span class="w"> </span>report<span class="w"> </span>model.json
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>prism<span class="w"> </span>maturity<span class="w"> </span>state<span class="w"> </span>show<span class="w"> </span>state.json
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>prism<span class="w"> </span>maturity<span class="w"> </span>plan<span class="w"> </span>dashboard<span class="w"> </span>plan.json
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="c1"># Roadmap commands (from prism-roadmap)</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>prism<span class="w"> </span>roadmap<span class="w"> </span>okr<span class="w"> </span>list<span class="w"> </span>okrs.json
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>prism<span class="w"> </span>roadmap<span class="w"> </span>v2mom<span class="w"> </span>convert<span class="w"> </span>doc.json
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>prism<span class="w"> </span>roadmap<span class="w"> </span>mrd<span class="w"> </span>generate<span class="w"> </span>spec.json
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="c1"># Ecosystem commands</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>prism<span class="w"> </span>ecosystem<span class="w"> </span>load<span class="w"> </span>--dir<span class="w"> </span>./ecosystem
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>prism<span class="w"> </span>validate<span class="w"> </span>--config<span class="w"> </span>prism.yaml
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>prism<span class="w"> </span>stats<span class="w"> </span>--dir<span class="w"> </span>./ecosystem<span class="w"> </span>--json
 </code></pre></div>
-<p>Available commands:</p>
+<h3 id="static-site-generator">Static Site Generator</h3>
+<p>Generate HTML dashboards from capability stacks with maturity overlays:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Generate site from standard directory structure</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>prism<span class="w"> </span>site<span class="w"> </span>generate<span class="w"> </span>--stack<span class="o">=</span>./security/<span class="w"> </span>--output<span class="o">=</span>./dist
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Multiple stacks with theme</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>prism<span class="w"> </span>site<span class="w"> </span>generate<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span>--stack<span class="o">=</span>./security/<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span>--stack<span class="o">=</span>./reliability/<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span>--output<span class="o">=</span>./dist<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span>--theme<span class="o">=</span>dark
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1"># With layer-based aggregation</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>prism<span class="w"> </span>site<span class="w"> </span>generate<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">  </span>--stack<span class="o">=</span>./stacks/<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">  </span>--aggregation<span class="o">=</span>min<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">  </span>--output<span class="o">=</span>./dist
+</code></pre></div>
+<p><strong>Features:</strong></p>
+<ul>
+<li>Homepage with cards linking to all capability stacks</li>
+<li>Filterable capability grids per stack</li>
+<li>Capability detail pages with SLI metrics</li>
+<li>Maturity level badges (M1-M5) with color coding</li>
+<li>Metrics count indicator on capability cards</li>
+<li>Layer-based aggregation views (min/avg methods)</li>
+<li>Light and dark theme support</li>
+</ul>
+<h3 id="module-renames">Module Renames</h3>
+<p>The ecosystem modules have been renamed for clarity:</p>
 <table>
 <thead>
 <tr>
-<th>Command</th>
+<th>Old Name</th>
+<th>New Name</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>prism ecosystem load</code></td>
-<td>Load an ecosystem from config or directory</td>
+<td>prism-intelligence</td>
+<td>prism-maturity</td>
+<td>SLIs, SLOs, maturity models</td>
 </tr>
 <tr>
-<td><code>prism validate</code></td>
-<td>Validate all documents and cross-references</td>
-</tr>
-<tr>
-<td><code>prism stats</code></td>
-<td>Show ecosystem statistics</td>
+<td>prism-execution</td>
+<td>prism-roadmap</td>
+<td>OKRs, V2MOMs, roadmaps</td>
 </tr>
 </tbody>
 </table>
-<h3 id="cli-flags">CLI Flags</h3>
-<p>Common flags across commands:</p>
+<p>Config types updated accordingly:</p>
 <ul>
-<li><code>--config, -c</code> - Load from JSON configuration file</li>
-<li><code>--dir, -d</code> - Load from directory structure</li>
-<li><code>--json</code> - Output as JSON (for scripting)</li>
-<li><code>--all</code> - Validate all documents (validate command)</li>
+<li><code>IntelligenceConfig</code> → <code>MaturityConfig</code></li>
+<li><code>ExecutionConfig</code> → <code>RoadmapConfig</code></li>
 </ul>
-<h2 id="installation">Installation</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>go<span class="w"> </span>install<span class="w"> </span>github.com/grokify/prism/cmd/prism@v0.8.0
+<h2 id="changed">Changed</h2>
+<h3 id="package-rename">Package Rename</h3>
+<p>The <code>site/</code> package has been renamed to <code>sitegen/</code> to avoid conflict with MkDocs output directory.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="s">&quot;github.com/grokify/prism/sitegen&quot;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nx">config</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sitegen</span><span class="p">.</span><span class="nx">Config</span><span class="p">{</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nx">StackPaths</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;./security/&quot;</span><span class="p">},</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nx">OutputDir</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;./dist&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nx">Theme</span><span class="p">:</span><span class="w">      </span><span class="s">&quot;dark&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">}</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="nx">gen</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sitegen</span><span class="p">.</span><span class="nx">NewGenerator</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="nx">gen</span><span class="p">.</span><span class="nx">Generate</span><span class="p">()</span>
 </code></pre></div>
 <h2 id="dependencies">Dependencies</h2>
 <table>
@@ -1358,15 +1492,43 @@
 <tr>
 <th>Module</th>
 <th>Version</th>
+<th>Change</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td>prism-capability</td>
+<td>v0.4.0</td>
+<td>Updated</td>
+</tr>
+<tr>
+<td>prism-maturity</td>
+<td>v0.10.0</td>
+<td>Renamed from prism-intelligence</td>
+</tr>
+<tr>
+<td>prism-roadmap</td>
+<td>v0.13.0</td>
+<td>Renamed from prism-execution</td>
+</tr>
+<tr>
 <td>spf13/cobra</td>
 <td>v1.10.2</td>
+<td>For CLI</td>
 </tr>
 </tbody>
 </table>
+<h2 id="installation">Installation</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>go<span class="w"> </span>install<span class="w"> </span>github.com/grokify/prism/cmd/prism@v0.8.0
+</code></pre></div>
+<h2 id="documentation">Documentation</h2>
+<p>New documentation added:</p>
+<ul>
+<li><a href="../../getting-started/installation/">Getting Started</a> - Installation and quickstart</li>
+<li><a href="../../cli/">CLI Reference</a> - Command reference for all modules</li>
+<li><a href="../../guide/configuration/">Configuration Guide</a> - Ecosystem configuration</li>
+<li><a href="../../guide/integration/">Integration Guide</a> - Module integration patterns</li>
+</ul>
 <h2 id="links">Links</h2>
 <ul>
 <li><a href="https://github.com/grokify/prism">GitHub Repository</a></li>
