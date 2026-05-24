@@ -5,24 +5,72 @@
 PRISM is a unified framework for capability-driven organizational intelligence, connecting **what you need** (capabilities), **how you measure** (maturity), and **how you act** (execution).
 
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│                              prism                                   │
-│                    Unified Orchestration Layer                       │
-│         Queries, cross-references, dashboards, workflows             │
-└─────────────────────────────────────────────────────────────────────┘
-        │                    │                    │
-        ▼                    ▼                    ▼
-┌───────────────┐    ┌───────────────┐    ┌───────────────┐
-│prism-capability│    │prism-intelligence│   │prism-execution│
-│               │    │                 │    │               │
-│ "What we need"│───▶│ "How we measure"│───▶│ "How we act" │
-│               │    │                 │    │               │
-│ Capabilities  │    │ Maturity Models │    │ OKRs/V2MOM   │
-│ Layers        │    │ SLI/SLO Defs    │    │ Roadmaps     │
-│ Categories    │    │ Current State   │    │ Initiatives  │
-│ Dependencies  │    │ Gap Analysis    │    │ Requirements │
-└───────────────┘    └───────────────┘    └───────────────┘
+┌────────────────────────────────────────────────────────────┐
+│                           prism                            │
+│                Unified Orchestration Layer                 │
+│      Queries, cross-references, dashboards, workflows      │
+└────────────────────────────────────────────────────────────┘
+         │                    │                    │
+         ▼                    ▼                    ▼
+┌────────────────┐    ┌─────────────────┐    ┌───────────────┐
+│prism-capability│    │  prism-maturity │    │ prism-roadmap │
+│                │    │                 │    │               │
+│ "What we need" │───>│ "How we measure"│───>│ "How we act"  │
+│                │    │                 │    │               │
+│ Capabilities   │    │ Maturity Models │    │ OKRs/V2MOM    │
+│ Layers         │    │ SLI/SLO Defs    │    │ Roadmaps      │
+│ Categories     │    │ Current State   │    │ Initiatives   │
+│ Dependencies   │    │ Gap Analysis    │    │ Requirements  │
+└────────────────┘    └─────────────────┘    └───────────────┘
 ```
+
+## Document Flow
+
+The PRISM ecosystem follows a top-down planning flow where each artifact informs the next:
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           CAPABILITY STACK                                  │
+│                    "What capabilities do we need?"                          │
+│         Layers, capabilities, dependencies, maturity targets                │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                      MATURITY MODEL + STATE                                 │
+│                    "Where are we for each capability?"                      │
+│              SLIs, criteria (M1-M5), current measurements                   │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                        OKR / V2MOM + ROADMAP                                │
+│              "What do we want to achieve, and in what order?"               │
+│         Goals (definition of success), phased roadmap items (RMIs)          │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           MRD / PRD / TRD                                   │
+│                    "How do we execute each roadmap item?"                   │
+│     Market requirements, product requirements, technical requirements       │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### Flow Summary
+
+| Stage | Artifact | Question Answered | Module |
+|-------|----------|-------------------|--------|
+| 1 | Capability Stack | What capabilities do we need? | prism-capability |
+| 2 | Maturity Model + State | Where are we for each capability? | prism-maturity |
+| 3 | OKR/V2MOM + Roadmap | What goals and sequence to improve? | prism-roadmap |
+| 4 | MRD/PRD/TRD | How do we execute each roadmap item? | prism-roadmap |
+
+### Relationships
+
+- **Capability → Maturity**: Each capability links to SLIs via `PRISMRef.SLIIDs`
+- **Maturity → Roadmap**: Gaps between current state and target drive roadmap priorities
+- **Roadmap → Requirements**: Each Roadmap Item (RMI) is executed via MRD/PRD/TRD documents
 
 ## Module Structure
 
@@ -30,8 +78,8 @@ PRISM is a unified framework for capability-driven organizational intelligence, 
 |--------|------------|---------|
 | **prism** | `github.com/grokify/prism` | Orchestrator connecting all modules |
 | **prism-capability** | `github.com/grokify/prism-capability` | Capability stack definitions |
-| **prism-intelligence** | `github.com/grokify/prism-intelligence` | Maturity models, SLIs, state tracking |
-| **prism-execution** | `github.com/grokify/prism-execution` | Goals, roadmaps, requirements |
+| **prism-maturity** | `github.com/grokify/prism-maturity` | Maturity models, SLIs, state tracking |
+| **prism-roadmap** | `github.com/grokify/prism-roadmap` | Goals, roadmaps, requirements |
 
 ## Core Concepts
 
@@ -66,12 +114,43 @@ From the ideation analysis, maturity is multi-dimensional:
 | **Integration** | Embeddedness in flows | Dependency metrics |
 | **Agility** | Time-to-change, evolution speed | Lead time metrics |
 
+### Importance and Dynamic Priority
+
+PRISM uses a two-tier priority system:
+
+1. **Static Importance** - Inherent weight of a capability (defined in prism-capability)
+2. **Dynamic Priority (P0-P3)** - Calculated from importance and maturity gap
+
+| Importance | Weight | Description |
+|------------|--------|-------------|
+| `critical` | 4 | Critical "-ilities" (security, availability, resiliency) |
+| `high` | 3 | High importance capabilities |
+| `medium` | 2 | Standard importance (default) |
+| `low` | 1 | Nice-to-have capabilities |
+
+**Priority Calculation:**
+
+```
+Priority Score = Importance Weight × (Target Level - Current Level)
+```
+
+| Score | Priority | Action Required |
+|-------|----------|-----------------|
+| ≥8 | P0 | Immediate action |
+| ≥4 | P1 | High priority |
+| ≥2 | P2 | Scheduled improvement |
+| <2 | P3 | Low priority |
+
+**Example:**
+- Critical capability at M2, target M4 → Score = 4 × 2 = 8 → **P0**
+- Medium capability at M3, target M4 → Score = 2 × 1 = 2 → **P2**
+
 ### SLI Hierarchy
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                    Capability Level Objectives                   │
-│         Unified threshold-based measurement framework            │
+│                    Capability Level Objectives                  │
+│         Unified threshold-based measurement framework           │
 └─────────────────────────────────────────────────────────────────┘
         │                    │                    │
         ▼                    ▼                    ▼
@@ -119,7 +198,7 @@ From the ideation analysis, maturity is multi-dimensional:
 }
 ```
 
-### prism-intelligence
+### prism-maturity
 
 **Purpose:** Define how capabilities are measured and track current maturity state.
 
@@ -149,7 +228,7 @@ Gap Analysis (what needs improvement)
 | Outcome | Business impact | Revenue lift, risk reduction |
 | Quality | Decision effectiveness | Precision, recall, override rate |
 
-### prism-execution
+### prism-roadmap
 
 **Purpose:** Plan and track improvement initiatives aligned to capability maturity.
 
@@ -257,9 +336,9 @@ Each module has its own CLI, plus unified commands in `prism`:
 
 ```bash
 # Module CLIs
-capstack validate capabilities.json
-prism-intel assess maturity-state.json
-prism-exec roadmap show roadmap.json
+prism-capability validate capabilities.json
+prism-maturity assess maturity-state.json
+prism-roadmap show roadmap.json
 
 # Unified prism CLI
 prism ecosystem load --config ecosystem.yaml
@@ -302,9 +381,9 @@ my-org-prism/
 | Old Location | New Location | Action |
 |--------------|--------------|--------|
 | `plexusone/capability-stack-spec` | `grokify/prism-capability` | ✅ Done (v0.1.0 tagged) |
-| `grokify/prism` | `grokify/prism-intelligence` | ✅ Done |
-| `grokify/structured-plan` | `grokify/prism-execution` | ✅ Done |
-| `grokify/structured-goals` | Merge DMAIC → prism-execution | Pending |
+| `grokify/prism` | `grokify/prism-maturity` | ✅ Done |
+| `grokify/structured-plan` | `grokify/prism-roadmap` | ✅ Done |
+| `grokify/structured-goals` | Merge DMAIC → prism-roadmap | Pending |
 | New | `grokify/prism` | This repo |
 
 ### Module Path Updates
@@ -315,19 +394,19 @@ Each module needs `go.mod` path updates:
 // prism-capability/go.mod
 module github.com/grokify/prism-capability
 
-// prism-intelligence/go.mod
-module github.com/grokify/prism-intelligence
+// prism-maturity/go.mod
+module github.com/grokify/prism-maturity
 
-// prism-execution/go.mod
-module github.com/grokify/prism-execution
+// prism-roadmap/go.mod
+module github.com/grokify/prism-roadmap
 
 // prism/go.mod
 module github.com/grokify/prism
 
 require (
     github.com/grokify/prism-capability v0.1.0
-    github.com/grokify/prism-intelligence v0.x.0
-    github.com/grokify/prism-execution v0.x.0
+    github.com/grokify/prism-maturity v0.x.0
+    github.com/grokify/prism-roadmap v0.x.0
 )
 ```
 
@@ -364,6 +443,6 @@ require (
 ## Related Documents
 
 - [prism-capability README](https://github.com/grokify/prism-capability)
-- [prism-intelligence README](https://github.com/grokify/prism-intelligence)
-- [prism-execution README](https://github.com/grokify/prism-execution)
+- [prism-maturity README](https://github.com/grokify/prism-maturity)
+- [prism-roadmap README](https://github.com/grokify/prism-roadmap)
 - [IDEATION_CHAT.md](./IDEATION_CHAT.md) - Original concept exploration

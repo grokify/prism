@@ -47,12 +47,25 @@ markdown_extensions:
 
 nav:
   - Home: index.md
+  - Getting Started:
+      - Installation: getting-started/installation.md
+      - Quick Start: getting-started/quickstart.md
+  - CLI Reference:
+      - Overview: cli/index.md
+      - prism capability: cli/capability.md
+      - prism maturity: cli/maturity.md
+      - prism roadmap: cli/roadmap.md
+      - prism ecosystem: cli/ecosystem.md
+      - prism site: cli/site.md
+  - Guides:
+      - Configuration: guide/configuration.md
+      - Integration: guide/integration.md
   - Ecosystem: ECOSYSTEM.md
   - Modules:
       - prism-core: https://github.com/grokify/prism-core
       - prism-capability: https://github.com/grokify/prism-capability
-      - prism-intelligence: https://grokify.github.io/prism-intelligence/
-      - prism-execution: https://grokify.github.io/prism-execution/
+      - prism-maturity: https://grokify.github.io/prism-maturity/
+      - prism-roadmap: https://grokify.github.io/prism-roadmap/
   - Releases:
       - v0.8.0: releases/v0.8.0.md
       - v0.7.0: releases/v0.7.0.md

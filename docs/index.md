@@ -19,7 +19,7 @@ A unified framework for capability-driven organizational intelligence, connectin
         │                       │                     │
         ▼                       ▼                     ▼
 ┌────────────────┐    ┌──────────────────┐    ┌───────────────┐
-│prism-capability│    │prism-intelligence│    │prism-execution│
+│prism-capability│    │  prism-maturity  │    │ prism-roadmap │
 │                │    │                  │    │               │
 │ "What we need" │───>│ "How we measure" │───>│ "How we act"  │
 └────────────────┘    └──────────────────┘    └───────────────┘
@@ -31,8 +31,8 @@ A unified framework for capability-driven organizational intelligence, connectin
 |--------|---------|---------------|
 | [prism-core](https://github.com/grokify/prism-core) | Shared primitives | Domain, Layer, Stage, MaturityLevel |
 | [prism-capability](https://github.com/grokify/prism-capability) | What capabilities exist | Capability stacks, layers |
-| [prism-intelligence](https://grokify.github.io/prism-intelligence/) | How we measure maturity | SLIs, SLOs, maturity models |
-| [prism-execution](https://grokify.github.io/prism-execution/) | How we improve | OKRs, roadmaps, PRDs |
+| [prism-maturity](https://grokify.github.io/prism-maturity/) | How we measure maturity | SLIs, SLOs, maturity models |
+| [prism-roadmap](https://grokify.github.io/prism-roadmap/) | How we improve | OKRs, roadmaps, PRDs |
 | **prism** (this repo) | Orchestration | Cross-module queries |
 
 ## Installation
@@ -87,6 +87,29 @@ func main() {
 | M3 | Defined | Standardized, repeatable across teams |
 | M4 | Managed | Measured, governed, integrated |
 | M5 | Optimizing | Continuously improved, adaptive |
+
+## Site Generator
+
+Generate static sites from capability stacks with maturity visualization:
+
+```bash
+prism site generate --stack=./stacks/ --output=./dist
+```
+
+### Features
+
+- **Metrics Count Indicator** - Badge showing SLI count per capability
+- **Light/Dark Theme** - Automatic theme synchronization
+- **Navigation** - Browse by category or layer
+- **Custom Footer** - Use `--hide-generated-by` to remove attribution
+
+### CLI Options
+
+| Flag | Description |
+|------|-------------|
+| `--stack` | Path to capability stack directory |
+| `--output` | Output directory for generated site |
+| `--hide-generated-by` | Hide footer attribution |
 
 ## Next Steps
 
