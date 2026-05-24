@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	capability "github.com/grokify/prism-capability"
-	intelligence "github.com/grokify/prism-intelligence"
+	maturity "github.com/grokify/prism-maturity"
 )
 
 func TestEcosystemStats(t *testing.T) {
@@ -18,9 +18,9 @@ func TestEcosystemStats(t *testing.T) {
 				},
 			},
 		},
-		PRISMDocuments: []*intelligence.PRISMDocument{
+		PRISMDocuments: []*maturity.PRISMDocument{
 			{
-				Metrics: []intelligence.Metric{
+				Metrics: []maturity.Metric{
 					{ID: "m1", Name: "Metric 1"},
 					{ID: "m2", Name: "Metric 2"},
 				},
@@ -75,14 +75,14 @@ func TestGetCapabilityByID(t *testing.T) {
 
 func TestGetMetricByID(t *testing.T) {
 	eco := &Ecosystem{
-		PRISMDocuments: []*intelligence.PRISMDocument{
+		PRISMDocuments: []*maturity.PRISMDocument{
 			{
-				Metrics: []intelligence.Metric{
+				Metrics: []maturity.Metric{
 					{ID: "m1", Name: "Metric 1"},
 				},
 			},
 			{
-				Metrics: []intelligence.Metric{
+				Metrics: []maturity.Metric{
 					{ID: "m2", Name: "Metric 2"},
 				},
 			},
@@ -113,9 +113,9 @@ func TestCapabilityContext(t *testing.T) {
 				},
 			},
 		},
-		PRISMDocuments: []*intelligence.PRISMDocument{
+		PRISMDocuments: []*maturity.PRISMDocument{
 			{
-				Metrics: []intelligence.Metric{
+				Metrics: []maturity.Metric{
 					{ID: "m1", Name: "Metric 1"},
 					{ID: "m2", Name: "Metric 2"},
 					{ID: "m3", Name: "Metric 3"},

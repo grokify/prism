@@ -8,18 +8,18 @@ import (
 	"path/filepath"
 
 	capability "github.com/grokify/prism-capability"
-	"github.com/grokify/prism-execution/goals/okr"
-	"github.com/grokify/prism-execution/roadmap"
-	intelligence "github.com/grokify/prism-intelligence"
+	maturity "github.com/grokify/prism-maturity"
+	"github.com/grokify/prism-roadmap/goals/okr"
+	"github.com/grokify/prism-roadmap/roadmap"
 )
 
 // Config defines the ecosystem configuration.
 type Config struct {
 	Name string `json:"name" yaml:"name"`
 
-	Capability   CapabilityConfig   `json:"capability" yaml:"capability"`
-	Intelligence IntelligenceConfig `json:"intelligence" yaml:"intelligence"`
-	Execution    ExecutionConfig    `json:"execution" yaml:"execution"`
+	Capability CapabilityConfig `json:"capability" yaml:"capability"`
+	Maturity   MaturityConfig   `json:"maturity" yaml:"maturity"`
+	Roadmap    RoadmapConfig    `json:"roadmap" yaml:"roadmap"`
 }
 
 // CapabilityConfig defines capability stack sources.
@@ -27,13 +27,13 @@ type CapabilityConfig struct {
 	Files []string `json:"files" yaml:"files"`
 }
 
-// IntelligenceConfig defines intelligence document sources.
-type IntelligenceConfig struct {
+// MaturityConfig defines maturity document sources.
+type MaturityConfig struct {
 	Files []string `json:"files" yaml:"files"`
 }
 
-// ExecutionConfig defines execution document sources.
-type ExecutionConfig struct {
+// RoadmapConfig defines roadmap document sources.
+type RoadmapConfig struct {
 	OKRs     []string `json:"okrs" yaml:"okrs"`
 	Roadmaps []string `json:"roadmaps" yaml:"roadmaps"`
 }
@@ -44,7 +44,7 @@ type Ecosystem struct {
 
 	// Loaded documents
 	CapabilityStacks []*capability.CapabilityStack
-	PRISMDocuments   []*intelligence.PRISMDocument
+	PRISMDocuments   []*maturity.PRISMDocument
 	OKRSets          []*okr.OKRSet
 	Roadmaps         []*roadmap.Roadmap
 }
@@ -54,7 +54,7 @@ func Load(config Config) (*Ecosystem, error) {
 	eco := &Ecosystem{
 		Config:           config,
 		CapabilityStacks: make([]*capability.CapabilityStack, 0),
-		PRISMDocuments:   make([]*intelligence.PRISMDocument, 0),
+		PRISMDocuments:   make([]*maturity.PRISMDocument, 0),
 		OKRSets:          make([]*okr.OKRSet, 0),
 		Roadmaps:         make([]*roadmap.Roadmap, 0),
 	}
@@ -68,8 +68,8 @@ func Load(config Config) (*Ecosystem, error) {
 		eco.CapabilityStacks = append(eco.CapabilityStacks, stack)
 	}
 
-	// Load PRISM documents (intelligence)
-	for _, file := range config.Intelligence.Files {
+	// Load PRISM documents (maturity)
+	for _, file := range config.Maturity.Files {
 		doc, err := loadPRISMDocument(file)
 		if err != nil {
 			return nil, fmt.Errorf("loading PRISM document %s: %w", file, err)
@@ -78,7 +78,7 @@ func Load(config Config) (*Ecosystem, error) {
 	}
 
 	// Load OKRs
-	for _, file := range config.Execution.OKRs {
+	for _, file := range config.Roadmap.OKRs {
 		okrSet, err := loadOKRSet(file)
 		if err != nil {
 			return nil, fmt.Errorf("loading OKR set %s: %w", file, err)
@@ -87,7 +87,7 @@ func Load(config Config) (*Ecosystem, error) {
 	}
 
 	// Load Roadmaps
-	for _, file := range config.Execution.Roadmaps {
+	for _, file := range config.Roadmap.Roadmaps {
 		rm, err := loadRoadmap(file)
 		if err != nil {
 			return nil, fmt.Errorf("loading roadmap %s: %w", file, err)
@@ -114,12 +114,12 @@ func LoadFromFile(path string) (*Ecosystem, error) {
 }
 
 // loadPRISMDocument loads a PRISMDocument from a JSON file.
-func loadPRISMDocument(path string) (*intelligence.PRISMDocument, error) {
+func loadPRISMDocument(path string) (*maturity.PRISMDocument, error) {
 	data, err := os.ReadFile(path)
 	if err != nil {
 		return nil, err
 	}
-	var doc intelligence.PRISMDocument
+	var doc maturity.PRISMDocument
 	if err := json.Unmarshal(data, &doc); err != nil {
 		return nil, err
 	}
@@ -196,12 +196,12 @@ func (e *Ecosystem) CapabilitiesByDomain(domain string) []capability.Capability 
 }
 
 // =============================================================================
-// Intelligence Queries
+// Maturity Queries
 // =============================================================================
 
 // AllMetrics returns all metrics from all PRISM documents.
-func (e *Ecosystem) AllMetrics() []intelligence.Metric {
-	var metrics []intelligence.Metric
+func (e *Ecosystem) AllMetrics() []maturity.Metric {
+	var metrics []maturity.Metric
 	for _, doc := range e.PRISMDocuments {
 		metrics = append(metrics, doc.Metrics...)
 	}
@@ -209,7 +209,7 @@ func (e *Ecosystem) AllMetrics() []intelligence.Metric {
 }
 
 // GetMetricByID finds a metric by ID across all PRISM documents.
-func (e *Ecosystem) GetMetricByID(id string) *intelligence.Metric {
+func (e *Ecosystem) GetMetricByID(id string) *maturity.Metric {
 	for _, doc := range e.PRISMDocuments {
 		if m := doc.GetMetricByID(id); m != nil {
 			return m
@@ -219,8 +219,8 @@ func (e *Ecosystem) GetMetricByID(id string) *intelligence.Metric {
 }
 
 // AllServices returns all services from all PRISM documents.
-func (e *Ecosystem) AllServices() []intelligence.Service {
-	var services []intelligence.Service
+func (e *Ecosystem) AllServices() []maturity.Service {
+	var services []maturity.Service
 	for _, doc := range e.PRISMDocuments {
 		services = append(services, doc.Services...)
 	}
@@ -228,7 +228,7 @@ func (e *Ecosystem) AllServices() []intelligence.Service {
 }
 
 // GetServiceByID finds a service by ID across all PRISM documents.
-func (e *Ecosystem) GetServiceByID(id string) *intelligence.Service {
+func (e *Ecosystem) GetServiceByID(id string) *maturity.Service {
 	for _, doc := range e.PRISMDocuments {
 		if s := doc.GetServiceByID(id); s != nil {
 			return s
@@ -238,8 +238,8 @@ func (e *Ecosystem) GetServiceByID(id string) *intelligence.Service {
 }
 
 // AllInitiatives returns all initiatives from all PRISM documents.
-func (e *Ecosystem) AllInitiatives() []intelligence.Initiative {
-	var initiatives []intelligence.Initiative
+func (e *Ecosystem) AllInitiatives() []maturity.Initiative {
+	var initiatives []maturity.Initiative
 	for _, doc := range e.PRISMDocuments {
 		initiatives = append(initiatives, doc.Initiatives...)
 	}
@@ -247,7 +247,7 @@ func (e *Ecosystem) AllInitiatives() []intelligence.Initiative {
 }
 
 // GetInitiativeByID finds an initiative by ID across all PRISM documents.
-func (e *Ecosystem) GetInitiativeByID(id string) *intelligence.Initiative {
+func (e *Ecosystem) GetInitiativeByID(id string) *maturity.Initiative {
 	for _, doc := range e.PRISMDocuments {
 		if init := doc.GetInitiativeByID(id); init != nil {
 			return init
@@ -257,7 +257,7 @@ func (e *Ecosystem) GetInitiativeByID(id string) *intelligence.Initiative {
 }
 
 // =============================================================================
-// Execution Queries
+// Roadmap Queries
 // =============================================================================
 
 // AllObjectives returns all objectives from all OKR sets.
@@ -307,7 +307,7 @@ func (e *Ecosystem) GetPhaseByID(id string) *roadmap.Phase {
 // CapabilityContext provides full context for a capability across all modules.
 type CapabilityContext struct {
 	Capability *capability.Capability
-	Metrics    []intelligence.Metric
+	Metrics    []maturity.Metric
 }
 
 // GetCapabilityContext returns full context for a capability ID.
@@ -320,7 +320,7 @@ func (e *Ecosystem) GetCapabilityContext(capabilityID string) *CapabilityContext
 
 	ctx := &CapabilityContext{
 		Capability: cap,
-		Metrics:    make([]intelligence.Metric, 0),
+		Metrics:    make([]maturity.Metric, 0),
 	}
 
 	// Find metrics linked via PRISMRef.SLIIDs
@@ -393,7 +393,7 @@ func (e *Ecosystem) Validate() ValidationErrors {
 		if docErrs := doc.Validate(); docErrs.HasErrors() {
 			for _, err := range docErrs {
 				errs = append(errs, ValidationError{
-					Module:  "intelligence",
+					Module:  "maturity",
 					Type:    "document",
 					ID:      fmt.Sprintf("doc[%d]", i),
 					Field:   err.Field,
@@ -493,9 +493,9 @@ func (e *Ecosystem) Stats() Stats {
 //	ecosystem/
 //	  capability/
 //	    *.json
-//	  intelligence/
+//	  maturity/
 //	    *.json
-//	  execution/
+//	  roadmap/
 //	    okrs/*.json
 //	    roadmaps/*.json
 func LoadFromDirectory(dir string) (*Ecosystem, error) {
@@ -509,19 +509,19 @@ func LoadFromDirectory(dir string) (*Ecosystem, error) {
 		config.Capability.Files = files
 	}
 
-	// Scan intelligence files
-	intDir := filepath.Join(dir, "intelligence")
-	if files, err := filepath.Glob(filepath.Join(intDir, "*.json")); err == nil {
-		config.Intelligence.Files = files
+	// Scan maturity files
+	matDir := filepath.Join(dir, "maturity")
+	if files, err := filepath.Glob(filepath.Join(matDir, "*.json")); err == nil {
+		config.Maturity.Files = files
 	}
 
-	// Scan execution files
-	execDir := filepath.Join(dir, "execution")
-	if files, err := filepath.Glob(filepath.Join(execDir, "okrs", "*.json")); err == nil {
-		config.Execution.OKRs = files
+	// Scan roadmap files
+	roadmapDir := filepath.Join(dir, "roadmap")
+	if files, err := filepath.Glob(filepath.Join(roadmapDir, "okrs", "*.json")); err == nil {
+		config.Roadmap.OKRs = files
 	}
-	if files, err := filepath.Glob(filepath.Join(execDir, "roadmaps", "*.json")); err == nil {
-		config.Execution.Roadmaps = files
+	if files, err := filepath.Glob(filepath.Join(roadmapDir, "roadmaps", "*.json")); err == nil {
+		config.Roadmap.Roadmaps = files
 	}
 
 	return Load(config)
