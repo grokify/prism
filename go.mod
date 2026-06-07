@@ -3,9 +3,9 @@ module github.com/grokify/prism
 go 1.26.2
 
 require (
-	github.com/grokify/prism-capability v0.4.0
-	github.com/grokify/prism-maturity v0.10.0
-	github.com/grokify/prism-roadmap v0.13.0
+	github.com/grokify/prism-capability v0.5.0
+	github.com/grokify/prism-maturity v0.11.0
+	github.com/grokify/prism-roadmap v0.14.0
 	github.com/spf13/cobra v1.10.2
 )
 
@@ -13,15 +13,16 @@ require (
 	github.com/bahlo/generic-list-go v0.2.0 // indirect
 	github.com/buger/jsonparser v1.2.0 // indirect
 	github.com/grokify/echartify v0.2.1 // indirect
-	github.com/grokify/prism-core v0.1.0 // indirect
+	github.com/grokify/priority-frameworks v0.2.0 // indirect
+	github.com/grokify/prism-core v0.2.0 // indirect
 	github.com/grokify/structureddocs v0.1.0 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/invopop/jsonschema v0.14.0 // indirect
 	github.com/pb33f/ordered-map/v2 v2.3.1 // indirect
 	github.com/plexusone/dashforge v0.3.0 // indirect
 	github.com/plexusone/omniframe v0.1.1 // indirect
-	github.com/plexusone/structured-evaluation v0.5.0 // indirect
-	github.com/richardlehane/mscfb v1.0.6 // indirect
+	github.com/plexusone/structured-evaluation v0.7.0 // indirect
+	github.com/richardlehane/mscfb v1.0.7 // indirect
 	github.com/richardlehane/msoleps v1.0.6 // indirect
 	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/tiendc/go-deepcopy v1.7.2 // indirect
