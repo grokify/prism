@@ -386,8 +386,6 @@ const stackPageFooter = `
 
 // capsByLayerTemplate is the template for capabilities by layer page.
 const capsByLayerTemplate = stackPageHeader + `
-</head>
-<body>
   <div class="site-container">
     <div class="site-header-row">
       {{if .HasSiteNavJS}}
@@ -401,7 +399,27 @@ const capsByLayerTemplate = stackPageHeader + `
       </header>
       {{end}}
     </div>
-` + stackPageNav + stackFilterSection + `
+` + stackPageNav + `
+    {{if .HasPrismUIJS}}
+    <!-- Lit Component Rendering -->
+    <main class="site-main">
+      <maturity-grid id="grid" view="by-layer" theme="{{.Theme}}" show-legend show-view-toggle base-url="{{.BaseURL}}/capabilities/{{.StackData.BaseName}}-">
+        <script type="application/json">{{.LitGridDataJSON}}</script>
+      </maturity-grid>
+    </main>
+    <script type="module" src="{{.BaseURL}}/assets/prism-ui.js"></script>
+    <script>
+      // Theme sync for Lit component
+      function syncTheme(theme) {
+        const grid = document.getElementById('grid');
+        if (grid) grid.setAttribute('theme', theme);
+      }
+      document.getElementById('themeToggle')?.addEventListener('wt-theme-change', e => syncTheme(e.detail.resolvedTheme));
+      document.getElementById('navbar')?.addEventListener('wt-theme-change', e => syncTheme(e.detail.resolvedTheme));
+    </script>
+    {{else}}
+    <!-- Go Template Rendering -->
+` + stackFilterSection + `
     <main class="site-main">
       {{range .CapsByLayer}}
       <div class="layer" data-layer-id="{{.ID}}">
@@ -463,12 +481,12 @@ const capsByLayerTemplate = stackPageHeader + `
       </div>
       {{end}}
     </main>
-` + capabilityFilterScript + stackPageFooter
+` + capabilityFilterScript + `
+    {{end}}
+` + stackPageFooter
 
 // capsByCategoryTemplate is the template for capabilities by category page.
 const capsByCategoryTemplate = stackPageHeader + `
-</head>
-<body>
   <div class="site-container">
     <div class="site-header-row">
       {{if .HasSiteNavJS}}
@@ -482,7 +500,27 @@ const capsByCategoryTemplate = stackPageHeader + `
       </header>
       {{end}}
     </div>
-` + stackPageNav + stackFilterSection + `
+` + stackPageNav + `
+    {{if .HasPrismUIJS}}
+    <!-- Lit Component Rendering -->
+    <main class="site-main">
+      <maturity-grid id="grid" view="by-category" theme="{{.Theme}}" show-legend show-view-toggle base-url="{{.BaseURL}}/capabilities/{{.StackData.BaseName}}-">
+        <script type="application/json">{{.LitGridDataJSON}}</script>
+      </maturity-grid>
+    </main>
+    <script type="module" src="{{.BaseURL}}/assets/prism-ui.js"></script>
+    <script>
+      // Theme sync for Lit component
+      function syncTheme(theme) {
+        const grid = document.getElementById('grid');
+        if (grid) grid.setAttribute('theme', theme);
+      }
+      document.getElementById('themeToggle')?.addEventListener('wt-theme-change', e => syncTheme(e.detail.resolvedTheme));
+      document.getElementById('navbar')?.addEventListener('wt-theme-change', e => syncTheme(e.detail.resolvedTheme));
+    </script>
+    {{else}}
+    <!-- Go Template Rendering -->
+` + stackFilterSection + `
     <main class="site-main">
       {{range .CapsByCategory}}
       <div class="layer" data-category-id="{{.ID}}">
@@ -514,7 +552,9 @@ const capsByCategoryTemplate = stackPageHeader + `
       </div>
       {{end}}
     </main>
-` + capabilityFilterScript + stackPageFooter
+` + capabilityFilterScript + `
+    {{end}}
+` + stackPageFooter
 
 // metricsPageScripts contains the D3 bullet chart JavaScript for metrics pages.
 const metricsPageScripts = `

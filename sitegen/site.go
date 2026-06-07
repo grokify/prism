@@ -87,6 +87,10 @@ type Config struct {
 
 	// AggregationMethod is the method for aggregating SLI levels: "min" or "avg".
 	AggregationMethod string
+
+	// PrismUIJS is the path to the prism-ui.js Lit component bundle.
+	// When set, capability pages use the maturity-grid Lit component instead of Go templates.
+	PrismUIJS string
 }
 
 // Generator creates static sites from PRISM data.
@@ -421,10 +425,12 @@ type StackPageData struct {
 	MetricsByCat        []SLIGroup
 	ThresholdMatrix     []ThresholdMatrixRow
 	ThresholdMatrixJSON template.JS
+	LitGridDataJSON     template.JS // JSON data for maturity-grid Lit component
 	SiteTitle           string
 	BaseURL             string
 	AllStacks           []*StackData
 	HasSiteNavJS        bool
+	HasPrismUIJS        bool // Whether prism-ui.js Lit component is available
 	HasModel            bool
 	CurrentPage         string // "caps-by-layer", "caps-by-category", "metrics", "metrics-by-layer", "metrics-by-category"
 	HideGeneratedBy     bool
@@ -522,6 +528,17 @@ func (g *Generator) generateStackPages() error {
 			thresholdMatrixJSON = "[]"
 		}
 
+		// Build Lit grid data JSON for maturity-grid component
+		var litGridDataJSON template.JS
+		if g.config.PrismUIJS != "" {
+			litData := g.buildLitGridData(sd, capMaturity, capSLICount)
+			if jsonData, err := json.Marshal(litData); err == nil {
+				litGridDataJSON = template.JS(jsonData) //nolint:gosec // G203: Safe - JSON data for templates
+			} else {
+				litGridDataJSON = "{}"
+			}
+		}
+
 		baseData := StackPageData{
 			Title:               sd.Stack.Metadata.Title,
 			Theme:               g.config.Theme,
@@ -535,10 +552,12 @@ func (g *Generator) generateStackPages() error {
 			MetricsByCat:        metricsByCat,
 			ThresholdMatrix:     thresholdMatrix,
 			ThresholdMatrixJSON: thresholdMatrixJSON,
+			LitGridDataJSON:     litGridDataJSON,
 			SiteTitle:           g.config.Title,
 			BaseURL:             g.config.BaseURL,
 			AllStacks:           g.stacks,
 			HasSiteNavJS:        g.config.SiteNavJS != "",
+			HasPrismUIJS:        g.config.PrismUIJS != "",
 			HasModel:            sd.Model != nil,
 			HideGeneratedBy:     g.config.HideGeneratedBy,
 		}
@@ -561,6 +580,12 @@ func (g *Generator) generateStackPages() error {
 			data := baseData
 			data.PageTitle = page.pageTitle
 			data.CurrentPage = page.currentPage
+			// Adjust BaseURL for pages in stacks/ subdirectory
+			if data.BaseURL == "." {
+				data.BaseURL = ".."
+			} else if data.BaseURL == "./" {
+				data.BaseURL = "../"
+			}
 
 			outPath := filepath.Join(g.config.OutputDir, "stacks", page.filename)
 			f, err := os.Create(outPath)
@@ -686,6 +711,12 @@ func (g *Generator) generateCapabilityPages() error {
 				AllStacks:       g.stacks,
 				HideGeneratedBy: g.config.HideGeneratedBy,
 			}
+			// Adjust BaseURL for pages in capabilities/ subdirectory
+			if data.BaseURL == "." {
+				data.BaseURL = ".."
+			} else if data.BaseURL == "./" {
+				data.BaseURL = "../"
+			}
 
 			// Use stack-capability as filename to avoid conflicts
 			capID := toKebabCase(cap.ID)
@@ -725,6 +756,18 @@ func (g *Generator) copyAssets() error {
 			return fmt.Errorf("reading site-nav JS: %w", err)
 		}
 		jsPath := filepath.Join(assetsDir, "site-nav.es.js")
+		if err := os.WriteFile(jsPath, jsData, 0644); err != nil { //nolint:gosec // G306: Web assets need 0644 for server access
+			return err
+		}
+	}
+
+	// If prism-ui JS provided, copy it
+	if g.config.PrismUIJS != "" {
+		jsData, err := os.ReadFile(g.config.PrismUIJS)
+		if err != nil {
+			return fmt.Errorf("reading prism-ui JS: %w", err)
+		}
+		jsPath := filepath.Join(assetsDir, "prism-ui.js")
 		if err := os.WriteFile(jsPath, jsData, 0644); err != nil { //nolint:gosec // G306: Web assets need 0644 for server access
 			return err
 		}
@@ -1367,4 +1410,167 @@ func WriteJSON(w io.Writer, v interface{}) error {
 	enc := json.NewEncoder(w)
 	enc.SetIndent("", "  ")
 	return enc.Encode(v)
+}
+
+// LitGridData is the JSON structure consumed by the maturity-grid Lit component.
+// This matches the TypeScript MaturityGridData interface in prism/ui/src/types.ts.
+type LitGridData struct {
+	Title        string                 `json:"title,omitempty"`
+	Layers       []LitLayer             `json:"layers"`
+	Categories   []LitCategory          `json:"categories"`
+	Capabilities []LitCapability        `json:"capabilities"`
+	Maturity     map[string]LitMaturity `json:"maturity,omitempty"`
+}
+
+// LitLayer represents a layer in the Lit component format.
+type LitLayer struct {
+	ID          string `json:"id"`
+	Name        string `json:"name"`
+	Description string `json:"description,omitempty"`
+	Order       int    `json:"order,omitempty"`
+}
+
+// LitCategory represents a category in the Lit component format.
+type LitCategory struct {
+	ID          string `json:"id"`
+	Name        string `json:"name"`
+	Description string `json:"description,omitempty"`
+	Order       int    `json:"order,omitempty"`
+}
+
+// LitCapability represents a capability in the Lit component format.
+type LitCapability struct {
+	ID          string    `json:"id"`
+	Name        string    `json:"name"`
+	FullName    string    `json:"fullName,omitempty"`
+	Description string    `json:"description,omitempty"`
+	LayerID     string    `json:"layerId"`
+	CategoryID  string    `json:"categoryId,omitempty"`
+	Status      string    `json:"status"`
+	Priority    string    `json:"priority,omitempty"`
+	Importance  string    `json:"importance,omitempty"`
+	Order       int       `json:"order,omitempty"`
+	Owner       string    `json:"owner,omitempty"`
+	Tooling     []LitTool `json:"tooling,omitempty"`
+	Tags        []string  `json:"tags,omitempty"`
+}
+
+// LitTool represents a tool in the Lit component format.
+type LitTool struct {
+	Name   string `json:"name"`
+	Type   string `json:"type,omitempty"`
+	Status string `json:"status,omitempty"`
+	URL    string `json:"url,omitempty"`
+}
+
+// LitMaturity represents maturity data for a capability.
+type LitMaturity struct {
+	CapabilityID string `json:"capabilityId"`
+	Level        int    `json:"level"`
+	SLICount     int    `json:"sliCount,omitempty"`
+}
+
+// buildLitGridData converts StackData to the JSON format expected by the maturity-grid Lit component.
+func (g *Generator) buildLitGridData(sd *StackData, capMaturity map[string]float64, capSLICount map[string]int) *LitGridData {
+	data := &LitGridData{
+		Title:        sd.Stack.Metadata.Title,
+		Layers:       make([]LitLayer, len(sd.Stack.Layers)),
+		Categories:   make([]LitCategory, len(sd.Stack.Categories)),
+		Capabilities: make([]LitCapability, 0, len(sd.Stack.Capabilities)+len(sd.Stack.Foundational)),
+		Maturity:     make(map[string]LitMaturity),
+	}
+
+	// Convert layers
+	for i, layer := range sd.Stack.Layers {
+		data.Layers[i] = LitLayer{
+			ID:          layer.ID,
+			Name:        layer.Name,
+			Description: layer.Description,
+			Order:       layer.Order,
+		}
+	}
+
+	// Convert categories
+	for i, cat := range sd.Stack.Categories {
+		data.Categories[i] = LitCategory{
+			ID:          cat.ID,
+			Name:        cat.Name,
+			Description: cat.Description,
+		}
+	}
+
+	// Convert regular capabilities
+	for _, cap := range sd.Stack.Capabilities {
+		litCap := g.capToLit(cap)
+		data.Capabilities = append(data.Capabilities, litCap)
+
+		// Add maturity info if available
+		if level, ok := capMaturity[cap.ID]; ok {
+			data.Maturity[cap.ID] = LitMaturity{
+				CapabilityID: cap.ID,
+				Level:        int(level + 0.5), // Round to nearest integer
+				SLICount:     capSLICount[cap.ID],
+			}
+		}
+	}
+
+	// Convert foundational capabilities
+	for _, cap := range sd.Stack.Foundational {
+		litCap := g.capToLit(cap)
+		data.Capabilities = append(data.Capabilities, litCap)
+
+		// Add maturity info if available
+		if level, ok := capMaturity[cap.ID]; ok {
+			data.Maturity[cap.ID] = LitMaturity{
+				CapabilityID: cap.ID,
+				Level:        int(level + 0.5),
+				SLICount:     capSLICount[cap.ID],
+			}
+		}
+	}
+
+	// Remove empty maturity map
+	if len(data.Maturity) == 0 {
+		data.Maturity = nil
+	}
+
+	return data
+}
+
+// capToLit converts a capability to the Lit component format.
+func (g *Generator) capToLit(cap capstack.Capability) LitCapability {
+	status := cap.Status
+	if status == "" {
+		status = "planned"
+	}
+
+	litCap := LitCapability{
+		ID:          cap.ID,
+		Name:        cap.Name,
+		FullName:    cap.FullName,
+		Description: cap.Description,
+		LayerID:     cap.LayerID,
+		CategoryID:  cap.CategoryID,
+		Status:      status,
+		Priority:    cap.Priority,
+		Importance:  cap.Importance,
+		Order:       cap.Order,
+		Owner:       cap.Owner,
+		Tags:        cap.Tags,
+	}
+
+	// Convert tooling
+	if len(cap.Tooling) > 0 {
+		litCap.Tooling = make([]LitTool, len(cap.Tooling))
+		for i, tool := range cap.Tooling {
+			litCap.Tooling[i] = LitTool{
+				Name:   tool.Name,
+				Type:   tool.Type,
+				Status: tool.Status,
+				URL:    tool.URL,
+			}
+		}
+	}
+
+	return litCap
 }
