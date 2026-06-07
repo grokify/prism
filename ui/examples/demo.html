@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRISM UI Demo</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    body.dark {
+      background: #0f172a;
+    }
+    .theme-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 100;
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      cursor: pointer;
+      font-family: system-ui, sans-serif;
+    }
+    body.dark .theme-toggle {
+      background: #1e293b;
+      color: #f1f5f9;
+      border-color: #334155;
+    }
+  </style>
+</head>
+<body>
+  <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+
+  <maturity-grid id="grid" view="by-layer" theme="light" show-legend show-view-toggle>
+    <script type="application/json">
+      {
+        "title": "Security Capability Stack",
+        "layers": [
+          {"id": "governance", "name": "Governance", "order": 0},
+          {"id": "identity", "name": "Identity & Access", "order": 1},
+          {"id": "protection", "name": "Protection", "order": 2},
+          {"id": "detection", "name": "Detection", "order": 3},
+          {"id": "response", "name": "Response", "order": 4}
+        ],
+        "categories": [
+          {"id": "policy", "name": "Policy", "order": 0},
+          {"id": "technical", "name": "Technical Controls", "order": 1},
+          {"id": "operational", "name": "Operational", "order": 2}
+        ],
+        "capabilities": [
+          {"id": "security-policy", "name": "Security Policy", "layerId": "governance", "categoryId": "policy", "status": "operational"},
+          {"id": "risk-assessment", "name": "Risk Assessment", "layerId": "governance", "categoryId": "policy", "status": "operational"},
+          {"id": "compliance-mgmt", "name": "Compliance Management", "layerId": "governance", "categoryId": "policy", "status": "implemented"},
+
+          {"id": "iam", "name": "IAM", "fullName": "Identity & Access Management", "layerId": "identity", "categoryId": "technical", "status": "operational"},
+          {"id": "sso", "name": "SSO", "fullName": "Single Sign-On", "layerId": "identity", "categoryId": "technical", "status": "operational"},
+          {"id": "mfa", "name": "MFA", "fullName": "Multi-Factor Authentication", "layerId": "identity", "categoryId": "technical", "status": "implemented"},
+          {"id": "pam", "name": "PAM", "fullName": "Privileged Access Management", "layerId": "identity", "categoryId": "technical", "status": "in-progress"},
+
+          {"id": "encryption", "name": "Encryption", "layerId": "protection", "categoryId": "technical", "status": "operational"},
+          {"id": "waf", "name": "WAF", "fullName": "Web Application Firewall", "layerId": "protection", "categoryId": "technical", "status": "operational"},
+          {"id": "dlp", "name": "DLP", "fullName": "Data Loss Prevention", "layerId": "protection", "categoryId": "technical", "status": "in-progress"},
+          {"id": "secrets-mgmt", "name": "Secrets Management", "layerId": "protection", "categoryId": "technical", "status": "implemented"},
+
+          {"id": "siem", "name": "SIEM", "fullName": "Security Information & Event Management", "layerId": "detection", "categoryId": "operational", "status": "operational"},
+          {"id": "edr", "name": "EDR", "fullName": "Endpoint Detection & Response", "layerId": "detection", "categoryId": "technical", "status": "implemented"},
+          {"id": "vuln-scanning", "name": "Vulnerability Scanning", "layerId": "detection", "categoryId": "operational", "status": "operational"},
+          {"id": "threat-intel", "name": "Threat Intelligence", "layerId": "detection", "categoryId": "operational", "status": "planned"},
+
+          {"id": "incident-response", "name": "Incident Response", "layerId": "response", "categoryId": "operational", "status": "implemented"},
+          {"id": "forensics", "name": "Digital Forensics", "layerId": "response", "categoryId": "operational", "status": "planned"},
+          {"id": "playbooks", "name": "Response Playbooks", "layerId": "response", "categoryId": "operational", "status": "in-progress"}
+        ],
+        "maturity": {
+          "security-policy": {"capabilityId": "security-policy", "level": 4, "sliCount": 3},
+          "risk-assessment": {"capabilityId": "risk-assessment", "level": 3, "sliCount": 2},
+          "compliance-mgmt": {"capabilityId": "compliance-mgmt", "level": 3, "sliCount": 4},
+          "iam": {"capabilityId": "iam", "level": 5, "sliCount": 5},
+          "sso": {"capabilityId": "sso", "level": 4, "sliCount": 2},
+          "mfa": {"capabilityId": "mfa", "level": 3, "sliCount": 2},
+          "pam": {"capabilityId": "pam", "level": 2, "sliCount": 3},
+          "encryption": {"capabilityId": "encryption", "level": 4, "sliCount": 4},
+          "waf": {"capabilityId": "waf", "level": 4, "sliCount": 3},
+          "dlp": {"capabilityId": "dlp", "level": 2, "sliCount": 2},
+          "secrets-mgmt": {"capabilityId": "secrets-mgmt", "level": 3, "sliCount": 2},
+          "siem": {"capabilityId": "siem", "level": 4, "sliCount": 6},
+          "edr": {"capabilityId": "edr", "level": 3, "sliCount": 3},
+          "vuln-scanning": {"capabilityId": "vuln-scanning", "level": 4, "sliCount": 4},
+          "threat-intel": {"capabilityId": "threat-intel", "level": 1, "sliCount": 2},
+          "incident-response": {"capabilityId": "incident-response", "level": 3, "sliCount": 4},
+          "forensics": {"capabilityId": "forensics", "level": 1, "sliCount": 2},
+          "playbooks": {"capabilityId": "playbooks", "level": 2, "sliCount": 3}
+        }
+      }
+    </script>
+  </maturity-grid>
+
+  <script type="module" src="../dist/prism-ui.js"></script>
+  <script>
+    function toggleTheme() {
+      const body = document.body;
+      const grid = document.getElementById('grid');
+      if (body.classList.contains('dark')) {
+        body.classList.remove('dark');
+        grid.setAttribute('theme', 'light');
+      } else {
+        body.classList.add('dark');
+        grid.setAttribute('theme', 'dark');
+      }
+    }
+  </script>
+</body>
+</html>
