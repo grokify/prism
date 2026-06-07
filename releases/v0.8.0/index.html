@@ -1118,6 +1118,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#lit-web-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lit Web Components
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#module-renames" class="md-nav__link">
     <span class="md-ellipsis">
       Module Renames
@@ -1294,6 +1303,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#lit-web-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lit Web Components
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#module-renames" class="md-nav__link">
     <span class="md-ellipsis">
       Module Renames
@@ -1387,11 +1405,12 @@
 
 
 <h1 id="v080-release-notes">v0.8.0 Release Notes</h1>
-<p><strong>Release Date:</strong> 2026-05-24</p>
+<p><strong>Release Date:</strong> 2026-06-07</p>
 <h2 id="highlights">Highlights</h2>
 <ul>
 <li><strong>Unified CLI</strong> - Single CLI integrating all PRISM ecosystem modules</li>
 <li><strong>Static Site Generator</strong> - HTML dashboards for capability maturity visualization</li>
+<li><strong>Lit Web Components</strong> - Interactive maturity-grid component for web visualization</li>
 <li><strong>Module Renames</strong> - prism-intelligence → prism-maturity, prism-execution → prism-roadmap</li>
 </ul>
 <h2 id="whats-new">What's New</h2>
@@ -1445,6 +1464,40 @@
 <li>Layer-based aggregation views (min/avg methods)</li>
 <li>Light and dark theme support</li>
 </ul>
+<h3 id="lit-web-components">Lit Web Components</h3>
+<p>New <code>@prism/ui</code> TypeScript package with Lit-based web components for interactive visualization:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Generate site with Lit component integration</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>prism<span class="w"> </span>site<span class="w"> </span>generate<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>--stack<span class="o">=</span>./security/<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span>--output<span class="o">=</span>./dist<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span>--prism-ui-js<span class="o">=</span>./ui/dist/prism-ui.js
+</code></pre></div>
+<p><strong>maturity-grid Component:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">&lt;</span><span class="nt">maturity-grid</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  <span class="na">view</span><span class="o">=</span><span class="s">&quot;by-layer&quot;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  <span class="na">theme</span><span class="o">=</span><span class="s">&quot;dark&quot;</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  <span class="na">show-legend</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>  <span class="na">show-view-toggle</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>  <span class="na">base-url</span><span class="o">=</span><span class="s">&quot;./capabilities/&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>  <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;application/json&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="p">{</span><span class="s2">&quot;layers&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[...],</span><span class="w"> </span><span class="s2">&quot;capabilities&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[...],</span><span class="w"> </span><span class="s2">&quot;maturity&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{...}}</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">  </span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="p">&lt;/</span><span class="nt">maturity-grid</span><span class="p">&gt;</span>
+</code></pre></div>
+<p><strong>Features:</strong></p>
+<ul>
+<li>Interactive capability grid with maturity overlay</li>
+<li>Toggle between by-layer and by-category views</li>
+<li>Theme-aware rendering (light/dark mode sync)</li>
+<li>Maturity levels M1-M5 with color coding</li>
+<li>Legend display with level descriptions</li>
+<li>Click-through to capability detail pages</li>
+</ul>
+<p><strong>Building the UI:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">cd</span><span class="w"> </span>ui/
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>npm<span class="w"> </span>install
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>npm<span class="w"> </span>run<span class="w"> </span>build<span class="w">  </span><span class="c1"># outputs dist/prism-ui.js</span>
+</code></pre></div>
 <h3 id="module-renames">Module Renames</h3>
 <p>The ecosystem modules have been renamed for clarity:</p>
 <table>
@@ -1476,15 +1529,15 @@
 <h2 id="changed">Changed</h2>
 <h3 id="package-rename">Package Rename</h3>
 <p>The <code>site/</code> package has been renamed to <code>sitegen/</code> to avoid conflict with MkDocs output directory.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="s">&quot;github.com/grokify/prism/sitegen&quot;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nx">config</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sitegen</span><span class="p">.</span><span class="nx">Config</span><span class="p">{</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nx">StackPaths</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;./security/&quot;</span><span class="p">},</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nx">OutputDir</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;./dist&quot;</span><span class="p">,</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nx">Theme</span><span class="p">:</span><span class="w">      </span><span class="s">&quot;dark&quot;</span><span class="p">,</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">}</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="nx">gen</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sitegen</span><span class="p">.</span><span class="nx">NewGenerator</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="nx">gen</span><span class="p">.</span><span class="nx">Generate</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">import</span><span class="w"> </span><span class="s">&quot;github.com/grokify/prism/sitegen&quot;</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nx">config</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sitegen</span><span class="p">.</span><span class="nx">Config</span><span class="p">{</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nx">StackPaths</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;./security/&quot;</span><span class="p">},</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="nx">OutputDir</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;./dist&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nx">Theme</span><span class="p">:</span><span class="w">      </span><span class="s">&quot;dark&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="p">}</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="nx">gen</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sitegen</span><span class="p">.</span><span class="nx">NewGenerator</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="nx">gen</span><span class="p">.</span><span class="nx">Generate</span><span class="p">()</span>
 </code></pre></div>
 <h2 id="dependencies">Dependencies</h2>
 <table>
@@ -1498,28 +1551,48 @@
 <tbody>
 <tr>
 <td>prism-capability</td>
-<td>v0.4.0</td>
+<td>v0.5.0</td>
 <td>Updated</td>
 </tr>
 <tr>
 <td>prism-maturity</td>
-<td>v0.10.0</td>
-<td>Renamed from prism-intelligence</td>
+<td>v0.11.0</td>
+<td>Updated (renamed from prism-intelligence)</td>
 </tr>
 <tr>
 <td>prism-roadmap</td>
-<td>v0.13.0</td>
-<td>Renamed from prism-execution</td>
+<td>v0.14.0</td>
+<td>Updated (renamed from prism-execution)</td>
+</tr>
+<tr>
+<td>prism-core</td>
+<td>v0.2.0</td>
+<td>Updated</td>
+</tr>
+<tr>
+<td>structured-evaluation</td>
+<td>v0.7.0</td>
+<td>Updated</td>
+</tr>
+<tr>
+<td>priority-frameworks</td>
+<td>v0.2.0</td>
+<td>Added</td>
 </tr>
 <tr>
 <td>spf13/cobra</td>
 <td>v1.10.2</td>
 <td>For CLI</td>
 </tr>
+<tr>
+<td>lit</td>
+<td>3.2.0</td>
+<td>For web components (ui/)</td>
+</tr>
 </tbody>
 </table>
 <h2 id="installation">Installation</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>go<span class="w"> </span>install<span class="w"> </span>github.com/grokify/prism/cmd/prism@v0.8.0
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>go<span class="w"> </span>install<span class="w"> </span>github.com/grokify/prism/cmd/prism@v0.8.0
 </code></pre></div>
 <h2 id="documentation">Documentation</h2>
 <p>New documentation added:</p>
