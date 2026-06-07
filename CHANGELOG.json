@@ -8,10 +8,11 @@
   "releases": [
     {
       "version": "v0.8.0",
-      "date": "2026-05-24",
+      "date": "2026-06-07",
       "highlights": [
         { "description": "Unified CLI integrating all PRISM ecosystem modules" },
         { "description": "Static site generator for capability maturity dashboards" },
+        { "description": "Lit web components for interactive maturity visualization" },
         { "description": "Module renames: prism-intelligence → prism-maturity, prism-execution → prism-roadmap" }
       ],
       "added": [
@@ -20,16 +21,25 @@
         { "description": "`prism site generate` command for static site generation", "commit": "a1bd139" },
         { "description": "sitegen/ package for HTML dashboard generation with maturity overlays", "commit": "c258565" },
         { "description": "Layer-based aggregation with min/avg methods", "commit": "c258565" },
-        { "description": "Metrics count badge on capability cards", "commit": "c258565" }
+        { "description": "Metrics count badge on capability cards", "commit": "c258565" },
+        { "description": "@prism/ui TypeScript package with Lit web components", "commit": "60c306e" },
+        { "description": "maturity-grid Lit component with by-layer and by-category views", "commit": "60c306e" },
+        { "description": "LitGridData types in sitegen for JSON data generation", "commit": "5660150" },
+        { "description": "`--prism-ui-js` flag for Lit component bundle integration", "commit": "5660150" },
+        { "description": "Theme sync between site and Lit components (light/dark mode)", "commit": "5660150" }
       ],
       "changed": [
         { "description": "Rename ecosystem types: IntelligenceConfig → MaturityConfig, ExecutionConfig → RoadmapConfig", "commit": "9c24fb8" },
-        { "description": "Rename site/ package to sitegen/ to avoid MkDocs output conflict", "commit": "749b42d" }
+        { "description": "Rename site/ package to sitegen/ to avoid MkDocs output conflict", "commit": "749b42d" },
+        { "description": "Conditional Lit vs Go template rendering based on --prism-ui-js flag", "commit": "5660150" }
       ],
       "dependencies": [
-        { "description": "Update prism-intelligence v0.9.0 → prism-maturity v0.10.0", "commit": "879bed0" },
-        { "description": "Update prism-execution v0.12.0 → prism-roadmap v0.13.0", "commit": "879bed0" },
-        { "description": "Update prism-capability v0.3.0 → v0.4.0", "commit": "879bed0" },
+        { "description": "Update prism-maturity v0.10.0 → v0.11.0", "commit": "bd08d70" },
+        { "description": "Update prism-roadmap v0.13.0 → v0.14.0", "commit": "bd08d70" },
+        { "description": "Update prism-capability v0.4.0 → v0.5.0", "commit": "bd08d70" },
+        { "description": "Update prism-core v0.1.0 → v0.2.0", "commit": "bd08d70" },
+        { "description": "Update structured-evaluation v0.5.0 → v0.7.0", "commit": "bd08d70" },
+        { "description": "Add priority-frameworks v0.2.0", "commit": "bd08d70" },
         { "description": "Add github.com/spf13/cobra v1.10.2 for CLI", "commit": "19ba787" }
       ],
       "documentation": [
