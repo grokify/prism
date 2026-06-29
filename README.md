@@ -275,18 +275,18 @@ This project is in active development. Current phase: **Foundation**
 
 | Module | Latest Version | Status |
 |--------|----------------|--------|
-| [prism-core](https://github.com/grokify/prism-core) | v0.2.0 | Released |
-| [prism-capability](https://github.com/grokify/prism-capability) | v0.5.0 | Released |
-| [prism-maturity](https://github.com/grokify/prism-maturity) | v0.11.0 | Released |
-| [prism-roadmap](https://github.com/grokify/prism-roadmap) | v0.14.0 | Released |
+| [prism-core](https://github.com/grokify/prism-core) | v0.3.0 | Released |
+| [prism-capability](https://github.com/grokify/prism-capability) | v0.6.0 | Released |
+| [prism-maturity](https://github.com/grokify/prism-maturity) | v0.12.0 | Released |
+| [prism-roadmap](https://github.com/grokify/prism-roadmap) | v0.14.1 | Released |
 | prism (this repo) | v0.8.0 | Released |
 
 ### Roadmap
 
-- [x] prism-core v0.2.0 released
-- [x] prism-capability v0.5.0 released
-- [x] prism-maturity v0.11.0 released
-- [x] prism-roadmap v0.14.0 released
+- [x] prism-core v0.3.0 released (developer productivity frameworks)
+- [x] prism-capability v0.6.0 released (operations & dev productivity)
+- [x] prism-maturity v0.12.0 released (SPACE, AI-DORA, AI-SPACE)
+- [x] prism-roadmap v0.14.1 released
 - [x] Repository restructuring complete
 - [x] Orchestrator types and loading
 - [x] Cross-module integration
