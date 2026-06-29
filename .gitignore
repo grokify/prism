@@ -12,3 +12,6 @@ site/
 .idea/
 .vscode/
 *.swp
+
+# Node.js
+ui/node_modules/
