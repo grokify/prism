@@ -87,6 +87,9 @@
     "url": "https://github.com/grokify/prism.git",
     "directory": "viewer"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
     "node": ">=20.0.0"
   }
