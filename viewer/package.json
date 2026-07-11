@@ -1,0 +1,93 @@
+{
+  "name": "@grokify/prism",
+  "version": "0.1.0",
+  "description": "PRISM visualization library - Zod schemas, TypeScript types, HTML renderers, and Lit web components for capability and maturity visualization",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./schema": {
+      "types": "./dist/schema/index.d.ts",
+      "import": "./dist/schema/index.js"
+    },
+    "./schema/maturity": {
+      "types": "./dist/schema/maturity/index.d.ts",
+      "import": "./dist/schema/maturity/index.js"
+    },
+    "./schema/roadmap": {
+      "types": "./dist/schema/roadmap/index.d.ts",
+      "import": "./dist/schema/roadmap/index.js"
+    },
+    "./html": {
+      "types": "./dist/html/index.d.ts",
+      "import": "./dist/html/index.js"
+    },
+    "./html/maturity": {
+      "types": "./dist/html/maturity/index.d.ts",
+      "import": "./dist/html/maturity/index.js"
+    },
+    "./html/roadmap": {
+      "types": "./dist/html/roadmap/index.d.ts",
+      "import": "./dist/html/roadmap/index.js"
+    },
+    "./components": {
+      "types": "./dist/components/index.d.ts",
+      "import": "./dist/components/index.js"
+    },
+    "./styles": {
+      "types": "./dist/styles/index.d.ts",
+      "import": "./dist/styles/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm build"
+  },
+  "dependencies": {
+    "lit": "^3.2.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0"
+  },
+  "peerDependencies": {
+    "lit": "^3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "lit": {
+      "optional": true
+    }
+  },
+  "keywords": [
+    "prism",
+    "maturity-model",
+    "capability",
+    "roadmap",
+    "visualization",
+    "zod",
+    "lit",
+    "web-components"
+  ],
+  "author": "John Wang",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grokify/prism.git",
+    "directory": "viewer"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
