@@ -17,8 +17,8 @@ github.com/grokify/prism-core v0.3.0 h1:lrSgu5hHAIp2K0+cCViRbW1dqf9fvd9EpONFg94y
 github.com/grokify/prism-core v0.3.0/go.mod h1:MGwhaaZdFW8WShYx3lqzGkcx8f07xFDbwd+u+4uBAT0=
 github.com/grokify/prism-maturity v0.12.0 h1:3/0FXymj8/q3H9JOeFp8aGj0Th2TYfJpV8PynRLgsXo=
 github.com/grokify/prism-maturity v0.12.0/go.mod h1:cyB8NU1xD8f9BTDBdFIs/JKdrLjb2kV6GJdlVWUyGBo=
-github.com/grokify/prism-roadmap v0.14.1 h1:z39R17i5244SlKQq7mlwczy/VlmbpcWikVXi7aelkp8=
-github.com/grokify/prism-roadmap v0.14.1/go.mod h1:wvctF4aD1/KkuJ2KgOuqaVwvkHSbRq54VYabHwrgz1U=
+github.com/grokify/prism-roadmap v0.16.0 h1:EGgXiOD7Y65JyHG3fxa/0wH1Q9sUm45WfE9ZBsSXn/E=
+github.com/grokify/prism-roadmap v0.16.0/go.mod h1:IWef6PsmIubzFzC7w2VeRJtsHlP5vRa0XudESSIx994=
 github.com/grokify/structureddocs v0.1.0 h1:ziCUm7OeJDwKoq8KrmIm44AFDJR7UtWhgHqVEyNiGRY=
 github.com/grokify/structureddocs v0.1.0/go.mod h1:DD6ooCUwmtyLzGs12TAhRmf/PjEDNapcKH8DAnJQvzQ=
 github.com/inconshreveable/mousetrap v1.1.0 h1:wN+x4NVGpMsO7ErUn/mUI3vEoE6Jt13X2s0bqwp9tc8=
@@ -31,8 +31,8 @@ github.com/plexusone/dashforge v0.3.0 h1:JmQn3ql38RUAqQYTbM2YOaICrQIu2tMBno810Ow
 github.com/plexusone/dashforge v0.3.0/go.mod h1:LouJCox1mjpDnET0vGeGWra5cDP4VDRBRB6DZLlqMEs=
 github.com/plexusone/omniframe v0.1.1 h1:x62SABI4yAHjBB6GzCuviQfMHXMGUHNYY73opaReV0A=
 github.com/plexusone/omniframe v0.1.1/go.mod h1:ozcYJFREvWtU1cCD4DOKr17/AV1OexpzQCxnQgu/V+0=
-github.com/plexusone/structured-evaluation v0.8.0 h1:dfXXp26ZzvaQaAaY27jh/OYB9J0TrTN7s9IfU8DqS1w=
-github.com/plexusone/structured-evaluation v0.8.0/go.mod h1:aqkP0xYPPXNg1ZB7MkDqFcWbrXLahrpRtAoYCav72bg=
+github.com/plexusone/structured-evaluation v0.10.0 h1:fmpNtO+H6Z5GvCQx4LPDIEPXC24X6KixBJny5wUWMZY=
+github.com/plexusone/structured-evaluation v0.10.0/go.mod h1:/EeH1LVHmGq+O35LQ/VybJNLIGqpoJlR8FqKCOt2KC4=
 github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 h1:Jamvg5psRIccs7FGNTlIRMkT8wgtp5eCXdBlqhYGL6U=
 github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/richardlehane/mscfb v1.0.7 h1:oeoiM0WE79vHwE8RpIYYvIAc8ajTH2mb6UZm55/+EB0=
