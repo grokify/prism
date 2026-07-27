@@ -1,0 +1,168 @@
+{
+  "$schema": "https://prism.grokify.com/schemas/capability-stack.json",
+  "metadata": {
+    "name": "platform-team",
+    "version": "1.0.0",
+    "title": "Platform Engineering",
+    "description": "Platform engineering capabilities for developer productivity and operational excellence"
+  },
+  "layers": [
+    {
+      "id": "developer-experience",
+      "name": "Developer Experience",
+      "description": "Tools and workflows for developer productivity",
+      "order": 1
+    },
+    {
+      "id": "delivery",
+      "name": "Delivery",
+      "description": "Build, test, and deployment pipelines",
+      "order": 2
+    },
+    {
+      "id": "observability",
+      "name": "Observability",
+      "description": "Monitoring, logging, and tracing",
+      "order": 3
+    },
+    {
+      "id": "infrastructure",
+      "name": "Infrastructure",
+      "description": "Compute, networking, and storage",
+      "order": 4
+    }
+  ],
+  "categories": [
+    { "id": "core", "name": "Core", "order": 1 },
+    { "id": "automation", "name": "Automation", "order": 2 },
+    { "id": "security", "name": "Security", "order": 3 }
+  ],
+  "capabilities": [
+    {
+      "id": "internal-dev-portal",
+      "name": "Internal Dev Portal",
+      "fullName": "Internal Developer Portal",
+      "description": "Self-service portal for developers to discover APIs, create services, and access documentation",
+      "layerId": "developer-experience",
+      "categoryId": "core",
+      "status": "in-progress"
+    },
+    {
+      "id": "local-dev-env",
+      "name": "Local Dev Environment",
+      "fullName": "Local Development Environment",
+      "description": "Reproducible local development environments with containers",
+      "layerId": "developer-experience",
+      "categoryId": "core",
+      "status": "operational"
+    },
+    {
+      "id": "api-docs",
+      "name": "API Documentation",
+      "fullName": "API Documentation System",
+      "description": "Automated API documentation generation from OpenAPI specs",
+      "layerId": "developer-experience",
+      "categoryId": "core",
+      "status": "operational"
+    },
+    {
+      "id": "ci-pipeline",
+      "name": "CI Pipeline",
+      "fullName": "Continuous Integration Pipeline",
+      "description": "Automated build, test, and artifact creation",
+      "layerId": "delivery",
+      "categoryId": "automation",
+      "status": "operational"
+    },
+    {
+      "id": "cd-pipeline",
+      "name": "CD Pipeline",
+      "fullName": "Continuous Deployment Pipeline",
+      "description": "Automated deployment to staging and production environments",
+      "layerId": "delivery",
+      "categoryId": "automation",
+      "status": "operational"
+    },
+    {
+      "id": "gitops",
+      "name": "GitOps",
+      "fullName": "GitOps Deployment",
+      "description": "Git-driven infrastructure and application deployment",
+      "layerId": "delivery",
+      "categoryId": "automation",
+      "status": "in-progress"
+    },
+    {
+      "id": "feature-flags",
+      "name": "Feature Flags",
+      "fullName": "Feature Flag System",
+      "description": "Runtime feature toggles for progressive rollouts",
+      "layerId": "delivery",
+      "categoryId": "automation",
+      "status": "planned"
+    },
+    {
+      "id": "metrics",
+      "name": "Metrics",
+      "fullName": "Metrics Collection & Dashboards",
+      "description": "Time-series metrics collection and visualization",
+      "layerId": "observability",
+      "categoryId": "core",
+      "status": "operational"
+    },
+    {
+      "id": "logging",
+      "name": "Logging",
+      "fullName": "Centralized Logging",
+      "description": "Log aggregation and search across all services",
+      "layerId": "observability",
+      "categoryId": "core",
+      "status": "operational"
+    },
+    {
+      "id": "tracing",
+      "name": "Tracing",
+      "fullName": "Distributed Tracing",
+      "description": "End-to-end request tracing across services",
+      "layerId": "observability",
+      "categoryId": "core",
+      "status": "in-progress"
+    },
+    {
+      "id": "alerting",
+      "name": "Alerting",
+      "fullName": "Alerting & On-Call",
+      "description": "Alert routing and on-call management",
+      "layerId": "observability",
+      "categoryId": "core",
+      "status": "operational"
+    },
+    {
+      "id": "kubernetes",
+      "name": "Kubernetes",
+      "fullName": "Kubernetes Platform",
+      "description": "Container orchestration platform",
+      "layerId": "infrastructure",
+      "categoryId": "core",
+      "status": "operational"
+    },
+    {
+      "id": "service-mesh",
+      "name": "Service Mesh",
+      "fullName": "Service Mesh (Istio)",
+      "description": "Service-to-service networking with mTLS",
+      "layerId": "infrastructure",
+      "categoryId": "security",
+      "status": "in-progress"
+    },
+    {
+      "id": "secrets-management",
+      "name": "Secrets Management",
+      "fullName": "Secrets Management (Vault)",
+      "description": "Centralized secrets storage and rotation",
+      "layerId": "infrastructure",
+      "categoryId": "security",
+      "status": "operational"
+    }
+  ]
+}

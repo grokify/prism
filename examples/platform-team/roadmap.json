@@ -1,0 +1,367 @@
+{
+  "$schema": "https://prism.grokify.com/schemas/journey-roadmap.json",
+  "id": "platform-roadmap-2026",
+  "type": "capability",
+  "name": "Platform Engineering Roadmap 2026",
+  "vision": "Build a world-class developer platform that enables teams to ship faster with confidence",
+  "description": "Multi-quarter roadmap for advancing platform engineering capabilities from current state to industry-leading maturity",
+  "timeModel": {
+    "type": "quarterly",
+    "fiscalYear": "2026",
+    "periods": [
+      {
+        "id": "q2-2026",
+        "label": "Q2 2026",
+        "startDate": "2026-04-01",
+        "endDate": "2026-06-30",
+        "isCurrent": true,
+        "description": "Foundation quarter - establish GitOps and tracing"
+      },
+      {
+        "id": "q3-2026",
+        "label": "Q3 2026",
+        "startDate": "2026-07-01",
+        "endDate": "2026-09-30",
+        "description": "Acceleration quarter - developer portal and service mesh"
+      },
+      {
+        "id": "q4-2026",
+        "label": "Q4 2026",
+        "startDate": "2026-10-01",
+        "endDate": "2026-12-31",
+        "description": "Optimization quarter - feature flags and advanced observability"
+      }
+    ]
+  },
+  "capabilityJourneys": [
+    {
+      "id": "cj-gitops",
+      "capabilityId": "gitops",
+      "name": "GitOps Deployment",
+      "description": "Implement GitOps workflow with ArgoCD for declarative deployments",
+      "owner": "Platform Team",
+      "currentState": {
+        "periodId": "q2-2026",
+        "maturityLevel": "M2",
+        "summary": "Basic ArgoCD setup, manual app definitions"
+      },
+      "targetStates": [
+        {
+          "periodId": "q3-2026",
+          "maturityLevel": "M3",
+          "confidence": 0.85,
+          "commitment": "committed",
+          "changes": ["ApplicationSets for multi-cluster", "Automated rollbacks"]
+        },
+        {
+          "periodId": "q4-2026",
+          "maturityLevel": "M4",
+          "confidence": 0.65,
+          "commitment": "planned",
+          "changes": ["Progressive delivery with Argo Rollouts", "Policy-as-code integration"]
+        }
+      ],
+      "tags": ["delivery", "automation"]
+    },
+    {
+      "id": "cj-tracing",
+      "capabilityId": "tracing",
+      "name": "Distributed Tracing",
+      "description": "Deploy OpenTelemetry across all services for comprehensive tracing",
+      "owner": "SRE Team",
+      "currentState": {
+        "periodId": "q2-2026",
+        "maturityLevel": "M2",
+        "summary": "Jaeger deployed, 40% service coverage"
+      },
+      "targetStates": [
+        {
+          "periodId": "q3-2026",
+          "maturityLevel": "M3",
+          "confidence": 0.9,
+          "commitment": "committed",
+          "changes": ["100% service instrumentation", "Trace-based testing"]
+        },
+        {
+          "periodId": "q4-2026",
+          "maturityLevel": "M4",
+          "confidence": 0.7,
+          "commitment": "planned",
+          "changes": ["ML-based anomaly detection", "Business transaction tracing"]
+        }
+      ],
+      "tags": ["observability"]
+    },
+    {
+      "id": "cj-dev-portal",
+      "capabilityId": "internal-dev-portal",
+      "name": "Internal Developer Portal",
+      "description": "Build comprehensive self-service portal for developers",
+      "owner": "Platform Team",
+      "currentState": {
+        "periodId": "q2-2026",
+        "maturityLevel": "M2",
+        "summary": "Basic Backstage instance, limited plugins"
+      },
+      "targetStates": [
+        {
+          "periodId": "q3-2026",
+          "maturityLevel": "M3",
+          "confidence": 0.8,
+          "commitment": "committed",
+          "changes": ["TechDocs integration", "Service catalog complete", "Golden path templates"]
+        },
+        {
+          "periodId": "q4-2026",
+          "maturityLevel": "M4",
+          "confidence": 0.6,
+          "commitment": "targeted",
+          "changes": ["Cost visibility", "Security scorecards", "Custom plugins"]
+        }
+      ],
+      "tags": ["developer-experience"]
+    },
+    {
+      "id": "cj-service-mesh",
+      "capabilityId": "service-mesh",
+      "name": "Service Mesh",
+      "description": "Implement service mesh for secure service-to-service communication",
+      "owner": "Platform Team",
+      "currentState": {
+        "periodId": "q2-2026",
+        "maturityLevel": "M2",
+        "summary": "Istio in staging, pilot services in production"
+      },
+      "targetStates": [
+        {
+          "periodId": "q3-2026",
+          "maturityLevel": "M3",
+          "confidence": 0.75,
+          "commitment": "committed",
+          "changes": ["mTLS everywhere", "Traffic management policies", "Circuit breakers"]
+        },
+        {
+          "periodId": "q4-2026",
+          "maturityLevel": "M4",
+          "confidence": 0.55,
+          "commitment": "planned",
+          "changes": ["Multi-cluster mesh", "Advanced authorization policies"]
+        }
+      ],
+      "tags": ["infrastructure", "security"]
+    },
+    {
+      "id": "cj-feature-flags",
+      "capabilityId": "feature-flags",
+      "name": "Feature Flags",
+      "description": "Deploy feature flag system for progressive rollouts",
+      "owner": "Platform Team",
+      "currentState": {
+        "periodId": "q2-2026",
+        "maturityLevel": "M1",
+        "summary": "No centralized system, env vars only"
+      },
+      "targetStates": [
+        {
+          "periodId": "q3-2026",
+          "maturityLevel": "M2",
+          "confidence": 0.85,
+          "commitment": "committed",
+          "changes": ["LaunchDarkly or OpenFeature deployed", "SDK integration guide"]
+        },
+        {
+          "periodId": "q4-2026",
+          "maturityLevel": "M3",
+          "confidence": 0.7,
+          "commitment": "planned",
+          "changes": ["Percentage rollouts", "A/B testing integration", "Flag lifecycle management"]
+        }
+      ],
+      "tags": ["delivery"]
+    }
+  ],
+  "initiatives": [
+    {
+      "id": "init-gitops",
+      "name": "GitOps Implementation",
+      "description": "Implement GitOps workflow using ArgoCD for declarative, Git-driven deployments across all environments",
+      "status": "in_progress",
+      "ownerTeam": "platform",
+      "periods": ["q2-2026", "q3-2026"],
+      "advances": [
+        {
+          "capabilityId": "gitops",
+          "capabilityName": "GitOps Deployment",
+          "from": "M2",
+          "to": "M4"
+        }
+      ],
+      "expectedOutcomes": ["Faster deployments", "Improved auditability", "Reduced configuration drift"],
+      "requiredCapacity": {
+        "ftes": 2,
+        "storyPoints": 80
+      }
+    },
+    {
+      "id": "init-otel",
+      "name": "OpenTelemetry Rollout",
+      "description": "Deploy OpenTelemetry collectors and instrument all services for distributed tracing",
+      "status": "in_progress",
+      "ownerTeam": "sre",
+      "periods": ["q2-2026", "q3-2026"],
+      "advances": [
+        {
+          "capabilityId": "tracing",
+          "capabilityName": "Distributed Tracing",
+          "from": "M2",
+          "to": "M4"
+        }
+      ],
+      "expectedOutcomes": ["End-to-end visibility", "Faster incident resolution", "Performance optimization"],
+      "requiredCapacity": {
+        "ftes": 1.5,
+        "storyPoints": 60
+      }
+    },
+    {
+      "id": "init-backstage",
+      "name": "Developer Portal Enhancement",
+      "description": "Enhance Backstage with TechDocs, service catalog, and golden path templates",
+      "status": "planned",
+      "ownerTeam": "platform",
+      "periods": ["q3-2026"],
+      "advances": [
+        {
+          "capabilityId": "internal-dev-portal",
+          "capabilityName": "Internal Developer Portal",
+          "from": "M2",
+          "to": "M3"
+        }
+      ],
+      "expectedOutcomes": ["Reduced onboarding time", "Self-service service creation", "Improved documentation"],
+      "requiredCapacity": {
+        "ftes": 2,
+        "storyPoints": 100
+      }
+    },
+    {
+      "id": "init-mesh",
+      "name": "Service Mesh Rollout",
+      "description": "Production rollout of Istio service mesh with mTLS and traffic management",
+      "status": "planned",
+      "ownerTeam": "platform",
+      "periods": ["q3-2026", "q4-2026"],
+      "advances": [
+        {
+          "capabilityId": "service-mesh",
+          "capabilityName": "Service Mesh",
+          "from": "M2",
+          "to": "M4"
+        }
+      ],
+      "expectedOutcomes": ["Zero-trust networking", "Advanced traffic control", "Improved security posture"],
+      "requiredCapacity": {
+        "ftes": 2,
+        "storyPoints": 120
+      },
+      "dependencies": ["init-otel"]
+    },
+    {
+      "id": "init-flags",
+      "name": "Feature Flag Platform",
+      "description": "Deploy feature flag system for progressive rollouts and experimentation",
+      "status": "proposed",
+      "ownerTeam": "platform",
+      "periods": ["q3-2026", "q4-2026"],
+      "advances": [
+        {
+          "capabilityId": "feature-flags",
+          "capabilityName": "Feature Flags",
+          "from": "M1",
+          "to": "M3"
+        }
+      ],
+      "expectedOutcomes": ["Safer deployments", "A/B testing capability", "Reduced rollback frequency"],
+      "requiredCapacity": {
+        "ftes": 1,
+        "storyPoints": 40
+      }
+    }
+  ],
+  "teams": [
+    {
+      "id": "platform",
+      "name": "Platform Engineering",
+      "type": "platform",
+      "level": "team",
+      "leaderName": "Jane Smith",
+      "capacity": {
+        "ftes": 6,
+        "storyPointsPerSprint": 60,
+        "allocatedPercent": 80
+      },
+      "skills": ["kubernetes", "golang", "terraform", "argocd"]
+    },
+    {
+      "id": "sre",
+      "name": "Site Reliability Engineering",
+      "type": "sre",
+      "level": "team",
+      "leaderName": "Bob Johnson",
+      "capacity": {
+        "ftes": 4,
+        "storyPointsPerSprint": 40,
+        "allocatedPercent": 70
+      },
+      "skills": ["monitoring", "incident-response", "automation", "opentelemetry"]
+    }
+  ],
+  "risks": [
+    {
+      "id": "risk-resources",
+      "description": "Platform team capacity constraints may delay Q4 initiatives",
+      "probability": "medium",
+      "impact": "high",
+      "mitigation": "Cross-train SRE team on Backstage development",
+      "affectedPeriods": ["q4-2026"]
+    },
+    {
+      "id": "risk-mesh-complexity",
+      "description": "Service mesh complexity may impact development velocity",
+      "probability": "medium",
+      "impact": "medium",
+      "mitigation": "Staged rollout starting with less critical services",
+      "affectedPeriods": ["q3-2026", "q4-2026"]
+    }
+  ],
+  "narrative": {
+    "title": "Journey to a World-Class Developer Platform",
+    "currentState": "Our platform has strong foundations in CI/CD and Kubernetes, but developers struggle with service discovery, observability gaps, and manual deployment processes.",
+    "turningPoint": "By investing in GitOps, distributed tracing, and a comprehensive developer portal, we can transform how teams build and operate services.",
+    "destination": "By end of 2026, developers will have a self-service platform with automated deployments, full observability, and secure service-to-service communication - enabling them to ship 3x faster with higher reliability.",
+    "journey": [
+      {
+        "periodId": "q2-2026",
+        "headline": "Laying the Foundation",
+        "story": "We're implementing GitOps with ArgoCD and rolling out OpenTelemetry for distributed tracing. These foundational capabilities will enable the automation and visibility needed for subsequent improvements.",
+        "keyChanges": ["ArgoCD production deployment", "OpenTelemetry collectors deployed", "40% tracing coverage"],
+        "userImpact": "Developers get declarative deployments and basic tracing capabilities"
+      },
+      {
+        "periodId": "q3-2026",
+        "headline": "Developer Experience Acceleration",
+        "story": "With foundations in place, we're enhancing the developer portal and beginning service mesh rollout. Golden path templates will make it trivial to create new services with best practices baked in.",
+        "keyChanges": ["Developer portal with TechDocs", "100% tracing coverage", "Service mesh in production"],
+        "userImpact": "Developers can self-service new services, trace requests end-to-end, and benefit from mTLS"
+      },
+      {
+        "periodId": "q4-2026",
+        "headline": "Platform Maturity",
+        "story": "We're completing our vision with feature flags for safe deployments, progressive delivery capabilities, and advanced observability powered by ML-based anomaly detection.",
+        "keyChanges": ["Feature flag system live", "Progressive delivery", "ML-based alerting"],
+        "userImpact": "Teams can safely deploy features to subsets of users and get proactive alerts before incidents occur"
+      }
+    ],
+    "callToAction": "Partner with Platform Engineering to onboard your services to GitOps and distributed tracing today - you'll be ready to leverage feature flags and progressive delivery when they launch in Q4."
+  }
+}

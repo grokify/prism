@@ -1,0 +1,47 @@
+{
+  "$schema": "https://prism.grokify.com/schemas/prism-document.json",
+  "metadata": {
+    "name": "Platform Team State",
+    "description": "Current state of platform engineering capabilities",
+    "version": "1.0.0",
+    "assessedAt": "2026-07-01T00:00:00Z"
+  },
+  "sliValues": {
+    "deployment-frequency": {
+      "7d": 12.5,
+      "30d": 10.2,
+      "90d": 8.7
+    },
+    "lead-time": {
+      "7d": 4.2,
+      "30d": 5.1,
+      "90d": 6.8
+    },
+    "change-failure-rate": {
+      "7d": 3.2,
+      "30d": 4.1,
+      "90d": 5.5
+    },
+    "mttr": {
+      "7d": 35,
+      "30d": 42,
+      "90d": 55
+    }
+  },
+  "capabilityLevels": {
+    "internal-dev-portal": 2,
+    "local-dev-env": 4,
+    "api-docs": 3,
+    "ci-pipeline": 4,
+    "cd-pipeline": 4,
+    "gitops": 2,
+    "feature-flags": 1,
+    "metrics": 4,
+    "logging": 4,
+    "tracing": 2,
+    "alerting": 3,
+    "kubernetes": 5,
+    "service-mesh": 2,
+    "secrets-management": 4
+  }
+}

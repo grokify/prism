@@ -1,0 +1,75 @@
+{
+  "$schema": "https://prism.grokify.com/schemas/maturity-spec.json",
+  "metadata": {
+    "name": "Platform Maturity Model",
+    "description": "Maturity model for platform engineering capabilities",
+    "version": "1.0.0"
+  },
+  "domains": {
+    "platform": {
+      "name": "Platform Engineering",
+      "description": "Maturity levels for platform capabilities",
+      "levels": [
+        {
+          "level": 1,
+          "name": "Initial",
+          "description": "Ad-hoc processes, manual operations"
+        },
+        {
+          "level": 2,
+          "name": "Developing",
+          "description": "Basic automation, some standardization"
+        },
+        {
+          "level": 3,
+          "name": "Defined",
+          "description": "Standardized processes, documented practices"
+        },
+        {
+          "level": 4,
+          "name": "Managed",
+          "description": "Measured and controlled, continuous improvement"
+        },
+        {
+          "level": 5,
+          "name": "Optimizing",
+          "description": "Continuous optimization, industry-leading practices"
+        }
+      ]
+    }
+  },
+  "slis": {
+    "deployment-frequency": {
+      "id": "deployment-frequency",
+      "name": "Deployment Frequency",
+      "description": "How often code is deployed to production",
+      "metricName": "deployments_per_day",
+      "unit": "per day",
+      "type": "quantitative"
+    },
+    "lead-time": {
+      "id": "lead-time",
+      "name": "Lead Time for Changes",
+      "description": "Time from commit to production deployment",
+      "metricName": "lead_time_hours",
+      "unit": "hours",
+      "type": "quantitative"
+    },
+    "change-failure-rate": {
+      "id": "change-failure-rate",
+      "name": "Change Failure Rate",
+      "description": "Percentage of deployments causing failures",
+      "metricName": "change_failure_rate",
+      "unit": "%",
+      "type": "quantitative"
+    },
+    "mttr": {
+      "id": "mttr",
+      "name": "Mean Time to Recovery",
+      "description": "Average time to recover from incidents",
+      "metricName": "mttr_minutes",
+      "unit": "minutes",
+      "type": "quantitative"
+    }
+  }
+}
