@@ -7,6 +7,62 @@
   "maintainers": ["grokify"],
   "releases": [
     {
+      "version": "v0.9.0",
+      "date": "2026-07-27",
+      "highlights": [
+        { "description": "RoadmapTimeline and InitiativeTracker Lit web components for roadmap visualization" },
+        { "description": "Static site generator roadmap page generation from JourneyRoadmap data" },
+        { "description": "Vitest test framework with jsdom for component and schema testing" },
+        { "description": "prism-maturity v0.14.0 with goal categories, JSON Schema validation, and MCP" }
+      ],
+      "added": [
+        { "description": "RoadmapTimeline Lit component for capability journey visualization", "commit": "4138339" },
+        { "description": "InitiativeTracker Lit component with grouping and filtering", "commit": "4138339" },
+        { "description": "Roadmap page generation in sitegen from roadmap.json files", "commit": "58bde40" },
+        { "description": "StackData.Roadmap field for JourneyRoadmap loading", "commit": "58bde40" },
+        { "description": "generateRoadmapPages() for roadmap timeline HTML generation", "commit": "58bde40" },
+        { "description": "Vitest test framework with jsdom environment", "commit": "17944e0" },
+        { "description": "Component tests for Lit web components", "commit": "17944e0" },
+        { "description": "Schema tests for maturity and roadmap Zod schemas", "commit": "17944e0" },
+        { "description": "Demo pages for component development at viewer/demo/", "commit": "e6696a5" },
+        { "description": "CLAUDE.md for AI assistant project context", "commit": "55e7354" }
+      ],
+      "dependencies": [
+        { "description": "Update prism-maturity v0.12.0 → v0.14.0 (adds categories, MCP, JSON Schema validation)", "commit": "d078ca0" },
+        { "description": "Update prism-capability v0.7.0 → v0.7.1", "commit": "d078ca0" },
+        { "description": "Update prism-roadmap v0.16.0 → v0.16.1", "commit": "d078ca0" },
+        { "description": "Update prism-core v0.3.0 → v0.4.0", "commit": "d078ca0" },
+        { "description": "Replace dashforge with uiforge v0.4.0", "commit": "d078ca0" },
+        { "description": "Add jsonschema/v6 v6.0.2 (transitive)", "commit": "d078ca0" },
+        { "description": "Add vitest v4.1.10 for testing", "commit": "17944e0" },
+        { "description": "Add jsdom v29.1.1 for browser environment", "commit": "17944e0" },
+        { "description": "Add @testing-library/dom v10.4.1", "commit": "17944e0" }
+      ],
+      "documentation": [
+        { "description": "Add PRISM orchestrator specs (PRD, TRD, ARCHITECTURE, PLAN, ROADMAP)", "commit": "d06b571" },
+        { "description": "Add platform-team capability stack example with standard directory structure", "commit": "74b253f" },
+        { "description": "Add v0.9.0 release notes" }
+      ]
+    },
+    {
+      "version": "v0.8.1",
+      "date": "2026-07-22",
+      "highlights": [
+        { "description": "@grokify/prism npm package with TypeScript/JavaScript visualization tools" }
+      ],
+      "added": [
+        { "description": "@grokify/prism package entry point", "commit": "692b944" },
+        { "description": "Zod schemas for maturity and roadmap models", "commit": "47fb629" },
+        { "description": "HTML string renderers for framework-agnostic usage", "commit": "0bc20f8" },
+        { "description": "Lit web components for maturity visualization", "commit": "5db51dd" },
+        { "description": "CSS styles for PRISM visualizations", "commit": "a6e0baa" }
+      ],
+      "documentation": [
+        { "description": "Add TypeScript/JavaScript documentation to MkDocs", "commit": "7a66ab3" },
+        { "description": "Add viewer README for @grokify/prism npm package", "commit": "e479cb3" }
+      ]
+    },
+    {
       "version": "v0.8.0",
       "date": "2026-06-07",
       "highlights": [
