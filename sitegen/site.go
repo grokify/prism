@@ -1664,7 +1664,7 @@ func (g *Generator) generateRoadmapIndexPage(sd *StackData, roadmapDir string) e
 		PrismUIJS:       g.config.PrismUIJS,
 		HideGeneratedBy: g.config.HideGeneratedBy,
 		Roadmap:         sd.Roadmap,
-		RoadmapJSON:     template.JS(roadmapJSON),
+		RoadmapJSON:     template.JS(roadmapJSON), //nolint:gosec // G203: JSON marshaled from trusted data, not user input
 	}
 
 	// Create HTML file
