@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRISM Components Demo</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f1f5f9;
+      color: #1f2937;
+    }
+
+    .dark-mode body {
+      background: #0f172a;
+      color: #f1f5f9;
+    }
+
+    header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0 0 12px 0;
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      opacity: 0.9;
+      font-size: 1.125rem;
+    }
+
+    .controls-bar {
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 16px 20px;
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .dark-mode .controls-bar {
+      background: #1e293b;
+      border-bottom-color: #334155;
+    }
+
+    .control-group {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .control-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
+    button {
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: 1px solid #e5e7eb;
+      background: white;
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.15s ease;
+    }
+
+    .dark-mode button {
+      background: #334155;
+      border-color: #475569;
+      color: #f1f5f9;
+    }
+
+    button:hover {
+      background: #f1f5f9;
+    }
+
+    .dark-mode button:hover {
+      background: #475569;
+    }
+
+    button.active {
+      background: #667eea;
+      color: white;
+      border-color: #667eea;
+    }
+
+    main {
+      padding: 40px 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    section {
+      margin-bottom: 60px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+      color: #667eea;
+    }
+
+    .dark-mode h2 {
+      color: #a5b4fc;
+    }
+
+    .section-description {
+      opacity: 0.7;
+      margin: 0 0 24px 0;
+    }
+
+    .component-container {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .dark-mode .component-container {
+      background: #1e293b;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      margin-top: 24px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.2);
+      transition: background 0.15s ease;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      opacity: 0.6;
+      font-size: 0.875rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>PRISM Components</h1>
+    <p class="subtitle">Interactive Lit Web Components for Capability Maturity Visualization</p>
+    <nav class="nav-links">
+      <a href="#maturity-grid">Maturity Grid</a>
+      <a href="#roadmap-timeline">Roadmap Timeline</a>
+      <a href="#initiative-tracker">Initiative Tracker</a>
+    </nav>
+  </header>
+
+  <div class="controls-bar">
+    <div class="control-group">
+      <span class="control-label">Theme:</span>
+      <button id="theme-light" class="active">Light</button>
+      <button id="theme-dark">Dark</button>
+    </div>
+  </div>
+
+  <main>
+    <!-- Maturity Grid Section -->
+    <section id="maturity-grid">
+      <h2>Maturity Grid</h2>
+      <p class="section-description">
+        Displays capabilities organized by layer or category with status colors and maturity badges.
+      </p>
+      <div class="component-container">
+        <maturity-grid view="by-layer" show-legend show-view-toggle>
+          <script type="application/json">
+            {
+              "title": "Platform Capability Stack",
+              "layers": [
+                { "id": "experience", "name": "Experience Layer", "order": 1 },
+                { "id": "service", "name": "Service Layer", "order": 2 },
+                { "id": "data", "name": "Data Layer", "order": 3 },
+                { "id": "infrastructure", "name": "Infrastructure Layer", "order": 4 }
+              ],
+              "categories": [
+                { "id": "core", "name": "Core", "order": 1 },
+                { "id": "integration", "name": "Integration", "order": 2 },
+                { "id": "security", "name": "Security", "order": 3 }
+              ],
+              "capabilities": [
+                { "id": "web-app", "name": "Web Application", "layerId": "experience", "categoryId": "core", "status": "operational" },
+                { "id": "mobile-app", "name": "Mobile App", "layerId": "experience", "categoryId": "core", "status": "implemented" },
+                { "id": "admin-portal", "name": "Admin Portal", "layerId": "experience", "categoryId": "core", "status": "in-progress" },
+                { "id": "api-gateway", "name": "API Gateway", "layerId": "service", "categoryId": "integration", "status": "operational" },
+                { "id": "auth-service", "name": "Auth Service", "layerId": "service", "categoryId": "security", "status": "operational" },
+                { "id": "order-service", "name": "Order Service", "layerId": "service", "categoryId": "core", "status": "implemented" },
+                { "id": "payment-service", "name": "Payment Service", "layerId": "service", "categoryId": "core", "status": "in-progress" },
+                { "id": "notification", "name": "Notifications", "layerId": "service", "categoryId": "integration", "status": "planned" },
+                { "id": "analytics-db", "name": "Analytics DB", "layerId": "data", "categoryId": "core", "status": "operational" },
+                { "id": "cache-layer", "name": "Cache Layer", "layerId": "data", "categoryId": "core", "status": "implemented" },
+                { "id": "data-lake", "name": "Data Lake", "layerId": "data", "categoryId": "core", "status": "planned" },
+                { "id": "kubernetes", "name": "Kubernetes", "layerId": "infrastructure", "categoryId": "core", "status": "operational" },
+                { "id": "ci-cd", "name": "CI/CD Pipeline", "layerId": "infrastructure", "categoryId": "core", "status": "operational" },
+                { "id": "monitoring", "name": "Monitoring", "layerId": "infrastructure", "categoryId": "core", "status": "implemented" },
+                { "id": "secrets-mgmt", "name": "Secrets Mgmt", "layerId": "infrastructure", "categoryId": "security", "status": "in-progress" }
+              ],
+              "maturity": {
+                "web-app": { "level": 4 },
+                "mobile-app": { "level": 3 },
+                "admin-portal": { "level": 2 },
+                "api-gateway": { "level": 5 },
+                "auth-service": { "level": 4 },
+                "order-service": { "level": 3 },
+                "payment-service": { "level": 2 },
+                "notification": { "level": 1 },
+                "analytics-db": { "level": 4 },
+                "cache-layer": { "level": 3 },
+                "data-lake": { "level": 1 },
+                "kubernetes": { "level": 5 },
+                "ci-cd": { "level": 4 },
+                "monitoring": { "level": 3 },
+                "secrets-mgmt": { "level": 2 }
+              }
+            }
+          </script>
+        </maturity-grid>
+      </div>
+    </section>
+
+    <!-- Roadmap Timeline Section -->
+    <section id="roadmap-timeline">
+      <h2>Roadmap Timeline</h2>
+      <p class="section-description">
+        Displays capability journeys over time periods with confidence indicators and commitment levels.
+      </p>
+      <div class="component-container">
+        <roadmap-timeline show-confidence show-commitment show-legend show-controls>
+          <script type="application/json">
+            {
+              "id": "platform-roadmap-2026",
+              "name": "Platform Maturity Roadmap 2026",
+              "vision": "Achieve industry-leading platform capabilities by end of 2026",
+              "timeModel": {
+                "type": "quarterly",
+                "periods": [
+                  { "id": "q1-2026", "label": "Q1 2026", "startDate": "2026-01-01", "endDate": "2026-03-31" },
+                  { "id": "q2-2026", "label": "Q2 2026", "startDate": "2026-04-01", "endDate": "2026-06-30", "isCurrent": true },
+                  { "id": "q3-2026", "label": "Q3 2026", "startDate": "2026-07-01", "endDate": "2026-09-30" },
+                  { "id": "q4-2026", "label": "Q4 2026", "startDate": "2026-10-01", "endDate": "2026-12-31" }
+                ]
+              },
+              "capabilityJourneys": [
+                {
+                  "id": "cj-cicd",
+                  "capabilityId": "ci-cd",
+                  "name": "CI/CD Pipeline",
+                  "owner": "Platform Team",
+                  "currentState": { "periodId": "q2-2026", "maturityLevel": "M3" },
+                  "targetStates": [
+                    { "periodId": "q3-2026", "maturityLevel": "M4", "confidence": 0.85, "commitment": "committed" },
+                    { "periodId": "q4-2026", "maturityLevel": "M5", "confidence": 0.6, "commitment": "planned" }
+                  ]
+                },
+                {
+                  "id": "cj-monitoring",
+                  "capabilityId": "monitoring",
+                  "name": "Observability",
+                  "owner": "SRE Team",
+                  "currentState": { "periodId": "q2-2026", "maturityLevel": "M2" },
+                  "targetStates": [
+                    { "periodId": "q3-2026", "maturityLevel": "M3", "confidence": 0.9, "commitment": "committed" },
+                    { "periodId": "q4-2026", "maturityLevel": "M4", "confidence": 0.7, "commitment": "planned" }
+                  ]
+                },
+                {
+                  "id": "cj-security",
+                  "capabilityId": "security",
+                  "name": "Security Posture",
+                  "owner": "Security Team",
+                  "currentState": { "periodId": "q2-2026", "maturityLevel": "M2" },
+                  "targetStates": [
+                    { "periodId": "q3-2026", "maturityLevel": "M3", "confidence": 0.75, "commitment": "committed" },
+                    { "periodId": "q4-2026", "maturityLevel": "M3", "confidence": 0.85, "commitment": "committed" }
+                  ]
+                },
+                {
+                  "id": "cj-api",
+                  "capabilityId": "api-gateway",
+                  "name": "API Management",
+                  "owner": "Platform Team",
+                  "currentState": { "periodId": "q2-2026", "maturityLevel": "M4" },
+                  "targetStates": [
+                    { "periodId": "q3-2026", "maturityLevel": "M4", "confidence": 0.95, "commitment": "committed" },
+                    { "periodId": "q4-2026", "maturityLevel": "M5", "confidence": 0.5, "commitment": "aspirant" }
+                  ]
+                },
+                {
+                  "id": "cj-data",
+                  "capabilityId": "data-platform",
+                  "name": "Data Platform",
+                  "owner": "Data Team",
+                  "currentState": { "periodId": "q2-2026", "maturityLevel": "M1" },
+                  "targetStates": [
+                    { "periodId": "q3-2026", "maturityLevel": "M2", "confidence": 0.8, "commitment": "committed" },
+                    { "periodId": "q4-2026", "maturityLevel": "M3", "confidence": 0.55, "commitment": "planned" }
+                  ]
+                }
+              ]
+            }
+          </script>
+        </roadmap-timeline>
+      </div>
+    </section>
+
+    <!-- Initiative Tracker Section -->
+    <section id="initiative-tracker">
+      <h2>Initiative Tracker</h2>
+      <p class="section-description">
+        Track initiatives with filtering, grouping, and search capabilities.
+      </p>
+      <div class="component-container">
+        <initiative-tracker group-by="status" show-stats show-search>
+          <script type="application/json">
+            {
+              "id": "roadmap-initiatives",
+              "name": "Platform Initiatives",
+              "teams": [
+                { "id": "platform", "name": "Platform Engineering" },
+                { "id": "sre", "name": "Site Reliability" },
+                { "id": "security", "name": "Security" },
+                { "id": "data", "name": "Data Engineering" }
+              ],
+              "initiatives": [
+                {
+                  "id": "init-1",
+                  "name": "GitOps Implementation",
+                  "description": "Implement GitOps workflow using ArgoCD for all production deployments. This will enable declarative infrastructure management and improve deployment reliability.",
+                  "status": "in_progress",
+                  "ownerTeam": "platform",
+                  "periods": ["Q2 2026", "Q3 2026"],
+                  "advances": [
+                    { "capabilityId": "ci-cd", "capabilityName": "CI/CD Pipeline", "from": "M3", "to": "M4" }
+                  ]
+                },
+                {
+                  "id": "init-2",
+                  "name": "Distributed Tracing",
+                  "description": "Deploy OpenTelemetry across all services for comprehensive distributed tracing. Enable correlation of requests across service boundaries.",
+                  "status": "in_progress",
+                  "ownerTeam": "sre",
+                  "periods": ["Q2 2026"],
+                  "advances": [
+                    { "capabilityId": "monitoring", "capabilityName": "Observability", "from": "M2", "to": "M3" }
+                  ]
+                },
+                {
+                  "id": "init-3",
+                  "name": "Zero Trust Network",
+                  "description": "Implement zero-trust network architecture with service mesh and mutual TLS for all internal communications.",
+                  "status": "planned",
+                  "ownerTeam": "security",
+                  "periods": ["Q3 2026"],
+                  "advances": [
+                    { "capabilityId": "security", "capabilityName": "Security Posture", "from": "M2", "to": "M3" }
+                  ]
+                },
+                {
+                  "id": "init-4",
+                  "name": "API Versioning Strategy",
+                  "description": "Define and implement a consistent API versioning strategy across all services. Include deprecation policies and migration guides.",
+                  "status": "completed",
+                  "ownerTeam": "platform",
+                  "periods": ["Q1 2026"],
+                  "advances": [
+                    { "capabilityId": "api-gateway", "capabilityName": "API Management", "from": "M3", "to": "M4" }
+                  ]
+                },
+                {
+                  "id": "init-5",
+                  "name": "Real-time Data Pipeline",
+                  "description": "Build streaming data infrastructure using Apache Kafka for real-time event processing and analytics.",
+                  "status": "proposed",
+                  "ownerTeam": "data",
+                  "periods": ["Q3 2026", "Q4 2026"],
+                  "advances": [
+                    { "capabilityId": "data-platform", "capabilityName": "Data Platform", "from": "M1", "to": "M3" }
+                  ]
+                },
+                {
+                  "id": "init-6",
+                  "name": "Chaos Engineering Program",
+                  "description": "Establish a chaos engineering practice with regular game days and automated failure injection in non-production environments.",
+                  "status": "planned",
+                  "ownerTeam": "sre",
+                  "periods": ["Q4 2026"],
+                  "advances": [
+                    { "capabilityId": "monitoring", "capabilityName": "Observability", "from": "M3", "to": "M4" }
+                  ]
+                },
+                {
+                  "id": "init-7",
+                  "name": "Secret Rotation Automation",
+                  "description": "Implement automated secret rotation for all credentials using Vault and integrate with CI/CD pipelines.",
+                  "status": "in_progress",
+                  "ownerTeam": "security",
+                  "periods": ["Q2 2026"],
+                  "advances": [
+                    { "capabilityId": "security", "capabilityName": "Security Posture", "from": "M2", "to": "M3" }
+                  ]
+                },
+                {
+                  "id": "init-8",
+                  "name": "Feature Flagging Platform",
+                  "description": "Deploy a feature flagging system to enable progressive rollouts and A/B testing capabilities.",
+                  "status": "on_hold",
+                  "ownerTeam": "platform",
+                  "periods": ["Q3 2026"]
+                }
+              ]
+            }
+          </script>
+        </initiative-tracker>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>PRISM - Platform Readiness & Improvement through Structured Maturity</p>
+    <p>Built with Lit Web Components</p>
+  </footer>
+
+  <script type="module">
+    // Import all components
+    import '../dist/components/index.js';
+
+    // Theme toggle functionality
+    const lightBtn = document.getElementById('theme-light');
+    const darkBtn = document.getElementById('theme-dark');
+
+    function setTheme(theme) {
+      // Update button states
+      lightBtn.classList.toggle('active', theme === 'light');
+      darkBtn.classList.toggle('active', theme === 'dark');
+
+      // Update body class
+      document.documentElement.classList.toggle('dark-mode', theme === 'dark');
+
+      // Update all components
+      document.querySelectorAll('maturity-grid, roadmap-timeline, initiative-tracker').forEach(el => {
+        el.setAttribute('theme', theme);
+      });
+    }
+
+    lightBtn.addEventListener('click', () => setTheme('light'));
+    darkBtn.addEventListener('click', () => setTheme('dark'));
+  </script>
+</body>
+</html>
