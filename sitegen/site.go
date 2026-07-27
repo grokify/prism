@@ -44,6 +44,7 @@ import (
 	prism "github.com/grokify/prism-maturity"
 	"github.com/grokify/prism-maturity/dashboard"
 	"github.com/grokify/prism-maturity/maturity"
+	"github.com/grokify/prism-roadmap/journey"
 )
 
 // Config holds configuration for site generation.
@@ -104,6 +105,7 @@ type StackData struct {
 	Stack    *capstack.CapabilityStack
 	Model    *maturity.Spec
 	State    *prism.PRISMDocument
+	Roadmap  *journey.JourneyRoadmap
 	FileName string
 	BaseName string
 	Maturity *dashboard.MaturityAggregator
@@ -148,6 +150,10 @@ func (g *Generator) Generate() error {
 		return fmt.Errorf("generating capability pages: %w", err)
 	}
 
+	if err := g.generateRoadmapPages(); err != nil {
+		return fmt.Errorf("generating roadmap pages: %w", err)
+	}
+
 	// Copy assets
 	if err := g.copyAssets(); err != nil {
 		return fmt.Errorf("copying assets: %w", err)
@@ -172,10 +178,11 @@ const (
 
 // stackSource represents a capability stack with its source location.
 type stackSource struct {
-	stackPath string
-	modelPath string
-	statePath string
-	dirName   string // for kebab-case basename
+	stackPath   string
+	modelPath   string
+	statePath   string
+	roadmapPath string
+	dirName     string // for kebab-case basename
 }
 
 func (g *Generator) loadStacks() error {
@@ -197,7 +204,7 @@ func (g *Generator) loadStacks() error {
 					stackPath: standardStackPath,
 					dirName:   filepath.Base(path),
 				}
-				// Check for model.json and state.json in same directory
+				// Check for model.json, state.json, and roadmap.json in same directory
 				modelPath := filepath.Join(path, StandardModelFile)
 				if _, err := os.Stat(modelPath); err == nil {
 					src.modelPath = modelPath
@@ -205,6 +212,10 @@ func (g *Generator) loadStacks() error {
 				statePath := filepath.Join(path, StandardStateFile)
 				if _, err := os.Stat(statePath); err == nil {
 					src.statePath = statePath
+				}
+				roadmapPath := filepath.Join(path, StandardRoadmapFile)
+				if _, err := os.Stat(roadmapPath); err == nil {
+					src.roadmapPath = roadmapPath
 				}
 				sources = append(sources, src)
 			} else {
@@ -230,6 +241,10 @@ func (g *Generator) loadStacks() error {
 							statePath := filepath.Join(subPath, StandardStateFile)
 							if _, err := os.Stat(statePath); err == nil {
 								src.statePath = statePath
+							}
+							roadmapPath := filepath.Join(subPath, StandardRoadmapFile)
+							if _, err := os.Stat(roadmapPath); err == nil {
+								src.roadmapPath = roadmapPath
 							}
 							sources = append(sources, src)
 						}
@@ -303,6 +318,16 @@ func (g *Generator) loadStacks() error {
 			g.loadStateForStack(sd, rawBaseName)
 			if sd.State == nil && baseName != rawBaseName {
 				g.loadStateForStack(sd, baseName)
+			}
+		}
+
+		// Load roadmap - prefer co-located file from standard structure
+		if src.roadmapPath != "" {
+			if roadmapData, err := os.ReadFile(src.roadmapPath); err == nil {
+				var roadmap journey.JourneyRoadmap
+				if json.Unmarshal(roadmapData, &roadmap) == nil {
+					sd.Roadmap = &roadmap
+				}
 			}
 		}
 
@@ -1574,3 +1599,198 @@ func (g *Generator) capToLit(cap capstack.Capability) LitCapability {
 
 	return litCap
 }
+
+// generateRoadmapPages creates roadmap timeline pages for stacks with journey data.
+func (g *Generator) generateRoadmapPages() error {
+	for _, sd := range g.stacks {
+		if sd.Roadmap == nil {
+			continue
+		}
+
+		// Create roadmap directory
+		roadmapDir := filepath.Join(g.config.OutputDir, sd.BaseName, "roadmap")
+		if err := os.MkdirAll(roadmapDir, 0755); err != nil {
+			return fmt.Errorf("creating roadmap dir: %w", err)
+		}
+
+		// Generate roadmap index page with timeline
+		if err := g.generateRoadmapIndexPage(sd, roadmapDir); err != nil {
+			return fmt.Errorf("generating roadmap index for %s: %w", sd.BaseName, err)
+		}
+	}
+
+	return nil
+}
+
+// RoadmapPageData holds data for rendering roadmap pages.
+type RoadmapPageData struct {
+	Title           string
+	Description     string
+	StackName       string
+	BaseName        string
+	Theme           string
+	BaseURL         string
+	SiteNavJS       string
+	PrismUIJS       string
+	HideGeneratedBy bool
+	Roadmap         *journey.JourneyRoadmap
+	RoadmapJSON     template.JS // JSON data for Lit component
+}
+
+func (g *Generator) generateRoadmapIndexPage(sd *StackData, roadmapDir string) error {
+	// Convert roadmap to JSON for Lit component
+	roadmapJSON, err := json.Marshal(sd.Roadmap)
+	if err != nil {
+		return fmt.Errorf("marshaling roadmap JSON: %w", err)
+	}
+
+	// Get stack name for breadcrumb
+	stackName := sd.Stack.Metadata.Title
+	if stackName == "" {
+		stackName = sd.Stack.Metadata.Name
+	}
+	if stackName == "" {
+		stackName = sd.BaseName
+	}
+
+	data := RoadmapPageData{
+		Title:           sd.Roadmap.Name,
+		Description:     sd.Roadmap.Vision,
+		StackName:       stackName,
+		BaseName:        sd.BaseName,
+		Theme:           g.config.Theme,
+		BaseURL:         g.config.BaseURL,
+		SiteNavJS:       g.config.SiteNavJS,
+		PrismUIJS:       g.config.PrismUIJS,
+		HideGeneratedBy: g.config.HideGeneratedBy,
+		Roadmap:         sd.Roadmap,
+		RoadmapJSON:     template.JS(roadmapJSON),
+	}
+
+	// Create HTML file
+	f, err := os.Create(filepath.Join(roadmapDir, "index.html"))
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	// Execute template
+	tmpl := template.Must(template.New("roadmap").Parse(roadmapPageTemplate))
+	return tmpl.Execute(f, data)
+}
+
+const roadmapPageTemplate = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{.Title}} - Roadmap</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      {{if eq .Theme "dark"}}
+      background: #0f172a;
+      color: #f1f5f9;
+      {{else}}
+      background: #f8fafc;
+      color: #1f2937;
+      {{end}}
+    }
+    .header {
+      padding: 24px;
+      border-bottom: 1px solid {{if eq .Theme "dark"}}#334155{{else}}#e5e7eb{{end}};
+    }
+    .breadcrumb {
+      font-size: 0.875rem;
+      opacity: 0.7;
+      margin-bottom: 8px;
+    }
+    .breadcrumb a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .description {
+      opacity: 0.7;
+    }
+    main {
+      padding: 24px;
+    }
+    .footer {
+      text-align: center;
+      padding: 24px;
+      opacity: 0.5;
+      font-size: 0.75rem;
+    }
+  </style>
+  {{if .PrismUIJS}}
+  <script type="module" src="{{.PrismUIJS}}"></script>
+  {{end}}
+</head>
+<body>
+  <header class="header">
+    <nav class="breadcrumb">
+      <a href="{{.BaseURL}}/">Home</a> /
+      <a href="{{.BaseURL}}/{{.BaseName}}/">{{.StackName}}</a> /
+      Roadmap
+    </nav>
+    <h1>{{.Title}}</h1>
+    {{if .Description}}<p class="description">{{.Description}}</p>{{end}}
+  </header>
+
+  <main>
+    {{if .PrismUIJS}}
+    <roadmap-timeline theme="{{.Theme}}" show-confidence show-commitment show-legend show-controls>
+      <script type="application/json">{{.RoadmapJSON}}</script>
+    </roadmap-timeline>
+    {{else}}
+    <p>Roadmap visualization requires the PRISM UI JavaScript bundle.</p>
+    <p>Pass <code>--prism-ui-js=path/to/prism-ui.js</code> to enable.</p>
+
+    <h2 style="margin-top: 24px;">Capability Journeys</h2>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 16px;">
+      <thead>
+        <tr style="background: {{if eq .Theme "dark"}}#1e293b{{else}}#f1f5f9{{end}};">
+          <th style="padding: 12px; text-align: left; border: 1px solid {{if eq .Theme "dark"}}#334155{{else}}#e5e7eb{{end}};">Capability</th>
+          <th style="padding: 12px; text-align: center; border: 1px solid {{if eq .Theme "dark"}}#334155{{else}}#e5e7eb{{end}};">Current</th>
+          <th style="padding: 12px; text-align: center; border: 1px solid {{if eq .Theme "dark"}}#334155{{else}}#e5e7eb{{end}};">Targets</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{range .Roadmap.CapabilityJourneys}}
+        <tr>
+          <td style="padding: 12px; border: 1px solid {{if eq $.Theme "dark"}}#334155{{else}}#e5e7eb{{end}};">
+            <strong>{{.Name}}</strong>
+            {{if .Owner}}<br><small style="opacity: 0.7;">{{.Owner}}</small>{{end}}
+          </td>
+          <td style="padding: 12px; text-align: center; border: 1px solid {{if eq $.Theme "dark"}}#334155{{else}}#e5e7eb{{end}};">
+            {{if .CurrentState}}{{.CurrentState.MaturityLevel}}{{else}}-{{end}}
+          </td>
+          <td style="padding: 12px; text-align: center; border: 1px solid {{if eq $.Theme "dark"}}#334155{{else}}#e5e7eb{{end}};">
+            {{range .TargetStates}}
+              {{.MaturityLevel}} ({{.PeriodID}})
+            {{end}}
+          </td>
+        </tr>
+        {{end}}
+      </tbody>
+    </table>
+    {{end}}
+  </main>
+
+  {{if not .HideGeneratedBy}}
+  <footer class="footer">
+    Generated by PRISM
+  </footer>
+  {{end}}
+</body>
+</html>
+`
