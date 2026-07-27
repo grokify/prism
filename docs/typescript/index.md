@@ -172,6 +172,14 @@ document.head.insertAdjacentHTML('beforeend', `<style>${INLINE_STYLES}</style>`)
 
 Interactive web components built with [Lit](https://lit.dev). Requires Lit as a peer dependency.
 
+### Available Components
+
+| Component | Description |
+|-----------|-------------|
+| `maturity-grid` | Capability grid with maturity overlay |
+| `roadmap-timeline` | Capability journey timeline visualization |
+| `initiative-tracker` | Initiative tracking with filtering and grouping |
+
 ### maturity-grid
 
 ```bash
@@ -252,6 +260,89 @@ grid.addEventListener('view-change', (e) => {
   console.log('View changed to:', e.detail.view);
 });
 ```
+
+### roadmap-timeline
+
+Timeline visualization for capability journeys over periods:
+
+```html
+<roadmap-timeline theme="dark" show-confidence show-commitment show-legend show-controls>
+  <script type="application/json">
+    {
+      "id": "roadmap-1",
+      "name": "Platform Roadmap",
+      "periods": [
+        { "id": "q3-2026", "name": "Q3 2026" }
+      ],
+      "capabilityJourneys": [
+        {
+          "capabilityId": "k8s",
+          "name": "Kubernetes",
+          "currentState": { "maturityLevel": "M2" },
+          "targetStates": [
+            { "periodId": "q3-2026", "maturityLevel": "M3", "confidence": 0.8 }
+          ]
+        }
+      ]
+    }
+  </script>
+</roadmap-timeline>
+```
+
+#### Attributes
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `theme` | `'light'` \| `'dark'` | `'light'` | Color theme |
+| `show-confidence` | `boolean` | `false` | Show confidence indicators |
+| `show-commitment` | `boolean` | `false` | Show commitment indicators |
+| `show-legend` | `boolean` | `false` | Show maturity legend |
+| `show-controls` | `boolean` | `false` | Show filter controls |
+| `color-scheme` | `'default'` \| `'heatmap'` \| `'monochrome'` | `'default'` | Color scheme |
+
+### initiative-tracker
+
+Track initiatives with filtering and grouping:
+
+```html
+<initiative-tracker group-by="status" sort-by="name" theme="light">
+  <script type="application/json">
+    {
+      "initiatives": [
+        {
+          "id": "init-1",
+          "name": "Zero Trust Implementation",
+          "status": "in_progress",
+          "teamId": "platform",
+          "periodId": "q3-2026"
+        }
+      ],
+      "teams": [
+        { "id": "platform", "name": "Platform Team" }
+      ]
+    }
+  </script>
+</initiative-tracker>
+```
+
+#### Attributes
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `theme` | `'light'` \| `'dark'` | `'light'` | Color theme |
+| `group-by` | `'status'` \| `'team'` \| `'period'` | `'status'` | Grouping mode |
+| `sort-by` | `'name'` \| `'status'` \| `'team'` | `'name'` | Sort order |
+
+#### Status Colors
+
+| Status | Background | Text |
+|--------|------------|------|
+| `proposed` | #e0e7ff | #3730a3 |
+| `planned` | #dbeafe | #1e40af |
+| `in_progress` | #fef3c7 | #92400e |
+| `completed` | #d1fae5 | #065f46 |
+| `on_hold` | #fce7f3 | #9d174d |
+| `cancelled` | #f3f4f6 | #6b7280 |
 
 ## Integration Examples
 
