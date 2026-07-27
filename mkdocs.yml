@@ -61,6 +61,9 @@ nav:
   - Guides:
       - Configuration: guide/configuration.md
       - Integration: guide/integration.md
+  - Developer:
+      - Contributing: CONTRIBUTING.md
+      - Development: DEVELOPMENT.md
   - Ecosystem: ECOSYSTEM.md
   - Modules:
       - prism-core: https://github.com/grokify/prism-core
