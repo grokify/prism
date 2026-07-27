@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://grokify.github.io/prism/cli/">
+        <link rel="canonical" href="https://grokify.github.io/prism/CONTRIBUTING/">
       
       
-        <link rel="prev" href="../typescript/">
+        <link rel="prev" href="../guide/integration/">
       
       
-        <link rel="next" href="capability/">
+        <link rel="next" href="../DEVELOPMENT/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Overview - PRISM</title>
+        <title>Contributing - PRISM</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#cli-reference" class="md-skip">
+        <a href="#contributing-to-prism" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Overview
+              Contributing
             
           </span>
         </div>
@@ -281,13 +281,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../cli/" class="md-tabs__link">
           
   
   
@@ -323,11 +321,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../CONTRIBUTING/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -618,31 +618,28 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
   
@@ -660,7 +657,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -675,37 +672,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Overview
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
         
   
   
@@ -721,109 +691,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#command-structure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Command Structure
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#modules" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Modules
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#global-commands" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Global Commands
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Global Commands">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#validate" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        validate
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#stats" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        stats
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#common-flags" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Common Flags
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Examples
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -836,7 +703,7 @@
   
   
     <li class="md-nav__item">
-      <a href="capability/" class="md-nav__link">
+      <a href="../cli/capability/" class="md-nav__link">
         
   
   
@@ -864,7 +731,7 @@
   
   
     <li class="md-nav__item">
-      <a href="maturity/" class="md-nav__link">
+      <a href="../cli/maturity/" class="md-nav__link">
         
   
   
@@ -892,7 +759,7 @@
   
   
     <li class="md-nav__item">
-      <a href="roadmap/" class="md-nav__link">
+      <a href="../cli/roadmap/" class="md-nav__link">
         
   
   
@@ -920,7 +787,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ecosystem/" class="md-nav__link">
+      <a href="../cli/ecosystem/" class="md-nav__link">
         
   
   
@@ -948,7 +815,7 @@
   
   
     <li class="md-nav__item">
-      <a href="site/" class="md-nav__link">
+      <a href="../cli/site/" class="md-nav__link">
         
   
   
@@ -1097,28 +964,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
-        
-          
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
             
   
   
@@ -1136,7 +1006,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1151,10 +1021,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../CONTRIBUTING/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1170,6 +1067,325 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting Started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clone-and-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clone and Build
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Run Tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#development-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Development Workflow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Development Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-find-or-create-an-issue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Find or Create an Issue
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-create-a-branch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Create a Branch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-make-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Make Changes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-test-your-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Test Your Changes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-commit-with-conventional-commits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Commit with Conventional Commits
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-push-and-create-pr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Push and Create PR
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-style" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Style
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Code Style">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#go" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Go
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TypeScript
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commit-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Commit Messages
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-to-contribute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What to Contribute
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What to Contribute">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#good-first-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Good First Issues
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bug-fixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bug Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#module-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module Boundaries
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pull-request-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pull Request Guidelines
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reporting-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reporting Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-of-conduct" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code of Conduct
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Questions?
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1610,44 +1826,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#command-structure" class="md-nav__link">
+  <a href="#getting-started" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Command Structure
+        Getting Started
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#modules" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Modules
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#global-commands" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Global Commands
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Global Commands">
+    <nav class="md-nav" aria-label="Getting Started">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#validate" class="md-nav__link">
+  <a href="#prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
       
-        validate
+        Prerequisites
       
     </span>
   </a>
@@ -1655,10 +1849,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#stats" class="md-nav__link">
+  <a href="#clone-and-build" class="md-nav__link">
     <span class="md-ellipsis">
       
-        stats
+        Clone and Build
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Run Tests
       
     </span>
   </a>
@@ -1671,10 +1876,204 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#common-flags" class="md-nav__link">
+  <a href="#development-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Common Flags
+        Development Workflow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Development Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-find-or-create-an-issue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Find or Create an Issue
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-create-a-branch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Create a Branch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-make-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Make Changes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-test-your-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Test Your Changes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-commit-with-conventional-commits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Commit with Conventional Commits
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-push-and-create-pr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Push and Create PR
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-style" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Style
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Code Style">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#go" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Go
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TypeScript
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commit-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Commit Messages
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-to-contribute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What to Contribute
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What to Contribute">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#good-first-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Good First Issues
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bug-fixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bug Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#module-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module Boundaries
       
     </span>
   </a>
@@ -1682,10 +2081,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#examples" class="md-nav__link">
+  <a href="#pull-request-guidelines" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Examples
+        Pull Request Guidelines
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reporting-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reporting Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-of-conduct" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code of Conduct
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Questions?
       
     </span>
   </a>
@@ -1712,97 +2144,169 @@
   
 
 
-<h1 id="cli-reference">CLI Reference</h1>
-<p>The <code>prism</code> CLI provides a unified interface to the PRISM ecosystem.</p>
-<h2 id="command-structure">Command Structure</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>prism &lt;module&gt; &lt;command&gt; [subcommand] [flags]
+<h1 id="contributing-to-prism">Contributing to PRISM</h1>
+<p>Thank you for your interest in contributing to PRISM! This document covers how to contribute code, documentation, and bug reports.</p>
+<h2 id="getting-started">Getting Started</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li>Go 1.21+</li>
+<li>Node.js 20+ and pnpm (for viewer/ TypeScript development)</li>
+<li>golangci-lint (for linting)</li>
+</ul>
+<h3 id="clone-and-build">Clone and Build</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/grokify/prism.git
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>prism
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Build CLI</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>go<span class="w"> </span>build<span class="w"> </span>-o<span class="w"> </span>prism<span class="w"> </span>./cmd/prism
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># Install viewer dependencies</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nb">cd</span><span class="w"> </span>viewer<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pnpm<span class="w"> </span>install
 </code></pre></div>
-<h2 id="modules">Modules</h2>
+<h3 id="run-tests">Run Tests</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Go tests</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>go<span class="w"> </span><span class="nb">test</span><span class="w"> </span>./...
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># TypeScript tests</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nb">cd</span><span class="w"> </span>viewer<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pnpm<span class="w"> </span><span class="nb">test</span>
+</code></pre></div>
+<h2 id="development-workflow">Development Workflow</h2>
+<h3 id="1-find-or-create-an-issue">1. Find or Create an Issue</h3>
+<p>Before starting work, check if an issue exists. For new features, open an issue to discuss the approach.</p>
+<p>For roadmap items tracked in <a href="https://github.com/ProductBuildersHQ/prism-control">prism-control</a>, use:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>prismctl<span class="w"> </span>work<span class="w"> </span>ready<span class="w"> </span>--repo<span class="w"> </span>github.com/grokify/prism
+</code></pre></div></p>
+<h3 id="2-create-a-branch">2. Create a Branch</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>feat/your-feature-name
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># or</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>fix/issue-description
+</code></pre></div>
+<h3 id="3-make-changes">3. Make Changes</h3>
+<p>Follow the code style and patterns documented in <a href="../DEVELOPMENT/">DEVELOPMENT.md</a>.</p>
+<h3 id="4-test-your-changes">4. Test Your Changes</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Go</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>go<span class="w"> </span><span class="nb">test</span><span class="w"> </span>./...
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>golangci-lint<span class="w"> </span>run
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="c1"># TypeScript (if applicable)</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="nb">cd</span><span class="w"> </span>viewer<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pnpm<span class="w"> </span><span class="nb">test</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pnpm<span class="w"> </span>typecheck
+</code></pre></div>
+<h3 id="5-commit-with-conventional-commits">5. Commit with Conventional Commits</h3>
+<p>Use <a href="https://www.conventionalcommits.org/">Conventional Commits</a> format:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;feat(sitegen): add roadmap page generation&quot;</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;fix(viewer): correct theme toggle behavior&quot;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;docs: update CLI reference for new flags&quot;</span>
+</code></pre></div>
+<p>For roadmap items, include the trailer:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;feat(ecosystem): add V2MOM loading</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="s2">Refs: RMI-PRISM-004&quot;</span>
+</code></pre></div></p>
+<h3 id="6-push-and-create-pr">6. Push and Create PR</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>feat/your-feature-name
+</code></pre></div>
+<p>Then create a pull request on GitHub.</p>
+<h2 id="code-style">Code Style</h2>
+<h3 id="go">Go</h3>
+<ul>
+<li>Run <code>gofmt</code> and <code>golangci-lint run</code> before committing</li>
+<li>Follow standard Go conventions</li>
+<li>Keep functions focused and small</li>
+<li>Prefer returning errors over panicking</li>
+</ul>
+<h3 id="typescript">TypeScript</h3>
+<ul>
+<li>Use TypeScript strict mode</li>
+<li>Define types with Zod schemas, infer TypeScript types from them</li>
+<li>Lit components follow the pattern in <code>viewer/src/components/</code></li>
+<li>Run <code>pnpm typecheck</code> before committing</li>
+</ul>
+<h3 id="commit-messages">Commit Messages</h3>
+<p>Format: <code>&lt;type&gt;(&lt;scope&gt;): &lt;description&gt;</code></p>
+<p>Types:
+- <code>feat</code> — New feature
+- <code>fix</code> — Bug fix
+- <code>docs</code> — Documentation changes
+- <code>test</code> — Test additions or fixes
+- <code>refactor</code> — Code restructuring
+- <code>chore</code> — Maintenance tasks</p>
+<p>Scopes: <code>sitegen</code>, <code>viewer</code>, <code>ecosystem</code>, <code>cli</code>, <code>deps</code></p>
+<h2 id="what-to-contribute">What to Contribute</h2>
+<h3 id="good-first-issues">Good First Issues</h3>
+<p>Look for issues labeled <code>good first issue</code> on GitHub.</p>
+<h3 id="documentation">Documentation</h3>
+<ul>
+<li>Improve existing docs in <code>docs/</code></li>
+<li>Add examples to <code>examples/</code></li>
+<li>Fix typos or unclear explanations</li>
+</ul>
+<h3 id="bug-fixes">Bug Fixes</h3>
+<ul>
+<li>Check the issue tracker for reported bugs</li>
+<li>Include a test case that reproduces the bug</li>
+<li>Keep the fix minimal and focused</li>
+</ul>
+<h3 id="new-features">New Features</h3>
+<p>For significant features:
+1. Open an issue to discuss the approach
+2. Reference the relevant spec in <code>docs/specs/</code> if applicable
+3. Update documentation alongside the code
+4. Add tests for new functionality</p>
+<h2 id="module-boundaries">Module Boundaries</h2>
+<p>This repo orchestrates the PRISM ecosystem. Schema changes belong in the module repos:</p>
 <table>
 <thead>
 <tr>
-<th>Module</th>
-<th>Description</th>
+<th>Change Type</th>
+<th>Repository</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="capability/"><code>capability</code></a></td>
-<td>Capability stack operations</td>
+<td>Capability stack schema</td>
+<td>prism-capability</td>
 </tr>
 <tr>
-<td><a href="maturity/"><code>maturity</code></a></td>
-<td>Maturity model and state operations</td>
+<td>SLI/SLO types, maturity models</td>
+<td>prism-maturity</td>
 </tr>
 <tr>
-<td><a href="roadmap/"><code>roadmap</code></a></td>
-<td>Goals and requirements operations</td>
+<td>OKR, V2MOM, roadmap types</td>
+<td>prism-roadmap</td>
 </tr>
 <tr>
-<td><a href="ecosystem/"><code>ecosystem</code></a></td>
-<td>Cross-module ecosystem operations</td>
+<td>Shared primitives</td>
+<td>prism-core</td>
 </tr>
 <tr>
-<td><a href="site/"><code>site</code></a></td>
-<td>Static site generation</td>
+<td>Cross-module queries, site generation</td>
+<td><strong>this repo</strong></td>
 </tr>
 </tbody>
 </table>
-<h2 id="global-commands">Global Commands</h2>
-<h3 id="validate">validate</h3>
-<p>Validate PRISM documents:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>prism<span class="w"> </span>validate<span class="w"> </span>--all
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>prism<span class="w"> </span>validate<span class="w"> </span>document.json
-</code></pre></div>
-<h3 id="stats">stats</h3>
-<p>Show repository statistics:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>prism<span class="w"> </span>stats
-</code></pre></div>
-<h2 id="common-flags">Common Flags</h2>
-<table>
-<thead>
-<tr>
-<th>Flag</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>--help</code>, <code>-h</code></td>
-<td>Show help for command</td>
-</tr>
-<tr>
-<td><code>--version</code></td>
-<td>Show version information</td>
-</tr>
-<tr>
-<td><code>--output</code>, <code>-o</code></td>
-<td>Output file path</td>
-</tr>
-<tr>
-<td><code>--format</code>, <code>-f</code></td>
-<td>Output format (json, html, md)</td>
-</tr>
-</tbody>
-</table>
-<h2 id="examples">Examples</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Capability operations</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>prism<span class="w"> </span>capability<span class="w"> </span>list<span class="w"> </span>stack.json
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>prism<span class="w"> </span>capability<span class="w"> </span>validate<span class="w"> </span>stack.json
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># Maturity operations</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>prism<span class="w"> </span>maturity<span class="w"> </span>model<span class="w"> </span>dashboard<span class="w"> </span>model.json<span class="w"> </span>--state<span class="w"> </span>state.json<span class="w"> </span>-o<span class="w"> </span>dash.html
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1"># Roadmap operations</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>prism<span class="w"> </span>roadmap<span class="w"> </span>goals<span class="w"> </span>okr<span class="w"> </span>render<span class="w"> </span>goals.json<span class="w"> </span>-o<span class="w"> </span>goals.md
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="c1"># Ecosystem operations</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>prism<span class="w"> </span>ecosystem<span class="w"> </span>load<span class="w"> </span>--config<span class="w"> </span>prism.yaml<span class="w"> </span>--json
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="c1"># Site generation</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>prism<span class="w"> </span>site<span class="w"> </span>generate<span class="w"> </span>--stack<span class="o">=</span>./stacks/<span class="w"> </span>--output<span class="o">=</span>./dist
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>prism<span class="w"> </span>site<span class="w"> </span>generate<span class="w"> </span>--stack<span class="o">=</span>./security/<span class="w"> </span>--stack<span class="o">=</span>./reliability/<span class="w"> </span>--title<span class="o">=</span><span class="s2">&quot;Dashboard&quot;</span>
-</code></pre></div>
+<p>If your feature requires a schema change:
+1. Contribute the schema change to the module repo first
+2. Wait for it to be tagged and released
+3. Update the dependency in this repo
+4. Build the feature here</p>
+<h2 id="pull-request-guidelines">Pull Request Guidelines</h2>
+<ul>
+<li>Keep PRs focused on a single change</li>
+<li>Include tests for new functionality</li>
+<li>Update documentation if behavior changes</li>
+<li>Ensure CI passes before requesting review</li>
+<li>Respond to review feedback promptly</li>
+</ul>
+<h2 id="reporting-issues">Reporting Issues</h2>
+<p>When reporting bugs:
+- Include Go/Node version
+- Provide minimal reproduction steps
+- Include error messages and stack traces
+- Attach sample input files if relevant</p>
+<h2 id="code-of-conduct">Code of Conduct</h2>
+<p>Be respectful and constructive. We're all here to build something useful.</p>
+<h2 id="questions">Questions?</h2>
+<p>Open a discussion on GitHub or reach out to the maintainers.</p>
 
 
 
