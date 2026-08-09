@@ -14,6 +14,8 @@
  */
 
 export { MaturityGrid } from './maturity-grid.js';
+export { DashboardFilters, type FilterState } from './dashboard-filters.js';
+export { InitiativeTable, type Initiative, type DimensionScore } from './initiative-table.js';
 
 export type {
   Capability,
