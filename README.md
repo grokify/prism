@@ -86,10 +86,13 @@ go install github.com/grokify/prism/cmd/prism@latest
 prism ecosystem load --config prism.yaml
 
 # Analyze maturity gaps
-prism gaps analyze --sort-by=impact
+prism gaps analyze --dir ./ecosystem --sort-by=impact
 
-# Generate dashboard
-prism dashboard generate --format=html -o dashboard.html
+# Rank initiatives by multi-dimensional scoring
+prism prioritize --dir ./ecosystem --pillar CSAT --top 10
+
+# Export a self-contained dashboard
+prism dashboard export --dir ./ecosystem --export dashboard.html
 
 # Generate static site from capability stacks
 prism site generate --stack=./stacks/ --output=./dist
@@ -187,8 +190,12 @@ ecosystem:
 
   roadmap:
     okrs: plans/okrs/
+    v2moms: plans/v2moms/
     roadmaps: plans/roadmaps/
-    requirements: plans/requirements/
+    opportunitySpecs: plans/opportunity-specs/
+
+  canvas:
+    bmcs: plans/bmcs/
 ```
 
 ## Core Concepts
@@ -272,11 +279,11 @@ This project is in active development. Current phase: **Foundation**
 
 | Module | Latest Version | Status |
 |--------|----------------|--------|
-| [prism-core](https://github.com/grokify/prism-core) | v0.3.0 | Released |
-| [prism-capability](https://github.com/grokify/prism-capability) | v0.6.0 | Released |
-| [prism-maturity](https://github.com/grokify/prism-maturity) | v0.12.0 | Released |
-| [prism-roadmap](https://github.com/grokify/prism-roadmap) | v0.14.1 | Released |
-| prism (this repo) | v0.8.0 | Released |
+| [prism-core](https://github.com/grokify/prism-core) | v0.4.0 | Released |
+| [prism-capability](https://github.com/grokify/prism-capability) | v0.7.1 | Released |
+| [prism-maturity](https://github.com/grokify/prism-maturity) | v0.14.0 | Released |
+| [prism-roadmap](https://github.com/grokify/prism-roadmap) | v0.16.1 | Released |
+| prism (this repo) | v0.10.0 | Released |
 
 ### Roadmap
 
@@ -291,6 +298,10 @@ This project is in active development. Current phase: **Foundation**
 - [x] Dashboard generation
 - [x] Static site generation
 - [x] Lit web components for interactive visualization
+- [x] Strategic canvas documents (V2MOM, BMC, OpportunitySpec)
+- [x] Capability evidence linking
+- [x] Initiative scoring and prioritization
+- [x] Strategic pillar rollups (CSAT, SAM-SOM, TAM)
 
 ## License
 
