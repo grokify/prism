@@ -72,6 +72,7 @@ nav:
       - prism-maturity: https://grokify.github.io/prism-maturity/
       - prism-roadmap: https://grokify.github.io/prism-roadmap/
   - Releases:
+      - v0.10.0: releases/v0.10.0.md
       - v0.9.0: releases/v0.9.0.md
       - v0.8.1: releases/v0.8.1.md
       - v0.8.0: releases/v0.8.0.md
