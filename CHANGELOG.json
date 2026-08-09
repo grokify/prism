@@ -7,6 +7,34 @@
   "maintainers": ["grokify"],
   "releases": [
     {
+      "version": "v0.10.0",
+      "date": "2026-08-09",
+      "highlights": [
+        { "description": "Strategic canvas documents: V2MOM, Business Model Canvas, and OpportunitySpec loading and validation" },
+        { "description": "Capability evidence linking with pluggable resolver and coverage/ARR/confidence summaries" },
+        { "description": "Initiative scoring and ranking via configurable multi-dimensional model" },
+        { "description": "New CLI commands: prism gaps, prism prioritize, and prism dashboard" }
+      ],
+      "added": [
+        { "description": "Capability evidence linking (EvidenceLink, EvidenceResolver, EvidenceSummary)", "commit": "226d5e6" },
+        { "description": "V2MOM, Business Model Canvas, and OpportunitySpec document support with cross-reference validation", "commit": "2be0838" },
+        { "description": "Strategic pillar rollups (CSAT, SAM-SOM, TAM) via ComputePortfolioRollup and ComputePillarDetails", "commit": "8e6e9f3" },
+        { "description": "Initiative scoring and ranking with default/customer-focused/growth-focused presets", "commit": "2671e8c" },
+        { "description": "Evidence, pillar, and dashboard page generators in sitegen", "commit": "e1dac8a" },
+        { "description": "prism gaps, prism prioritize, and prism dashboard commands", "commit": "7e98bf8" },
+        { "description": "DashboardFilters and InitiativeTable Lit components", "commit": "8f44569" }
+      ],
+      "dependencies": [
+        { "description": "Update echartify v0.2.1 → v0.2.3", "commit": "6ab57d8" },
+        { "description": "Update jsonparser v1.2.0 → v1.6.1", "commit": "6ab57d8" },
+        { "description": "Update jsonschema/v6 v6.0.2 → v6.0.3", "commit": "6ab57d8" }
+      ],
+      "documentation": [
+        { "description": "Add ecosystem API guide", "commit": "e938177" },
+        { "description": "Add v0.10.0 release notes" }
+      ]
+    },
+    {
       "version": "v0.9.0",
       "date": "2026-07-27",
       "highlights": [
