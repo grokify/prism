@@ -16,6 +16,9 @@ prism <module> <command> [subcommand] [flags]
 | [`maturity`](maturity.md) | Maturity model and state operations |
 | [`roadmap`](roadmap.md) | Goals and requirements operations |
 | [`ecosystem`](ecosystem.md) | Cross-module ecosystem operations |
+| [`gaps`](gaps.md) | Gap analysis across ecosystem documents |
+| [`prioritize`](prioritize.md) | Rank initiatives by multi-dimensional scoring |
+| [`dashboard`](dashboard.md) | Portfolio dashboard generation |
 | [`site`](site.md) | Static site generation |
 
 ## Global Commands
@@ -61,6 +64,13 @@ prism roadmap goals okr render goals.json -o goals.md
 
 # Ecosystem operations
 prism ecosystem load --config prism.yaml --json
+
+# Gap analysis and prioritization
+prism gaps analyze --dir ./ecosystem --sort-by=impact
+prism prioritize --dir ./ecosystem --pillar CSAT --top 10
+
+# Dashboard
+prism dashboard export --dir ./ecosystem --export dashboard.html
 
 # Site generation
 prism site generate --stack=./stacks/ --output=./dist

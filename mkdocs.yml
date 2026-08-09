@@ -57,6 +57,9 @@ nav:
       - prism maturity: cli/maturity.md
       - prism roadmap: cli/roadmap.md
       - prism ecosystem: cli/ecosystem.md
+      - prism gaps: cli/gaps.md
+      - prism prioritize: cli/prioritize.md
+      - prism dashboard: cli/dashboard.md
       - prism site: cli/site.md
   - Guides:
       - Configuration: guide/configuration.md
