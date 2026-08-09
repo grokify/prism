@@ -9,7 +9,9 @@ import (
 
 	capability "github.com/grokify/prism-capability"
 	maturity "github.com/grokify/prism-maturity"
+	"github.com/grokify/prism-roadmap/canvas"
 	"github.com/grokify/prism-roadmap/goals/okr"
+	"github.com/grokify/prism-roadmap/goals/v2mom"
 	"github.com/grokify/prism-roadmap/roadmap"
 )
 
@@ -20,6 +22,7 @@ type Config struct {
 	Capability CapabilityConfig `json:"capability" yaml:"capability"`
 	Maturity   MaturityConfig   `json:"maturity" yaml:"maturity"`
 	Roadmap    RoadmapConfig    `json:"roadmap" yaml:"roadmap"`
+	Canvas     CanvasConfig     `json:"canvas" yaml:"canvas"`
 }
 
 // CapabilityConfig defines capability stack sources.
@@ -34,8 +37,15 @@ type MaturityConfig struct {
 
 // RoadmapConfig defines roadmap document sources.
 type RoadmapConfig struct {
-	OKRs     []string `json:"okrs" yaml:"okrs"`
-	Roadmaps []string `json:"roadmaps" yaml:"roadmaps"`
+	OKRs             []string `json:"okrs" yaml:"okrs"`
+	V2MOMs           []string `json:"v2moms" yaml:"v2moms"`
+	Roadmaps         []string `json:"roadmaps" yaml:"roadmaps"`
+	OpportunitySpecs []string `json:"opportunitySpecs" yaml:"opportunitySpecs"`
+}
+
+// CanvasConfig defines strategic canvas document sources.
+type CanvasConfig struct {
+	BMCs []string `json:"bmcs" yaml:"bmcs"`
 }
 
 // Ecosystem holds loaded documents from all PRISM modules.
@@ -46,7 +56,16 @@ type Ecosystem struct {
 	CapabilityStacks []*capability.CapabilityStack
 	PRISMDocuments   []*maturity.PRISMDocument
 	OKRSets          []*okr.OKRSet
+	V2MOMs           []*v2mom.V2MOM
 	Roadmaps         []*roadmap.Roadmap
+	OpportunitySpecs []*canvas.OpportunitySpec
+	BMCs             []*canvas.BusinessModelCanvas
+
+	// Evidence resolution (optional, nil if OmniSignal not available)
+	EvidenceResolver EvidenceResolver
+
+	// Evidence links by capability ID (loaded from external config or set programmatically)
+	CapabilityEvidence map[string][]EvidenceLink
 }
 
 // Load creates an Ecosystem from a configuration.
@@ -56,7 +75,10 @@ func Load(config Config) (*Ecosystem, error) {
 		CapabilityStacks: make([]*capability.CapabilityStack, 0),
 		PRISMDocuments:   make([]*maturity.PRISMDocument, 0),
 		OKRSets:          make([]*okr.OKRSet, 0),
+		V2MOMs:           make([]*v2mom.V2MOM, 0),
 		Roadmaps:         make([]*roadmap.Roadmap, 0),
+		OpportunitySpecs: make([]*canvas.OpportunitySpec, 0),
+		BMCs:             make([]*canvas.BusinessModelCanvas, 0),
 	}
 
 	// Load capability stacks
@@ -86,6 +108,15 @@ func Load(config Config) (*Ecosystem, error) {
 		eco.OKRSets = append(eco.OKRSets, okrSet)
 	}
 
+	// Load V2MOMs
+	for _, file := range config.Roadmap.V2MOMs {
+		v, err := v2mom.ReadFile(file)
+		if err != nil {
+			return nil, fmt.Errorf("loading V2MOM %s: %w", file, err)
+		}
+		eco.V2MOMs = append(eco.V2MOMs, v)
+	}
+
 	// Load Roadmaps
 	for _, file := range config.Roadmap.Roadmaps {
 		rm, err := loadRoadmap(file)
@@ -93,6 +124,24 @@ func Load(config Config) (*Ecosystem, error) {
 			return nil, fmt.Errorf("loading roadmap %s: %w", file, err)
 		}
 		eco.Roadmaps = append(eco.Roadmaps, rm)
+	}
+
+	// Load OpportunitySpecs
+	for _, file := range config.Roadmap.OpportunitySpecs {
+		spec, err := loadOpportunitySpec(file)
+		if err != nil {
+			return nil, fmt.Errorf("loading opportunity spec %s: %w", file, err)
+		}
+		eco.OpportunitySpecs = append(eco.OpportunitySpecs, spec)
+	}
+
+	// Load BMCs
+	for _, file := range config.Canvas.BMCs {
+		bmc, err := loadBMC(file)
+		if err != nil {
+			return nil, fmt.Errorf("loading BMC %s: %w", file, err)
+		}
+		eco.BMCs = append(eco.BMCs, bmc)
 	}
 
 	return eco, nil
@@ -150,6 +199,32 @@ func loadRoadmap(path string) (*roadmap.Roadmap, error) {
 		return nil, err
 	}
 	return &rm, nil
+}
+
+// loadOpportunitySpec loads an OpportunitySpec from a JSON file.
+func loadOpportunitySpec(path string) (*canvas.OpportunitySpec, error) {
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+	var spec canvas.OpportunitySpec
+	if err := json.Unmarshal(data, &spec); err != nil {
+		return nil, err
+	}
+	return &spec, nil
+}
+
+// loadBMC loads a BusinessModelCanvas from a JSON file.
+func loadBMC(path string) (*canvas.BusinessModelCanvas, error) {
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+	var bmc canvas.BusinessModelCanvas
+	if err := json.Unmarshal(data, &bmc); err != nil {
+		return nil, err
+	}
+	return &bmc, nil
 }
 
 // =============================================================================
@@ -301,6 +376,85 @@ func (e *Ecosystem) GetPhaseByID(id string) *roadmap.Phase {
 }
 
 // =============================================================================
+// V2MOM Queries
+// =============================================================================
+
+// AllV2MOMs returns all loaded V2MOM documents.
+func (e *Ecosystem) AllV2MOMs() []*v2mom.V2MOM {
+	return e.V2MOMs
+}
+
+// GetV2MOMByID finds a V2MOM by its metadata ID.
+func (e *Ecosystem) GetV2MOMByID(id string) *v2mom.V2MOM {
+	for _, v := range e.V2MOMs {
+		if v.Metadata != nil && v.Metadata.ID == id {
+			return v
+		}
+	}
+	return nil
+}
+
+// =============================================================================
+// OpportunitySpec Queries
+// =============================================================================
+
+// AllOpportunitySpecs returns all loaded OpportunitySpec documents.
+func (e *Ecosystem) AllOpportunitySpecs() []*canvas.OpportunitySpec {
+	return e.OpportunitySpecs
+}
+
+// GetOpportunitySpecByID finds an OpportunitySpec by its metadata ID.
+func (e *Ecosystem) GetOpportunitySpecByID(id string) *canvas.OpportunitySpec {
+	for _, spec := range e.OpportunitySpecs {
+		if spec.Metadata.ID == id {
+			return spec
+		}
+	}
+	return nil
+}
+
+// OpportunitySpecCapabilityRefs returns all capability IDs referenced by OpportunitySpecs.
+// These come from UniqueCapabilities and MustHaveCapabilities fields.
+func (e *Ecosystem) OpportunitySpecCapabilityRefs() []string {
+	seen := make(map[string]bool)
+	var refs []string
+	for _, spec := range e.OpportunitySpecs {
+		for _, capID := range spec.CompetitiveEdge.UniqueCapabilities {
+			if !seen[capID] {
+				seen[capID] = true
+				refs = append(refs, capID)
+			}
+		}
+		for _, capID := range spec.CriticalRequirements.MustHaveCapabilities {
+			if !seen[capID] {
+				seen[capID] = true
+				refs = append(refs, capID)
+			}
+		}
+	}
+	return refs
+}
+
+// =============================================================================
+// BMC Queries
+// =============================================================================
+
+// AllBMCs returns all loaded Business Model Canvas documents.
+func (e *Ecosystem) AllBMCs() []*canvas.BusinessModelCanvas {
+	return e.BMCs
+}
+
+// GetBMCByID finds a Business Model Canvas by its metadata ID.
+func (e *Ecosystem) GetBMCByID(id string) *canvas.BusinessModelCanvas {
+	for _, bmc := range e.BMCs {
+		if bmc.Metadata.ID == id {
+			return bmc
+		}
+	}
+	return nil
+}
+
+// =============================================================================
 // Cross-Module Queries
 // =============================================================================
 
@@ -308,10 +462,14 @@ func (e *Ecosystem) GetPhaseByID(id string) *roadmap.Phase {
 type CapabilityContext struct {
 	Capability *capability.Capability
 	Metrics    []maturity.Metric
+
+	// Evidence links and summary (RMI-013)
+	EvidenceLinks   []EvidenceLink   `json:"evidenceLinks,omitempty"`
+	EvidenceSummary *EvidenceSummary `json:"evidenceSummary,omitempty"`
 }
 
 // GetCapabilityContext returns full context for a capability ID.
-// Currently links capabilities to metrics via the capability's PRISMRef.SLIIDs.
+// Links capabilities to metrics via PRISMRef.SLIIDs and resolves evidence if available.
 func (e *Ecosystem) GetCapabilityContext(capabilityID string) *CapabilityContext {
 	cap := e.GetCapabilityByID(capabilityID)
 	if cap == nil {
@@ -319,8 +477,9 @@ func (e *Ecosystem) GetCapabilityContext(capabilityID string) *CapabilityContext
 	}
 
 	ctx := &CapabilityContext{
-		Capability: cap,
-		Metrics:    make([]maturity.Metric, 0),
+		Capability:    cap,
+		Metrics:       make([]maturity.Metric, 0),
+		EvidenceLinks: make([]EvidenceLink, 0),
 	}
 
 	// Find metrics linked via PRISMRef.SLIIDs
@@ -336,7 +495,46 @@ func (e *Ecosystem) GetCapabilityContext(capabilityID string) *CapabilityContext
 		}
 	}
 
+	// Add evidence links if available
+	if e.CapabilityEvidence != nil {
+		if links, ok := e.CapabilityEvidence[capabilityID]; ok {
+			ctx.EvidenceLinks = links
+
+			// Resolve evidence if resolver is available
+			if e.EvidenceResolver != nil {
+				resolved, err := e.EvidenceResolver.ResolveAll(links)
+				if err == nil {
+					ctx.EvidenceSummary = ComputeEvidenceSummary(links, resolved)
+				}
+			}
+		}
+	}
+
 	return ctx
+}
+
+// SetCapabilityEvidence sets evidence links for a capability.
+func (e *Ecosystem) SetCapabilityEvidence(capabilityID string, links []EvidenceLink) {
+	if e.CapabilityEvidence == nil {
+		e.CapabilityEvidence = make(map[string][]EvidenceLink)
+	}
+	e.CapabilityEvidence[capabilityID] = links
+}
+
+// AddCapabilityEvidence adds evidence links to a capability.
+func (e *Ecosystem) AddCapabilityEvidence(capabilityID string, links ...EvidenceLink) {
+	if e.CapabilityEvidence == nil {
+		e.CapabilityEvidence = make(map[string][]EvidenceLink)
+	}
+	e.CapabilityEvidence[capabilityID] = append(e.CapabilityEvidence[capabilityID], links...)
+}
+
+// AllCapabilityEvidence returns all capability evidence links.
+func (e *Ecosystem) AllCapabilityEvidence() map[string][]EvidenceLink {
+	if e.CapabilityEvidence == nil {
+		return make(map[string][]EvidenceLink)
+	}
+	return e.CapabilityEvidence
 }
 
 // =============================================================================
@@ -421,6 +619,137 @@ func (e *Ecosystem) Validate() ValidationErrors {
 		}
 	}
 
+	// Cross-reference validation: OpportunitySpec → capability references
+	for _, spec := range e.OpportunitySpecs {
+		specID := spec.Metadata.ID
+		if specID == "" {
+			specID = spec.Metadata.Title
+		}
+
+		// Validate UniqueCapabilities
+		for _, capID := range spec.CompetitiveEdge.UniqueCapabilities {
+			if e.GetCapabilityByID(capID) == nil {
+				errs = append(errs, ValidationError{
+					Module:  "canvas",
+					Type:    "opportunitySpec",
+					ID:      specID,
+					Field:   "competitiveEdge.uniqueCapabilities",
+					RefID:   capID,
+					Message: "references non-existent capability",
+				})
+			}
+		}
+
+		// Validate MustHaveCapabilities
+		for _, capID := range spec.CriticalRequirements.MustHaveCapabilities {
+			if e.GetCapabilityByID(capID) == nil {
+				errs = append(errs, ValidationError{
+					Module:  "canvas",
+					Type:    "opportunitySpec",
+					ID:      specID,
+					Field:   "criticalRequirements.mustHaveCapabilities",
+					RefID:   capID,
+					Message: "references non-existent capability",
+				})
+			}
+		}
+	}
+
+	// Cross-reference validation: BMC internal references
+	for _, bmc := range e.BMCs {
+		bmcID := bmc.Metadata.ID
+		if bmcID == "" {
+			bmcID = bmc.Metadata.Title
+		}
+
+		// Build lookup sets for internal IDs
+		segmentIDs := make(map[string]bool)
+		for _, seg := range bmc.CustomerSegments {
+			segmentIDs[seg.ID] = true
+		}
+
+		valuePropIDs := make(map[string]bool)
+		for _, vp := range bmc.ValuePropositions {
+			valuePropIDs[vp.ID] = true
+		}
+
+		// Validate ValueProposition.SegmentRefs
+		for _, vp := range bmc.ValuePropositions {
+			for _, segRef := range vp.SegmentRefs {
+				if !segmentIDs[segRef] {
+					errs = append(errs, ValidationError{
+						Module:  "canvas",
+						Type:    "bmc",
+						ID:      bmcID,
+						Field:   "valuePropositions.segmentRefs",
+						RefID:   segRef,
+						Message: "references non-existent customer segment",
+					})
+				}
+			}
+		}
+
+		// Validate Channel.SegmentRefs
+		for _, ch := range bmc.Channels {
+			for _, segRef := range ch.SegmentRefs {
+				if !segmentIDs[segRef] {
+					errs = append(errs, ValidationError{
+						Module:  "canvas",
+						Type:    "bmc",
+						ID:      bmcID,
+						Field:   "channels.segmentRefs",
+						RefID:   segRef,
+						Message: "references non-existent customer segment",
+					})
+				}
+			}
+		}
+
+		// Validate CustomerRelation.SegmentRefs
+		for _, cr := range bmc.CustomerRelationships {
+			for _, segRef := range cr.SegmentRefs {
+				if !segmentIDs[segRef] {
+					errs = append(errs, ValidationError{
+						Module:  "canvas",
+						Type:    "bmc",
+						ID:      bmcID,
+						Field:   "customerRelationships.segmentRefs",
+						RefID:   segRef,
+						Message: "references non-existent customer segment",
+					})
+				}
+			}
+		}
+
+		// Validate RevenueStream.SegmentRefs and ValuePropRefs
+		for _, rs := range bmc.RevenueStreams {
+			for _, segRef := range rs.SegmentRefs {
+				if !segmentIDs[segRef] {
+					errs = append(errs, ValidationError{
+						Module:  "canvas",
+						Type:    "bmc",
+						ID:      bmcID,
+						Field:   "revenueStreams.segmentRefs",
+						RefID:   segRef,
+						Message: "references non-existent customer segment",
+					})
+				}
+			}
+			for _, vpRef := range rs.ValuePropRefs {
+				if !valuePropIDs[vpRef] {
+					errs = append(errs, ValidationError{
+						Module:  "canvas",
+						Type:    "bmc",
+						ID:      bmcID,
+						Field:   "revenueStreams.valuePropRefs",
+						RefID:   vpRef,
+						Message: "references non-existent value proposition",
+					})
+				}
+			}
+		}
+	}
+
 	return errs
 }
 
@@ -430,35 +759,41 @@ func (e *Ecosystem) Validate() ValidationErrors {
 
 // Stats returns summary statistics about the ecosystem.
 type Stats struct {
-	CapabilityStacks  int            `json:"capabilityStacks"`
-	TotalCapabilities int            `json:"totalCapabilities"`
-	PRISMDocuments    int            `json:"prismDocuments"`
-	TotalMetrics      int            `json:"totalMetrics"`
-	TotalServices     int            `json:"totalServices"`
-	TotalInitiatives  int            `json:"totalInitiatives"`
-	TotalOKRSets      int            `json:"totalOkrSets"`
-	TotalObjectives   int            `json:"totalObjectives"`
-	TotalRoadmaps     int            `json:"totalRoadmaps"`
-	TotalPhases       int            `json:"totalPhases"`
-	ByStatus          map[string]int `json:"byStatus"`
-	ByDomain          map[string]int `json:"byDomain"`
+	CapabilityStacks     int            `json:"capabilityStacks"`
+	TotalCapabilities    int            `json:"totalCapabilities"`
+	PRISMDocuments       int            `json:"prismDocuments"`
+	TotalMetrics         int            `json:"totalMetrics"`
+	TotalServices        int            `json:"totalServices"`
+	TotalInitiatives     int            `json:"totalInitiatives"`
+	TotalOKRSets         int            `json:"totalOkrSets"`
+	TotalV2MOMs          int            `json:"totalV2moms"`
+	TotalObjectives      int            `json:"totalObjectives"`
+	TotalRoadmaps        int            `json:"totalRoadmaps"`
+	TotalPhases          int            `json:"totalPhases"`
+	TotalOpportunitySpec int            `json:"totalOpportunitySpecs"`
+	TotalBMCs            int            `json:"totalBmcs"`
+	ByStatus             map[string]int `json:"byStatus"`
+	ByDomain             map[string]int `json:"byDomain"`
 }
 
 // Stats returns ecosystem statistics.
 func (e *Ecosystem) Stats() Stats {
 	stats := Stats{
-		CapabilityStacks:  len(e.CapabilityStacks),
-		TotalCapabilities: 0,
-		PRISMDocuments:    len(e.PRISMDocuments),
-		TotalMetrics:      len(e.AllMetrics()),
-		TotalServices:     len(e.AllServices()),
-		TotalInitiatives:  len(e.AllInitiatives()),
-		TotalOKRSets:      len(e.OKRSets),
-		TotalObjectives:   len(e.AllObjectives()),
-		TotalRoadmaps:     len(e.Roadmaps),
-		TotalPhases:       len(e.AllPhases()),
-		ByStatus:          make(map[string]int),
-		ByDomain:          make(map[string]int),
+		CapabilityStacks:     len(e.CapabilityStacks),
+		TotalCapabilities:    0,
+		PRISMDocuments:       len(e.PRISMDocuments),
+		TotalMetrics:         len(e.AllMetrics()),
+		TotalServices:        len(e.AllServices()),
+		TotalInitiatives:     len(e.AllInitiatives()),
+		TotalOKRSets:         len(e.OKRSets),
+		TotalV2MOMs:          len(e.V2MOMs),
+		TotalObjectives:      len(e.AllObjectives()),
+		TotalRoadmaps:        len(e.Roadmaps),
+		TotalPhases:          len(e.AllPhases()),
+		TotalOpportunitySpec: len(e.OpportunitySpecs),
+		TotalBMCs:            len(e.BMCs),
+		ByStatus:             make(map[string]int),
+		ByDomain:             make(map[string]int),
 	}
 
 	for _, stack := range e.CapabilityStacks {
@@ -497,7 +832,11 @@ func (e *Ecosystem) Stats() Stats {
 //	    *.json
 //	  roadmap/
 //	    okrs/*.json
+//	    v2moms/*.json
 //	    roadmaps/*.json
+//	    opportunity-specs/*.json
+//	  canvas/
+//	    bmcs/*.json
 func LoadFromDirectory(dir string) (*Ecosystem, error) {
 	config := Config{
 		Name: filepath.Base(dir),
@@ -520,8 +859,20 @@ func LoadFromDirectory(dir string) (*Ecosystem, error) {
 	if files, err := filepath.Glob(filepath.Join(roadmapDir, "okrs", "*.json")); err == nil {
 		config.Roadmap.OKRs = files
 	}
+	if files, err := filepath.Glob(filepath.Join(roadmapDir, "v2moms", "*.json")); err == nil {
+		config.Roadmap.V2MOMs = files
+	}
 	if files, err := filepath.Glob(filepath.Join(roadmapDir, "roadmaps", "*.json")); err == nil {
 		config.Roadmap.Roadmaps = files
+	}
+	if files, err := filepath.Glob(filepath.Join(roadmapDir, "opportunity-specs", "*.json")); err == nil {
+		config.Roadmap.OpportunitySpecs = files
+	}
+
+	// Scan canvas files
+	canvasDir := filepath.Join(dir, "canvas")
+	if files, err := filepath.Glob(filepath.Join(canvasDir, "bmcs", "*.json")); err == nil {
+		config.Canvas.BMCs = files
 	}
 
 	return Load(config)

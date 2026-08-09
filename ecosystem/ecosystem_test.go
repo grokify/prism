@@ -5,6 +5,7 @@ import (
 
 	capability "github.com/grokify/prism-capability"
 	maturity "github.com/grokify/prism-maturity"
+	"github.com/grokify/prism-roadmap/canvas"
 )
 
 func TestEcosystemStats(t *testing.T) {
@@ -159,5 +160,73 @@ func TestLoadConfig(t *testing.T) {
 	}
 	if eco.Config.Name != "test-ecosystem" {
 		t.Errorf("expected name 'test-ecosystem', got %q", eco.Config.Name)
+	}
+}
+
+func TestValidateOpportunitySpecCapabilityRefs(t *testing.T) {
+	eco := &Ecosystem{
+		CapabilityStacks: []*capability.CapabilityStack{
+			{
+				Capabilities: []capability.Capability{
+					{ID: "cap-existing", Name: "Existing Capability"},
+				},
+			},
+		},
+		OpportunitySpecs: []*canvas.OpportunitySpec{
+			{
+				Metadata: canvas.Metadata{ID: "spec-1", Title: "Test Spec"},
+				CompetitiveEdge: canvas.OSCompetitiveEdge{
+					UniqueCapabilities: []string{"cap-existing", "cap-missing"},
+				},
+				CriticalRequirements: canvas.OSCriticalRequirements{
+					MustHaveCapabilities: []string{"cap-also-missing"},
+				},
+			},
+		},
+	}
+
+	errs := eco.Validate()
+
+	// Should have 2 errors: cap-missing and cap-also-missing
+	capErrors := 0
+	for _, err := range errs {
+		if err.Module == "canvas" && err.Type == "opportunitySpec" {
+			capErrors++
+		}
+	}
+	if capErrors != 2 {
+		t.Errorf("expected 2 capability reference errors, got %d", capErrors)
+	}
+}
+
+func TestValidateBMCInternalRefs(t *testing.T) {
+	eco := &Ecosystem{
+		BMCs: []*canvas.BusinessModelCanvas{
+			{
+				Metadata: canvas.Metadata{ID: "bmc-1", Title: "Test BMC"},
+				CustomerSegments: []canvas.CustomerSegment{
+					{ID: "seg-1", Name: "Segment 1"},
+				},
+				ValuePropositions: []canvas.ValueProposition{
+					{ID: "vp-1", Description: "Value Prop 1", SegmentRefs: []string{"seg-1", "seg-missing"}},
+				},
+				RevenueStreams: []canvas.RevenueStream{
+					{ID: "rs-1", Description: "Revenue 1", ValuePropRefs: []string{"vp-missing"}},
+				},
+			},
+		},
+	}
+
+	errs := eco.Validate()
+
+	// Should have 2 errors: seg-missing and vp-missing
+	bmcErrors := 0
+	for _, err := range errs {
+		if err.Module == "canvas" && err.Type == "bmc" {
+			bmcErrors++
+		}
+	}
+	if bmcErrors != 2 {
+		t.Errorf("expected 2 BMC reference errors, got %d", bmcErrors)
 	}
 }
