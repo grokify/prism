@@ -60,6 +60,7 @@ nav:
       - prism site: cli/site.md
   - Guides:
       - Configuration: guide/configuration.md
+      - Ecosystem API: guide/ecosystem-api.md
       - Integration: guide/integration.md
   - Developer:
       - Contributing: CONTRIBUTING.md
