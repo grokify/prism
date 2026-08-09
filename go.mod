@@ -11,8 +11,8 @@ require (
 
 require (
 	github.com/bahlo/generic-list-go v0.2.0 // indirect
-	github.com/buger/jsonparser v1.2.0 // indirect
-	github.com/grokify/echartify v0.2.1 // indirect
+	github.com/buger/jsonparser v1.6.1 // indirect
+	github.com/grokify/echartify v0.2.3 // indirect
 	github.com/grokify/priority-frameworks v0.2.0 // indirect
 	github.com/grokify/prism-core v0.4.0 // indirect
 	github.com/grokify/structureddocs v0.1.0 // indirect
@@ -24,7 +24,7 @@ require (
 	github.com/plexusone/uiforge v0.4.0 // indirect
 	github.com/richardlehane/mscfb v1.0.7 // indirect
 	github.com/richardlehane/msoleps v1.0.6 // indirect
-	github.com/santhosh-tekuri/jsonschema/v6 v6.0.2 // indirect
+	github.com/santhosh-tekuri/jsonschema/v6 v6.0.3 // indirect
 	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/tiendc/go-deepcopy v1.7.2 // indirect
 	github.com/xuri/efp v0.0.1 // indirect
