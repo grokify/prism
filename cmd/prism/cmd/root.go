@@ -43,4 +43,7 @@ func init() {
 	rootCmd.AddCommand(validateCmd)
 	rootCmd.AddCommand(statsCmd)
 	rootCmd.AddCommand(siteCmd)
+	rootCmd.AddCommand(gapsCmd)
+	rootCmd.AddCommand(prioritizeCmd)
+	rootCmd.AddCommand(dashboardCmd)
 }
