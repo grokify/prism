@@ -19,8 +19,8 @@ github.com/grokify/prism-core v0.4.0 h1:aJy92m4ls41RqfRt/FETZyDNj6ECzPtTyh8nVEtR
 github.com/grokify/prism-core v0.4.0/go.mod h1:MGwhaaZdFW8WShYx3lqzGkcx8f07xFDbwd+u+4uBAT0=
 github.com/grokify/prism-maturity v0.14.0 h1:QiwdI2zTaKE9B6TpzzPxqGpqPM9RL6vNbCGLL1+JDhM=
 github.com/grokify/prism-maturity v0.14.0/go.mod h1:K2JMGxlzAvShUsHSoTWtHYpUuGtysqZWREojuRfFTWM=
-github.com/grokify/prism-roadmap v0.16.1 h1:rzisNa/DBlbICBpjCtyG0Zte04Ut9lDgSXpJM/Ak9fM=
-github.com/grokify/prism-roadmap v0.16.1/go.mod h1:jK86J9QiRZZaMfocnjge4c1si6U0YwDZVLVBLIM1MDA=
+github.com/grokify/prism-roadmap v0.17.0 h1:xsM+LDffaocNQQ4cdYlchJ7565fj+0PGIBte1me4dgU=
+github.com/grokify/prism-roadmap v0.17.0/go.mod h1:B3XMoton1box8nhTk/i9TcG+tPouz2tbbUUi3I7mvzo=
 github.com/grokify/structureddocs v0.1.0 h1:ziCUm7OeJDwKoq8KrmIm44AFDJR7UtWhgHqVEyNiGRY=
 github.com/grokify/structureddocs v0.1.0/go.mod h1:DD6ooCUwmtyLzGs12TAhRmf/PjEDNapcKH8DAnJQvzQ=
 github.com/inconshreveable/mousetrap v1.1.0 h1:wN+x4NVGpMsO7ErUn/mUI3vEoE6Jt13X2s0bqwp9tc8=
@@ -31,8 +31,8 @@ github.com/pb33f/ordered-map/v2 v2.3.1 h1:5319HDO0aw4DA4gzi+zv4FXU9UlSs3xGZ40wcP
 github.com/pb33f/ordered-map/v2 v2.3.1/go.mod h1:qxFQgd0PkVUtOMCkTapqotNgzRhMPL7VvaHKbd1HnmQ=
 github.com/plexusone/omniframe v0.1.1 h1:x62SABI4yAHjBB6GzCuviQfMHXMGUHNYY73opaReV0A=
 github.com/plexusone/omniframe v0.1.1/go.mod h1:ozcYJFREvWtU1cCD4DOKr17/AV1OexpzQCxnQgu/V+0=
-github.com/plexusone/structured-evaluation v0.11.0 h1:kQCpHEIaysdkVLw2C8OHfkwH+4GEHTuWftyjlIjUzIE=
-github.com/plexusone/structured-evaluation v0.11.0/go.mod h1:/EeH1LVHmGq+O35LQ/VybJNLIGqpoJlR8FqKCOt2KC4=
+github.com/plexusone/structured-evaluation v0.14.0 h1:gACNOB//bGD78F8WQlUhCtfBNY4FcRPxcLsbEWGzBc0=
+github.com/plexusone/structured-evaluation v0.14.0/go.mod h1:C7/anlUnYBxXMGRggHD7f2eQ+6ejXvXEIsCadG/D1kg=
 github.com/plexusone/uiforge v0.4.0 h1:AzYBAOdj9+uNiVlQpLPgokqw7sxbCLPCXxTHhV+vVuM=
 github.com/plexusone/uiforge v0.4.0/go.mod h1:vYReIfoR8OP9SjC+XauXs2+9f8OiBou1t3oXZ0k8rGQ=
 github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 h1:Jamvg5psRIccs7FGNTlIRMkT8wgtp5eCXdBlqhYGL6U=

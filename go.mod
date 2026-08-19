@@ -5,7 +5,7 @@ go 1.26.5
 require (
 	github.com/grokify/prism-capability v0.7.1
 	github.com/grokify/prism-maturity v0.14.0
-	github.com/grokify/prism-roadmap v0.16.1
+	github.com/grokify/prism-roadmap v0.17.0
 	github.com/spf13/cobra v1.10.2
 )
 
@@ -20,7 +20,7 @@ require (
 	github.com/invopop/jsonschema v0.14.0 // indirect
 	github.com/pb33f/ordered-map/v2 v2.3.1 // indirect
 	github.com/plexusone/omniframe v0.1.1 // indirect
-	github.com/plexusone/structured-evaluation v0.11.0 // indirect
+	github.com/plexusone/structured-evaluation v0.14.0 // indirect
 	github.com/plexusone/uiforge v0.4.0 // indirect
 	github.com/richardlehane/mscfb v1.0.7 // indirect
 	github.com/richardlehane/msoleps v1.0.6 // indirect
