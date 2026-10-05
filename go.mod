@@ -5,7 +5,7 @@ go 1.26.5
 require (
 	github.com/grokify/prism-capability v0.7.1
 	github.com/grokify/prism-maturity v0.14.0
-	github.com/grokify/prism-roadmap v0.20.0
+	github.com/grokify/prism-roadmap v0.21.0
 	github.com/spf13/cobra v1.10.2
 )
 
